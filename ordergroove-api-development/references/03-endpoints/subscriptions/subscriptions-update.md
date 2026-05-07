@@ -1,0 +1,383 @@
+# Update
+
+Updates the "extra_data", "price", "components", "offer", and "cancel_reason" fields.
+
+# Update Endpoint
+
+> **📋 Authentication**
+>
+> ✔️ Application API Scope
+>
+> ✔️ Storefront API Scope
+>
+> Note: Application API Scope is required to update the price or components values.
+
+**Important:** New Bundle Components should not be updated using this endpoint.
+
+## Response Body Definitions
+
+| Name                           | Type             | Description                                                                                                                                               | Example                                                                                                                                                     |
+| ------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer                       | string           | Customer ID                                                                                                                                               | `"00026001"`                                                                                                                                                |
+| merchant                       | string           | Merchant ID                                                                                                                                               | `"ac4f7938383a11e89ecbbc764e1107f2"`                                                                                                                        |
+| product                        | string           | Product ID                                                                                                                                                | `"0070000693"`                                                                                                                                              |
+| payment                        | string           | Payment record ID                                                                                                                                         | `"070001bc02fd11e99542bc764e1043b0"`                                                                                                                        |
+| shipping\_address              | string           | Shipping address record ID                                                                                                                                | `"66c25cd0564011e9abc5bc764e107990"`                                                                                                                        |
+| offer                          | string           | Offer ID                                                                                                                                                  | `"a748aa648ac811e8af3bbc764e106cf4"`                                                                                                                        |
+| subscription\_type             | string           | Subscription Type                                                                                                                                         | `"Replenish"`                                                                                                                                               |
+| components                     | string           | Legacy Bundle components                                                                                                                                  | See [Legacy Bundle Components](#legacy-bundle-components) below                                                                                             |
+| components                     | array of objects | New Bundle components                                                                                                                                     | See [New Bundle Components](#new-bundle-components) below                                                                                                   |
+| extra\_data                    | JSON             | JSON object that should be JSON.parse() as key/value store for any extra information                                                                      | `{"some": "extra", "fields": "here"}`                                                                                                                       |
+| public\_id                     | string           | Subscription ID                                                                                                                                           | `"f9cb2f93e1c845eb9de9eff46ddb3cbf"`                                                                                                                        |
+| product\_attribute             | string           |                                                                                                                                                           | `"null"`                                                                                                                                                    |
+| quantity                       | integer          | Number of items                                                                                                                                           | `21`                                                                                                                                                        |
+| price                          | string           | Price                                                                                                                                                     | `"12.99"` <br /><br />**Note:** subscription.price accepts $0.00. Ordergroove sets the subscription price and updates future orders according to the price. |
+| frequency\_days                | integer          | Order placement interval in days                                                                                                                          | `42`                                                                                                                                                        |
+| reminder\_days                 | integer          | Days before order placement to email reminder (minimum of 5)                                                                                              | `42`                                                                                                                                                        |
+| every                          | integer          | Number of periods                                                                                                                                         | `6`                                                                                                                                                         |
+| every\_period                  | integer          | Type of period                                                                                                                                            | `3`                                                                                                                                                         |
+| start\_date                    | string           | Date of subscription start, in format YYYY-MM-DD                                                                                                          | `"2019-07-21"`                                                                                                                                              |
+| cancelled                      | string           | Date of subscription cancellation; null=not cancelled                                                                                                     | `"null"`                                                                                                                                                    |
+| cancel\_reason                 | string           | Pipe-delimited cancel reason code and cancel reason details                                                                                               | `"4\|Overstocked"`                                                                                                                                          |
+| cancel\_reason\_code           | string           | Cancel reason code                                                                                                                                        | `"4"`                                                                                                                                                       |
+| ~~iteration~~                  | string           |                                                                                                                                                           | *Deprecated*                                                                                                                                                |
+| ~~sequence~~                   | string           |                                                                                                                                                           | *Deprecated*                                                                                                                                                |
+| session\_id                    | string           | Session ID, obtained from og\_session\_id cookie                                                                                                          | `"ac4f7938383a11e89ecbbc764e1107f2.896371.1539022086"`                                                                                                      |
+| merchant\_order\_id            | string           | Order ID in your system                                                                                                                                   | `"301617"`                                                                                                                                                  |
+| ~~customer\_rep~~              | string           |                                                                                                                                                           | *Deprecated*                                                                                                                                                |
+| ~~club~~                       | string           |                                                                                                                                                           | *Deprecated*                                                                                                                                                |
+| created                        | string           | Date created                                                                                                                                              | `"2017-02-29 12:00:00"`                                                                                                                                     |
+| updated                        | string           | Date updated                                                                                                                                              | `"2017-02-29 12:00:00"`                                                                                                                                     |
+| live                           | boolean          | true=active subscription; false=inactive subscription                                                                                                     | `true`                                                                                                                                                      |
+| external\_id                   | string           | External subscription ID. Shopify subscription contract                                                                                                   | `"gid://shopify/SubscriptionContract/10831298836"` or `"{external_id}"`                                                                                     |
+| prepaid\_subscription\_context | object           | [Prepaid information](https://developer.ordergroove.com/reference/prepaid-subscriptions#prepaid-subscriptions-data) - Returned only if prepaid is enabled | See [Prepaid Subscription Context](#prepaid-subscription-context) below                                                                                     |
+
+### Legacy Bundle Components
+
+```json
+"components": [
+  {"product": "123"},
+  {"product": "456"},
+  {"product": "789"}
+]
+```
+
+### New Bundle Components
+
+**Type:** Array of objects with structure: `{public_id: string, quantity: integer, product: string}`
+
+```json
+[
+  {
+    "public_id": "79d2dc76245111eeb185acde48001122",
+    "quantity": 1,
+    "product": "0070067690"
+  },
+  {
+    "public_id": "7eeaa504245111eeb185acde48001122",
+    "quantity": 3,
+    "product": "0070067691"
+  }
+]
+```
+
+### Prepaid Subscription Context
+
+```json
+{
+  "prepaid_orders_remaining": 0,
+  "prepaid_orders_per_billing": 3,
+  "renewal_behavior": "autorenew",
+  "last_renewal_revenue": 100.8,
+  "prepaid_origin_merchant_order_id": "#3082"
+}
+```
+
+If prepaid is not enabled, this will return an empty object: `{}`
+
+# OpenAPI definition
+
+```json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ordergroove-restrpc",
+    "version": "2.10.0"
+  },
+  "servers": [
+    {
+      "url": "https://restapi.ordergroove.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "x-api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "security": [
+    {},
+    {
+      "x-api-key": []
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscription_id}/update/": {
+      "patch": {
+        "summary": "Update",
+        "description": "Updates the \"extra_data\", \"price\", \"components\", \"offer\", and \"cancel_reason\" fields.",
+        "operationId": "subscriptions-update",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "description": "Unique subscription ID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "extra_data": {
+                    "type": "string",
+                    "description": "JSON object that should be JSON.parse() as key/value store for any extra information.",
+                    "format": "json"
+                  },
+                  "price": {
+                    "type": "string",
+                    "description": "Price, must be in decimal form ex: 10.00"
+                  },
+                  "components": {
+                    "type": "array",
+                    "description": "Array of JSON objects to set product IDs that are the legacy bundle components. For example: \"components\": [ {\"product\":\"123\"}, {\"product\":\"456\"}, {\"product\":\"789\"} ],"
+                  },
+                  "offer": {
+                    "type": "string",
+                    "description": "Public ID of the new offer."
+                  },
+                  "cancel_reason": {
+                    "type": "string",
+                    "description": "Pipe-delimited cancel reason code and cancel reason details, e.g. \"4|Overstocked\""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n    \"customer\": \"00026001\",\n    \"merchant\": \"ac4f7938383a11e89ecbbc764e1107f2\",\n    \"product\": \"0070000693\",\n    \"payment\": \"070001bc02fd11e99542bc764e1043b0\",\n    \"shipping_address\": \"66c25cd0564011e9abc5bc764e107990\",\n    \"offer\": \"a748aa648ac811e8af3bbc764e106cf4\",\n    \"subscription_type\": \"replenishment\",\n    \"components\": [],\n    \"extra_data\": {},\n    \"public_id\": \"607daa2accc811e88516bc764e106cf4\",\n    \"product_attribute\": null,\n    \"quantity\": 21,\n    \"price\": null,\n    \"frequency_days\": 180,\n    \"reminder_days\": 10,\n    \"every\": 6,\n    \"every_period\": 3,\n    \"start_date\": \"2018-12-27\",\n    \"cancelled\": null,\n    \"cancel_reason\": null,\n    \"cancel_reason_code\": null,\n    \"iteration\": null,\n    \"sequence\": null,\n    \"session_id\": \"ac4f7938383a11e89ecbbc764e1107f2.896371.1539022086\",\n    \"merchant_order_id\": \"2906548\",\n    \"customer_rep\": null,\n    \"club\": null,\n    \"created\": \"2018-10-10 15:09:21\",\n    \"updated\": \"2019-04-04 11:28:39\",\n    \"live\": true\n}\n"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customer": {
+                      "type": "string",
+                      "example": "00026001"
+                    },
+                    "merchant": {
+                      "type": "string",
+                      "example": "ac4f7938383a11e89ecbbc764e1107f2"
+                    },
+                    "product": {
+                      "type": "string",
+                      "example": "0070000693"
+                    },
+                    "payment": {
+                      "type": "string",
+                      "example": "070001bc02fd11e99542bc764e1043b0"
+                    },
+                    "shipping_address": {
+                      "type": "string",
+                      "example": "66c25cd0564011e9abc5bc764e107990"
+                    },
+                    "offer": {
+                      "type": "string",
+                      "example": "a748aa648ac811e8af3bbc764e106cf4"
+                    },
+                    "subscription_type": {
+                      "type": "string",
+                      "example": "replenishment"
+                    },
+                    "components": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "extra_data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "public_id": {
+                      "type": "string",
+                      "example": "607daa2accc811e88516bc764e106cf4"
+                    },
+                    "product_attribute": {},
+                    "quantity": {
+                      "type": "integer",
+                      "example": 21,
+                      "default": 0
+                    },
+                    "price": {},
+                    "frequency_days": {
+                      "type": "integer",
+                      "example": 180,
+                      "default": 0
+                    },
+                    "reminder_days": {
+                      "type": "integer",
+                      "example": 10,
+                      "default": 0
+                    },
+                    "every": {
+                      "type": "integer",
+                      "example": 6,
+                      "default": 0
+                    },
+                    "every_period": {
+                      "type": "integer",
+                      "example": 3,
+                      "default": 0
+                    },
+                    "start_date": {
+                      "type": "string",
+                      "example": "2018-12-27"
+                    },
+                    "cancelled": {},
+                    "cancel_reason": {},
+                    "cancel_reason_code": {},
+                    "iteration": {},
+                    "sequence": {},
+                    "session_id": {
+                      "type": "string",
+                      "example": "ac4f7938383a11e89ecbbc764e1107f2.896371.1539022086"
+                    },
+                    "merchant_order_id": {
+                      "type": "string",
+                      "example": "2906548"
+                    },
+                    "customer_rep": {},
+                    "club": {},
+                    "created": {
+                      "type": "string",
+                      "example": "2018-10-10 15:09:21"
+                    },
+                    "updated": {
+                      "type": "string",
+                      "example": "2019-04-04 11:28:39"
+                    },
+                    "live": {
+                      "type": "boolean",
+                      "example": true,
+                      "default": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"[field_name]\": \"field_name error detail\"\n}\n"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "[field_name]": {
+                      "type": "string",
+                      "example": "field_name error detail"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": \"Authentication Failed\"\n}\n"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "example": "Authentication Failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n  \"detail\": \"Unable to find requested asset.\"\n}\n"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "example": "Unable to find requested asset."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "423": {
+            "description": "423",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{'details': 'Resource is currently in use. Please try again shortly.'}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  },
+  "x-readme-fauxas": true
+}
+```

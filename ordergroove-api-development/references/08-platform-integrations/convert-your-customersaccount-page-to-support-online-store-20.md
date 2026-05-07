@@ -1,0 +1,5 @@
+# Convert your customers/account page to support Online Store 2.0
+
+Many Online Store 2.0 themes don’t support blocks on the customers/account page. This page is where Ordergroove adds a link to direct customers to their Subscription Manager. You can modify your Online Store 2.0 theme to support blocks on the customers/account page.
+
+<Anchor label="Online Store 2.0" target="_blank" href="https://shopify.dev/docs/storefronts/themes/os20">Online Store 2.0</Anchor> in Shopify's Help Center covers how to convert your theme to allow blocks and other Online Store 2.0 features. After you adapt your theme, you can add Ordergroove’s Subscription Manager block by going to your Themes page and clicking the ‘Customize’ button to go to the theme editor. In the theme editor, navigate to your customers/account page and then click ‘Add block’ to select Ordergroove’s Subscription Manager block. For more information on how you use Shopify’s theme editor and Online Store 2.0 features, you can refer to Shopify’s documentation [here](https://help.shopify.com/en/manual/online-store/themes/customizing-themes/edit).
