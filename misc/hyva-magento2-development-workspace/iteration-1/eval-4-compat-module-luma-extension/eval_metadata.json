@@ -1,0 +1,49 @@
+{
+  "eval_id": 4,
+  "eval_name": "compat-module-luma-extension",
+  "prompt": "I have a Magento 2 store running Hyvä 1.4 default theme on the main store view and Luma on a B2B store view. I just installed a third-party module (`Acme_Recommendations`) that only has Luma frontend support — it uses Knockout and a UI component. I need to make it work on the Hyvä side without breaking Luma. Walk me through creating a compatibility module.",
+  "assertions": [
+    {
+      "name": "uses-hyva-prefixed-handles",
+      "description": "Recommends scoping all overrides to hyva_*-prefixed layout handles so Luma store view is unaffected",
+      "type": "content_pattern",
+      "expected_regex": "hyva_(default|catalog_|cms_|customer_|checkout_)"
+    },
+    {
+      "name": "separate-module-not-theme-customization",
+      "description": "Recommends a separate Magento module (composer package or app/code), not edits to the original module's vendor files",
+      "type": "content_pattern",
+      "expected_regex": "(separate module|new module|compatibility module|hyva-compat|HyvaCompat)"
+    },
+    {
+      "name": "mentions-extra-hyva-themes-key",
+      "description": "Mentions the `extra.hyva-themes.compat-module-for` Composer key (or hyva-themes.json) for registration",
+      "type": "content_pattern",
+      "expected_regex": "(compat-module-for|hyva-themes\\.json|extra.+hyva-themes)"
+    },
+    {
+      "name": "removes-knockout-and-ui-components",
+      "description": "States that Knockout, UI components, RequireJS, and x-magento-init must be replaced (not retained) for the Hyvä side",
+      "type": "content_pattern",
+      "expected_regex": "(replace|remove|reimplement|rewrit).+(knockout|UI component|RequireJS|x-magento-init)"
+    },
+    {
+      "name": "uses-alpine-tailwind-replacement",
+      "description": "Suggests Alpine.js + Tailwind for the Hyvä-side reimplementation",
+      "type": "content_pattern",
+      "expected_regex": "[Aa]lpine"
+    },
+    {
+      "name": "module-sequence-or-dependency",
+      "description": "Recommends declaring a module sequence (etc/module.xml) or composer require dependency on the original module + Hyva_Theme",
+      "type": "content_pattern",
+      "expected_regex": "(sequence|<sequence>|<module name=\"Hyva_Theme|composer require)"
+    },
+    {
+      "name": "mentions-tracker-or-existing-compat",
+      "description": "Mentions checking if a compat module already exists (compatibility module tracker) before building one — saves duplicate work",
+      "type": "content_pattern",
+      "expected_regex": "(tracker|already exists|check.+compat|module-tracker)"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "uses-hyva-prefixed-handles: Recommends scoping all overrides to hyva_*-prefixed layout handles so Luma store view is unaffected",
+      "passed": true,
+      "evidence": "matched: 'hyva_default'"
+    },
+    {
+      "text": "separate-module-not-theme-customization: Recommends a separate Magento module (composer package or app/code), not edits to the original module's vendor files",
+      "passed": true,
+      "evidence": "matched: 'compatibility module'"
+    },
+    {
+      "text": "mentions-extra-hyva-themes-key: Mentions the `extra.hyva-themes.compat-module-for` Composer key (or hyva-themes.json) for registration",
+      "passed": true,
+      "evidence": "matched: 'compat-module-for'"
+    },
+    {
+      "text": "removes-knockout-and-ui-components: States that Knockout, UI components, RequireJS, and x-magento-init must be replaced (not retained) for the Hyv\u00e4 side",
+      "passed": false,
+      "evidence": "no match for /(replace|remove|reimplement|rewrit).+(knockout|UI component|RequireJS|x-magento-init)/"
+    },
+    {
+      "text": "uses-alpine-tailwind-replacement: Suggests Alpine.js + Tailwind for the Hyv\u00e4-side reimplementation",
+      "passed": true,
+      "evidence": "matched: 'Alpine'"
+    },
+    {
+      "text": "module-sequence-or-dependency: Recommends declaring a module sequence (etc/module.xml) or composer require dependency on the original module + Hyva_Theme",
+      "passed": true,
+      "evidence": "matched: '<sequence>'"
+    },
+    {
+      "text": "mentions-tracker-or-existing-compat: Mentions checking if a compat module already exists (compatibility module tracker) before building one \u2014 saves duplicate work",
+      "passed": true,
+      "evidence": "matched: 'tracker'"
+    }
+  ]
+}

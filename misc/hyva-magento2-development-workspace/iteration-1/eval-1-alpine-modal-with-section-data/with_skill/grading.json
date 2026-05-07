@@ -1,0 +1,49 @@
+{
+  "expectations": [
+    {
+      "text": "uses-private-content-loaded-event: Listens for the `private-content-loaded` window event (Hyv\u00e4's section data event), not Knockout/customerData",
+      "passed": true,
+      "evidence": "matched: ...n modal that:\n\n- Listens for `private-content-loaded` and reads `customer.firstnam..."
+    },
+    {
+      "text": "reads-customer-firstname-from-event-detail: Accesses customer.firstname from event.detail.data (Hyv\u00e4's section data shape)",
+      "passed": false,
+      "evidence": "no match for /(event|\\$event)\\.detail\\.data\\.customer/"
+    },
+    {
+      "text": "uses-child-theme-path: Places the template inside a child theme path under app/design/frontend/, not vendor or Hyva/default",
+      "passed": true,
+      "evidence": "matched: 'app/design/frontend/Acme/default/Magento_'"
+    },
+    {
+      "text": "uses-hyva-layout-handle-prefix: Uses a hyva_-prefixed layout handle (or hyva_default) for the layout XML override",
+      "passed": true,
+      "evidence": "matched: 'hyva_cms_index_index'"
+    },
+    {
+      "text": "includes-x-cloak: Uses x-cloak to prevent flash of unstyled content while Alpine initializes",
+      "passed": true,
+      "evidence": "matched: ....window=\"open && close()\"\n    x-cloak\n>\n    <template x-if=\"open\">..."
+    },
+    {
+      "text": "session-deduplication: Uses sessionStorage / hyva.getBrowserStorage / $persist or similar to show the modal once per session",
+      "passed": true,
+      "evidence": "matched: 'sessionStorage'"
+    },
+    {
+      "text": "uses-escaper: Uses Magento's $escaper helper for output (escapeHtml or escapeHtmlAttr)",
+      "passed": true,
+      "evidence": "matched: '$escaper->escapeHtml'"
+    },
+    {
+      "text": "no-knockout-or-requirejs: Does NOT suggest data-bind, customerData.get, requirejs-config, or x-magento-init (Luma artifacts)",
+      "passed": true,
+      "evidence": "absent"
+    },
+    {
+      "text": "mentions-tailwind-rebuild: Mentions running `npm run build` or `npm run watch` from web/tailwind (or notes new classes need a rebuild)",
+      "passed": true,
+      "evidence": "matched: 'npm run build'"
+    }
+  ]
+}

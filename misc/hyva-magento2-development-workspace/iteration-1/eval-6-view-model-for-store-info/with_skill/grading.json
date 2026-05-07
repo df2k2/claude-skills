@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "uses-viewModels-require: Uses `$viewModels->require(...)` (Hyv\u00e4's view model registry) in the template \u2014 the modern, reusable Hyv\u00e4 way",
+      "passed": true,
+      "evidence": "matched: '$viewModels->require'"
+    },
+    {
+      "text": "view-model-implements-ArgumentInterface: Defines a view model class that implements ArgumentInterface (PHP class signature)",
+      "passed": true,
+      "evidence": "matched: 'ArgumentInterface'"
+    },
+    {
+      "text": "uses-scopeConfig-with-SCOPE_STORE: Reads config via ScopeConfigInterface with SCOPE_STORE (the right scope for store info)",
+      "passed": true,
+      "evidence": "matched: 'ScopeInterface::SCOPE_STORE'"
+    },
+    {
+      "text": "uses-hyva-layout-prefix: Uses a hyva_-prefixed layout handle (e.g. hyva_default) so override doesn't affect Luma store views",
+      "passed": true,
+      "evidence": "matched: 'hyva_default'"
+    },
+    {
+      "text": "no-redundant-xml-arguments: Does NOT inject the view model via `<arguments><argument name=\"...\" xsi:type=\"object\">...</argument></arguments>` (that's the old, verbose way \u2014 Hyv\u00e4 recommends the registry)",
+      "passed": false,
+      "evidence": "unexpected literal present: 'xsi:type=\"object\"'"
+    },
+    {
+      "text": "uses-escaper: Uses $escaper->escapeHtml in the template",
+      "passed": true,
+      "evidence": "matched: '$escaper->escape'"
+    },
+    {
+      "text": "mentions-cache-flush: Tells the user to flush cache after creating the new view model / module",
+      "passed": true,
+      "evidence": "matched: 'setup:upgrade'"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "eval_id": 3,
+  "eval_name": "tailwind-v4-dynamic-class",
+  "prompt": "I have a Hyvä 1.4 store. In a category card component I'm trying to do `<div class=\"bg-<?= $escaper->escapeHtmlAttr($category->getColor()) ?>-100\">` where category->getColor() returns 'red', 'green', or 'blue'. The colors aren't applying — `bg-red-100` etc. are missing from styles.css. What's wrong and what are my options?",
+  "assertions": [
+    {
+      "name": "explains-static-scanning",
+      "description": "Explains that Tailwind only includes classes it can find as literal/static strings in scanned files (concatenated/dynamic class names get purged)",
+      "type": "content_pattern",
+      "expected_regex": "(literal|static|JIT|scan|purge|concaten)"
+    },
+    {
+      "name": "suggests-mapping-to-literal-classes",
+      "description": "Suggests mapping dynamic values to literal class names server-side (PHP array → known class strings)",
+      "type": "content_pattern",
+      "expected_regex": "(map|mapping|lookup|array.+=>|switch)"
+    },
+    {
+      "name": "mentions-safelist",
+      "description": "Mentions safelist (comment in scanned file or config) as a way to keep classes",
+      "type": "content_pattern",
+      "expected_regex": "safelist"
+    },
+    {
+      "name": "mentions-arbitrary-values",
+      "description": "Mentions arbitrary values like `bg-[#ff0000]` as an alternative",
+      "type": "content_pattern",
+      "expected_regex": "(arbitrary|bg-\\[|\\[#|\\[var)"
+    },
+    {
+      "name": "mentions-rebuild",
+      "description": "Tells the user to rebuild Tailwind (`npm run build` or `npm run watch`) after changes",
+      "type": "content_pattern",
+      "expected_regex": "npm (run )?(build|watch|start)"
+    },
+    {
+      "name": "diagnoses-the-bug",
+      "description": "Identifies the root cause (the dynamic class isn't visible to Tailwind's scanner) before suggesting fixes",
+      "type": "content_pattern",
+      "expected_regex": "(scanner|JIT|purge|because|the reason|why)"
+    }
+  ]
+}

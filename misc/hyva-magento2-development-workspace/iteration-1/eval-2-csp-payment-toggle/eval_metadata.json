@@ -1,0 +1,49 @@
+{
+  "eval_id": 2,
+  "eval_name": "csp-payment-toggle",
+  "prompt": "We're upgrading our payment page to PCI-DSS compliant strict CSP. We have an Alpine component that needs to expand/collapse a 'terms and conditions' panel and inverts a boolean. The current code is `<div x-data=\"{ accepted: false }\"><button @click=\"accepted = !accepted\">Toggle</button><div x-show=\"accepted\">terms…</div></div>`. Convert it to be CSP-safe.",
+  "assertions": [
+    {
+      "name": "registers-with-Alpine-data",
+      "description": "Uses Alpine.data('name', () => ({...})) to register the component (CSP requirement, replaces inline x-data object)",
+      "type": "content_includes",
+      "expected": "Alpine.data"
+    },
+    {
+      "name": "fires-on-alpine-init",
+      "description": "Registers the component on the alpine:init event (the canonical CSP-safe registration timing)",
+      "type": "content_includes",
+      "expected": "alpine:init"
+    },
+    {
+      "name": "x-data-references-name-only",
+      "description": "Uses x-data=\"<name>\" referencing a registered component, not an inline object",
+      "type": "content_pattern",
+      "expected_regex": "x-data=\\\"[a-zA-Z][a-zA-Z0-9_]*\\\""
+    },
+    {
+      "name": "no-inline-negation",
+      "description": "Does NOT use `accepted = !accepted` or any inline negation (forbidden under strict CSP)",
+      "type": "content_excludes",
+      "expected": "= !accepted"
+    },
+    {
+      "name": "uses-method-reference-for-click",
+      "description": "@click is a method reference (no parens, no inline expression) like `@click=\"toggle\"`",
+      "type": "content_pattern",
+      "expected_regex": "@click=\\\"[a-zA-Z][a-zA-Z0-9_.]*\\\""
+    },
+    {
+      "name": "mentions-createBooleanObject-or-toggle-method",
+      "description": "Either uses hyva.createBooleanObject for the boolean or defines a toggle() method on the component",
+      "type": "content_pattern",
+      "expected_regex": "(createBooleanObject|toggle\\(\\)|toggle\\s*\\()"
+    },
+    {
+      "name": "mentions-CSP-context",
+      "description": "Mentions CSP, PCI-DSS, or strict CSP — confirms the answer addresses the CSP requirement",
+      "type": "content_pattern",
+      "expected_regex": "(CSP|PCI-DSS|strict.+(CSP|policy))"
+    }
+  ]
+}

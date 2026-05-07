@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "explains-static-scanning: Explains that Tailwind only includes classes it can find as literal/static strings in scanned files (concatenated/dynamic class names get purged)",
+      "passed": true,
+      "evidence": "matched: 'literal'"
+    },
+    {
+      "text": "suggests-mapping-to-literal-classes: Suggests mapping dynamic values to literal class names server-side (PHP array \u2192 known class strings)",
+      "passed": true,
+      "evidence": "matched: 'lookup'"
+    },
+    {
+      "text": "mentions-safelist: Mentions safelist (comment in scanned file or config) as a way to keep classes",
+      "passed": true,
+      "evidence": "matched: 'safelist'"
+    },
+    {
+      "text": "mentions-arbitrary-values: Mentions arbitrary values like `bg-[#ff0000]` as an alternative",
+      "passed": true,
+      "evidence": "matched: 'arbitrary'"
+    },
+    {
+      "text": "mentions-rebuild: Tells the user to rebuild Tailwind (`npm run build` or `npm run watch`) after changes",
+      "passed": true,
+      "evidence": "matched: 'npm run build'"
+    },
+    {
+      "text": "diagnoses-the-bug: Identifies the root cause (the dynamic class isn't visible to Tailwind's scanner) before suggesting fixes",
+      "passed": true,
+      "evidence": "matched: 'scanner'"
+    }
+  ]
+}

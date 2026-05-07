@@ -1,0 +1,43 @@
+{
+  "eval_id": 5,
+  "eval_name": "minicart-update-after-custom-add",
+  "prompt": "I built a custom 'Add Bundle to Cart' button in Hyvä that POSTs SKUs to a custom controller via fetch. The cart updates server-side correctly but the mini-cart count in the header doesn't refresh until I navigate to a new page. How do I make it update immediately?",
+  "assertions": [
+    {
+      "name": "dispatches-reload-customer-section-data",
+      "description": "Recommends dispatching the `reload-customer-section-data` event after the successful fetch — Hyvä's canonical mechanism",
+      "type": "content_includes",
+      "expected": "reload-customer-section-data"
+    },
+    {
+      "name": "uses-window-dispatchEvent",
+      "description": "Uses window.dispatchEvent (not document.dispatchEvent) — Hyvä listens on window",
+      "type": "content_pattern",
+      "expected_regex": "window\\.dispatchEvent"
+    },
+    {
+      "name": "mentions-form-key",
+      "description": "Reminds to include form_key in the POST (via hyva.getFormKey() or direct cookie read)",
+      "type": "content_pattern",
+      "expected_regex": "(form_key|hyva\\.getFormKey)"
+    },
+    {
+      "name": "no-customerData-from-luma",
+      "description": "Does NOT recommend `customerData.invalidate(['cart'])` or `customerData.reload(['cart'])` — that's Luma's API",
+      "type": "content_excludes",
+      "expected": "customerData.invalidate"
+    },
+    {
+      "name": "no-customerData-reload",
+      "description": "Does NOT recommend `customerData.reload` — Luma-only",
+      "type": "content_excludes",
+      "expected": "customerData.reload"
+    },
+    {
+      "name": "explains-why",
+      "description": "Briefly explains the why: section data is cached client-side and only refreshes on event dispatch or version cookie change",
+      "type": "content_pattern",
+      "expected_regex": "(localStorage|section data|cache|private[_-]content[_-]version|cookie)"
+    }
+  ]
+}

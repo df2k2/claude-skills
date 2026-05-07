@@ -1,0 +1,61 @@
+{
+  "eval_id": 1,
+  "eval_name": "alpine-modal-with-section-data",
+  "prompt": "I'm working in a Hyvä Magento 2 child theme (Hyvä 1.4). I want to add a small 'welcome back' modal that appears once per session for logged-in customers when they land on the homepage. It should show the customer's first name from section data and have a close button. Where should I put the file and what should the code look like? Use the standard (non-CSP) Hyvä default theme.",
+  "assertions": [
+    {
+      "name": "uses-private-content-loaded-event",
+      "description": "Listens for the `private-content-loaded` window event (Hyvä's section data event), not Knockout/customerData",
+      "type": "content_includes",
+      "expected": "private-content-loaded"
+    },
+    {
+      "name": "reads-customer-firstname-from-event-detail",
+      "description": "Accesses customer.firstname from event.detail.data (Hyvä's section data shape)",
+      "type": "content_pattern",
+      "expected_regex": "(event|\\$event)\\.detail\\.data\\.customer"
+    },
+    {
+      "name": "uses-child-theme-path",
+      "description": "Places the template inside a child theme path under app/design/frontend/, not vendor or Hyva/default",
+      "type": "content_pattern",
+      "expected_regex": "app/design/frontend/[A-Za-z]+/[A-Za-z]+/Magento_"
+    },
+    {
+      "name": "uses-hyva-layout-handle-prefix",
+      "description": "Uses a hyva_-prefixed layout handle (or hyva_default) for the layout XML override",
+      "type": "content_pattern",
+      "expected_regex": "hyva_(default|cms_index_index|cms_page)"
+    },
+    {
+      "name": "includes-x-cloak",
+      "description": "Uses x-cloak to prevent flash of unstyled content while Alpine initializes",
+      "type": "content_includes",
+      "expected": "x-cloak"
+    },
+    {
+      "name": "session-deduplication",
+      "description": "Uses sessionStorage / hyva.getBrowserStorage / $persist or similar to show the modal once per session",
+      "type": "content_pattern",
+      "expected_regex": "(sessionStorage|hyva\\.getBrowserStorage|\\$persist|\\.as\\()"
+    },
+    {
+      "name": "uses-escaper",
+      "description": "Uses Magento's $escaper helper for output (escapeHtml or escapeHtmlAttr)",
+      "type": "content_pattern",
+      "expected_regex": "\\$escaper->escape(Html|HtmlAttr)"
+    },
+    {
+      "name": "no-knockout-or-requirejs",
+      "description": "Does NOT suggest data-bind, customerData.get, requirejs-config, or x-magento-init (Luma artifacts)",
+      "type": "content_excludes",
+      "expected": "data-bind"
+    },
+    {
+      "name": "mentions-tailwind-rebuild",
+      "description": "Mentions running `npm run build` or `npm run watch` from web/tailwind (or notes new classes need a rebuild)",
+      "type": "content_pattern",
+      "expected_regex": "npm (run )?(build|watch|start)"
+    }
+  ]
+}

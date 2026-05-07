@@ -1,0 +1,49 @@
+{
+  "eval_id": 6,
+  "eval_name": "view-model-for-store-info",
+  "prompt": "In our Hyvä 1.4 child theme I want to display the store opening hours from store config (`general/store_information/hours`) in the footer. Show me how to do this the Hyvä way — it should be reusable.",
+  "assertions": [
+    {
+      "name": "uses-viewModels-require",
+      "description": "Uses `$viewModels->require(...)` (Hyvä's view model registry) in the template — the modern, reusable Hyvä way",
+      "type": "content_pattern",
+      "expected_regex": "\\$viewModels->require"
+    },
+    {
+      "name": "view-model-implements-ArgumentInterface",
+      "description": "Defines a view model class that implements ArgumentInterface (PHP class signature)",
+      "type": "content_pattern",
+      "expected_regex": "(implements ArgumentInterface|ArgumentInterface\\b)"
+    },
+    {
+      "name": "uses-scopeConfig-with-SCOPE_STORE",
+      "description": "Reads config via ScopeConfigInterface with SCOPE_STORE (the right scope for store info)",
+      "type": "content_pattern",
+      "expected_regex": "(SCOPE_STORE|ScopeInterface::SCOPE_STORE)"
+    },
+    {
+      "name": "uses-hyva-layout-prefix",
+      "description": "Uses a hyva_-prefixed layout handle (e.g. hyva_default) so override doesn't affect Luma store views",
+      "type": "content_pattern",
+      "expected_regex": "hyva_default"
+    },
+    {
+      "name": "no-redundant-xml-arguments",
+      "description": "Does NOT inject the view model via `<arguments><argument name=\"...\" xsi:type=\"object\">...</argument></arguments>` (that's the old, verbose way — Hyvä recommends the registry)",
+      "type": "content_excludes",
+      "expected": "xsi:type=\"object\""
+    },
+    {
+      "name": "uses-escaper",
+      "description": "Uses $escaper->escapeHtml in the template",
+      "type": "content_pattern",
+      "expected_regex": "\\$escaper->escape"
+    },
+    {
+      "name": "mentions-cache-flush",
+      "description": "Tells the user to flush cache after creating the new view model / module",
+      "type": "content_pattern",
+      "expected_regex": "(cache:flush|cache flush|setup:upgrade)"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "skill_name": "hyva-magento2-development",
+  "evals": [
+    {
+      "id": 1,
+      "name": "alpine-modal-with-section-data",
+      "prompt": "I'm working in a Hyvä Magento 2 child theme (Hyvä 1.4). I want to add a small 'welcome back' modal that appears once per session for logged-in customers when they land on the homepage. It should show the customer's first name from section data and have a close button. Where should I put the file and what should the code look like? Use the standard (non-CSP) Hyvä default theme.",
+      "expected_output": "An inline-Alpine `.phtml` template under app/design/frontend/<Vendor>/<Theme>/Magento_Theme/templates/... that listens for `private-content-loaded`, reads `customer.firstname` from `event.detail.data`, uses `$persist` or `sessionStorage`/`hyva.getBrowserStorage()` to dedupe per session, includes `x-cloak`, has correct $escaper usage, mentions adding the block to `hyva_cms_index_index.xml` or similar, and tells the user to rebuild Tailwind",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "csp-payment-toggle",
+      "prompt": "We're upgrading our payment page to PCI-DSS compliant strict CSP. We have an Alpine component that needs to expand/collapse a 'terms and conditions' panel and inverts a boolean. The current code is `<div x-data=\"{ accepted: false }\"><button @click=\"accepted = !accepted\">Toggle</button><div x-show=\"accepted\">terms…</div></div>`. Convert it to be CSP-safe.",
+      "expected_output": "Code using Alpine.data() registration on alpine:init, hyva.createBooleanObject('accepted', false) for the toggle (since `!` inversion is forbidden under CSP), `accepted.toggle` method reference (no parens) instead of inline expression, references to `accepted.acceptedTrue`/`accepted.notAccepted` instead of `!accepted`, and acknowledgment that the inline script may need `$hyvaCsp->registerInlineScript()` registration",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "tailwind-v4-dynamic-class",
+      "prompt": "I have a Hyvä 1.4 store. In a category card component I'm trying to do `<div class=\"bg-<?= $escaper->escapeHtmlAttr($category->getColor()) ?>-100\">` where category->getColor() returns 'red', 'green', or 'blue'. The colors aren't applying — `bg-red-100` etc. are missing from styles.css. What's wrong and what are my options?",
+      "expected_output": "Explanation that Tailwind v4 only includes classes it can find as literal strings during scanning, so `bg-<dynamic>-100` gets purged. Options should include: (1) safelist comment with literal classes, (2) PHP-side mapping of values to literal class names, (3) arbitrary values like `bg-[#ff0000]`, (4) CSS variables for runtime dynamic values. Should mention rebuilding with `npm run build` from `web/tailwind/`",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "compat-module-luma-extension",
+      "prompt": "I have a Magento 2 store running Hyvä 1.4 default theme on the main store view and Luma on a B2B store view. I just installed a third-party module (`Acme_Recommendations`) that only has Luma frontend support — it uses Knockout and a UI component. I need to make it work on the Hyvä side without breaking Luma. Walk me through creating a compatibility module.",
+      "expected_output": "Description of a separate Magento module (e.g., `MyVendor_HyvaCompatRecommendations`) with: composer.json including `extra.hyva-themes.compat-module-for`, etc/module.xml with sequence on the original module + Hyva_Theme, layout overrides scoped to `hyva_*` handles only (so Luma is unaffected), new phtml templates rewritten without UI components / Knockout / RequireJS, Alpine + Tailwind for any interactivity. Should mention updating the child theme's hyva.config.json includes if the compat ships Tailwind classes, and mention checking the Compatibility Module Tracker first",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "minicart-update-after-custom-add",
+      "prompt": "I built a custom 'Add Bundle to Cart' button in Hyvä that POSTs SKUs to a custom controller via fetch. The cart updates server-side correctly but the mini-cart count in the header doesn't refresh until I navigate to a new page. How do I make it update immediately?",
+      "expected_output": "The answer should explain: dispatch `reload-customer-section-data` after the fetch succeeds, e.g. `window.dispatchEvent(new Event('reload-customer-section-data'))`. Optionally show using `window.dispatchMessages([{type:'success',text:'Added!'}], 5000)` for a toast. Mentions form_key via `hyva.getFormKey()`. Notes that on POST Magento auto-updates `private_content_version` so the dispatch causes a real fetch. Possibly mentions opening the cart drawer with `toggle-cart` event"
+    },
+    {
+      "id": 6,
+      "name": "view-model-for-store-info",
+      "prompt": "In our Hyvä 1.4 child theme I want to display the store opening hours from store config (`general/store_information/hours`) in the footer. Show me how to do this the Hyvä way — it should be reusable.",
+      "expected_output": "A view model class implementing `ArgumentInterface` that injects `ScopeConfigInterface` and returns the hours. A phtml template that uses `$viewModels->require(...)` (NOT `<arguments>` XML — that's the old way), proper escaping with `$escaper->escapeHtml()`, layout XML adding the block to `hyva_default.xml` referenceContainer footer (using the hyva_ prefix). Should mention `bin/magento cache:flush` and `npm run build` if new Tailwind classes are added"
+    }
+  ]
+}

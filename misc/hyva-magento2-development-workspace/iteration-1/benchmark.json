@@ -1,0 +1,130 @@
+{
+  "skill_name": "hyva-magento2-development",
+  "iteration": "iteration-1",
+  "configurations": [
+    {
+      "configuration": "with_skill",
+      "n_evals": 6,
+      "mean_pass_rate": 0.8822751322751322,
+      "stddev_pass_rate": 0.060320941141557484,
+      "mean_tokens": 68504,
+      "stddev_tokens": 9619.589533862658,
+      "mean_duration_s": 137.19333333333333,
+      "stddev_duration_s": 34.20688273822488
+    },
+    {
+      "configuration": "without_skill",
+      "n_evals": 6,
+      "mean_pass_rate": 0.843915343915344,
+      "stddev_pass_rate": 0.1318193204706697,
+      "mean_tokens": 51284.5,
+      "stddev_tokens": 3758.3029547922292,
+      "mean_duration_s": 133.39,
+      "stddev_duration_s": 46.316609115953206
+    }
+  ],
+  "per_eval": [
+    {
+      "eval_dir": "eval-1-alpine-modal-with-section-data",
+      "with_skill": {
+        "passed": 8,
+        "total": 9,
+        "pass_rate": 0.8888888888888888,
+        "tokens": 73190,
+        "duration_s": 123.77
+      },
+      "without_skill": {
+        "passed": 7,
+        "total": 9,
+        "pass_rate": 0.7777777777777778,
+        "tokens": 49576,
+        "duration_s": 108.05
+      }
+    },
+    {
+      "eval_dir": "eval-2-csp-payment-toggle",
+      "with_skill": {
+        "passed": 6,
+        "total": 7,
+        "pass_rate": 0.8571428571428571,
+        "tokens": 60113,
+        "duration_s": 116.79
+      },
+      "without_skill": {
+        "passed": 6,
+        "total": 7,
+        "pass_rate": 0.8571428571428571,
+        "tokens": 49021,
+        "duration_s": 94.62
+      }
+    },
+    {
+      "eval_dir": "eval-3-tailwind-v4-dynamic-class",
+      "with_skill": {
+        "passed": 6,
+        "total": 6,
+        "pass_rate": 1.0,
+        "tokens": 59720,
+        "duration_s": 109.33
+      },
+      "without_skill": {
+        "passed": 6,
+        "total": 6,
+        "pass_rate": 1.0,
+        "tokens": 50534,
+        "duration_s": 132.27
+      }
+    },
+    {
+      "eval_dir": "eval-4-compat-module-luma-extension",
+      "with_skill": {
+        "passed": 6,
+        "total": 7,
+        "pass_rate": 0.8571428571428571,
+        "tokens": 85330,
+        "duration_s": 202.8
+      },
+      "without_skill": {
+        "passed": 5,
+        "total": 7,
+        "pass_rate": 0.7142857142857143,
+        "tokens": 58887,
+        "duration_s": 223.35
+      }
+    },
+    {
+      "eval_dir": "eval-5-minicart-update-after-custom-add",
+      "with_skill": {
+        "passed": 5,
+        "total": 6,
+        "pass_rate": 0.8333333333333334,
+        "tokens": 65771,
+        "duration_s": 126.13
+      },
+      "without_skill": {
+        "passed": 6,
+        "total": 6,
+        "pass_rate": 1.0,
+        "tokens": 49653,
+        "duration_s": 111.51
+      }
+    },
+    {
+      "eval_dir": "eval-6-view-model-for-store-info",
+      "with_skill": {
+        "passed": 6,
+        "total": 7,
+        "pass_rate": 0.8571428571428571,
+        "tokens": 66900,
+        "duration_s": 144.34
+      },
+      "without_skill": {
+        "passed": 5,
+        "total": 7,
+        "pass_rate": 0.7142857142857143,
+        "tokens": 50036,
+        "duration_s": 130.54
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "registers-with-Alpine-data: Uses Alpine.data('name', () => ({...})) to register the component (CSP requirement, replaces inline x-data object)",
+      "passed": true,
+      "evidence": "matched: ...ng **named components** with `Alpine.data('myComponent', () => ({ ... }..."
+    },
+    {
+      "text": "fires-on-alpine-init: Registers the component on the alpine:init event (the canonical CSP-safe registration timing)",
+      "passed": true,
+      "evidence": "matched: ...module (or registered before `alpine:init`).\n- Replacing inline express..."
+    },
+    {
+      "text": "x-data-references-name-only: Uses x-data=\"<name>\" referencing a registered component, not an inline object",
+      "passed": true,
+      "evidence": "matched: 'x-data=\"termsToggle\"'"
+    },
+    {
+      "text": "no-inline-negation: Does NOT use `accepted = !accepted` or any inline negation (forbidden under strict CSP)",
+      "passed": false,
+      "evidence": "unexpected literal present: '= !accepted'"
+    },
+    {
+      "text": "uses-method-reference-for-click: @click is a method reference (no parens, no inline expression) like `@click=\"toggle\"`",
+      "passed": true,
+      "evidence": "matched: '@click=\"toggle\"'"
+    },
+    {
+      "text": "mentions-createBooleanObject-or-toggle-method: Either uses hyva.createBooleanObject for the boolean or defines a toggle() method on the component",
+      "passed": true,
+      "evidence": "matched: 'toggle()'"
+    },
+    {
+      "text": "mentions-CSP-context: Mentions CSP, PCI-DSS, or strict CSP \u2014 confirms the answer addresses the CSP requirement",
+      "passed": true,
+      "evidence": "matched: 'CSP'"
+    }
+  ]
+}

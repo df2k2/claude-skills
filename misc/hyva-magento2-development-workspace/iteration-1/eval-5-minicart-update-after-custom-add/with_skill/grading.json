@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "dispatches-reload-customer-section-data: Recommends dispatching the `reload-customer-section-data` event after the successful fetch \u2014 Hyv\u00e4's canonical mechanism",
+      "passed": true,
+      "evidence": "matched: ...ch()` succeeds, dispatch the `reload-customer-section-data` event on `window`:\n\n```js\nwi..."
+    },
+    {
+      "text": "uses-window-dispatchEvent: Uses window.dispatchEvent (not document.dispatchEvent) \u2014 Hyv\u00e4 listens on window",
+      "passed": true,
+      "evidence": "matched: 'window.dispatchEvent'"
+    },
+    {
+      "text": "mentions-form-key: Reminds to include form_key in the POST (via hyva.getFormKey() or direct cookie read)",
+      "passed": true,
+      "evidence": "matched: 'form_key'"
+    },
+    {
+      "text": "no-customerData-from-luma: Does NOT recommend `customerData.invalidate(['cart'])` or `customerData.reload(['cart'])` \u2014 that's Luma's API",
+      "passed": false,
+      "evidence": "unexpected literal present: 'customerData.invalidate'"
+    },
+    {
+      "text": "no-customerData-reload: Does NOT recommend `customerData.reload` \u2014 Luma-only",
+      "passed": true,
+      "evidence": "absent"
+    },
+    {
+      "text": "explains-why: Briefly explains the why: section data is cached client-side and only refreshes on event dispatch or version cookie change",
+      "passed": true,
+      "evidence": "matched: 'localStorage'"
+    }
+  ]
+}
