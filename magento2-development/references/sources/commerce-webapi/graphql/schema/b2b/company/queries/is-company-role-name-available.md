@@ -1,0 +1,65 @@
+---
+title: isCompanyRoleNameAvailable query
+contributor_name: Atwix
+contributor_link: https://www.atwix.com/
+keywords:
+  - B2B
+---
+
+import CommerceOnly from '/src/_includes/commerce-only.md'
+
+<CommerceOnly />
+
+# isCompanyRoleNameAvailable query
+
+The `isCompanyRoleNameAvailable` query checks whether a company role name is valid for creating into a company.
+
+The query returns a `false` value if the specified role name has already found in a company.
+
+This query requires a valid [customer authentication token](../../../customer/mutations/generate-token.md).
+
+## Syntax
+
+```graphql
+{
+    isCompanyRoleNameAvailable(
+        name: String!
+    ) {
+        is_role_name_available
+    }
+}
+```
+
+## Reference
+
+The `isCompanyRoleNameAvailable` reference provides detailed information about the types and fields defined in this query.
+
+* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-isCompanyRoleNameAvailable)
+
+* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-isCompanyRoleNameAvailable)
+
+## Example usage
+
+The following example checks whether the company role named "Company Admin" can be used to create a new company role.
+
+**Request:**
+
+```graphql
+query {
+  isCompanyRoleNameAvailable(name: "Company Admin") {
+    is_role_name_available
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "isCompanyRoleNameAvailable": {
+      "is_role_name_available": false
+    }
+  }
+}
+```
