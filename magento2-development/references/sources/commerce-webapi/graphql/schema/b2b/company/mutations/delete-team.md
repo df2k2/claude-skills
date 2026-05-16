@@ -1,0 +1,65 @@
+---
+title: deleteCompanyTeam mutation
+contributor_name: Atwix
+contributor_link: https://www.atwix.com/
+keywords:
+  - B2B
+---
+
+import CommerceOnly from '/src/_includes/commerce-only.md'
+
+<CommerceOnly />
+
+# deleteCompanyTeam mutation
+
+Use the `deleteCompanyTeam` mutation to delete a company team by ID. You can get the team ID with the [`company`](../queries/company.md) query.
+
+This mutation requires a valid [customer authentication token](../../../customer/mutations/generate-token.md).
+
+## Syntax
+
+```graphql
+mutation {
+    deleteCompanyTeam(
+        id: ID!
+    ) {
+        DeleteCompanyTeamOutput
+    }
+}
+```
+
+## Reference
+
+The `deleteCompanyTeam` reference provides detailed information about the types and fields defined in this mutation.
+
+* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-deleteCompanyTeam)
+
+* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-deleteCompanyTeam)
+
+## Example usage
+
+The following example deletes the specified team.
+
+**Request:**
+
+```graphql
+mutation {
+  deleteCompanyTeam(
+    id: "Mg=="
+  ) {
+    success
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "deleteCompanyTeam": {
+      "success": true
+    }
+  }
+}
+```

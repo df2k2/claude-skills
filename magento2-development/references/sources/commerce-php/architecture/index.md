@@ -1,0 +1,81 @@
+---
+title: Architecture Guide | Commerce PHP Extensions
+description: Explore resources that describe the foundational elements of the Adobe Commerce and Magento Open Source framework.
+keywords:
+- Extensions
+---
+
+# Architecture Guide
+
+The Architecture Guide provides a high-level introduction and view of the Adobe Commerce and Magento Open Source framework.
+
+The Adobe Commerce and Magento Open Source framework (Commerce framework) and components are explained from the perspective of several audiences:
+
+-  Merchants
+-  Web store developers (frontend developers)
+-  Extension developers
+-  System administrators
+-  Installers
+-  Integrators
+
+More detailed information about building online stores, using APIs, installing, configuring, and extending the platform is included in other sections of the [developer guide](https://developer.adobe.com/commerce/).
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Architectural basics](../images/info.png)
+
+## Basics
+
+Review fundamental architectural principles of object-oriented, PHP-based applications
+
+[Learn more](basics/index.md)
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Architectural layers](../images/layers.png)
+
+## Layers
+
+Learn about layered application design and details about each layer
+
+[Learn more](layers/index.md)
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Coding standards](../images/code.png)
+
+## Coding Standards
+
+Review these technical guidelines before you contribute code to Adobe Commerce and Magento Open Source projects
+
+[Learn more](coding-standards.md)
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Architectural framework](../images/app-delivery.png)
+
+## Framework
+
+Learn how the Commerce framework controls the way application components interact
+
+[Learn more](framework.md)
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Modules and extensibility](../images/extension.png)
+
+## Modules and Extensibility
+
+Learn about how Commerce extensibility has been designed to maximize your ability to customize and enhance the framework
+
+[Learn more](modules/index.md)
+
+<Cards slots="image, heading, text, links" width="50%" />
+
+![Technical vision](../images/browse.png)
+
+## Technical Vision
+
+Review resources that describe the aspirational state of the Commerce framework
+
+[Learn more](technical-vision/index.md)

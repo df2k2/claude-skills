@@ -1,0 +1,11 @@
+---
+title: Theme
+description: N/A
+---
+
+# Magento_Theme module
+
+This module contains common infrastructure that provides an ability to apply and use themes in Magento application.
+
+<InlineAlert slots="text" />
+The version of this module is 101.1.9.
