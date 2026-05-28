@@ -1,0 +1,27 @@
+{
+  "name": "print-api",
+  "version": "1.0.0",
+  "description": "Promise wrapper for communicating with Gelato Print API",
+  "main": "main.js",
+  "tonicExampleFilename": "test.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gelato-api/npm-gelato-api.git"
+  },
+  "keywords": [
+    "print"
+  ],
+  "author": "Eivind Ingebrigtsen <eivind@gelato.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gelato-api/npm-gelato-api/issues"
+  },
+  "homepage": "https://github.com/gelato-api/npm-gelato-api#readme",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "superagent": "^3.8.3"
+  }
+}

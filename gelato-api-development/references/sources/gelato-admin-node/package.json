@@ -1,0 +1,112 @@
+{
+  "name": "gelato-admin",
+  "version": "1.3.1",
+  "description": "A lightweight Node.js client for the Gelato API",
+  "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/ekkolon/gelato-admin-node#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "scripts": {
+    "build": "pnpm exec gulp build",
+    "prepare": "pnpm build && pnpm run generate-esm",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:fix": "eslint --fix \"**/*.ts\"",
+    "test": "jest --config jest.config.ts --testPathPatterns test/unit",
+    "test:e2e": "jest --config jest.config.ts --testPathPatterns test/e2e",
+    "generate-esm": "pnpm exec tsx scripts/generate-esm.js"
+  },
+  "keywords": [
+    "gelato",
+    "api",
+    "gelato api",
+    "print-on-demand",
+    "pod",
+    "client",
+    "node",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekkolon/gelato-admin-node"
+  },
+  "bugs": {
+    "url": "https://github.com/ekkolon/gelato-admin-node/issues"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "types": "./lib/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "orders": [
+        "lib/services/orders"
+      ],
+      "products": [
+        "lib/services/products"
+      ],
+      "shipment": [
+        "lib/services/shipment"
+      ],
+      "ecommerce": [
+        "lib/services/ecommerce"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./orders": {
+      "types": "./lib/services/orders/index.d.ts",
+      "require": "./lib/services/orders/index.js",
+      "import": "./lib/esm/orders/index.js"
+    },
+    "./products": {
+      "types": "./lib/services/products/index.d.ts",
+      "require": "./lib/services/products/index.js",
+      "import": "./lib/esm/products/index.js"
+    },
+    "./shipment": {
+      "types": "./lib/services/shipment/index.d.ts",
+      "require": "./lib/services/shipment/index.js",
+      "import": "./lib/esm/shipment/index.js"
+    },
+    "./ecommerce": {
+      "types": "./lib/services/ecommerce/index.d.ts",
+      "require": "./lib/services/ecommerce/index.js",
+      "import": "./lib/esm/ecommerce/index.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/gulp": "^4.0.18",
+    "@types/gulp-filter": "^3.0.41",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.12.2",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/parser": "^8.58.1",
+    "del": "^8.0.1",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-n": "^17.24.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "gulp": "^5.0.1",
+    "gulp-filter": "^9.0.1",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "jest": "30.3.0",
+    "prettier": "^3.6.2",
+    "ts-jest": "29.4.9",
+    "ts-node": "10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.1"
+  }
+}
