@@ -7,12 +7,13 @@ description: "Build, integrate, and debug applications against the Gelato print-
 
 Gelato is a global print-on-demand (POD) and fulfillment platform. Its public HTTP API lets developers programmatically place orders, browse the product catalog, query shipping options, manage e-commerce store templates, and receive webhook notifications as orders move through production. This skill is the developer-side guide to that API.
 
-The skill ships with two layers of documentation:
+The skill ships with three layers of documentation:
 
 1. **Curated references** in `references/*.md` — synthesized guides for every part of the API, with example payloads, gotchas, and recipe code. Read these first.
-2. **Embedded SDK source** in `references/sources/` — the full TypeScript source of [`ekkolon/gelato-admin-node`](https://github.com/ekkolon/gelato-admin-node) (Apache-2.0), which is the most complete public type definition of the current Gelato API surface. The legacy [`gelato-api/npm-gelato-api`](https://github.com/gelato-api/npm-gelato-api) (MIT, v2-era) is included for historical context only.
+2. **Official Gelato API docs (captured)** in `references/sources/gelato-official-docs/` — a markdown snapshot of `https://dashboard.gelato.com/docs/` (retrieved **2026-05-30**, live), the **authoritative per-endpoint reference**: every request/response example (fenced) and parameter table. Start at its `INDEX.md`. Drop here whenever you need exact, ground-truth endpoint detail. Legacy v2/v3 excluded.
+3. **Embedded SDK source** in `references/sources/{gelato-admin-node,npm-gelato-api}/` — the full TypeScript of [`ekkolon/gelato-admin-node`](https://github.com/ekkolon/gelato-admin-node) (Apache-2.0), the most complete public *type* definitions. ⚠ The SDK is **incomplete on some field shapes** (e.g. it models order `files[]` as `{url,type}` only, omitting `fitMethod`/`fillMethod`/`isVisible` that the live API accepts and echoes) — when the SDK and the captured official docs disagree, trust the official docs (or verify live). The legacy [`gelato-api/npm-gelato-api`](https://github.com/gelato-api/npm-gelato-api) (MIT, v2-era) is historical context only.
 
-> ⚠ **The official Gelato API documentation at `https://dashboard.gelato.com/docs/` is gated** behind the dashboard's web portal and is not redistributable. The curated references here distill the publicly-observable API contract; when a curated reference is insufficient, the user should sign in at the dashboard for the canonical reference page.
+> ℹ **The official docs sit behind a Cloudflare challenge** — plain `curl`/WebFetch get HTTP 403, so a markdown snapshot is bundled in `references/sources/gelato-official-docs/` (retrieved 2026-05-30). To refresh it, harvest those URLs with a headless browser that clears the Cloudflare interstitial (the docs are a static MkDocs Material site → full HTML content once rendered). Read the curated references first; drop to the captured official docs for exact per-endpoint request/response/parameter detail.
 
 ## Scope and versions
 
