@@ -44,15 +44,34 @@ echo ""
 mkdir -p "$DEST/openapi-specs" "$DEST/sdk-snippets" "$DEST/kalshi-official-docs"
 
 # ----------------------------------------------------------------------------
-# 1. OpenAPI / AsyncAPI / Perps OpenAPI spec files
+# 1. OpenAPI / AsyncAPI / Perps OpenAPI spec files + llms.txt index files
 # ----------------------------------------------------------------------------
+#
+# Files in docs.kalshi.com worth bundling, in priority order:
+#   - llms.txt          plain-text index of all doc pages (Mintlify convention).
+#                       The single best file for skill bundling — Mintlify
+#                       concatenates the URL list AND the full content of every
+#                       page, so consuming this one file gives an LLM the
+#                       whole doc site in plain text without needing to render
+#                       individual HTML pages.
+#   - llms-full.txt     extended variant (sometimes longer / more complete).
+#   - openapi.yaml      REST event-contracts (canonical request/response shape).
+#   - asyncapi.yaml     WebSocket channels.
+#   - perps_openapi.yaml REST perpetual-futures.
+#
+# All five live behind the same Cloudflare gate; this script tries plain curl
+# first and falls back to a headless-browser note when blocked.
 
-echo "==> Fetching OpenAPI / AsyncAPI specs"
+echo "==> Fetching llms.txt index + OpenAPI / AsyncAPI specs"
 
 UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15'
 
-for f in openapi.yaml asyncapi.yaml perps_openapi.yaml; do
-    out="$DEST/openapi-specs/$f"
+for f in llms.txt llms-full.txt openapi.yaml asyncapi.yaml perps_openapi.yaml; do
+    # llms*.txt land in kalshi-official-docs/; YAML specs in openapi-specs/.
+    case "$f" in
+        llms*.txt) out="$DEST/kalshi-official-docs/$f" ;;
+        *)         out="$DEST/openapi-specs/$f" ;;
+    esac
     echo "  -> https://docs.kalshi.com/$f"
     if curl -fsSL -A "$UA" "https://docs.kalshi.com/$f" -o "$out.tmp" 2>/dev/null; then
         # Cloudflare returns an HTML interstitial body with 200 in some cases —
@@ -151,11 +170,56 @@ fi
 cat > "$DEST/kalshi-official-docs/README.md" <<'EOF'
 # Captured docs.kalshi.com snapshot
 
-This directory holds a markdown snapshot of `https://docs.kalshi.com/`. Because
-the site is fronted by Cloudflare, plain `curl` / `WebFetch` requests return
-HTTP 403 ("Just a moment…"). To refresh:
+This directory holds:
 
-## Headless capture recipe
+1. **`llms.txt`** and **`llms-full.txt`** — the Mintlify-generated plain-text
+   bundles of the entire `docs.kalshi.com` site. **These are the single best
+   files to harvest** — Mintlify concatenates the URL index AND the full
+   prose content of every documentation page into one (or two) plain-text
+   files specifically for LLM consumption. If you can grab just these, you
+   have effectively the whole doc site.
+2. A markdown snapshot of the individual pages of `https://docs.kalshi.com/`,
+   if a headless harvest has been run.
+
+Because the site is fronted by Cloudflare, plain `curl` / `WebFetch` requests
+return HTTP 403 ("Just a moment…"). To refresh:
+
+## Easiest path: `llms.txt` + `llms-full.txt`
+
+These two URLs hold the complete documentation in plain text:
+
+- `https://docs.kalshi.com/llms.txt` — index + concatenated content
+- `https://docs.kalshi.com/llms-full.txt` — extended variant
+
+From a developer workstation (NOT a CI runner / sandbox) most browsers can
+fetch these directly after solving the Cloudflare challenge once:
+
+```bash
+# In a real browser session that has cleared the Cloudflare challenge,
+# save the response body as llms.txt and llms-full.txt into this directory.
+# Or via Playwright (Python):
+python -c "
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    ctx = browser.new_context()
+    page = ctx.new_page()
+    page.goto('https://docs.kalshi.com/')                  # solves CF once
+    for f in ('llms.txt', 'llms-full.txt'):
+        page.goto(f'https://docs.kalshi.com/{f}', wait_until='networkidle')
+        # Strip the auto-added <html><body><pre>…</pre></body></html> wrapper:
+        body = page.content()
+        start = body.find('<pre'); end = body.rfind('</pre>')
+        if start != -1 and end != -1:
+            body = body[body.find('>', start)+1:end]
+        open(f, 'w').write(body)
+"
+```
+
+## Headless capture of individual pages (more granular)
+
+If you also want the docs as one-file-per-page markdown (e.g. to grep
+per-endpoint), harvest the URL list and render each page:
 
 1. **Enumerate the page set** without hitting Cloudflare via the Wayback CDX
    API:
@@ -166,6 +230,9 @@ HTTP 403 ("Just a moment…"). To refresh:
      | grep -vE '/(assets|_next|favicon)|\.(js|css|woff|png|jpg|svg)' \
      > urls.txt
    ```
+
+   (Or parse the URL list straight out of `llms.txt` once you have it — that
+   index is the most current source.)
 
 2. **Render each page** with a headless Chromium that clears the Cloudflare
    challenge. Playwright + a real User-Agent + persistent context to reuse the

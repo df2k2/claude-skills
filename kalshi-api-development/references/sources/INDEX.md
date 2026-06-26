@@ -76,11 +76,13 @@ After running `scripts/kalshi/fetch_docs.sh` from a real-browser-capable environ
 
 | Topic | File |
 | --- | --- |
+| **`llms.txt`** — full plain-text bundle of docs.kalshi.com (URL index + every page's prose; Mintlify convention). The single best file to harvest. | `references/sources/kalshi-official-docs/llms.txt` |
+| **`llms-full.txt`** — extended variant of llms.txt (longer/more complete) | `references/sources/kalshi-official-docs/llms-full.txt` |
 | **OpenAPI** for event-contracts REST | `references/sources/openapi-specs/openapi.yaml` |
 | **AsyncAPI** for event-contracts WebSocket | `references/sources/openapi-specs/asyncapi.yaml` |
 | **OpenAPI** for perps REST | `references/sources/openapi-specs/perps_openapi.yaml` |
 | How to refresh the spec files | `references/sources/openapi-specs/README.md` |
-| Captured docs.kalshi.com pages | `references/sources/kalshi-official-docs/` |
+| Captured docs.kalshi.com individual pages | `references/sources/kalshi-official-docs/` |
 | TexasCoding kalshi-python-sdk README | `references/sources/sdk-snippets/kalshi-python-sdk/README.md` |
 | arshka pykalshi README | `references/sources/sdk-snippets/pykalshi/README.md` |
 | vaguenebula kalshi-client README | `references/sources/sdk-snippets/kalshi-client/README.md` |
@@ -302,11 +304,15 @@ bash scripts/kalshi/fetch_docs.sh
 
 What it does:
 
-1. Tries to fetch `openapi.yaml`, `asyncapi.yaml`, `perps_openapi.yaml` from `docs.kalshi.com`.
+1. Tries to fetch `llms.txt`, `llms-full.txt`, `openapi.yaml`, `asyncapi.yaml`, `perps_openapi.yaml` from `docs.kalshi.com` (in that priority order — `llms.txt` is the highest-value file since it bundles the entire site as plain text).
 2. Clones the community SDK repos to update `sdk-snippets/`.
 3. Creates / updates `kalshi-official-docs/README.md` with the headless-capture recipe.
 
-If Cloudflare or sandbox restrictions block the script, follow the headless recipe in `openapi-specs/README.md`.
+If Cloudflare or sandbox restrictions block the script, follow the headless recipe in `kalshi-official-docs/README.md` — the script writes that file with up-to-date instructions every run.
+
+### Quick fact about `llms.txt`
+
+`llms.txt` is a Mintlify-platform convention (Kalshi's docs are Mintlify-hosted). For any Mintlify-powered docs site, `/llms.txt` returns the URL index of all pages, and `/llms-full.txt` returns the URL index **plus** the concatenated full content of every page. For LLM-consumption purposes, **harvesting `llms-full.txt` alone is usually equivalent to harvesting the entire doc site**. Always try those two URLs first.
 
 ## Authoritative-source priority
 
