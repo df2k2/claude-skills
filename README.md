@@ -12,6 +12,8 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 | [`hyva-magento2-development/`](hyva-magento2-development/) | Hyvä themes for Magento 2 — Hyvä 1.4.x with Tailwind CSS v4 and Alpine.js v3, phtml templates, Alpine components, view models, hyva.config.json, hyva-themes/magento2-* packages, Magewire / Hyvä Checkout, compatibility modules for Luma extensions, Tailwind v3→v4 migration. | 3.4 MB |
 | [`ordergroove-api-development/`](ordergroove-api-development/) | OrderGroove subscription commerce platform — every REST endpoint, every GraphQL type, every webhook payload, the Subscription Manager front-end widget, platform integrations (Shopify, Recharge migration, etc.), Purchase POST, 1-click actions. | 11 MB |
 | [`printful-api-development/`](printful-api-development/) | Printful print-on-demand developer API (v1 stable + v2 open beta) — catalog, orders, mockup generator, files, shipping rates, webhooks (incl. HMAC-SHA256 verification), Sync Products, warehouse products, approval sheets, OAuth scopes, Personal Access Tokens. Ships the full v2 OpenAPI spec (39 paths, 134 schemas) plus the official v1 PHP SDK source. | 908 KB |
+| [`akeneo-pim-api-development/`](akeneo-pim-api-development/) | Akeneo PIM Web API — REST (SaaS/Serenity OpenAPI 3.1.0 + classic CE/EE Swagger 2.0), GraphQL, the Event Platform (webhooks), Apps/Connections OAuth + UI Extensions, Catalogs + product mapping, the Akeneo MCP server, and the official `akeneo/api-php-client`. Ships both specs (289 ops total), the Postman collection, the PHP client source, and the `pim-api-docs` prose. | 12 MB |
+| [`akeneo-magento2-connector/`](akeneo-magento2-connector/) | Akeneo Connector for Magento 2 / Adobe Commerce — the `akeneo/module-magento2-connector-community` module that imports Akeneo PIM catalog data into Magento: install/compatibility, admin config & mapping, the Job step pipeline (category/family/attribute/option/product), running via `akeneo_connector:import`/admin grid/cron, extending, and troubleshooting. Ships the full module source (v105.1.2). | 1.9 MB |
 
 ## Layout
 
@@ -52,11 +54,30 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 │           ├── printful-v2-endpoints.md   ← auto-generated endpoint catalog
 │           ├── printful-v2-schemas.md     ← auto-generated schema catalog
 │           └── Printful*.php              ← official v1 PHP SDK
+├── akeneo-pim-api-development/            ← Akeneo PIM Web API (scripts live in-skill)
+│   ├── SKILL.md
+│   ├── references/
+│   │   ├── *.md                          ← 15 curated guides (getting-started … common-pitfalls)
+│   │   └── sources/
+│   │       ├── INDEX.md                  ← topic map
+│   │       ├── openapi-specs/            ← saas-openapi.json (3.1.0) + classic-web-api.json (Swagger 2.0) + SPEC-SUMMARY.md
+│   │       ├── postman/                  ← akeneo-postman-collection.json
+│   │       ├── api-php-client-source/    ← official akeneo/api-php-client source
+│   │       └── akeneo-official-docs/     ← pim-api-docs prose (rest-api, events, apps, graphql, mcp, …)
+│   └── scripts/akeneo-pim/               ← fetch_docs.sh + gen_spec_summary.py
+├── akeneo-magento2-connector/            ← Akeneo→Magento import module (scripts live in-skill)
+│   ├── SKILL.md
+│   ├── references/
+│   │   ├── *.md                          ← 8 curated guides (getting-started … troubleshooting)
+│   │   └── sources/
+│   │       ├── INDEX.md
+│   │       └── magento2-connector-source/ ← full module source @ v105.1.2
+│   └── scripts/akeneo-magento2/          ← fetch_docs.sh
 ├── misc/                                  ← packaged `.skill` archives + work-in-progress sketches
 └── scripts/                               ← helper scripts for refreshing each skill's source docs
     ├── hyva/
     ├── magento2/
-    └── printful/
+    └── printful/                          ← (akeneo skills keep their fetch scripts in-skill instead)
 ```
 
 ## Using a skill
@@ -94,6 +115,13 @@ python3 ./scripts/hyva/fetch_links_to_md.py
 
 # Printful — re-fetches the v2 OpenAPI spec + the official PHP SDK source
 ./scripts/printful/fetch_docs.sh
+
+# Akeneo PIM API — re-fetches both specs + Postman + api-php-client + pim-api-docs prose (scripts are in-skill)
+./akeneo-pim-api-development/scripts/akeneo-pim/fetch_docs.sh
+python3 ./akeneo-pim-api-development/scripts/akeneo-pim/gen_spec_summary.py
+
+# Akeneo Magento 2 connector — re-vendors the module source at a tag
+./akeneo-magento2-connector/scripts/akeneo-magento2/fetch_docs.sh
 ```
 
 Run periodically (e.g. quarterly) to keep the embedded docs current. Each script regenerates any auto-generated INDEX / catalog files and reports a size delta so you can review the diff before committing.
