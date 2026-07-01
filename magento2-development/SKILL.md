@@ -288,3 +288,12 @@ bin/magento cache:flush
 5. **If they need a storefront input**, that goes in a `.phtml` under `view/frontend/templates/checkout/`, registered via `view/frontend/layout/checkout_index_index.xml` with a Knockout UI component, plus a quote API extension plugin to persist `gift_wrap_message` from the GraphQL/REST payload. See `references/layout-blocks-templates.md` and `references/rest-graphql-webapi.md`.
 
 This pattern — db_schema, extension_attributes, observer/plugin to wire it up, a UI component for input — is the Magento way. Don't shortcut it by writing SQL directly or stuffing logic into a template.
+
+## Related skills
+
+This is the core Magento 2 / Adobe Commerce backend skill. Reach for a sibling when the task shifts focus:
+
+- **`hyva-magento2-development`** — the storefront runs a **Hyvä** theme (Tailwind + Alpine.js instead of Luma / Knockout / RequireJS / LESS). Hyvä replaces only the frontend layer; backend work (modules, DI, plugins, GraphQL, indexing, cron) still uses *this* skill.
+- **`akeneo-magento2-connector`** — importing catalog data (products, categories, families, attributes, options) into this store from an **Akeneo PIM** via the official connector module.
+- **`akeneo-pim-api-development`** — the upstream **Akeneo PIM** itself (the product-data source the connector pulls from), or any custom integration against the Akeneo Web API.
+- **`ordergroove-api-development`** — adding **subscriptions / recurring orders** (OrderGroove) to the store.

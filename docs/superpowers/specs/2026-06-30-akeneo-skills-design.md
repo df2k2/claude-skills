@@ -7,7 +7,7 @@
 ## Summary
 
 Add **two new sibling skills** to the `claude-skills` repo, following the repo's
-gold-standard `kalshi-api-development` template (long trigger-rich `SKILL.md` →
+gold-standard `*-api-development` skill template (long trigger-rich `SKILL.md` →
 curated `references/*.md` → vendored `references/sources/` → `INDEX.md` topic map →
 `scripts/<skill>/fetch_docs.sh` refresher):
 
@@ -32,8 +32,8 @@ The two skills cross-link (both center on the shared `akeneo/api-php-client` lib
 
 ## Upstream source inventory (verified reachable 2026-06-30)
 
-All sources return HTTP 200 from this environment — **Akeneo is not DNS/category-filtered**
-(unlike Kalshi), so fetch scripts use plain `curl`/`git` with an optional `HTTPS_PROXY`
+All sources return HTTP 200 from this environment — **Akeneo is not DNS/category-filtered**,
+so fetch scripts use plain `curl`/`git` with an optional `HTTPS_PROXY`
 passthrough. No SOCKS/SSH transport needed.
 
 | Source | URL | Format | Scale | Notes |
@@ -81,7 +81,7 @@ assets/catalogs), GraphQL, Events/webhooks, Apps & Connections OAuth, the PHP cl
 server. Trigger phrases: Akeneo, PIM, api.akeneo.com, `/api/rest/v1/`, product model, family
 variant, reference entity, asset family, attribute option, channel/locale/scope, Serenity,
 Growth Edition, App OAuth/connection, Event Platform, `akeneo/api-php-client`, Akeneo MCP, etc.
-(Full enumerated list authored in `SKILL.md` frontmatter — long, kalshi-style.)
+(Full enumerated list authored in `SKILL.md` frontmatter — long, keyword-rich style.)
 
 ### Directory layout
 ```
@@ -121,7 +121,7 @@ akeneo-pim-api-development/
 │           ├── extensions/  advanced-extensions/
 │           ├── getting-started/  guides/  tutorials/
 │           └── README.md                         ← provenance + refresh
-└── scripts/akeneo-pim/                           ← in-skill (self-contained), mirrors kalshi
+└── scripts/akeneo-pim/                           ← in-skill (self-contained)
     ├── fetch_docs.sh
     └── gen_spec_summary.py
 ```
@@ -178,7 +178,7 @@ akeneo-magento2-connector/
 │       └── magento2-connector-source/            ← full module vendored @ tag v105.1.2
 │           └── (Api Block Console Controller Converter Cron Executor Helper Job Logger
 │               Model Observer Setup Ui ViewModel etc i18n view + README + CHANGELOG + composer.json)
-└── scripts/akeneo-magento2/                      ← in-skill (self-contained), mirrors kalshi
+└── scripts/akeneo-magento2/                      ← in-skill (self-contained)
     └── fetch_docs.sh
 ```
 
@@ -232,7 +232,7 @@ akeneo-magento2-connector/
   passthrough for corporate networks.
 - **`events-reference-*` are per-version dirs** — vendor all four (5.0/6.0/7.0/serenity) so
   the skill can answer version-specific webhook-payload questions.
-- **Scripts live inside each skill** (`<skill>/scripts/<name>/`), mirroring the kalshi template,
+- **Scripts live inside each skill** (`<skill>/scripts/<name>/`),
   so each skill stays self-contained/portable — not at repo-root `scripts/` like the older skills.
 - **Plan decomposition:** implementation naturally splits into two plans (one per skill), Skill 1
   first (the connector skill cross-links it). `writing-plans` may produce two plans or one

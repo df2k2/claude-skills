@@ -166,3 +166,10 @@ The embedded docs cover the public OrderGroove developer site as of the most rec
 - Pricing, contracts, or non-technical content.
 
 For those, point the user to their OG account manager or `https://help.ordergroove.com`. Do not invent endpoints, fields, or payloads — say "not in the embedded docs" and stop.
+
+## Related skills
+
+OrderGroove is layered onto a commerce storefront. For the host platform:
+
+- **`magento2-development`** — integrating OrderGroove into a **Magento 2 / Adobe Commerce** store (backend: modules, plugins, the quote/order flow, REST / GraphQL).
+- **`hyva-magento2-development`** — rendering the OrderGroove **Subscription Manager** and subscribe widgets on a **Hyvä** storefront (Tailwind + Alpine.js).

@@ -166,3 +166,11 @@ Then add it to the layout:
 Then: `bin/magento cache:flush` and from the child theme's `web/tailwind/`, run `npm run build`.
 
 If the store uses CSP, this `x-data="{ … }"` won't work — see `references/alpine-csp.md` for the registered-component variant.
+
+## Related skills
+
+Hyvä replaces only the Magento 2 **frontend** — reach for a sibling for everything else:
+
+- **`magento2-development`** — the Magento 2 / Adobe Commerce backend this theme runs on: modules, DI, plugins, observers, layout/blocks, EAV, Web APIs (REST / GraphQL), indexing, CLI/cron. Any non-frontend work lives there.
+- **`ordergroove-api-development`** — wiring the OrderGroove **Subscription Manager** widget and subscription flows into a Hyvä storefront.
+- **`akeneo-magento2-connector`** — the products and categories rendered on the Hyvä storefront are imported from **Akeneo PIM** by this connector.

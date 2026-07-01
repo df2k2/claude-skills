@@ -196,6 +196,8 @@ Everything Akeneo publishes for the API is embedded under `references/sources/`:
 5. The curated references in this skill.
 6. Past blog posts / tutorials.
 
-## Related skill
+## Related skills
 
-For the **Akeneo Connector for Magento 2 / Adobe Commerce** (the PHP module that imports Akeneo catalog data into a Magento store), use the **`akeneo-magento2-connector`** skill. It depends on the same `akeneo/api-php-client` documented here.
+- **`akeneo-magento2-connector`** — the PHP module that imports this PIM's catalog data (products, categories, families, attributes, options) into a **Magento 2 / Adobe Commerce** store. It depends on the same `akeneo/api-php-client` documented here.
+- **`magento2-development`** — the Magento 2 / Adobe Commerce backend on the receiving end of that import, or any custom Akeneo→Magento integration you build yourself.
+- **`hyva-magento2-development`** — if that Magento store's storefront is a **Hyvä** theme (Tailwind + Alpine.js), where the imported catalog renders.

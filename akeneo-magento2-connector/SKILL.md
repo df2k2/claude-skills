@@ -141,3 +141,9 @@ The full module is embedded at `references/sources/magento2-connector-source/` (
 3. The connector `CHANGELOG.md` and README.
 4. The curated references in this skill.
 5. The Akeneo help-center connector docs / blog posts.
+
+## Related skills
+
+- **`akeneo-pim-api-development`** — the Akeneo Web API side this connector consumes: auth (Connections vs Apps), endpoints, the `{locale,scope,data}` value shape, and the shared `akeneo/api-php-client`. Debug connector API/auth errors there.
+- **`magento2-development`** — the generic Magento 2 / Adobe Commerce mechanics this skill deliberately doesn't re-teach: di.xml, plugins/observers, EAV, layout, indexing, cron internals.
+- **`hyva-magento2-development`** — if the store's storefront is a **Hyvä** theme, the imported catalog renders through it.
