@@ -158,4 +158,4 @@ Are you building a new integration?
 - https://apisupport.gelato.com/hc/en-us/articles/360016975040-Getting-started-with-Order-Desk (Order Desk).
 - https://connect-api.live.gelato.tech/docs/ (GelatoConnect — different product).
 - https://www.gelato.com/order-flow (Order Flow API overview).
-- Official (gated): https://dashboard.gelato.com/docs/ — main API docs.
+- Official live (gated): https://dashboard.gelato.com/docs/ — main API docs; a captured markdown snapshot is bundled at `references/sources/gelato-official-docs/` (see its `INDEX.md`).

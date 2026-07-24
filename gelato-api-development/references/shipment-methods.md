@@ -260,4 +260,4 @@ Unlike the Quote API, `prices:search` gives you a price for a method+product **w
 - `references/sources/gelato-admin-node/src/services/shipment/shipment.ts` — `ShipmentMethod` + `ShipmentMethodType` types.
 - `references/sources/gelato-official-docs/shipment/methods.md` — captured official Methods reference.
 - `references/sources/gelato-official-docs/shipment/price.md` — captured official `prices:search` reference (added 2026-07-24).
-- Official (gated): https://dashboard.gelato.com/docs/shipment/methods/ and https://dashboard.gelato.com/docs/shipment/price/.
+- Official live (gated): https://dashboard.gelato.com/docs/shipment/methods/ and https://dashboard.gelato.com/docs/shipment/price/.

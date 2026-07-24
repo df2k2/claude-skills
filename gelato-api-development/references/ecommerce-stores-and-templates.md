@@ -343,7 +343,8 @@ For direct-API orders, `storeId` is null and `channel` is `"api"`.
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/ecommerce/products/{list,get,create-from-template}.md` + `ecommerce/templates/get.md` — captured official per-endpoint references (incl. `imagePlaceholders` + `fitMethod`).
 - `references/sources/gelato-admin-node/src/services/ecommerce/ecommerce-api.ts` — endpoint paths.
 - `references/sources/gelato-admin-node/src/services/ecommerce/templates.ts` — Template + Variant + ImagePlaceholder types.
 - `references/sources/gelato-admin-node/src/services/ecommerce/products.ts` — full Get/Create Product request/response shapes.
-- Official (gated): https://dashboard.gelato.com/docs/ecommerce/templates/get/.
+- Official live (gated): https://dashboard.gelato.com/docs/ecommerce/templates/get/.

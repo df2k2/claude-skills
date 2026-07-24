@@ -176,6 +176,7 @@ Suggested timeouts per endpoint type:
 | --- | --- |
 | Catalog reads (`GET /v3/catalogs/...`) | 10s |
 | Product reads | 10s |
+| Shipment methods / prices (`GET /v1/shipment-methods`, `POST /v1/prices:search`) | 10s |
 | Quote (`POST /v4/orders:quote`) | 30s |
 | Order create (`POST /v4/orders`) | 30s |
 | Order get | 10s |
@@ -221,4 +222,4 @@ Note that webhook delivery from Gelato to you follows different rules — 3 retr
 ## Original sources
 
 - `references/sources/gelato-admin-node/src/utils/error.ts` — SDK error wrapper.
-- Official: HTTP semantics are standard REST; Gelato's specific error codes are inconsistently documented in the gated docs.
+- Official: HTTP semantics are standard REST; Gelato's specific error codes are inconsistently documented in the official docs (captured snapshot at `references/sources/gelato-official-docs/`).

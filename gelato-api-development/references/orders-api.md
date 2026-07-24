@@ -326,7 +326,7 @@ Response includes one or more "quotes" with available shipment methods and price
 
 When `allowMultipleQuotes: true`, an order spanning multiple production countries returns one quote per country.
 
-Quote requests **do not** charge anything or create an order. Use them on cart pages or for live shipping calculation.
+Quote requests **do not** charge anything or create an order. Use them on cart pages or for live shipping calculation. For an address-free, product-level shipping estimate (productUid + quantity + destination country only, no recipient), use `POST /v1/prices:search` on the shipment host instead — see `references/shipment-methods.md`.
 
 ## Patch order (draft → production)
 
@@ -554,7 +554,8 @@ See `references/common-pitfalls.md` for the full catalog.
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/orders/v4/{create,get,search,quote,patch,cancel,delete}.md` — captured official per-endpoint references (full request/response examples + parameter tables).
+- `references/sources/gelato-official-docs/orders/order_details.md` — captured official "How orders work" (statuses, receipts, order object).
 - `references/sources/gelato-admin-node/src/services/orders/orders-api.ts` — endpoint paths + verbs (Apache-2.0).
 - `references/sources/gelato-admin-node/src/services/orders/order.ts` — every request/response type definition with field-level docs.
-- Official (gated): https://dashboard.gelato.com/docs/orders/v4/create/, /get/, /search/, /quote/, /patch/, /cancel/.
-- Official "How orders work" (gated): https://dashboard.gelato.com/docs/orders/order_details/.
+- Official live (gated): https://dashboard.gelato.com/docs/orders/v4/create/, /get/, /search/, /quote/, /patch/, /cancel/ and /docs/orders/order_details/.

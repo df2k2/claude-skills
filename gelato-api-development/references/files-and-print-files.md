@@ -249,6 +249,9 @@ If the product is *not* 2-sided (the `gpr_4-4` suffix is 4-color front + 4-color
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/orders/order_details.md` — captured official order/file reference (incl. PDF/X recommendations).
+- `references/sources/gelato-official-docs/orders/v4/create.md` — captured `files[]` parameter table (type values, fitMethod).
+- `references/sources/gelato-official-docs/guides/embroidery.md` — captured embroidery file guide.
 - `references/sources/gelato-admin-node/src/services/orders/order.ts` — `File`, `FileType`, `OrderCreateItemObject` types.
-- Official (gated): https://dashboard.gelato.com/docs/orders/order_details/ (mentions PDF/X recommendations).
+- Official live (gated): https://dashboard.gelato.com/docs/orders/order_details/.
 - Per-product design templates and spec sheets are downloadable from each product's page in the dashboard catalog.

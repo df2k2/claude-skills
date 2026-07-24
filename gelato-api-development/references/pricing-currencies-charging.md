@@ -203,6 +203,7 @@ Payouts are for selling-side platforms (Shopify, Etsy) where the storefront coll
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/products/prices.md` + `get-started.md` — captured official price + intro references.
 - `references/sources/gelato-admin-node/src/services/orders/order.ts` — `Currency`, `ReceiptObject`, `ReceiptItemObject` types.
 - `references/sources/gelato-admin-node/src/services/products/prices.ts` — pricing object.
-- Official (gated): https://dashboard.gelato.com/docs/get-started/ and `/billing/`.
+- Official live (gated): https://dashboard.gelato.com/docs/get-started/ and `/billing/`.

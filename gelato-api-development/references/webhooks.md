@@ -1,6 +1,6 @@
 # Webhooks
 
-Gelato sends webhook events when state changes happen — primarily order status updates, but also file-related events (malware scan, stock availability). This reference covers configuration, event types, payload shapes, retry semantics, signature verification, and idempotency patterns.
+Gelato sends webhook events when state changes happen — order lifecycle events (order status, item status, tracking codes, delivery estimates) and store product / template lifecycle events. This reference covers configuration, event types, payload shapes, retry semantics, signature verification, and idempotency patterns. Ground truth for every payload shape: the captured official page at `references/sources/gelato-official-docs/webhooks.md`.
 
 ## Configuration
 
@@ -19,72 +19,91 @@ You can configure multiple webhook URLs — useful for fan-out (one URL for prod
 
 ## Event types
 
-The publicly documented events:
+The publicly documented events (per the captured official page):
 
 | Event | Fires when |
 | --- | --- |
-| `order_status_updated` | Order-level fulfillment / financial status changes |
+| `order_status_updated` | Order-level fulfillment status changes (carries per-item tracking once shipped) |
 | `order_item_status_updated` | Item-level fulfillment status changes (per line item) |
-| `catalog_product_stock_availability_updated` | A stockable product's regional availability changes |
+| `order_item_tracking_code_updated` | An item ships — tracking code + shipping provider |
+| `order_delivery_estimate_updated` | **Beta** (request via apisupport@gelato.com) — an order's estimated min/max delivery date increases |
+| `store_product_created` / `_updated` / `_deleted` | A store product is created / updated (or published) / deleted |
+| `store_product_template_created` / `_updated` / `_deleted` | A store product template is created / updated / deleted |
+
+One more event name exists in the wild but is **absent from the official webhooks page**: `catalog_product_stock_availability_updated` (see below).
 
 ### `order_status_updated`
 
-Fires on every order-level transition: `created` → `passed` → `printed` → `shipped`, plus financial transitions (`pending` → `paid`), cancellations, and refunds.
+Fires on every order-level transition: `created` → `passed` → `printed` → `shipped`, plus cancellations.
 
-Payload (representative shape):
+Payload (official shape — note there is **no** top-level `financialStatus` and **no** `shipment` object; tracking rides per-item in `items[].fulfillments[]`):
 
 ```json
 {
+  "id": "os_5e5680ce494f6",
   "event": "order_status_updated",
-  "orderId": "gelato-order-id",
-  "orderReferenceId": "your-internal-order-id",
+  "orderId": "a6a1f9ce-2bdd-4a9e-9f8d-0009df0e24d9",
   "storeId": null,
+  "orderReferenceId": "your-internal-order-id",
   "fulfillmentStatus": "shipped",
-  "financialStatus": "paid",
   "items": [
     {
       "itemReferenceId": "your-line-1",
-      "fulfillmentStatus": "shipped"
+      "fulfillmentStatus": "shipped",
+      "fulfillments": [
+        {
+          "trackingCode": "code123",
+          "trackingUrl": "http://example.com/tracking?code=code123",
+          "shipmentMethodName": "DHL Express Domestic BR",
+          "shipmentMethodUid": "dhl_express_domestic_br",
+          "fulfillmentCountry": "BR",
+          "fulfillmentStateProvince": "SP",
+          "fulfillmentFacilityId": "940fec84-54bc-44fc-a8a3-7d6f02cf8f14"
+        }
+      ]
     }
-  ],
-  "shipment": {
-    "shipmentMethodName": "UPS Ground",
-    "shipmentMethodUid": "ups_ground",
-    "packageCount": 1,
-    "minDeliveryDate": "2026-06-01",
-    "maxDeliveryDate": "2026-06-03",
-    "packages": [
-      {
-        "trackingCode": "1Z999AA10123456784",
-        "trackingUrl": "https://www.ups.com/track?tracknum=1Z999AA10123456784",
-        "orderItemIds": ["g-item-1"]
-      }
-    ]
-  }
+  ]
 }
 ```
 
-The exact set of fields varies by transition — a `created` event won't have a `shipment`, a `shipped` event will. Treat the shape as additive.
+The exact set of fields varies by transition — `items[].fulfillments[]` fills in once packages exist (an early `created` event carries no tracking). Treat the shape as additive. For financial state (`paid`, `refunded`, …) fetch `GET /v4/orders/{orderId}` — the webhook does not carry `financialStatus`.
 
 ### `order_item_status_updated`
 
-Fires on item-level fulfillment-status changes. Useful when an order has items produced in different facilities and they ship at different times.
+Fires on item-level fulfillment-status changes. Useful when an order has items produced in different facilities and they ship at different times. ⚠ Field-name gotcha: the item's status arrives as **`status`** (not `fulfillmentStatus`), and there is no `previousFulfillmentStatus` — track prior state yourself.
 
 ```json
 {
+  "id": "is_5b6403bd3cf1f",
   "event": "order_item_status_updated",
-  "orderId": "gelato-order-id",
-  "orderReferenceId": "your-internal-order-id",
-  "itemId": "g-item-1",
   "itemReferenceId": "your-line-1",
-  "fulfillmentStatus": "printed",
-  "previousFulfillmentStatus": "passed"
+  "orderReferenceId": "your-internal-order-id",
+  "orderId": "e82885f8-f92a-4326-b2c7-77d010f6996f",
+  "storeId": null,
+  "fulfillmentCountry": "US",
+  "fulfillmentStateProvince": "NY",
+  "fulfillmentFacilityId": "21315db8-e694-4ded-a72a-98f60814c6e8",
+  "status": "passed",
+  "comment": "",
+  "created": "2018-08-03T07:26:52+00:00"
 }
 ```
 
-### `catalog_product_stock_availability_updated`
+### `order_item_tracking_code_updated`
 
-Fires when stockable-product availability changes in a region.
+Fires when an item ships. Flat per-item payload: `id`, `event`, `orderId`, `storeId`, `itemReferenceId`, `orderReferenceId`, `trackingCode`, `trackingUrl`, `shipmentMethodName`, `shipmentMethodUid`, production-location fields, `created`. Redundant with `order_status_updated`'s `items[].fulfillments[]` — subscribe to whichever is simpler for your handler. Full example: the captured official page.
+
+### `order_delivery_estimate_updated` (beta)
+
+Access on request via apisupport@gelato.com. Fires when an order's estimated delivery window **increases** (multi-package orders report the most conservative estimate). Payload: `id`, `event`, `orderId`, `storeId`, `orderReferenceId`, `minDeliveryDate`, `maxDeliveryDate`, `created`.
+
+### Store product / template lifecycle events
+
+`store_product_{created,updated,deleted}` and `store_product_template_{created,updated,deleted}` fire as products/templates change in a connected store. `created`/`updated` payloads carry the full product or template snapshot (same shape as the Ecommerce GET endpoints — variants, `imagePlaceholders`, `textPlaceholders`, preview URLs); `deleted` carries just `id`, `event`, and the deleted `storeProductId` / `storeProductTemplateId`. These matter for template-registry patterns: there is **no list endpoint for templates**, so the `store_product_template_*` webhooks (plus per-ID GETs) are how you keep a local template registry current.
+
+### `catalog_product_stock_availability_updated` (⚠ not in the official docs)
+
+This event name is used by integrations in the wild but is **absent from the official webhooks page** — re-confirmed by the 2026-07-24 snapshot refresh. Its payload shape is therefore unverified; the sketch below is a best-effort reconstruction. Capture a live event before depending on any field, and prefer polling `POST /v3/stock/region-availability` as the mainline for stock data.
 
 ```json
 {
@@ -95,8 +114,6 @@ Fires when stockable-product availability changes in a region.
   "expectedBackInStock": "2026-06-15"
 }
 ```
-
-Subscribe to this if you're caching product availability in your own database or showing "in stock" badges on your storefront.
 
 ## Delivery semantics
 
@@ -121,14 +138,15 @@ For high-value orders or business-critical flows, supplement webhooks with:
 
 ## Idempotency
 
-Every webhook payload includes `orderId` (Gelato's) and `orderReferenceId` (yours). Your handler must be safe to call multiple times for the same `(orderId, fulfillmentStatus, financialStatus)` combination.
+Every documented event payload carries a unique event **`id`** (`os_…`, `is_…`, `tc_…`, `sp…_…`) — the natural dedup key. Order events also include `orderId` (Gelato's) and `orderReferenceId` (yours). Your handler must be safe to call multiple times for the same event.
 
 Pattern:
 
 ```typescript
 async function handleWebhook(payload: any) {
-  // 1. Compute a deterministic event key
-  const eventKey = `${payload.orderId}:${payload.fulfillmentStatus}:${payload.financialStatus}`;
+  // 1. Dedup on the event id (composite fallback for anything without one)
+  const eventKey = payload.id
+    ?? `${payload.orderId}:${payload.event}:${payload.fulfillmentStatus ?? payload.status}`;
 
   // 2. Check if we've already processed this exact key
   if (await db.processed_webhook_events.exists(eventKey)) {
@@ -141,8 +159,8 @@ async function handleWebhook(payload: any) {
       where: { gelato_id: payload.orderId },
       data: {
         fulfillment_status: payload.fulfillmentStatus,
-        financial_status:   payload.financialStatus,
-        shipment_tracking:  payload.shipment?.packages,
+        // financialStatus is NOT on the webhook — GET /v4/orders/{id} if you track it
+        shipment_tracking:  payload.items?.flatMap((i: any) => i.fulfillments ?? []),
       },
     });
     await tx.processed_webhook_events.insert({ event_key: eventKey });
@@ -214,16 +232,15 @@ app.post('/webhooks/gelato', (req, res) => {
 
 | Field | Always present | What it tells you |
 | --- | --- | --- |
+| `id` | YES (documented events) | Unique event identifier — use as your dedup key. |
 | `event` | YES | Which event type fired. |
 | `orderId` | order events | Gelato's order ID. Use to fetch full details via `GET /v4/orders/{orderId}`. |
 | `orderReferenceId` | order events | Your internal ID — primary lookup key in your DB. |
-| `fulfillmentStatus` | order events | Current order-level status. |
-| `financialStatus` | order events | Current payment status. |
-| `items[]` | order events | Slim per-item snapshot. For full item state, GET the order. |
-| `shipment` | `shipped` event onwards | Tracking codes + URLs, package breakdown. |
-| `storeId` | connected-store orders only | The connected store this order belongs to. Null for direct-API orders. |
+| `fulfillmentStatus` | `order_status_updated` (order-level + per-item); arrives as `status` on `order_item_status_updated` | Current fulfillment status. |
+| `items[].fulfillments[]` | `order_status_updated`, once packages exist | Tracking codes + URLs, shipping method, production location. |
+| `storeId` | connected-store orders only | The connected store this order belongs to. Null for direct-API/UI orders. |
 
-For the canonical, exhaustive payload shape, fetch the order with `GET /v4/orders/{orderId}` after the webhook arrives — the webhook is a notification; the full state is in the order endpoint.
+`financialStatus` is **not** included in any webhook payload — for payment state (`paid`, `refunded`, …), `GET /v4/orders/{orderId}`. In general the webhook is a notification; the full state is in the order endpoint.
 
 ## Common failure modes
 
@@ -261,6 +278,7 @@ Nightly:
 
 ## Original sources
 
-- Official (gated): https://dashboard.gelato.com/docs/webhooks/
+- `references/sources/gelato-official-docs/webhooks.md` — captured official webhooks reference (every event type's exact payload shape + configuration).
+- Official live (gated): https://dashboard.gelato.com/docs/webhooks/
 - Help center: https://support.gelato.com/en/articles/8996576-how-do-i-configure-notifications-webhooks
-- The ekkolon SDK doesn't include webhook-handler code (only API-call code) — the official docs are the only public source for the exact payload shape.
+- The ekkolon SDK doesn't include webhook-handler code (only API-call code) — the official docs (captured above) are the only source for the exact payload shape.

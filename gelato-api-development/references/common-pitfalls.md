@@ -85,7 +85,7 @@ The "why is this not working?" catalog. Mapped from symptom → root cause → f
 | Webhook delivers once then stops | First delivery returned non-2xx; retries (3x, 5s gap) exhausted; event dropped | Fix endpoint; supplement with periodic polling for missed events. |
 | Webhook payload has `orderId` you don't recognize | The order was created on a connected storefront, not via your direct API | Look up by `orderReferenceId` (the storefront's order ID) or by `storeId`. |
 | Webhook arrives before your `POST /v4/orders` response | Race condition | Use `orderReferenceId` as your primary DB key; insert it before the API call, update with `orderId` after. |
-| Duplicate processing | No idempotency | Track processed event keys (e.g., `{orderId}:{fulfillmentStatus}:{financialStatus}`); skip duplicates. |
+| Duplicate processing | No idempotency | Dedup on the payload's unique event `id` (fallback: `{orderId}:{event}:{status}`); skip duplicates. |
 | Out-of-order events (shipped arrives before passed) | Webhook delivery retry sequence | Apply only "later" status transitions; check `STATUS_ORDER`. |
 | Signature can't be verified | Gelato doesn't publish an HMAC scheme | Use Basic Auth (`https://user:pass@your-host/...`) or shared-secret query param. |
 

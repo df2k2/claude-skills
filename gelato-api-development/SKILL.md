@@ -1,6 +1,6 @@
 ---
 name: gelato-api-development
-description: "Build, integrate, and debug applications against the Gelato print-on-demand REST API — Orders v4 (`order.gelatoapis.com`), Product Catalog v3 (`product.gelatoapis.com`), Shipment Methods v1 (`shipment.gelatoapis.com`), Ecommerce Stores/Templates v1 (`ecommerce.gelatoapis.com`), and webhook event handling. Use this skill whenever the user is integrating Gelato for print fulfillment, creating/quoting/canceling orders, working with `productUid` strings, building printable PDFs (PDF/X-1a, PDF/X-4) for Gelato file uploads, mapping a Shopify/Etsy/WooCommerce/BigCommerce/Wix/Squarespace storefront onto Gelato products, working with templates and image placeholders (front/back/neck-inner/neck-outer/sleeve-left/sleeve-right), parsing webhook events (`order_status_updated`, `order_item_status_updated`, `catalog_product_stock_availability_updated`), handling fulfillment / financial statuses (draft / pending_approval / on_hold / passed / printed / shipped / canceled / refunded), debugging X-API-KEY auth failures, debugging 'file URL unreachable' / 'invalid product UID' errors, choosing between draft and order types, picking shipment methods (normal / express / pallet), or scripting against Gelato from Node/Python/PHP/Go. Trigger on mentions of Gelato, Gelato API, GelatoConnect, `order.gelatoapis.com`, `product.gelatoapis.com`, `shipment.gelatoapis.com`, `ecommerce.gelatoapis.com`, X-API-KEY, productUid, orderReferenceId, customerReferenceId, shipmentMethodUid, draft order, Quote API, fulfillmentStatus, financialStatus, Gelato webhook, gelato.com/keys/manage, Gelato Dashboard, print-on-demand, POD fulfillment, Gelato Shopify integration, Gelato Etsy, Gelato template, Gelato variant, image placeholder, Gelato wallet, Gelato 85/15 (no — that's Adobe), Gelato pricing tiers, GelatoConnect order intake, GelatoConnect logistics, Gelato Order Desk. Trigger even when the user just says 'print-on-demand' if context suggests Gelato (e.g., they reference `gelatoapis.com` hostnames, the productUid encoding scheme, or a Gelato dashboard URL). NOTE: This skill covers the Gelato HTTP API — the customer-facing developer surface. It is NOT about GelatoConnect's production-partner APIs (those are for print facilities receiving orders from Gelato) — for GelatoConnect, confirm scope before continuing."
+description: "Build, integrate, and debug applications against the Gelato print-on-demand REST API — Orders v4 (`order.gelatoapis.com`), Product Catalog v3 (`product.gelatoapis.com`), Shipment Methods v1 (`shipment.gelatoapis.com`), Ecommerce Stores/Templates v1 (`ecommerce.gelatoapis.com`), and webhook event handling. Use this skill whenever the user is integrating Gelato for print fulfillment, creating/quoting/canceling orders, working with `productUid` strings, building printable PDFs (PDF/X-1a, PDF/X-4) for Gelato file uploads, mapping a Shopify/Etsy/WooCommerce/BigCommerce/Wix/Squarespace storefront onto Gelato products, working with templates and image placeholders (front/back/neck-inner/neck-outer/sleeve-left/sleeve-right), parsing webhook events (`order_status_updated`, `order_item_status_updated`, `catalog_product_stock_availability_updated`), handling fulfillment / financial statuses (draft / pending_approval / on_hold / passed / printed / shipped / canceled / refunded), debugging X-API-KEY auth failures, debugging 'file URL unreachable' / 'invalid product UID' errors, choosing between draft and order types, picking shipment methods (normal / express / pallet), querying shipment prices (`prices:search`), or scripting against Gelato from Node/Python/PHP/Go. Trigger on mentions of Gelato, Gelato API, GelatoConnect, `order.gelatoapis.com`, `product.gelatoapis.com`, `shipment.gelatoapis.com`, `ecommerce.gelatoapis.com`, X-API-KEY, productUid, orderReferenceId, customerReferenceId, shipmentMethodUid, draft order, Quote API, prices:search, fulfillmentStatus, financialStatus, Gelato webhook, gelato.com/keys/manage, Gelato Dashboard, print-on-demand, POD fulfillment, Gelato Shopify integration, Gelato Etsy, Gelato template, Gelato variant, image placeholder, Gelato wallet, Gelato 85/15 (no — that's Adobe), Gelato pricing tiers, GelatoConnect order intake, GelatoConnect logistics, Gelato Order Desk. Trigger even when the user just says 'print-on-demand' if context suggests Gelato (e.g., they reference `gelatoapis.com` hostnames, the productUid encoding scheme, or a Gelato dashboard URL). NOTE: This skill covers the Gelato HTTP API — the customer-facing developer surface. It is NOT about GelatoConnect's production-partner APIs (those are for print facilities receiving orders from Gelato) — for GelatoConnect, confirm scope before continuing."
 ---
 
 # Gelato Print-on-Demand API
@@ -10,10 +10,10 @@ Gelato is a global print-on-demand (POD) and fulfillment platform. Its public HT
 The skill ships with three layers of documentation:
 
 1. **Curated references** in `references/*.md` — synthesized guides for every part of the API, with example payloads, gotchas, and recipe code. Read these first.
-2. **Official Gelato API docs (captured)** in `references/sources/gelato-official-docs/` — a markdown snapshot of `https://dashboard.gelato.com/docs/` (retrieved **2026-05-30**, live), the **authoritative per-endpoint reference**: every request/response example (fenced) and parameter table. Start at its `INDEX.md`. Drop here whenever you need exact, ground-truth endpoint detail. Legacy v2/v3 excluded.
+2. **Official Gelato API docs (captured)** in `references/sources/gelato-official-docs/` — a markdown snapshot of `https://dashboard.gelato.com/docs/` (captured **2026-05-30**; re-verified against the live site **2026-07-24** with no content drift, adding the two pages new upstream: `shipment/price.md` and `products/v3.md`), the **authoritative per-endpoint reference**: every request/response example (fenced) and parameter table. Start at its `INDEX.md`. Drop here whenever you need exact, ground-truth endpoint detail. Legacy v2/v3 excluded.
 3. **Embedded SDK source** in `references/sources/{gelato-admin-node,npm-gelato-api}/` — the full TypeScript of [`ekkolon/gelato-admin-node`](https://github.com/ekkolon/gelato-admin-node) (Apache-2.0), the most complete public *type* definitions. ⚠ The SDK is **incomplete on some field shapes** (e.g. it models order `files[]` as `{url,type}` only, omitting `fitMethod`/`fillMethod`/`isVisible` that the live API accepts and echoes) — when the SDK and the captured official docs disagree, trust the official docs (or verify live). The legacy [`gelato-api/npm-gelato-api`](https://github.com/gelato-api/npm-gelato-api) (MIT, v2-era) is historical context only.
 
-> ℹ **The official docs sit behind a Cloudflare challenge** — plain `curl`/WebFetch get HTTP 403, so a markdown snapshot is bundled in `references/sources/gelato-official-docs/` (retrieved 2026-05-30). To refresh it, harvest those URLs with a headless browser that clears the Cloudflare interstitial (the docs are a static MkDocs Material site → full HTML content once rendered). Read the curated references first; drop to the captured official docs for exact per-endpoint request/response/parameter detail.
+> ℹ **The official docs sit behind a Cloudflare challenge** — plain `curl`/WebFetch get HTTP 403, so a markdown snapshot is bundled in `references/sources/gelato-official-docs/` (captured 2026-05-30, refreshed 2026-07-24). To refresh it, follow the procedure in `references/sources/INDEX.md` — preferred: a real user-launched Chrome over CDP, then diff `search_index.json` against the snapshot; fallback: a headless browser that clears the Cloudflare interstitial. Read the curated references first; drop to the captured official docs for exact per-endpoint request/response/parameter detail.
 
 ## Scope and versions
 
@@ -23,7 +23,7 @@ This skill targets the **current** (2026) Gelato API surface:
 | --- | --- | --- |
 | Orders | `https://order.gelatoapis.com` | **v4** (v3 is deprecated; v2 is legacy / removed) |
 | Product Catalog | `https://product.gelatoapis.com` | **v3** |
-| Shipment Methods | `https://shipment.gelatoapis.com` | **v1** |
+| Shipment (methods + prices) | `https://shipment.gelatoapis.com` | **v1** |
 | Ecommerce (stores, products, templates) | `https://ecommerce.gelatoapis.com` | **v1** |
 
 Endpoints not listed above (`api.gelato.com/v2/...` from the 2018 SDK; the GelatoConnect partner-facing API at `connect-api.live.gelato.tech/docs/`) are out of scope of this skill. If the user asks about them, stop and confirm scope before continuing — GelatoConnect in particular is a different product for production-partner facilities, not for buyers/developers placing orders.
@@ -51,6 +51,7 @@ A typical fulfillment flow:
 2.              Browse Product Catalog API → find catalog (e.g., "apparel") → list products
                 → resolve a concrete productUid for the SKU you want to sell
 3.              Use Shipment Methods API to learn which methods serve your destination country
+                (and prices:search for shipping prices per product + country, no address needed)
 4.              (optional) Quote API: POST a draft cart with productUid + quantity + shippingAddress
                 → receive shipmentMethodUid + price options
 5.              Create Order: POST /v4/orders with items[], shippingAddress, currency,
@@ -70,7 +71,7 @@ A typical fulfillment flow:
 
 - **customerReferenceId** — Your internal customer ID. Free-form string. Used for grouping orders by customer in your reports.
 
-- **shipmentMethodUid** — The shipping method identifier returned by Shipment Methods or Quote API. You can also pass the strings `"normal"`, `"express"`, or `"pallet"` to let Gelato choose the cheapest method of that type. If omitted entirely, the cheapest available method is used.
+- **shipmentMethodUid** — The shipping method identifier returned by Shipment Methods, `prices:search`, or Quote API. You can also pass the strings `"normal"`, `"express"`, or `"pallet"` to let Gelato choose the cheapest method of that type. If omitted entirely, the cheapest available method is used.
 
 - **orderType** — `"order"` (production-bound) or `"draft"` (saved for review; doesn't enter production). Only draft orders can be edited via the Patch API. Convert draft → order via the Patch API with `orderType: "order"`.
 
@@ -107,7 +108,7 @@ Before writing integration code:
 | Native integrations (Shopify, Etsy, WooCommerce, BigCommerce, Wix, Squarespace) + GelatoConnect | `references/integrations-and-platforms.md` |
 | The common rejection / failure catalog with fixes | `references/common-pitfalls.md` |
 
-`references/sources/INDEX.md` maps each topic to the matching SDK source file.
+`references/sources/INDEX.md` maps each topic to the matching captured official-docs page and SDK source file.
 
 ## Critical things to know up-front
 
@@ -119,7 +120,7 @@ Each Gelato API resource lives at its own subdomain:
 
 - `order.gelatoapis.com` for everything order-related.
 - `product.gelatoapis.com` for the catalog / product / pricing / stock surface.
-- `shipment.gelatoapis.com` for shipment-method lookup.
+- `shipment.gelatoapis.com` for shipment-method lookup and product-level shipping prices (`prices:search`).
 - `ecommerce.gelatoapis.com` for connected-store features (templates, products on a store).
 
 There's no single `api.gelatoapis.com` root. Many integration bugs trace to a hard-coded base URL that pointed at the wrong host.
@@ -142,7 +143,7 @@ For best print quality, Gelato recommends PDF/X-1a:2003 or PDF/X-4 with embedded
 
 ### 6. Webhook retries are limited; idempotency is your job
 
-Gelato retries failed webhook deliveries **3 times**, with **5 seconds** between attempts. After 3 failures, the event is dropped. If your endpoint is occasionally down, you'll miss notifications — supplement webhooks with periodic polling of `GET /v4/orders/{id}` for high-value orders. Each webhook payload includes both `orderId` (Gelato's ID) and `orderReferenceId` (your ID) — your handler must be idempotent on either.
+Gelato retries failed webhook deliveries **3 times**, with **5 seconds** between attempts. After 3 failures, the event is dropped. If your endpoint is occasionally down, you'll miss notifications — supplement webhooks with periodic polling of `GET /v4/orders/{id}` for high-value orders. Each payload carries a unique event `id` (your dedup key); order events also include both `orderId` (Gelato's ID) and `orderReferenceId` (your ID). Your handler must be idempotent.
 
 ### 7. The product UID format hard-couples to the catalog
 
@@ -161,9 +162,12 @@ _gpr_4-4                           Garment Print = 4-color front, 4-color back
 
 Each `_xxx_value` segment maps to a `productAttributeUid` that you can list with `GET /v3/catalogs/{catalogId}`. The 3-letter prefix (`gca`, `gsc`, etc.) is the attribute family. Don't try to construct these — list them.
 
-### 8. The Quote API is the right way to estimate shipping before checkout
+### 8. Two ways to price shipping before checkout: `prices:search` and the Quote API
 
-`POST /v4/orders:quote` accepts the same items + recipient and returns all available shipment methods with prices in your requested currency. Use this on the cart page to show the customer their shipping options. Quote requests are not orders and don't charge anything.
+- `POST https://shipment.gelatoapis.com/v1/prices:search` — product-level shipping prices keyed only on productUid + quantity + destination **country** (no recipient address, no cart). Use it for catalog/PDP "shipping from $X" displays and rate-cache warming. Returns per-method `minPrice`/`avgPrice` + `minDays`/`maxDays`.
+- `POST /v4/orders:quote` — the exact, order-accurate price for a full cart + recipient address, with delivery dates. Use it on the cart page to show the customer their real shipping options. Quote requests are not orders and don't charge anything.
+
+See `references/shipment-methods.md` for both.
 
 ### 9. There's no public sandbox
 
@@ -210,11 +214,11 @@ In this case, the developer rarely calls the Orders API directly. They might cal
 
 See `references/common-pitfalls.md` for the full catalog.
 
-## Source repos and where to refresh them
+## Sources and how to refresh them
 
-`scripts/gelato/fetch_docs.sh` re-clones:
+The claude-skills repo's `scripts/gelato/fetch_docs.sh` re-clones the SDK trees:
 
 - [`ekkolon/gelato-admin-node`](https://github.com/ekkolon/gelato-admin-node) — Apache-2.0, current v3/v4 endpoints, well-typed.
 - [`gelato-api/npm-gelato-api`](https://github.com/gelato-api/npm-gelato-api) — MIT, **legacy v2 endpoints**, historical only.
 
-The official Gelato docs at `https://dashboard.gelato.com/docs/` are the authoritative reference for the canonical request/response shapes — but they're not redistributable, so they're not bundled here. When in doubt, the user should consult that doc directly.
+The official Gelato docs at `https://dashboard.gelato.com/docs/` are the authoritative reference for the canonical request/response shapes, and a captured markdown snapshot of them **is bundled** at `references/sources/gelato-official-docs/` (captured 2026-05-30; refreshed 2026-07-24 — re-verified page-by-page against the live site with no content drift, plus the two pages new upstream: `shipment/price.md`, `products/v3.md`). The refresh procedure (real-browser CDP capture + `search_index.json` diff) is documented in `references/sources/INDEX.md`. When the snapshot and the live site disagree, the live site wins — re-capture the page.

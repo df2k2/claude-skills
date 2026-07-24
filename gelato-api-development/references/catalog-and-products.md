@@ -340,10 +340,12 @@ console.log(`Price (EUR, qty 1): €${eurPrice.price}`);
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/products/catalog/{list,get}.md`, `products/product/{search,get,cover-dimensions}.md`, `products/prices.md`, `products/stock/region-availability.md` — captured official per-endpoint references.
+- `references/sources/gelato-official-docs/products/v3.md` — captured consolidated "API: Product V3" single-page reference (added upstream, captured 2026-07-24; overlaps the granular pages above).
 - `references/sources/gelato-admin-node/src/services/products/products-api.ts`
 - `references/sources/gelato-admin-node/src/services/products/catalog.ts`
 - `references/sources/gelato-admin-node/src/services/products/product.ts`
 - `references/sources/gelato-admin-node/src/services/products/prices.ts`
 - `references/sources/gelato-admin-node/src/services/products/stock-availability.ts`
 - `references/sources/gelato-admin-node/src/services/products/cover-dimensions.ts`
-- Official (gated): https://dashboard.gelato.com/docs/products/ and https://dashboard.gelato.com/docs/stock/.
+- Official live (gated): https://dashboard.gelato.com/docs/products/ and https://dashboard.gelato.com/docs/stock/.

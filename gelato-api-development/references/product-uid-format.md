@@ -217,9 +217,11 @@ Returns availability per region for each stockable product. Useful before placin
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/get-started.md` — captured official intro (includes the productUid concept).
+- `references/sources/gelato-official-docs/products/catalog/get.md` + `products/product/search.md` — captured official attribute + search references (where UIDs come from).
 - `references/sources/gelato-admin-node/src/services/products/products-api.ts` — endpoint paths.
 - `references/sources/gelato-admin-node/src/services/products/product.ts` — Product type.
 - `references/sources/gelato-admin-node/src/services/products/catalog.ts` — Catalog + ProductAttribute types.
 - `references/sources/gelato-admin-node/src/services/products/prices.ts` — pricing object shape.
 - `references/sources/gelato-admin-node/src/services/products/cover-dimensions.ts` — cover dimensions shape.
-- Official (gated): https://dashboard.gelato.com/docs/products/.
+- Official live (gated): https://dashboard.gelato.com/docs/products/.

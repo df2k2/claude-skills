@@ -26,7 +26,7 @@ The Gelato API is split across four hosts. There is no single root.
 | --- | --- | --- |
 | Orders | `https://order.gelatoapis.com` | v4 (current), v3 (deprecated) |
 | Product Catalog | `https://product.gelatoapis.com` | v3 (current) |
-| Shipment Methods | `https://shipment.gelatoapis.com` | v1 |
+| Shipment (methods + prices) | `https://shipment.gelatoapis.com` | v1 |
 | Ecommerce (stores, products, templates) | `https://ecommerce.gelatoapis.com` | v1 |
 
 So a full URL is, e.g., `https://order.gelatoapis.com/v4/orders` — host + version + resource path.
@@ -227,6 +227,7 @@ Next steps:
 
 ## Original sources
 
+- `references/sources/gelato-official-docs/get-started.md` — captured official getting-started reference (API key, hosts, first requests).
 - `references/sources/gelato-admin-node/README.md` — the SDK's getting-started prose (includes the same `https://dashboard.gelato.com/keys/manage` link).
 - `references/sources/gelato-admin-node/src/client/http-client.ts` — confirms `X-API-KEY` header usage in the SDK.
 - `references/sources/gelato-admin-node/src/utils/urls.ts` — base URL combinator (used throughout).
