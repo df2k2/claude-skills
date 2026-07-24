@@ -4,15 +4,15 @@ This skill bundles a **captured markdown snapshot of the official Gelato API doc
 
 ## Trees
 
-### `gelato-official-docs/` — captured official docs (snapshot **2026-05-30**) — START HERE
+### `gelato-official-docs/` — captured official docs (snapshot **2026-05-30**, refreshed **2026-07-24**) — START HERE
 
-Markdown snapshot of `https://dashboard.gelato.com/docs/`, the **authoritative per-endpoint reference** (request/response examples + parameter tables). Legacy v2/v3 excluded. See `gelato-official-docs/INDEX.md` for the full file→endpoint map. Trust this over the SDK when they disagree.
+Markdown snapshot of `https://dashboard.gelato.com/docs/`, the **authoritative per-endpoint reference** (request/response examples + parameter tables). Legacy v2/v3 excluded. See `gelato-official-docs/INDEX.md` for the full file→endpoint map. Trust this over the SDK when they disagree. The 2026-07-24 refresh re-verified every page (no drift) and added `shipment/price.md` + `products/v3.md`.
 
 | Area | Files |
 | --- | --- |
 | Orders v4 | `orders/v4/{create,get,search,quote,patch,cancel,delete}.md`, plus `orders/order_details.md`, `orders/migrationGuides.md` |
-| Product Catalog v3 | `products/catalog/{list,get}.md`, `products/product/{search,get,cover-dimensions}.md`, `products/prices.md`, `products/stock/region-availability.md` |
-| Shipment v1 | `shipment/methods.md` |
+| Product Catalog v3 | `products/catalog/{list,get}.md`, `products/product/{search,get,cover-dimensions}.md`, `products/prices.md`, `products/stock/region-availability.md`, plus consolidated `products/v3.md` |
+| Shipment v1 | `shipment/methods.md`, `shipment/price.md` (`POST /v1/prices:search`) |
 | Ecommerce v1 | `ecommerce/products/{list,get,create-from-template}.md`, `ecommerce/templates/get.md` |
 | Webhooks + guides | `webhooks.md`, `guides/*.md`, `get-started.md`, `index.md` |
 
@@ -73,7 +73,9 @@ grep -A 3 "printArea" references/sources/gelato-admin-node/src/services/ecommerc
 
 ## Refreshing the official-docs snapshot
 
-The docs at https://dashboard.gelato.com/docs/ are a static **MkDocs Material** site behind a **Cloudflare** challenge — plain `curl`/WebFetch return HTTP 403 ("Just a moment…"). To re-capture:
+The docs at https://dashboard.gelato.com/docs/ are a static **MkDocs Material** site behind a **Cloudflare** challenge — plain `curl`/WebFetch return HTTP 403 ("Just a moment…").
+
+**Preferred method (used for the 2026-07-24 refresh):** drive a **real, user-launched Chrome** over CDP (`@playwright/mcp --cdp-endpoint`) — a genuine browser has a valid `cf_clearance` and clears Cloudflare with no fingerprint spoofing. Then (a) pull `docs/search/search_index.json` in one request for a whole-site text diff against the snapshot to find drift and new pages, and (b) for each changed/new page, extract `.md-content__inner` and convert HTML→markdown with a recursive walker that emits GFM tables + fenced code (recurse into `md-typeset__scrollwrap`/`md-typeset__table` wrapper divs, or their tables are dropped). To re-capture the legacy way (headless, no real browser):
 
 1. Enumerate the current page set (Cloudflare-free) via the Wayback CDX API:
    `curl -s "http://web.archive.org/cdx/search/cdx?url=dashboard.gelato.com/docs*&output=text&fl=original&collapse=urlkey&limit=2000"` — filter out `/assets/`, `.js`/`.css`, and **legacy `orders/v2`, `orders/v3`, `products/v2`**.

@@ -98,7 +98,7 @@ Before writing integration code:
 | Orders API v4 — create / get / search / quote / patch / cancel / delete | `references/orders-api.md` |
 | Decoding and constructing a `productUid`; the catalog → product → variant pipeline | `references/product-uid-format.md` |
 | Product Catalog API — catalogs, products, prices, stock availability, cover dimensions | `references/catalog-and-products.md` |
-| Shipment Methods API — normal/express/pallet, tracking, destination filtering | `references/shipment-methods.md` |
+| Shipment Methods + Prices API — normal/express/pallet, tracking, destination filtering, `prices:search` product-level shipping estimates | `references/shipment-methods.md` |
 | Ecommerce API — stores, products, templates, variant options, image placeholders | `references/ecommerce-stores-and-templates.md` |
 | Webhooks — event types, payload shape, retries, signature verification, configuration | `references/webhooks.md` |
 | Preparing print files — PDF/X, bleed, resolution, image placeholders, file.type values | `references/files-and-print-files.md` |

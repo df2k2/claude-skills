@@ -6,6 +6,12 @@ Cloudflare challenge; fetched with a headless Chromium that clears the challenge
 HTML→markdown). This is the **authoritative endpoint reference** — request/response examples are fenced
 code blocks and every parameter table is preserved.
 
+**Refreshed 2026-07-24** (via an authenticated real-browser session against the live docs): every existing
+page was re-verified against the current live docs — **no content drift** was found (the 2026-05-30 capture
+is still accurate). Two pages that are new since May were added: `shipment/price.md`
+(`POST /v1/prices:search`) and `products/v3.md` (the consolidated "API: Product V3" single-page reference).
+These two files carry a `Retrieved: 2026-07-24` header; all others remain `2026-05-30`.
+
 **Legacy deliberately excluded** (replaced by current endpoints): Orders **v2** (`/docs/orders/v2/*`),
 Orders **v3** (`/docs/orders/v3/*`), Products **v2** (`/docs/products/v2/`). Use Orders **v4** + the
 current Product/Shipment/Ecommerce endpoints below.
@@ -37,7 +43,9 @@ current Product/Shipment/Ecommerce endpoints below.
 | `products/prices.md` | `GET /v3/products/{uid}/prices` |
 | `products/product/cover-dimensions.md` | `GET /v3/products/{uid}/cover-dimensions` |
 | `products/stock/region-availability.md` | `POST /v3/stock/region-availability` |
+| `products/v3.md` | Consolidated **Product V3** reference — catalogs, catalog info, products, product info, prices on one page (added 2026-07-24; overlaps the granular `products/*` files above) |
 | `shipment/methods.md` | `GET /v1/shipment-methods` |
+| `shipment/price.md` | `POST /v1/prices:search` — shipment prices by product + quantity + destination country, no order/recipient required (added 2026-07-24) |
 | `ecommerce/products/list.md` | `GET /v1/stores/{storeId}/products` |
 | `ecommerce/products/get.md` | `GET /v1/stores/{storeId}/products/{id}` |
 | `ecommerce/products/create-from-template.md` | `POST /v1/stores/{storeId}/products` (incl. `imagePlaceholders`, `fitMethod`) |

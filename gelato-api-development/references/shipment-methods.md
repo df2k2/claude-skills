@@ -126,9 +126,63 @@ For wholesale orders where tracking is required and pallet shipping is acceptabl
 2. If shipping a large quantity, include `type: "pallet"` options.
 3. Choose based on price + delivery window.
 
+## Shipment prices endpoint (`POST /v1/prices:search`)
+
+Added to the docs after the initial snapshot (captured 2026-07-24). This is a dedicated pricing endpoint on the shipment host that returns shipping prices for a set of products + quantities **without creating an order and without a recipient address** — you supply only destination `country`, `currency`, and the product UIDs/quantities. It sits between the (free, price-less) Shipment Methods list and the (full-cart) Quote API.
+
+```http
+POST https://shipment.gelatoapis.com/v1/prices:search
+X-API-KEY: <key>
+Content-Type: application/json
+```
+
+```json
+{
+  "currency": "USD",
+  "country": "US",
+  "isBusiness": true,
+  "isPrivate": true,
+  "hasTracking": true,
+  "products": [
+    { "productUid": "cards_pf_bx_pt_110-lb-cover-uncoated_cl_4-4_hor", "quantities": [1] },
+    { "productUid": "posters_pf_a3_pt_100-lb-text-uncoated_cl_4-0_hor", "quantities": [1, 5] }
+  ]
+}
+```
+
+Request fields: `country` (required, ISO 3166-1 alpha-2), `currency` (required, ISO 4217), `isBusiness` / `isPrivate` / `hasTracking` (optional filters, same semantics as the methods list), and `products[]` — each with `productUid` (required), `quantities` (required int array), and `pageCount` (optional, only for multi-page products).
+
+The response nests prices per product → per quantity → per method:
+
+```json
+{
+  "prices": [
+    {
+      "productUid": "cards_pf_bx_pt_110-lb-cover-uncoated_cl_4-4_hor",
+      "quantities": [
+        {
+          "quantity": 1,
+          "pageCount": null,
+          "methods": [
+            { "shipmentMethodUid": "fed_ex_smart_post", "type": "normal",
+              "minPrice": 6.27, "avgPrice": 6.27, "minDays": 3, "maxDays": 14, "hasFlatRate": false },
+            { "shipmentMethodUid": "fed_ex_standard_overnight", "type": "express",
+              "minPrice": 16.48, "avgPrice": 16.48, "minDays": 2, "maxDays": 2, "hasFlatRate": false }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Per-method fields: `shipmentMethodUid`, `type` (`normal` / `express` / `pallet`), `minPrice` (cheapest price for that method in the country), `avgPrice`, `minDays` / `maxDays` (total calendar days to produce + deliver, incl. weekends/holidays), and `hasFlatRate` (true = regional flat rate, false = dynamic pricing). Prices are in the requested `currency`.
+
+**When to use which:** use `prices:search` for a fast, address-free estimate keyed only on product + quantity + destination country (good for catalog/PDP "shipping from $X" displays); use `POST /v4/orders:quote` when you have a full cart + recipient and need the exact, order-accurate price and delivery dates.
+
 ## Combining with the Quote API
 
-The Shipment Methods API tells you *what's possible*. The Quote API tells you *what it costs*.
+The Shipment Methods API tells you *what's possible*. The `prices:search` endpoint (above) and the Quote API tell you *what it costs* — `prices:search` for a product-level estimate, Quote for exact cart-level pricing.
 
 ```bash
 # Get available methods (fast, free)
@@ -191,17 +245,19 @@ Multi-item orders may have multiple packages — e.g., an apparel item + a poste
 
 ## A note on cost
 
-Shipment Methods API doesn't return prices — for prices, use the Quote API or place a draft order. Prices vary by:
+The Shipment Methods list (`GET /v1/shipment-methods`) itself doesn't return prices. For prices you have two options: the dedicated `POST /v1/prices:search` endpoint (product + quantity + country, no recipient — see above), or `POST /v4/orders:quote` / a draft order for exact cart-level pricing. Prices vary by:
 
 - Destination.
 - Item weight + dimensions.
 - Currency.
 - Account-level shipping discounts (negotiated rates with Gelato+).
 
-There's no "give me a price for this method" endpoint independent of an actual cart.
+Unlike the Quote API, `prices:search` gives you a price for a method+product **without** an actual cart or recipient address — useful for catalog-level "shipping from $X" estimates.
 
 ## Original sources
 
 - `references/sources/gelato-admin-node/src/services/shipment/shipment-api.ts` — endpoint path + verb.
 - `references/sources/gelato-admin-node/src/services/shipment/shipment.ts` — `ShipmentMethod` + `ShipmentMethodType` types.
-- Official (gated): https://dashboard.gelato.com/docs/shipment/methods/.
+- `references/sources/gelato-official-docs/shipment/methods.md` — captured official Methods reference.
+- `references/sources/gelato-official-docs/shipment/price.md` — captured official `prices:search` reference (added 2026-07-24).
+- Official (gated): https://dashboard.gelato.com/docs/shipment/methods/ and https://dashboard.gelato.com/docs/shipment/price/.
