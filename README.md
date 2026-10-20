@@ -13,6 +13,7 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 | [`ordergroove-api-development/`](ordergroove-api-development/) | OrderGroove subscription commerce platform — every REST endpoint, every GraphQL type, every webhook payload, the Subscription Manager front-end widget, platform integrations (Shopify, Recharge migration, etc.), Purchase POST, 1-click actions. | 11 MB |
 | [`akeneo-pim-api-development/`](akeneo-pim-api-development/) | Akeneo PIM Web API — REST (SaaS/Serenity OpenAPI 3.1.0 + classic CE/EE Swagger 2.0), GraphQL, the Event Platform (webhooks), Apps/Connections OAuth + UI Extensions, Catalogs + product mapping, the Akeneo MCP server, and the official `akeneo/api-php-client`. Ships both specs (289 ops total), the Postman collection, the PHP client source, and the `pim-api-docs` prose. | 12 MB |
 | [`akeneo-magento2-connector/`](akeneo-magento2-connector/) | Akeneo Connector for Magento 2 / Adobe Commerce — the `akeneo/module-magento2-connector-community` module that imports Akeneo PIM catalog data into Magento: install/compatibility, admin config & mapping, the Job step pipeline (category/family/attribute/option/product), running via `akeneo_connector:import`/admin grid/cron, extending, and troubleshooting. Ships the full module source (v105.1.2). | 1.9 MB |
+| [`inspinia-tailwind-frontend-design/`](inspinia-tailwind-frontend-design/) | Frontend design & build reference for the INSPINIA Tailwind admin template (WebAppLayers) — Tailwind CSS v4.3 + Preline UI + Tabler icons, 11 skins, dark mode, RTL, attribute-driven layouts (`data-sidenav-size`, `data-menu-color`, `data-layout=horizontal`, …), base-UI components, forms (flatpickr, Choices, Dropzone/FilePond, Quill, noUiSlider, wizard), `custom-table.js` + DataTables, ApexCharts/ECharts with theme-aware wrappers, maps, 15 utility plugins (text diff, sortable, PDF viewer, SweetAlert2, tour, tree view, …), 3 dashboards + widget catalogue, 57 app pages (file manager, email, chat, kanban, invoices, e-commerce back-office, …), auth and error pages — each with *when-to-use* product context. Ships all 233 demo pages + the template's own CSS/JS under `references/sources/`. | 44 MB |
 
 ## Layout
 
@@ -60,6 +61,15 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 │   │       ├── INDEX.md
 │   │       └── magento2-connector-source/ ← full module source @ v105.1.2
 │   └── scripts/akeneo-magento2/          ← fetch_docs.sh
+├── inspinia-tailwind-frontend-design/     ← INSPINIA Tailwind admin template (scripts live in-skill)
+│   ├── SKILL.md
+│   ├── references/
+│   │   ├── *.md                          ← 11 curated guides (design-system, layout-and-theming, ui-components, forms, tables, charts, widgets, apps, auth/errors, pitfalls)
+│   │   └── sources/
+│   │       ├── INDEX.md                  ← page map + manifests
+│   │       ├── pages/                    ← 233 vendored demo pages
+│   │       └── assets/                   ← config.js, app.js, js/pages/*.js, app.min.css
+│   └── scripts/inspinia/                 ← fetch_pages.sh + extract_main.py
 ├── misc/                                  ← packaged `.skill` archives + work-in-progress sketches
 └── scripts/                               ← fetch scripts for magento2 & hyva (akeneo skills keep theirs in-skill)
     ├── hyva/
@@ -105,6 +115,9 @@ python3 ./akeneo-pim-api-development/scripts/akeneo-pim/gen_spec_summary.py
 
 # Akeneo Magento 2 connector — re-vendors the module source at a tag
 ./akeneo-magento2-connector/scripts/akeneo-magento2/fetch_docs.sh
+
+# INSPINIA Tailwind — re-downloads every demo page + the template's own CSS/JS (not third-party plugin libs)
+bash ./inspinia-tailwind-frontend-design/scripts/inspinia/fetch_pages.sh
 ```
 
 Run periodically (e.g. quarterly) to keep the embedded docs current. Each script regenerates any auto-generated INDEX / catalog files and reports a size delta so you can review the diff before committing.

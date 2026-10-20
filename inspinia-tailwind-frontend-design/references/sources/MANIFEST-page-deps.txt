@@ -1,0 +1,234 @@
+# page | page-script | plugin assets
+apps-api-keys.html | custom-table.js apps-api-keys.js  | apexcharts/apexcharts.min.js clipboard/clipboard.min.js 
+apps-blog-add.html | form-quilljs.js  | quill/quill.js 
+apps-blog-article.html | – | –
+apps-blog-grid.html | apps-blog-grid.js  | masonry/masonry.pkgd.min.js 
+apps-blog-list.html | – | –
+apps-calendar.html | apps-calendar.js  | fullcalendar/index.global.min.js 
+apps-chat.html | apps-chat.js  | –
+apps-clients.html | custom-table.js  | –
+apps-companies.html | – | –
+apps-ecommerce-attributes.html | custom-table.js  | –
+apps-ecommerce-cart.html | – | –
+apps-ecommerce-categories.html | custom-table.js  | –
+apps-ecommerce-checkout.html | form-inputmask.js  | inputmask/inputmask.min.js 
+apps-ecommerce-customers.html | custom-table.js  | –
+apps-ecommerce-marketplace.html | – | –
+apps-ecommerce-order-add.html | – | –
+apps-ecommerce-order-details.html | – | –
+apps-ecommerce-orders.html | custom-table.js  | –
+apps-ecommerce-product-add.html | ecommerce-product-add.js  | quill/quill.js dropzone/dropzone-min.js 
+apps-ecommerce-product-details.html | custom-table.js  | –
+apps-ecommerce-product-stocks.html | custom-table.js  | –
+apps-ecommerce-product-views.html | custom-table.js ecommerce-product-views.js  | apexcharts/apexcharts.min.js 
+apps-ecommerce-products-grid.html | ecommerce-products.js  | nouislider/nouislider.min.js 
+apps-ecommerce-products.html | custom-table.js  | –
+apps-ecommerce-purchased-orders.html | custom-table.js  | –
+apps-ecommerce-refunds.html | custom-table.js  | –
+apps-ecommerce-reviews.html | custom-table.js ecommerce-reviews.js  | apexcharts/apexcharts.min.js 
+apps-ecommerce-sales.html | custom-table.js ecommerce-sales.js  | apexcharts/apexcharts.min.js 
+apps-ecommerce-seller-details.html | custom-table.js ecommerce-seller-details.js  | apexcharts/apexcharts.min.js 
+apps-ecommerce-sellers.html | custom-table.js ecommerce-product-views.js  | apexcharts/apexcharts.min.js 
+apps-ecommerce-settings.html | – | –
+apps-ecommerce-warehouse.html | custom-table.js  | –
+apps-email-compose.html | apps-email-compose.js  | quill/quill.js 
+apps-email-details.html | – | –
+apps-email-inbox.html | custom-table.js apps-email.js  | –
+apps-file-manager.html | custom-table.js  | –
+apps-forum-post.html | – | –
+apps-forum-view.html | – | –
+apps-invoice-create.html | apps-create-invoice.js  | –
+apps-invoice-details.html | – | –
+apps-invoice-list.html | custom-table.js  | –
+apps-issue-tracker.html | custom-table.js  | –
+apps-manage.html | – | –
+apps-outlook.html | custom-table.js  | –
+apps-pin-board.html | – | –
+apps-projects-activity.html | – | –
+apps-projects-details.html | – | –
+apps-projects-grid.html | – | –
+apps-projects-kanban.html | apps-kanban.js  | sortablejs/Sortable.min.js 
+apps-projects-list.html | custom-table.js  | –
+apps-projects-team-board.html | – | –
+apps-social-feed.html | – | –
+apps-users-contacts.html | – | –
+apps-users-permissions.html | custom-table.js  | –
+apps-users-role-details.html | custom-table.js  | –
+apps-users-roles.html | custom-table.js  | –
+apps-vote-list.html | – | –
+auth-card-delete-account.html | – | –
+auth-card-lock-screen.html | – | –
+auth-card-login-pin.html | auth-two-factor.js  | –
+auth-card-new-pass.html | auth-two-factor.js auth-password.js  | –
+auth-card-reset-pass.html | – | –
+auth-card-sign-in.html | – | –
+auth-card-sign-up.html | auth-password.js  | –
+auth-card-success-mail.html | – | –
+auth-card-two-factor.html | auth-two-factor.js  | –
+auth-delete-account.html | – | –
+auth-lock-screen.html | – | –
+auth-login-pin.html | auth-two-factor.js  | –
+auth-new-pass.html | auth-two-factor.js auth-password.js  | –
+auth-reset-pass.html | – | –
+auth-sign-in.html | – | –
+auth-sign-up.html | auth-password.js  | –
+auth-split-delete-account.html | – | –
+auth-split-lock-screen.html | – | –
+auth-split-login-pin.html | auth-two-factor.js  | –
+auth-split-new-pass.html | auth-two-factor.js auth-password.js  | –
+auth-split-reset-pass.html | – | –
+auth-split-sign-in.html | – | –
+auth-split-sign-up.html | auth-password.js  | –
+auth-split-success-mail.html | – | –
+auth-split-two-factor.html | auth-two-factor.js  | –
+auth-success-mail.html | – | –
+auth-two-factor.html | auth-two-factor.js  | –
+charts-apex-area.html | chart-apex-area.js  | apexcharts/apexcharts.min.js moment/moment.min.js 
+charts-apex-bar.html | chart-apex-bar.js  | apexcharts/apexcharts.min.js 
+charts-apex-boxplot.html | chart-apex-boxplot.js  | apexcharts/apexcharts.min.js 
+charts-apex-bubble.html | chart-apex-bubble.js  | apexcharts/apexcharts.min.js 
+charts-apex-candlestick.html | chart-apex-candlestick.js  | apexcharts/apexcharts.min.js 
+charts-apex-column.html | chart-apex-column.js  | apexcharts/apexcharts.min.js 
+charts-apex-funnel.html | chart-apex-funnel.js  | apexcharts/apexcharts.min.js moment/moment.min.js 
+charts-apex-heatmap.html | chart-apex-heatmap.js  | apexcharts/apexcharts.min.js 
+charts-apex-line.html | chart-apex-line.js  | apexcharts/apexcharts.min.js 
+charts-apex-mixed.html | chart-apex-mixed.js  | apexcharts/apexcharts.min.js 
+charts-apex-pie.html | chart-apex-pie.js  | apexcharts/apexcharts.min.js 
+charts-apex-polar-area.html | chart-apex-polar-area.js  | apexcharts/apexcharts.min.js 
+charts-apex-radar.html | chart-apex-radar.js  | apexcharts/apexcharts.min.js 
+charts-apex-radialbar.html | chart-apex-radialbar.js  | apexcharts/apexcharts.min.js 
+charts-apex-range.html | chart-apex-range.js  | apexcharts/apexcharts.min.js moment/moment.min.js 
+charts-apex-scatter.html | chart-apex-scatter.js  | apexcharts/apexcharts.min.js 
+charts-apex-slope.html | chart-apex-slope.js  | apexcharts/apexcharts.min.js moment/moment.min.js 
+charts-apex-sparklines.html | chart-apex-sparklines.js  | apexcharts/apexcharts.min.js 
+charts-apex-timeline.html | chart-apex-timeline.js  | apexcharts/apexcharts.min.js moment/moment.min.js 
+charts-apex-treemap.html | chart-apex-treemap.js  | apexcharts/apexcharts.min.js 
+charts-echart-area.html | chart-echart-area.js  | echarts/echarts.min.js 
+charts-echart-bar.html | chart-echart-bar.js  | echarts/echarts.min.js 
+charts-echart-candlestick.html | chart-echart-candlestick.js  | echarts/echarts.min.js 
+charts-echart-gauge.html | chart-echart-gauge.js  | echarts/echarts.min.js 
+charts-echart-geo-map.html | chart-echart-geo-map.js  | echarts/echarts.min.js 
+charts-echart-heatmap.html | chart-echart-heatmap.js  | echarts/echarts.min.js 
+charts-echart-line.html | chart-echart-line.js  | echarts/echarts.min.js 
+charts-echart-other.html | chart-echart-other.js  | echarts/echarts.min.js 
+charts-echart-pie.html | chart-echart-pie.js  | echarts/echarts.min.js 
+charts-echart-radar.html | chart-echart-radar.js  | echarts/echarts.min.js 
+charts-echart-scatter.html | chart-echart-scatter.js  | echarts/echarts.min.js 
+dashboard-analytics.html | custom-table.js dashboard-analytics.js  | apexcharts/apexcharts.min.js 
+dashboard-ecommerce.html | custom-table.js dashboard-ecommerce.js  | echarts/echarts.min.js jsvectormap/jsvectormap.min.js 
+error-400.html | – | –
+error-401.html | – | –
+error-403.html | – | –
+error-404.html | – | –
+error-408.html | – | –
+error-500.html | – | –
+error-maintenance.html | – | –
+form-elements.html | – | –
+form-fileuploads.html | form-fileupload.js  | dropzone/dropzone-min.js filepond/filepond.min.js filepond/filepond-plugin-image-preview.min.js filepond/filepond-plugin-file-validate-size.min.js filepond/filepond-plugin-image-exif-orientation.min.js filepond/filepond-plugin-file-encode.min.js 
+form-layout.html | – | –
+form-other-plugin.html | form-inputmask.js form-typehead.js  | inputmask/inputmask.min.js jquery/jquery.min.js handlebars/handlebars.min.js typeahead/typeahead.bundle.min.js 
+form-pickers.html | form-date-range-picker.js form-colorpickr.js  | jquery/jquery.min.js moment/moment.min.js daterangepicker/daterangepicker.js pickr/pickr.min.js 
+form-range-slider.html | form-range-slider.js  | nouislider/nouislider.min.js wnumb/wNumb.min.js 
+form-select.html | form-choice.js form-select2.js  | jquery/jquery.min.js select2/select2.min.js 
+form-text-editors.html | form-quilljs.js  | quill/quill.js 
+form-validation.html | form-validation.js  | –
+form-wizard.html | form-wizard.js  | –
+icons-flags.html | flags-listing.js  | –
+icons-lucide.html | – | –
+icons-tabler.html | – | –
+index.html | dashboard-projects.js  | echarts/echarts.min.js 
+landing.html | – | –
+layouts-boxed.html | – | –
+layouts-compact.html | – | –
+layouts-horizontal.html | – | –
+layouts-preloader.html | – | –
+layouts-scrollable.html | – | –
+layouts-sidebar-compact.html | – | –
+layouts-sidebar-gradient.html | – | –
+layouts-sidebar-gray.html | – | –
+layouts-sidebar-image.html | – | –
+layouts-sidebar-light.html | – | –
+layouts-sidebar-no-icons.html | – | –
+layouts-sidebar-offcanvas.html | – | –
+layouts-sidebar-on-hover-active.html | – | –
+layouts-sidebar-on-hover.html | – | –
+layouts-sidebar-with-lines.html | – | –
+layouts-topbar-dark.html | – | –
+layouts-topbar-gradient.html | – | –
+layouts-topbar-gray.html | – | –
+maps-google.html | – | –
+maps-leaflet.html | maps-leaflet.js  | leaflet/leaflet.css leaflet/leaflet.js 
+maps-vector.html | maps-vector.js  | jsvectormap/jsvectormap.min.js 
+metrics.html | metrics.js  | echarts/echarts.min.js 
+pages-account-settings.html | – | –
+pages-coming-soon.html | coming-soon.js  | –
+pages-empty.html | – | –
+pages-faq.html | – | –
+pages-gallery.html | pages-gallery.js  | glightbox/glightbox.min.css glightbox/glightbox.min.js web-animations/web-animations.min.js muuri/muuri.min.js 
+pages-pricing.html | – | –
+pages-privacy-policy.html | – | –
+pages-profile.html | – | –
+pages-search-results.html | – | –
+pages-sitemap.html | – | –
+pages-terms-conditions.html | – | –
+pages-timeline.html | – | –
+plugins-animation.html | plugins-animation.js  | –
+plugins-clipboard.html | plugins-clipboard.js  | clipboard/clipboard.min.js 
+plugins-i18.html | – | –
+plugins-idle-timer.html | plugins-idle-timer.js  | –
+plugins-live-favicon.html | plugins-tinycon.js  | tinycon/tinycon.min.js 
+plugins-loading-buttons.html | plugins-loading-button.js  | jquery/jquery.min.js ladda/spin.min.js ladda/ladda.min.js ladda/ladda.jquery.min.js 
+plugins-masonry.html | plugins-masonry.js  | masonry/masonry.pkgd.min.js 
+plugins-pass-meter.html | plugins-pass-meter.js  | –
+plugins-pdf-viewer.html | plugins-pdf-viewer.js  | pdfjs/pdf.min.js 
+plugins-sortable.html | plugins-nestable.js  | sortablejs/Sortable.min.js 
+plugins-sweet-alerts.html | plugins-sweetalerts.js  | sweetalert2/sweetalert2.min.css sweetalert2/sweetalert2.min.js 
+plugins-text-diff.html | plugins-text-diff.js  | diff/diff.min.js 
+plugins-tour.html | plugins-tour.js  | tourguidejs/tour.js 
+plugins-tree-view.html | plugins-treeview.js  | jquery/jquery.min.js jstree/jstree.min.js 
+plugins-video-player.html | plugins-plyr.js  | plyr/plyr.min.js 
+tables-custom.html | custom-table.js  | –
+tables-datatables-ajax.html | datatables-ajax.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-basic.html | datatables-basic.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-checkbox-select.html | datatables-checkbox-select.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js datatables-dt/dataTables.select.min.js 
+tables-datatables-child-rows.html | datatables-child-rows.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-column-searching.html | datatables-column-search.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-columns.html | datatables-show-hide-columns.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-export-data.html | datatables-export-data.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js datatables-dt/dataTables.buttons.min.js datatables-dt/jszip.min.js datatables-dt/pdfmake.min.js datatables-dt/vfs_fonts.js datatables-dt/buttons.html5.min.js datatables-dt/buttons.print.min.js 
+tables-datatables-fixed-columns.html | datatables-fixed-columns.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js datatables-dt/dataTables.fixedColumns.min.js 
+tables-datatables-fixed-header.html | datatables-fixed-header.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js datatables-dt/dataTables.fixedHeader.min.js 
+tables-datatables-javascript.html | datatables-javascript-source.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-range-search.html | datatables-range-search.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-rendering.html | datatables-rendering.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-rows-add.html | datatables-rows-add.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-scroll.html | datatables-scroll.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js 
+tables-datatables-select.html | datatables-select.js  | jquery/jquery.min.js datatables-dt/dataTables.min.js datatables-dt/dataTables.responsive.min.js datatables-dt/dataTables.select.min.js 
+tables-static.html | – | –
+ui-accordions.html | – | –
+ui-alerts.html | – | –
+ui-badges.html | – | –
+ui-breadcrumb.html | – | –
+ui-buttons.html | – | –
+ui-cards.html | – | –
+ui-carousel.html | – | –
+ui-collapse.html | – | –
+ui-colors.html | – | –
+ui-dropdowns.html | – | –
+ui-images.html | – | –
+ui-links.html | – | –
+ui-list-group.html | – | –
+ui-modals.html | – | –
+ui-notifications.html | – | –
+ui-offcanvas.html | – | –
+ui-pagination.html | – | –
+ui-placeholders.html | – | –
+ui-popovers.html | – | –
+ui-progress.html | – | –
+ui-scrollspy.html | – | –
+ui-spinners.html | – | –
+ui-tabs.html | – | –
+ui-tooltips.html | – | –
+ui-typography.html | – | –
+ui-utilities.html | – | –
+ui-videos.html | – | –
+widgets.html | – | –

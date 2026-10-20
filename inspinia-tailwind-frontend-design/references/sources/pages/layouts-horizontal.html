@@ -1,0 +1,1848 @@
+<!doctype html>
+<html lang="en" data-layout="horizontal">
+    <head>
+        <meta charset="utf-8" />
+        <title>Horizontal | INSPINIA - Responsive Bootstrap 5 Admin Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Inspinia is the #1 best-selling admin dashboard template on Wrapmarket. Perfect for building CRM, CMS, project management tools, and custom web apps with clean UI, responsive design, and powerful features." />
+        <meta name="keywords" content="Inspinia, admin dashboard, Wrapmarket, Wrapbootstrap, HTML template, Bootstrap admin, CRM template, CMS template, responsive admin, web app UI, admin theme, best admin template" />
+        <meta name="author" content="WebAppLayers" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico" />
+ 
+
+<!-- Style css -->
+<link href="assets/css/app.min.css" rel="stylesheet" type="text/css">
+
+<!-- Head.js -->
+<script src="assets/js/config.js"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header class="app-header">
+                <div class="container-fluid flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="logo-topbar">
+                            <!-- Sidenav Menu Brand Logo -->
+                            <a href="index.html" class="logo-box">
+                                <!-- Light Brand Logo -->
+                                <div class="logo-light">
+                                    <img src="assets/images/logo.png" class="logo-lg h-6" alt="Light logo">
+                                    <img src="assets/images/logo-sm.png" class="logo-sm h-6" alt="Small logo">
+                                </div>
+
+                                <!-- Dark Brand Logo -->
+                                <div class="logo-dark">
+                                    <img src="assets/images/logo-black.png" class="logo-lg h-6" alt="Dark logo">
+                                    <img src="assets/images/logo-sm.png" class="logo-sm h-6" alt="Small logo">
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Sidenav Menu Toggle Button -->
+                        <button id="button-toggle-menu" class="sidenav-toggle-button btn btn-icon">
+                            <i class="iconify tabler--menu-4 text-xl"></i>
+                        </button>
+
+                        <!-- Topnav Menu Toggle Button for Horizontal -->
+                        <div class="topnav-toggle-button">
+                            <button type="button" class="hs-collapse-toggle btn topnav-toggle-button" data-hs-collapse="#topnav-menu" id="topnav-menu-collapse" aria-expanded="false" aria-controls="topnav-menu" aria-label="Toggle navigation">
+                                <i class="iconify tabler--menu-4 text-xl"></i>
+                            </button>
+                        </div>
+
+                        <div id="search-box" class="hidden xl:flex">
+                            <div class="input-icon-group">
+                                <i class="iconify tabler--search input-icon text-lg text-(--topbar-item-color)/50! placeholder:opacity-50"></i>
+                                <input type="search" id="topbar-search" class="form-input w-57.5 border-(--topbar-search-border)! bg-(--topbar-search-bg)! text-(--topbar-item-color)! placeholder:opacity-50" placeholder="Search for something...">
+                            </div>
+                        </div>
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+                        <div id="megamenu-header" class="md:inline-flex hidden">
+                            <div class="topbar-item hs-dropdown relative inline-flex">
+                                <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                    Mega Menu
+                                    <i class="iconify tabler--chevron-down"></i>
+                                </button>
+
+                                <div class="hs-dropdown-menu p-0 md:min-w-3xl" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                    <div style="max-height: 380px" data-simplebar="">
+                                        <div class="bg-light/50 px-6 py-3 text-center">
+                                            <h4 class="text-base font-semibold">
+                                                Welcome to
+                                                <span class="text-primary">Inspinia</span>
+                                                Admin Theme.
+                                            </h4>
+                                        </div>
+                                        <div class="grid md:grid-cols-3">
+                                            <div class="p-6">
+                                                <h5 class="py-2 px-3.5 font-semibold mb-2 text-sm">Dashboard &amp; Analytics</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Sales Dashboard</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Marketing Dashboard</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Finance Overview</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">User Analytics</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Traffic Insights</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="p-6">
+                                                <h5 class="py-2 px-3.5 font-semibold mb-2 text-sm">Project Management</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Task Overview</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Kanban Board</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Gantt Chart</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Team Collaboration</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Project Milestones</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="p-6">
+                                                <h5 class="py-2 px-3.5 font-semibold mb-2 text-sm">User Management</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">User Profiles</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Access Control</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Role Permissions</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Activity Logs</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item">Security Settings</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- end row-->
+                                    </div>
+                                    <!-- end .h-100-->
+                                </div>
+                            </div>
+                        </div>
+
+            
+
+            
+
+                        <div id="megamenu-apps" class="md:inline-flex hidden">
+                            <div class="topbar-item hs-dropdown relative inline-flex">
+                                <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Apps <i class="iconify tabler--chevron-down"></i></button>
+
+                                <div class="hs-dropdown-menu p-0 md:min-w-3xl" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                    <div style="max-height: 380px" data-simplebar="">
+                                        <div class="grid md:grid-cols-3">
+                                            <div class="p-3 space-y-2">
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-primary border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--basket size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">eCommerce</h5>
+                                                            <span class="text-default-400 text-xs">Products, orders &amp; etc.</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-success border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--message size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Chat</h5>
+                                                            <span class="text-default-400 text-xs">Team conversations</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-danger border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--list-check size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Task</h5>
+                                                            <span class="text-default-400 text-xs">Plan and track work</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-info border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--mailbox size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Email</h5>
+                                                            <span class="text-default-400 text-xs">Messages and inbox</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </div>
+
+                                            <div class="p-3 space-y-2">
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-secondary border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--building size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Companies</h5>
+                                                            <span class="text-default-400 text-xs">Business profiles</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-dark border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--id size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Contacts Diary</h5>
+                                                            <span class="text-default-400 text-xs">People and connections</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-warning border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--calendar size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Calendar</h5>
+                                                            <span class="text-default-400 text-xs">Events and reminders</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                                <a href="#!" class="dropdown-item">
+                                                    <span class="flex items-center gap-3">
+                                                        <span class="size-9 flex items-center justify-center text-success border border-light bg-light/50 rounded">
+                                                            <i class="iconify tabler--lifebuoy size-5.5"></i>
+                                                        </span>
+                                                        <span>
+                                                            <h5 class="text-xs">Support</h5>
+                                                            <span class="text-default-400 text-xs">Help and assistance</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </div>
+
+                                            <div class="row-span-2 bg-light/50">
+                                                <div class="h-full relative rounded-e overflow-hidden bg-[url(../images/stock/small-8.jpg)] bg-cover">
+                                                    <div class="p-6 absolute inset-0 bg-gradient bg-secondary/90 flex items-center justify-center">
+                                                        <div class="text-center text-white">
+                                                            <i class="iconify tabler--atom text-4xl"></i>
+                                                            <p class="text-white/75 mb-5 uppercase">Limited Offer</p>
+                                                            <h3 class="font-semibold text-white mb-3 text-xl">Unlock Exclusive Savings</h3>
+                                                            <h4 class="font-medium text-base mb-1">
+                                                                <del class="text-opacity-75 text-white">$49.00</del>
+                                                                /
+                                                                <span class="font-bold text-white">$25 USD</span>
+                                                            </h4>
+                                                            <button type="button" class="mt-5 btn btn-sm bg-danger text-white hover:bg-danger-hover">
+                                                                <i class="iconify tabler--shopping-cart me-1.5"></i>
+                                                                Buy Now
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end .bg-light-->
+                                            </div>
+
+                                            <div class="col-span-2">
+                                                <div class="grid grid-cols-2 border-t border-light border-dashed text-center">
+                                                    <div class="p-6">
+                                                        <p class="font-medium text-default-400 mb-1 text-2xs uppercase">-: &nbsp; Support &nbsp;:-</p>
+                                                        <h5 class="text-md">help@mydomain.com</h5>
+                                                    </div>
+
+                                                    <div class="p-6">
+                                                        <p class="font-medium text-default-400 mb-1 text-2xs uppercase">-: &nbsp; Help: &nbsp;:-</p>
+                                                        <h5 class="text-md">+(12) 3456 7890</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end row-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5">
+            
+
+            
+
+            
+
+            
+
+                        <div id="theme-toggler" class="sm:inline-flex hidden">
+                            <div class="topbar-item">
+                                <button class="topbar-link btn btn-icon size-8 rounded-full transition-[scale,background]" id="light-dark-mode" type="button">
+                                    <i class="iconify tabler--moon absolute scale-100 rotate-0 topbar-link-icon transition-all duration-200 dark:scale-0 dark:-rotate-90"></i>
+                                    <i class="iconify tabler--sun absolute scale-0 rotate-90 topbar-link-icon transition-all duration-200 dark:scale-100 dark:rotate-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+            
+
+            
+
+                        <div id="apps-dropdown-rounded" class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
+                            <button class="topbar-link hs-dropdown-toggle relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                <i class="iconify tabler--apps topbar-link-icon"></i>
+                            </button>
+
+                            <div class="hs-dropdown-menu w-80 p-3" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                <div class="grid grid-cols-3 items-center gap-1.5">
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
+                                            <img src="assets/images/logos/google.svg" alt="Google Logo" class="h-4.5">
+                                        </span>
+                                        <span class="align-middle font-medium">Google</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
+                                            <img src="assets/images/logos/figma.svg" alt="Figma Logo" class="h-4.5">
+                                        </span>
+                                        <span class="align-middle font-medium">Figma</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
+                                            <img src="assets/images/logos/slack.svg" alt="Slack Logo" class="h-4.5">
+                                        </span>
+                                        <span class="align-middle font-medium">Slack</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
+                                            <img src="assets/images/logos/dropbox.svg" alt="Dropbox Logo" class="h-4.5">
+                                        </span>
+                                        <span class="align-middle font-medium">Dropbox</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
+                                            <i class="iconify tabler--calendar text-lg"></i>
+                                        </span>
+                                        <span class="align-middle font-medium">Calendar</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 text-center py-3">
+                                        <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
+                                            <i class="iconify tabler--message-circle text-lg"></i>
+                                        </span>
+                                        <span class="align-middle font-medium">Chat</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+            
+
+                        <div id="simple-messages-dropdown" class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
+                            <button class="topbar-link hs-dropdown-toggle relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                <i class="iconify tabler--mail topbar-link-icon"></i>
+                                <span class="badge bg-success absolute -end-px -top-[13px] size-4 rounded-full leading-0 text-white">7</span>
+                            </button>
+
+                            <div class="hs-dropdown-menu min-w-80 p-0 space-y-0" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                <div class="border-default-300 border-b px-6 py-3">
+                                    <div class="flex items-center justify-between">
+                                        <h6 class="text-base font-semibold">Messages</h6>
+                                        <a href="#!" class="badge badge-label bg-success/15 text-success">09 Notifications</a>
+                                    </div>
+                                </div>
+
+                                <div style="max-height: 300px" data-simplebar="">
+                                    <!-- item 1 -->
+                                    <div id="message-1" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item active px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="shrink-0">
+                                                <img src="assets/images/users/user-1.jpg" class="size-9 rounded-full" alt="User Avatar">
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Liam Carter</span>
+                                                uploaded a new document to
+                                                <span class="text-body-color font-medium">Project Phoenix</span>
+                                                <br>
+                                                <span class="text-xs">5 minutes ago</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-1">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <!-- item 2 -->
+                                    <div id="message-2" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="shrink-0">
+                                                <img src="assets/images/users/user-2.jpg" class="size-9 rounded-full" alt="User Avatar">
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Ava Mitchell</span>
+                                                commented on
+                                                <span class="text-body-color font-medium">Marketing Campaign Q3</span>
+                                                <br>
+                                                <span class="text-xs">12 minutes ago</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-2">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <!-- item 3 -->
+                                    <div id="message-3" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="bg-info flex size-9 shrink-0 items-center justify-center rounded-full text-white">
+                                                <i class="iconify tabler--user-hexagon text-xl"></i>
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Noah Blake</span>
+                                                updated the status of
+                                                <span class="text-body-color font-medium">Client Onboarding</span>
+                                                <br>
+                                                <span class="text-xs">30 minutes ago</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-3">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <!-- item 4 -->
+                                    <div id="message-4" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="shrink-0">
+                                                <img src="assets/images/users/user-4.jpg" class="size-9 rounded-full" alt="User Avatar">
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Sophia Taylor</span>
+                                                sent an invoice for
+                                                <span class="text-body-color font-medium">Service Renewal</span>
+                                                <br>
+                                                <span class="text-xs">1 hour ago</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-4">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <!-- item 5 -->
+                                    <div id="message-5" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="shrink-0">
+                                                <img src="assets/images/users/user-5.jpg" class="size-9 rounded-full" alt="User Avatar">
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Ethan Moore</span>
+                                                completed the task
+                                                <span class="text-body-color font-medium">UI Review</span>
+                                                <br>
+                                                <span class="text-xs">2 hours ago</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-5">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <!-- item 6 -->
+                                    <div id="message-6" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 dropdown-item px-4.5 py-3 text-wrap">
+                                        <span class="flex gap-base">
+                                            <span class="shrink-0">
+                                                <img src="assets/images/users/user-6.jpg" class="size-9 rounded-full" alt="User Avatar">
+                                            </span>
+                                            <span class="text-default-400 grow">
+                                                <span class="text-body-color font-medium">Olivia White</span>
+                                                assigned you a task in
+                                                <span class="text-body-color font-medium">Sales Pipeline</span>
+                                                <br>
+                                                <span class="text-xs">Yesterday</span>
+                                            </span>
+                                            <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#message-6">
+                                                <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-reset notify-item border-light justify-center border-t py-3 text-center font-bold underline underline-offset-2">Read All Messages</a>
+                            </div>
+                        </div>
+
+            
+
+                        <div id="notification-dropdown-alert" class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
+                            <button class="topbar-link hs-dropdown-toggle relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                <i class="iconify tabler--bell topbar-link-icon"></i>
+                                <span class="badge bg-warning absolute -end-px -top-[13px] size-4 rounded text-white">12</span>
+                            </button>
+
+                            <div class="hs-dropdown-menu min-w-80 p-0 space-y-0" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                <div class="border-default-300 border-b px-3 py-2">
+                                    <div class="flex items-center justify-between">
+                                        <h6 class="text-base font-semibold">Notifications</h6>
+                                        <a href="#!" class="badge badge-label bg-light text-dark">12 Alerts</a>
+                                    </div>
+                                </div>
+
+                                <div style="max-height: 300px" data-simplebar="">
+                                    <!-- item 1 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-1">
+                                        <span class="shrink-0">
+                                            <span class="bg-danger/15 text-danger flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--server-bolt text-lg fill-danger"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Critical alert: Server crash detected</span>
+                                            <br>
+                                            <span class="text-xs">30 minutes ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-1">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 2 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-2">
+                                        <span class="shrink-0">
+                                            <span class="bg-warning/15 text-warning flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--alert-triangle text-lg fill-warning"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">High memory usage on Node A</span>
+                                            <br>
+                                            <span class="text-xs">10 minutes ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-2">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 3 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-3">
+                                        <span class="shrink-0">
+                                            <span class="bg-success/15 text-success flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--circle-check text-lg fill-success"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Backup completed successfully</span>
+                                            <br>
+                                            <span class="text-xs">1 hour ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-3">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 4 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-4">
+                                        <span class="shrink-0">
+                                            <span class="bg-primary/15 text-primary flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--user-plus text-lg fill-primary"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">New user registration: Sarah Miles</span>
+                                            <br>
+                                            <span class="text-xs">Just now</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-4">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 5 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-5">
+                                        <span class="shrink-0">
+                                            <span class="bg-danger/15 text-danger flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--bug text-lg fill-danger"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Bug reported in payment module</span>
+                                            <br>
+                                            <span class="text-xs">20 minutes ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-5">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 6 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-6">
+                                        <span class="shrink-0">
+                                            <span class="bg-info/15 text-info flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--message-circle text-lg fill-info"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">New comment on Task #142</span>
+                                            <br>
+                                            <span class="text-xs">15 minutes ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-6">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 7 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-7">
+                                        <span class="shrink-0">
+                                            <span class="bg-warning/15 text-warning flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--battery-charging text-lg fill-warning"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Low battery on Device X</span>
+                                            <br>
+                                            <span class="text-xs">45 minutes ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-7">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 8 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-8">
+                                        <span class="shrink-0">
+                                            <span class="bg-success/15 text-success flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--cloud-upload text-lg fill-success"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">File upload completed</span>
+                                            <br>
+                                            <span class="text-xs">1 hour ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-8">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 9 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-9">
+                                        <span class="shrink-0">
+                                            <span class="bg-primary/15 text-primary flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--calendar text-lg fill-primary"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Team meeting scheduled at 3 PM</span>
+                                            <br>
+                                            <span class="text-xs">2 hours ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-9">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 10 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-10">
+                                        <span class="shrink-0">
+                                            <span class="bg-secondary/15 text-secondary flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--download text-lg fill-secondary"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Report ready for download</span>
+                                            <br>
+                                            <span class="text-xs">3 hours ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-10">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 11 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-11">
+                                        <span class="shrink-0">
+                                            <span class="bg-danger/15 text-danger flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--lock text-lg fill-danger"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Multiple failed login attempts</span>
+                                            <br>
+                                            <span class="text-xs">5 hours ago</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-11">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- item 12 -->
+                                    <div class="dropdown-item hs-removing:hidden items-start gap-3 px-4.5 py-3 text-wrap" id="notification-12">
+                                        <span class="shrink-0">
+                                            <span class="bg-info/15 text-info flex size-9 items-center justify-center rounded">
+                                                <i class="iconify tabler--bell-ringing text-lg fill-info"></i>
+                                            </span>
+                                        </span>
+                                        <span class="text-default-400 grow">
+                                            <span class="font-medium text-body-color">Reminder: Submit your timesheet</span>
+                                            <br>
+                                            <span class="text-xs">Today, 9:00 AM</span>
+                                        </span>
+                                        <button type="button" class="text-default-400 btn btn-link shrink-0 p-0" data-hs-remove-element="#notification-12">
+                                            <i class="iconify tabler--square-rounded-x text-xl"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- end dropdown-->
+
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-reset border-light justify-center border-t py-3 font-bold underline underline-offset-2">View All Alerts</a>
+                            </div>
+                        </div>
+
+                        <div id="fullscreen-toggler" class="md:inline-flex hidden">
+                            <div class="topbar-item">
+                                <button class="topbar-link btn group size-8 rounded-full" data-toggle="fullscreen" aria-label="Full Screen">
+                                    <i class="iconify tabler--maximize topbar-link-icon group-[.fullscreen-active]:hidden"></i>
+                                    <i class="iconify tabler--minimize hidden topbar-link-icon group-[.fullscreen-active]:inline-block"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="xl:inline-flex hidden">
+                            <div id="monochrome-toggler" class="topbar-item">
+                                <button class="topbar-link btn btn-sm size-8 rounded-full" id="monochrome-mode" type="button" aria-label="Monochrome Mode">
+                                    <i class="iconify tabler--palette topbar-link-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sm:inline-flex hidden">
+                            <div class="topbar-item btn-theme-setting">
+                                <button class="topbar-link btn btn-icon size-8 rounded-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="theme-customization" data-hs-overlay="#theme-customization">
+                                    <i class="iconify tabler--settings topbar-link-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="language-selector" class="topbar-item hs-dropdown relative sm:inline-flex hidden [--placement:bottom-right]">
+                            <button class="topbar-link hs-dropdown-toggle font-bold relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                <img src="assets/images/flags/us.svg" alt="" class="me-3 size-4.5 rounded" id="selected-language-image">
+                                <span id="selected-language-code">EN</span>
+                            </button>
+
+                            <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="en" title="English">
+                                    <img src="assets/images/flags/us.svg" alt="English" class="me-1 size-4 rounded" height="18" data-translator-image="">
+                                    <span class="align-middle">English</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="de" title="German">
+                                    <img src="assets/images/flags/de.svg" alt="German" class="me-1 size-4 rounded" height="18" data-translator-image="">
+                                    <span class="align-middle">Deutsch</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="it" title="Italian">
+                                    <img src="assets/images/flags/it.svg" alt="Italian" class="me-1 size-4 rounded" height="18" data-translator-image="">
+                                    <span class="align-middle">Italiano</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="es" title="Spanish">
+                                    <img src="assets/images/flags/es.svg" alt="Spanish" class="me-1 size-4 rounded" height="18" data-translator-image="">
+                                    <span class="align-middle">Español</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="ru" title="Russian">
+                                    <img src="assets/images/flags/ru.svg" alt="Russian" class="me-1 size-4 rounded" height="18" data-translator-image="">
+                                    <span class="align-middle">Русский</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="hi" title="Hindi">
+                                    <img src="assets/images/flags/in.svg" alt="Hindi" class="me-1 size-4 rounded" data-translator-image="">
+                                    <span class="align-middle">हिन्दी</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="ar" title="Arabic">
+                                    <img src="assets/images/flags/sa.svg" alt="Arabic" class="me-1 size-4 rounded" data-translator-image="">
+                                    <span class="align-middle">عربي</span>
+                                </a>
+                            </div>
+                        </div>
+
+            
+
+            
+
+                        <div id="simple-user-dropdown" class="topbar-item hs-dropdown before:bg-default-700/35 relative inline-flex before:h-4.5 before:w-px before:content-['']">
+                            <button class="hs-dropdown-toggle topbar-link ms-2.5 cursor-pointer items-center px-3! flex" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                <img src="assets/images/users/user-1.jpg" alt="user-image" class="size-8 rounded-full lg:me-3">
+                                <div class="hidden lg:flex items-center gap-1.5">
+                                    <h5 class="pro-username">Damian D.</h5>
+                                    <i class="iconify tabler--chevron-down align-middle"></i>
+                                </div>
+                            </button>
+
+                            <div class="hs-dropdown-menu min-w-48" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-icons">
+                                <!-- Header -->
+                                <div class="py-2 px-3.5">
+                                    <h6 class="text-xs">Welcome back 👋!</h6>
+                                </div>
+
+                                <!-- My Profile -->
+                                <a href="#!" class="dropdown-item">
+                                    <i class="iconify tabler--user-circle text-base align-middle"></i>
+                                    <span class="align-middle">Profile</span>
+                                </a>
+
+                                <!-- Notifications -->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="iconify tabler--bell-ringing text-base align-middle"></i>
+                                    <span class="align-middle">Notifications</span>
+                                </a>
+
+                                <!-- Wallet -->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="iconify tabler--credit-card me-1.5 text-base align-middle"></i>
+                                    <span class="align-middle"> Balance: <span class="font-semibold">$985.25</span> </span>
+                                </a>
+
+                                <!-- Settings -->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="iconify tabler--settings-2 text-base align-middle"></i>
+                                    <span class="align-middle">Account Settings</span>
+                                </a>
+
+                                <!-- Support -->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="iconify tabler--headset text-base align-middle"></i>
+                                    <span class="align-middle">Support Center</span>
+                                </a>
+
+                                <!-- Divider -->
+                                <div class="dropdown-divider"></div>
+
+                                <!-- Lock -->
+                                <a href="auth-lock-screen.html" class="dropdown-item">
+                                    <i class="iconify tabler--lock text-base align-middle"></i>
+                                    <span class="align-middle">Lock Screen</span>
+                                </a>
+
+                                <!-- Logout -->
+                                <a href="javascript:void(0);" class="dropdown-item font-semibold text-danger">
+                                    <i class="iconify tabler--logout text-base align-middle"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Topbar End -->
+ <div class="topnav top-topbar-height border-default-300 fixed z-30 flex w-full items-center border-b bg-(--sidenav-bg)">
+    <!-- Secondary Navbar -->
+    <div class="container-fluid">
+        <nav id="topnav-menu" class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block" aria-labelledby="topnav-menu-collapse">
+<ul class="navbar-nav flex">
+<li class="nav-item">
+    <div class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--adaptive:adaptive] md:[--is-collapse:false] md:[--strategy:fixed]">
+        <button id="topnav-main" type="button" class="hs-dropdown-toggle nav-link" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <span class="menu-icon"><i class="iconify tabler--dashboard text-lg"></i></span>
+            <span class="menu-text" data-lang="main">Main</span>
+            <div class="menu-arrow"></div>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative top-full z-10 hidden w-full ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:start-0 before:-top-4 before:h-5 before:w-full after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:w-52 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:after:hidden dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-main">
+            <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-dashboards" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="dashboards">Dashboards</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-dashboards">
+        <a href="dashboard-ecommerce.html" class="dropdown-item"><span data-lang="dashboard-ecommerce">Ecommerce</span></a>
+<a href="dashboard-analytics.html" class="dropdown-item"><span data-lang="dashboard-analytics">Analytics</span></a>
+<a href="index.html" class="dropdown-item"><span data-lang="dashboard-projects">Projects</span></a>
+    </div>
+</div>
+<a href="landing.html" class="dropdown-item"><span data-lang="landing">Landing</span></a>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <div class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--adaptive:adaptive] md:[--is-collapse:false] md:[--strategy:fixed]">
+        <button id="topnav-apps" type="button" class="hs-dropdown-toggle nav-link" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <span class="menu-icon"><i class="iconify tabler--apps text-lg"></i></span>
+            <span class="menu-text" data-lang="apps">Apps</span>
+            <div class="menu-arrow"></div>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative top-full z-10 hidden w-full ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:start-0 before:-top-4 before:h-5 before:w-full after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:w-52 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:after:hidden dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-apps">
+            <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-ecommerce" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="ecommerce">Ecommerce</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-ecommerce">
+        <a href="apps-ecommerce-marketplace.html" class="dropdown-item"><span data-lang="apps-ecommerce-marketplace">Marketplace</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-products" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="products">Products</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-products">
+        <a href="apps-ecommerce-products.html" class="dropdown-item"><span data-lang="apps-ecommerce-products">Products</span></a>
+<a href="apps-ecommerce-products-grid.html" class="dropdown-item"><span data-lang="apps-ecommerce-products-grid">Products Grid</span></a>
+<a href="apps-ecommerce-product-details.html" class="dropdown-item"><span data-lang="apps-ecommerce-product-details">Product Details</span></a>
+<a href="apps-ecommerce-product-add.html" class="dropdown-item"><span data-lang="apps-ecommerce-product-add">Add Product</span></a>
+    </div>
+</div>
+<a href="apps-ecommerce-categories.html" class="dropdown-item"><span data-lang="apps-ecommerce-categories">Categories</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-orders" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="orders">Orders</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-orders">
+        <a href="apps-ecommerce-orders.html" class="dropdown-item"><span data-lang="apps-ecommerce-orders">Orders</span></a>
+<a href="apps-ecommerce-order-details.html" class="dropdown-item"><span data-lang="apps-ecommerce-order-details">Order Details</span></a>
+<a href="apps-ecommerce-order-add.html" class="dropdown-item"><span data-lang="apps-ecommerce-order-add">Add/Edit Order</span></a>
+    </div>
+</div>
+<a href="apps-ecommerce-customers.html" class="dropdown-item"><span data-lang="apps-ecommerce-customers">Customers</span></a>
+<a href="apps-ecommerce-cart.html" class="dropdown-item"><span data-lang="apps-ecommerce-cart">Cart</span></a>
+<a href="apps-ecommerce-checkout.html" class="dropdown-item"><span data-lang="apps-ecommerce-checkout">Checkout</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-sellers" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="sellers">Sellers</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-sellers">
+        <a href="apps-ecommerce-sellers.html" class="dropdown-item"><span data-lang="apps-ecommerce-sellers">Sellers</span></a>
+<a href="apps-ecommerce-seller-details.html" class="dropdown-item"><span data-lang="apps-ecommerce-seller-details">Sellers Details</span></a>
+    </div>
+</div>
+<a href="apps-ecommerce-refunds.html" class="dropdown-item"><span data-lang="apps-ecommerce-refunds">Refunds</span></a>
+<a href="apps-ecommerce-reviews.html" class="dropdown-item"><span data-lang="apps-ecommerce-reviews">Reviews</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-inventory" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="inventory">Inventory</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-inventory">
+        <a href="apps-ecommerce-warehouse.html" class="dropdown-item"><span data-lang="apps-ecommerce-warehouse">Warehouse</span></a>
+<a href="apps-ecommerce-product-stocks.html" class="dropdown-item"><span data-lang="apps-ecommerce-product-stocks">Product Stocks</span></a>
+<a href="apps-ecommerce-purchased-orders.html" class="dropdown-item"><span data-lang="apps-ecommerce-purchased-orders">Purchased Orders</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-reports" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="reports">Reports</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-reports">
+        <a href="apps-ecommerce-product-views.html" class="dropdown-item"><span data-lang="apps-ecommerce-product-views">Product Views</span></a>
+<a href="apps-ecommerce-sales.html" class="dropdown-item"><span data-lang="apps-ecommerce-sales">Sales</span></a>
+    </div>
+</div>
+<a href="apps-ecommerce-attributes.html" class="dropdown-item"><span data-lang="apps-ecommerce-attributes">Attributes</span></a>
+<a href="apps-ecommerce-settings.html" class="dropdown-item"><span data-lang="apps-ecommerce-settings">Settings</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-email" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="email">Email</span><span class="badge bg-danger text-white">New</span>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-email">
+        <a href="apps-email-inbox.html" class="dropdown-item"><span data-lang="apps-email-inbox">Inbox</span></a>
+<a href="apps-email-details.html" class="dropdown-item"><span data-lang="apps-email-details">Details</span></a>
+<a href="apps-email-compose.html" class="dropdown-item"><span data-lang="apps-email-compose">Compose</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-users" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="users">Users</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-users">
+        <a href="apps-users-contacts.html" class="dropdown-item"><span data-lang="apps-users-contacts">Contacts</span></a>
+<a href="apps-users-roles.html" class="dropdown-item"><span data-lang="apps-users-roles">Roles</span></a>
+<a href="apps-users-role-details.html" class="dropdown-item"><span data-lang="apps-users-role-details">Role Details</span></a>
+<a href="apps-users-permissions.html" class="dropdown-item"><span data-lang="apps-users-permissions">Permissions</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-projects" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="projects">Projects</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-projects">
+        <a href="apps-projects-grid.html" class="dropdown-item"><span data-lang="apps-projects-grid">My Projects</span></a>
+<a href="apps-projects-list.html" class="dropdown-item"><span data-lang="apps-projects-list">Projects List</span></a>
+<a href="apps-projects-details.html" class="dropdown-item"><span data-lang="apps-projects-details">View Project</span></a>
+<a href="apps-projects-kanban.html" class="dropdown-item"><span data-lang="apps-projects-kanban">Kanban Board</span></a>
+<a href="apps-projects-team-board.html" class="dropdown-item"><span data-lang="apps-projects-team-board">Team Board</span></a>
+<a href="apps-projects-activity.html" class="dropdown-item"><span data-lang="apps-projects-activity">Activity Steam</span></a>
+    </div>
+</div>
+<a href="apps-file-manager.html" class="dropdown-item"><span data-lang="apps-file-manager">File Manager</span></a>
+<a href="apps-chat.html" class="dropdown-item"><span data-lang="apps-chat">Chat</span></a>
+<a href="apps-calendar.html" class="dropdown-item"><span data-lang="apps-calendar">Calendar</span></a>
+<a href="apps-social-feed.html" class="dropdown-item"><span data-lang="apps-social-feed">Social Feed</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-invoice" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="invoice">Invoice</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-invoice">
+        <a href="apps-invoice-list.html" class="dropdown-item"><span data-lang="apps-invoice-list">Invoices</span></a>
+<a href="apps-invoice-details.html" class="dropdown-item"><span data-lang="apps-invoice-details">Single Invoice</span></a>
+<a href="apps-invoice-create.html" class="dropdown-item"><span data-lang="apps-invoice-create">New Invoice</span></a>
+    </div>
+</div>
+<a href="apps-companies.html" class="dropdown-item"><span data-lang="apps-companies">Companies</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-more-apps" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="more-apps">More Apps</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-more-apps">
+        <a href="apps-clients.html" class="dropdown-item"><span data-lang="apps-clients">Clients</span></a>
+<a href="apps-outlook.html" class="dropdown-item"><span data-lang="apps-outlook">Outlook View</span></a>
+<a href="apps-vote-list.html" class="dropdown-item"><span data-lang="apps-vote-list">Vote List</span></a>
+<a href="apps-issue-tracker.html" class="dropdown-item"><span data-lang="apps-issue-tracker">Issue Tracker</span></a>
+<a href="apps-api-keys.html" class="dropdown-item"><span data-lang="apps-api-keys">API Keys</span></a>
+<a href="apps-manage.html" class="dropdown-item"><span data-lang="apps-manage">Manage Apps</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-blog" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="blog">Blog</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-blog">
+        <a href="apps-blog-list.html" class="dropdown-item"><span data-lang="apps-blog-list">Blog List</span></a>
+<a href="apps-blog-grid.html" class="dropdown-item"><span data-lang="apps-blog-grid">Blog Grid</span></a>
+<a href="apps-blog-article.html" class="dropdown-item"><span data-lang="apps-blog-article">Article</span></a>
+<a href="apps-blog-add.html" class="dropdown-item"><span data-lang="apps-blog-add">Add Article</span></a>
+    </div>
+</div>
+<a href="apps-pin-board.html" class="dropdown-item"><span data-lang="apps-pin-board">Pin Board</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-forum" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="forum">Forum</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-forum">
+        <a href="apps-forum-view.html" class="dropdown-item"><span data-lang="apps-forum-view">Forum View</span></a>
+<a href="apps-forum-post.html" class="dropdown-item"><span data-lang="apps-forum-post">Forum Post</span></a>
+    </div>
+</div>
+    </div>
+</div>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <div class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--adaptive:adaptive] md:[--is-collapse:false] md:[--strategy:fixed]">
+        <button id="topnav-custom-pages" type="button" class="hs-dropdown-toggle nav-link" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <span class="menu-icon"><i class="iconify tabler--files text-lg"></i></span>
+            <span class="menu-text" data-lang="custom-pages">Custom Pages</span>
+            <div class="menu-arrow"></div>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative top-full z-10 hidden w-full ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:start-0 before:-top-4 before:h-5 before:w-full after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:w-52 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:after:hidden dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-custom-pages">
+            <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-pages" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="pages">Pages</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-pages">
+        <a href="pages-profile.html" class="dropdown-item"><span data-lang="pages-profile">Profile</span></a>
+<a href="pages-account-settings.html" class="dropdown-item"><span data-lang="pages-account-settings">Account Settings</span></a>
+<a href="pages-faq.html" class="dropdown-item"><span data-lang="pages-faq">FAQ</span></a>
+<a href="pages-pricing.html" class="dropdown-item"><span data-lang="pages-pricing">Pricing</span></a>
+<a href="pages-empty.html" class="dropdown-item"><span data-lang="pages-empty">Empty Page</span></a>
+<a href="pages-timeline.html" class="dropdown-item"><span data-lang="pages-timeline">Timeline</span></a>
+<a href="pages-gallery.html" class="dropdown-item"><span data-lang="pages-gallery">Gallery</span></a>
+<a href="pages-sitemap.html" class="dropdown-item"><span data-lang="pages-sitemap">Sitemap</span></a>
+<a href="pages-search-results.html" class="dropdown-item"><span data-lang="pages-search-results">Search Results</span></a>
+<a href="pages-coming-soon.html" class="dropdown-item"><span data-lang="pages-coming-soon">Coming Soon</span></a>
+<a href="pages-privacy-policy.html" class="dropdown-item"><span data-lang="pages-privacy-policy">Privacy Policy</span></a>
+<a href="pages-terms-conditions.html" class="dropdown-item"><span data-lang="pages-terms-conditions">Terms &amp; Conditions</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-plugins" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="plugins">Plugins</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-plugins">
+        <a href="plugins-sortable.html" class="dropdown-item"><span data-lang="plugins-sortable">Sortable List</span></a>
+<a href="plugins-text-diff.html" class="dropdown-item"><span data-lang="plugins-text-diff">Text Diff</span></a>
+<a href="plugins-pdf-viewer.html" class="dropdown-item"><span data-lang="plugins-pdf-viewer">PDF Viewer</span></a>
+<a href="plugins-i18.html" class="dropdown-item"><span data-lang="plugins-i18">i18 Support</span></a>
+<a href="plugins-sweet-alerts.html" class="dropdown-item"><span data-lang="plugins-sweet-alerts">Sweet Alerts</span></a>
+<a href="plugins-idle-timer.html" class="dropdown-item"><span data-lang="plugins-idle-timer">Idle Timer</span></a>
+<a href="plugins-pass-meter.html" class="dropdown-item"><span data-lang="plugins-pass-meter">Password Meter</span></a>
+<a href="plugins-live-favicon.html" class="dropdown-item"><span data-lang="plugins-live-favicon">Live Favicon</span></a>
+<a href="plugins-clipboard.html" class="dropdown-item"><span data-lang="plugins-clipboard">Clipboard</span></a>
+<a href="plugins-tree-view.html" class="dropdown-item"><span data-lang="plugins-tree-view">Tree View</span></a>
+<a href="plugins-loading-buttons.html" class="dropdown-item"><span data-lang="plugins-loading-buttons">Loading Buttons</span></a>
+<a href="plugins-masonry.html" class="dropdown-item"><span data-lang="plugins-masonry">Masonry</span></a>
+<a href="plugins-tour.html" class="dropdown-item"><span data-lang="plugins-tour">Tour</span></a>
+<a href="plugins-animation.html" class="dropdown-item"><span data-lang="plugins-animation">Animation</span></a>
+<a href="plugins-video-player.html" class="dropdown-item"><span data-lang="plugins-video-player">Video Player</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-authentication" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="authentication">Authentication</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-authentication">
+        <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-auth-basic" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="auth-basic">Basic</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-auth-basic">
+        <a href="auth-sign-in.html" class="dropdown-item"><span data-lang="auth-sign-in">Sign In</span></a>
+<a href="auth-sign-up.html" class="dropdown-item"><span data-lang="auth-sign-up">Sign Up</span></a>
+<a href="auth-reset-pass.html" class="dropdown-item"><span data-lang="auth-reset-pass">Reset Password</span></a>
+<a href="auth-new-pass.html" class="dropdown-item"><span data-lang="auth-new-pass">New Password</span></a>
+<a href="auth-two-factor.html" class="dropdown-item"><span data-lang="auth-two-factor">Two Factor</span></a>
+<a href="auth-lock-screen.html" class="dropdown-item"><span data-lang="auth-lock-screen">Lock Screen</span></a>
+<a href="auth-success-mail.html" class="dropdown-item"><span data-lang="auth-success-mail">Success Mail</span></a>
+<a href="auth-login-pin.html" class="dropdown-item"><span data-lang="auth-login-pin">Login with PIN</span></a>
+<a href="auth-delete-account.html" class="dropdown-item"><span data-lang="auth-delete-account">Delete Account</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-auth-card" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="auth-card">Card</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-auth-card">
+        <a href="auth-card-sign-in.html" class="dropdown-item"><span data-lang="auth-card-sign-in">Sign In</span></a>
+<a href="auth-card-sign-up.html" class="dropdown-item"><span data-lang="auth-card-sign-up">Sign Up</span></a>
+<a href="auth-card-reset-pass.html" class="dropdown-item"><span data-lang="auth-card-reset-pass">Reset Password</span></a>
+<a href="auth-card-new-pass.html" class="dropdown-item"><span data-lang="auth-card-new-pass">New Password</span></a>
+<a href="auth-card-two-factor.html" class="dropdown-item"><span data-lang="auth-card-two-factor">Two Factor</span></a>
+<a href="auth-card-lock-screen.html" class="dropdown-item"><span data-lang="auth-card-lock-screen">Lock Screen</span></a>
+<a href="auth-card-success-mail.html" class="dropdown-item"><span data-lang="auth-card-success-mail">Success Mail</span></a>
+<a href="auth-card-login-pin.html" class="dropdown-item"><span data-lang="auth-card-login-pin">Login with PIN</span></a>
+<a href="auth-card-delete-account.html" class="dropdown-item"><span data-lang="auth-card-delete-account">Delete Account</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-auth-split" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="auth-split">Split</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-auth-split">
+        <a href="auth-split-sign-in.html" class="dropdown-item"><span data-lang="auth-split-sign-in">Sign In</span></a>
+<a href="auth-split-sign-up.html" class="dropdown-item"><span data-lang="auth-split-sign-up">Sign Up</span></a>
+<a href="auth-split-reset-pass.html" class="dropdown-item"><span data-lang="auth-split-reset-pass">Reset Password</span></a>
+<a href="auth-split-new-pass.html" class="dropdown-item"><span data-lang="auth-split-new-pass">New Password</span></a>
+<a href="auth-split-two-factor.html" class="dropdown-item"><span data-lang="auth-split-two-factor">Two Factor</span></a>
+<a href="auth-split-lock-screen.html" class="dropdown-item"><span data-lang="auth-split-lock-screen">Lock Screen</span></a>
+<a href="auth-split-success-mail.html" class="dropdown-item"><span data-lang="auth-split-success-mail">Success Mail</span></a>
+<a href="auth-split-login-pin.html" class="dropdown-item"><span data-lang="auth-split-login-pin">Login with PIN</span></a>
+<a href="auth-split-delete-account.html" class="dropdown-item"><span data-lang="auth-split-delete-account">Delete Account</span></a>
+    </div>
+</div>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-error-pages" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="error-pages">Error Pages</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-error-pages">
+        <a href="error-400.html" class="dropdown-item"><span data-lang="error-400">400 Bad Request</span></a>
+<a href="error-401.html" class="dropdown-item"><span data-lang="error-401">401 Unauthorized</span></a>
+<a href="error-403.html" class="dropdown-item"><span data-lang="error-403">403 Forbidden</span></a>
+<a href="error-404.html" class="dropdown-item"><span data-lang="error-404">404 Not Found</span></a>
+<a href="error-408.html" class="dropdown-item"><span data-lang="error-408">408 Request Timeout</span></a>
+<a href="error-500.html" class="dropdown-item"><span data-lang="error-500">500 Internal Server</span></a>
+<a href="error-maintenance.html" class="dropdown-item"><span data-lang="error-maintenance">Maintenance</span></a>
+    </div>
+</div>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <div class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--adaptive:adaptive] md:[--is-collapse:false] md:[--strategy:fixed]">
+        <button id="topnav-layouts" type="button" class="hs-dropdown-toggle nav-link" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <span class="menu-icon"><i class="iconify tabler--table-column text-lg"></i></span>
+            <span class="menu-text" data-lang="layouts">Layouts</span>
+            <div class="menu-arrow"></div>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative top-full z-10 hidden w-full ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:start-0 before:-top-4 before:h-5 before:w-full after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:w-52 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:after:hidden dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-layouts">
+            <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-layout-options" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="layout-options">Layout Options</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-layout-options">
+        <a href="layouts-scrollable.html" class="dropdown-item" target="_blank"><span data-lang="layouts-scrollable">Scrollable</span></a>
+<a href="layouts-compact.html" class="dropdown-item" target="_blank"><span data-lang="layouts-compact">Compact</span></a>
+<a href="layouts-boxed.html" class="dropdown-item" target="_blank"><span data-lang="layouts-boxed">Boxed</span></a>
+<a href="layouts-horizontal.html" class="dropdown-item" target="_blank"><span data-lang="layouts-horizontal">Horizontal</span></a>
+<a href="layouts-preloader.html" class="dropdown-item" target="_blank"><span data-lang="layouts-preloader">Preloader</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-sidebars" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="sidebars">Sidebars</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-sidebars">
+        <a href="layouts-sidebar-light.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-light">Light Menu</span></a>
+<a href="layouts-sidebar-gradient.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-gradient">Gradient Menu</span></a>
+<a href="layouts-sidebar-gray.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-gray">Gray Menu</span></a>
+<a href="layouts-sidebar-image.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-image">Image Menu</span></a>
+<a href="layouts-sidebar-compact.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-compact">Compact Menu</span></a>
+<a href="layouts-sidebar-on-hover.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-on-hover">On Hover Menu</span></a>
+<a href="layouts-sidebar-on-hover-active.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-on-hover-active">On Hover Active</span></a>
+<a href="layouts-sidebar-offcanvas.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-offcanvas">Offcanvas Menu</span></a>
+<a href="layouts-sidebar-no-icons.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-no-icons">No Icons with Lines</span></a>
+<a href="layouts-sidebar-with-lines.html" class="dropdown-item" target="_blank"><span data-lang="layouts-sidebar-with-lines">Sidebar with Lines</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-topbar" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="topbar">Topbar</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-topbar">
+        <a href="layouts-topbar-dark.html" class="dropdown-item" target="_blank"><span data-lang="layouts-topbar-dark">Dark Topbar</span></a>
+<a href="layouts-topbar-gray.html" class="dropdown-item" target="_blank"><span data-lang="layouts-topbar-gray">Gray Topbar</span></a>
+<a href="layouts-topbar-gradient.html" class="dropdown-item" target="_blank"><span data-lang="layouts-topbar-gradient">Gradient Topbar</span></a>
+    </div>
+</div>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <div class="hs-dropdown [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--adaptive:adaptive] md:[--is-collapse:false] md:[--strategy:fixed]">
+        <button id="topnav-components" type="button" class="hs-dropdown-toggle nav-link" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <span class="menu-icon"><i class="iconify tabler--components text-lg"></i></span>
+            <span class="menu-text" data-lang="components">Components</span>
+            <div class="menu-arrow"></div>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative top-full z-10 hidden w-full ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:start-0 before:-top-4 before:h-5 before:w-full after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:w-52 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:after:hidden dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-components">
+            <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-base-ui" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="base-ui">Base UI</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-base-ui">
+        <a href="ui-accordions.html" class="dropdown-item"><span data-lang="ui-accordions">Accordions</span></a>
+<a href="ui-alerts.html" class="dropdown-item"><span data-lang="ui-alerts">Alerts</span></a>
+<a href="ui-images.html" class="dropdown-item"><span data-lang="ui-images">Images</span></a>
+<a href="ui-badges.html" class="dropdown-item"><span data-lang="ui-badges">Badges</span></a>
+<a href="ui-breadcrumb.html" class="dropdown-item"><span data-lang="ui-breadcrumb">Breadcrumb</span></a>
+<a href="ui-buttons.html" class="dropdown-item"><span data-lang="ui-buttons">Buttons</span></a>
+<a href="ui-cards.html" class="dropdown-item"><span data-lang="ui-cards">Cards</span></a>
+<a href="ui-carousel.html" class="dropdown-item"><span data-lang="ui-carousel">Carousel</span></a>
+<a href="ui-collapse.html" class="dropdown-item"><span data-lang="ui-collapse">Collapse</span></a>
+<a href="ui-colors.html" class="dropdown-item"><span data-lang="ui-colors">Colors</span></a>
+<a href="ui-dropdowns.html" class="dropdown-item"><span data-lang="ui-dropdowns">Dropdowns</span></a>
+<a href="ui-videos.html" class="dropdown-item"><span data-lang="ui-videos">Videos</span></a>
+<a href="ui-links.html" class="dropdown-item"><span data-lang="ui-links">Links</span></a>
+<a href="ui-list-group.html" class="dropdown-item"><span data-lang="ui-list-group">List Group</span></a>
+<a href="ui-modals.html" class="dropdown-item"><span data-lang="ui-modals">Modals</span></a>
+<a href="ui-notifications.html" class="dropdown-item"><span data-lang="ui-notifications">Notifications</span></a>
+<a href="ui-offcanvas.html" class="dropdown-item"><span data-lang="ui-offcanvas">Offcanvas</span></a>
+<a href="ui-placeholders.html" class="dropdown-item"><span data-lang="ui-placeholders">Placeholders</span></a>
+<a href="ui-pagination.html" class="dropdown-item"><span data-lang="ui-pagination">Pagination</span></a>
+<a href="ui-popovers.html" class="dropdown-item"><span data-lang="ui-popovers">Popovers</span></a>
+<a href="ui-progress.html" class="dropdown-item"><span data-lang="ui-progress">Progress</span></a>
+<a href="ui-scrollspy.html" class="dropdown-item"><span data-lang="ui-scrollspy">Scrollspy</span></a>
+<a href="ui-spinners.html" class="dropdown-item"><span data-lang="ui-spinners">Spinners</span></a>
+<a href="ui-tabs.html" class="dropdown-item"><span data-lang="ui-tabs">Tabs</span></a>
+<a href="ui-tooltips.html" class="dropdown-item"><span data-lang="ui-tooltips">Tooltips</span></a>
+<a href="ui-typography.html" class="dropdown-item"><span data-lang="ui-typography">Typography</span></a>
+<a href="ui-utilities.html" class="dropdown-item"><span data-lang="ui-utilities">Utilities</span></a>
+    </div>
+</div>
+<a href="widgets.html" class="dropdown-item"><span data-lang="widgets">Widgets</span></a>
+<a href="metrics.html" class="dropdown-item"><span data-lang="metrics">Metrics</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-charts" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="charts">Charts</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-charts">
+        <div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-apex-charts" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="apex-charts">Apex Charts</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-apex-charts">
+        <a href="charts-apex-area.html" class="dropdown-item"><span data-lang="charts-apex-area">Area</span></a>
+<a href="charts-apex-bar.html" class="dropdown-item"><span data-lang="charts-apex-bar">Bar</span></a>
+<a href="charts-apex-bubble.html" class="dropdown-item"><span data-lang="charts-apex-bubble">Bubble</span></a>
+<a href="charts-apex-candlestick.html" class="dropdown-item"><span data-lang="charts-apex-candlestick">Candlestick</span></a>
+<a href="charts-apex-column.html" class="dropdown-item"><span data-lang="charts-apex-column">Column</span></a>
+<a href="charts-apex-heatmap.html" class="dropdown-item"><span data-lang="charts-apex-heatmap">Heatmap</span></a>
+<a href="charts-apex-line.html" class="dropdown-item"><span data-lang="charts-apex-line">Line</span></a>
+<a href="charts-apex-mixed.html" class="dropdown-item"><span data-lang="charts-apex-mixed">Mixed</span></a>
+<a href="charts-apex-timeline.html" class="dropdown-item"><span data-lang="charts-apex-timeline">Timeline</span></a>
+<a href="charts-apex-boxplot.html" class="dropdown-item"><span data-lang="charts-apex-boxplot">Boxplot</span></a>
+<a href="charts-apex-treemap.html" class="dropdown-item"><span data-lang="charts-apex-treemap">Treemap</span></a>
+<a href="charts-apex-pie.html" class="dropdown-item"><span data-lang="charts-apex-pie">Pie</span></a>
+<a href="charts-apex-radar.html" class="dropdown-item"><span data-lang="charts-apex-radar">Radar</span></a>
+<a href="charts-apex-radialbar.html" class="dropdown-item"><span data-lang="charts-apex-radialbar">RadialBar</span></a>
+<a href="charts-apex-scatter.html" class="dropdown-item"><span data-lang="charts-apex-scatter">Scatter</span></a>
+<a href="charts-apex-polar-area.html" class="dropdown-item"><span data-lang="charts-apex-polar-area">Polar Area</span></a>
+<a href="charts-apex-sparklines.html" class="dropdown-item"><span data-lang="charts-apex-sparklines">Sparklines</span></a>
+<a href="charts-apex-range.html" class="dropdown-item"><span data-lang="charts-apex-range">Range</span></a>
+<a href="charts-apex-funnel.html" class="dropdown-item"><span data-lang="charts-apex-funnel">Funnel</span></a>
+<a href="charts-apex-slope.html" class="dropdown-item"><span data-lang="charts-apex-slope">Slope</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-echarts" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="echarts">Echarts</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-echarts">
+        <a href="charts-echart-line.html" class="dropdown-item"><span data-lang="charts-echart-line">Line</span></a>
+<a href="charts-echart-bar.html" class="dropdown-item"><span data-lang="charts-echart-bar">Bar</span></a>
+<a href="charts-echart-pie.html" class="dropdown-item"><span data-lang="charts-echart-pie">Pie</span></a>
+<a href="charts-echart-scatter.html" class="dropdown-item"><span data-lang="charts-echart-scatter">Scatter</span></a>
+<a href="charts-echart-geo-map.html" class="dropdown-item"><span data-lang="charts-echart-geo-map">GEO Map</span></a>
+<a href="charts-echart-gauge.html" class="dropdown-item"><span data-lang="charts-echart-gauge">Gauge</span></a>
+<a href="charts-echart-candlestick.html" class="dropdown-item"><span data-lang="charts-echart-candlestick">Candlestick</span></a>
+<a href="charts-echart-area.html" class="dropdown-item"><span data-lang="charts-echart-area">Area</span></a>
+<a href="charts-echart-radar.html" class="dropdown-item"><span data-lang="charts-echart-radar">Radar</span></a>
+<a href="charts-echart-heatmap.html" class="dropdown-item"><span data-lang="charts-echart-heatmap">Heatmap</span></a>
+<a href="charts-echart-other.html" class="dropdown-item"><span data-lang="charts-echart-other">Other</span></a>
+    </div>
+</div>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-forms" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="forms">Forms</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-forms">
+        <a href="form-elements.html" class="dropdown-item"><span data-lang="form-elements">Basic Elements</span></a>
+<a href="form-pickers.html" class="dropdown-item"><span data-lang="form-pickers">Pickers</span></a>
+<a href="form-select.html" class="dropdown-item"><span data-lang="form-select">Select</span></a>
+<a href="form-validation.html" class="dropdown-item"><span data-lang="form-validation">Validation</span></a>
+<a href="form-wizard.html" class="dropdown-item"><span data-lang="form-wizard">Wizard</span></a>
+<a href="form-fileuploads.html" class="dropdown-item"><span data-lang="form-fileuploads">File Uploads</span></a>
+<a href="form-text-editors.html" class="dropdown-item"><span data-lang="form-text-editors">Text Editors</span></a>
+<a href="form-range-slider.html" class="dropdown-item"><span data-lang="form-range-slider">Range Slider</span></a>
+<a href="form-layout.html" class="dropdown-item"><span data-lang="form-layout">Layouts</span></a>
+<a href="form-other-plugin.html" class="dropdown-item"><span data-lang="form-other-plugin">Other Plugins</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-tables" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="tables">Tables</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-tables">
+        <a href="tables-static.html" class="dropdown-item"><span data-lang="tables-static">Static Tables</span></a>
+<a href="tables-custom.html" class="dropdown-item"><span data-lang="tables-custom">Custom Tables</span></a>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-datatables" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="datatables">DataTables</span><span class="badge bg-success text-white">15</span>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-datatables">
+        <a href="tables-datatables-basic.html" class="dropdown-item"><span data-lang="tables-datatables-basic">Basic</span></a>
+<a href="tables-datatables-export-data.html" class="dropdown-item"><span data-lang="tables-datatables-export-data">Export Data</span></a>
+<a href="tables-datatables-select.html" class="dropdown-item"><span data-lang="tables-datatables-select">Select</span></a>
+<a href="tables-datatables-ajax.html" class="dropdown-item"><span data-lang="tables-datatables-ajax">Ajax</span></a>
+<a href="tables-datatables-javascript.html" class="dropdown-item"><span data-lang="tables-datatables-javascript">Javascript Source</span></a>
+<a href="tables-datatables-rendering.html" class="dropdown-item"><span data-lang="tables-datatables-rendering">Data Rendering</span></a>
+<a href="tables-datatables-scroll.html" class="dropdown-item"><span data-lang="tables-datatables-scroll">Scroll</span></a>
+<a href="tables-datatables-fixed-columns.html" class="dropdown-item"><span data-lang="tables-datatables-fixed-columns">Fixed Columns</span></a>
+<a href="tables-datatables-fixed-header.html" class="dropdown-item"><span data-lang="tables-datatables-fixed-header">Fixed Header</span></a>
+<a href="tables-datatables-columns.html" class="dropdown-item"><span data-lang="tables-datatables-columns">Show &amp; Hide Column</span></a>
+<a href="tables-datatables-child-rows.html" class="dropdown-item"><span data-lang="tables-datatables-child-rows">Child Rows</span></a>
+<a href="tables-datatables-column-searching.html" class="dropdown-item"><span data-lang="tables-datatables-column-searching">Column Searching</span></a>
+<a href="tables-datatables-range-search.html" class="dropdown-item"><span data-lang="tables-datatables-range-search">Range Search</span></a>
+<a href="tables-datatables-rows-add.html" class="dropdown-item"><span data-lang="tables-datatables-rows-add">Add Rows</span></a>
+<a href="tables-datatables-checkbox-select.html" class="dropdown-item"><span data-lang="tables-datatables-checkbox-select">Checkbox Select</span></a>
+    </div>
+</div>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-icons" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="icons">Icons</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-icons">
+        <a href="icons-tabler.html" class="dropdown-item"><span data-lang="icons-tabler">Tabler</span></a>
+<a href="icons-lucide.html" class="dropdown-item"><span data-lang="icons-lucide">Lucide</span></a>
+<a href="icons-flags.html" class="dropdown-item"><span data-lang="icons-flags">Flags</span></a>
+    </div>
+</div>
+<div class="hs-dropdown relative [--adaptive:none] [--is-collapse:true] [--strategy:static] md:[--is-collapse:false] md:[--strategy:absolute] md:[--trigger:hover]">
+    <button id="topnav-submenu-maps" type="button" class="hs-dropdown-toggle dropdown-item w-full text-start flex items-center justify-between">
+        <span data-lang="maps">Maps</span><div class="menu-arrow"></div>
+    </button>
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 relative z-10 hidden ps-7 opacity-0 transition-[opacity,margin] duration-[0.1ms] before:absolute before:-end-5 before:top-0 before:hidden before:h-full before:w-5 after:absolute after:start-2 after:top-1 after:h-[calc(100%-4px)] after:w-0.5 after:bg-gray-100 md:end-full md:top-0 md:mx-2.5! md:mt-2 md:w-48 md:rounded-lg md:bg-white md:ps-1 md:shadow-md md:duration-[150ms] md:before:block md:after:hidden dark:divide-neutral-700 dark:bg-neutral-800 dark:after:bg-neutral-700 dark:md:bg-neutral-800" role="menu" aria-orientation="vertical" aria-labelledby="topnav-submenu-maps">
+        <a href="maps-google.html" class="dropdown-item"><span data-lang="maps-google">Google Maps</span></a>
+<a href="maps-vector.html" class="dropdown-item"><span data-lang="maps-vector">Vector Maps</span></a>
+<a href="maps-leaflet.html" class="dropdown-item"><span data-lang="maps-leaflet">Leaflet Maps</span></a>
+    </div>
+</div>
+        </div>
+    </div>
+</li>
+</ul>
+</nav>
+    </div>
+    <!-- End Secondary Navbar -->
+</div>
+<!-- Topbar End -->
+
+            <!-- Start Page Content here -->
+            <div class="page-content">
+                <main>
+                    <div class="container-fluid">
+                        <!-- Page Title Start -->
+                        <div class="page-title-head">
+                            <h4 class="page-main-title">Horizontal</h4>
+
+                            <div class="hidden items-center gap-1.25 text-sm md:flex">
+
+                                <a href="#" class="text-sm">Inspinia</a>
+
+                                <i class="iconify tabler--chevron-right text-sm rtl:rotate-180"></i>
+
+                                <a href="#" class="text-sm">Layouts</a>
+
+                                <i class="iconify tabler--chevron-right text-sm rtl:rotate-180"></i>
+
+                                <a href="#" class="text-default-400 text-sm " aria-current="page">Horizontal</a>
+                            </div>
+                        </div>
+                        <!-- Page Title End -->
+
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4 class="text-lg">Your custom content here</h4>
+                            </div>
+                            <!-- end card-body-->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </main>
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="flex flex-wrap items-center">
+                            <div class="w-full md:w-1/2 text-center md:text-left">
+                                ©
+                                <span data-current-year></span>
+                                Inspinia By
+                                <span class="font-semibold">WebAppLayers</span>
+                            </div>
+
+                            <div class="w-full md:w-1/2">
+                                <div class="hidden md:block md:text-right">
+                                    10GB of
+                                    <span class="font-bold">250GB</span>
+                                    Free.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer End -->
+            </div>
+            <!-- End Page content -->
+        </div>
+
+        <div>
+            <div id="theme-customization" class="hs-overlay hs-overlay-open:translate-x-0 bg-card hs-overlay-open:flex fixed inset-y-0 end-0 bottom-0 z-80 hidden w-full max-w-[400px] translate-x-full transform flex-col overflow-hidden transition-all duration-300 rtl:-translate-x-full">
+                <div class="bg-primary text-default-600 border-default-900/10 flex items-start gap-3 border-b border-dashed bg-[url(../images/settings-bg.png)] p-6">
+                    <div>
+                        <h5 class="mb-1.25 text-sm font-bold text-white uppercase">Admin Customizer</h5>
+                        <p class="font-medium text-white/75 italic">Easily configure layout, styles, and preferences for your
+                            admin interface.</p>
+                    </div>
+
+                    <div class="grow">
+                        <button type="button" data-hs-overlay="#theme-customization" class="btn btn-sm bg-default-100/20 size-7.5 rounded-full text-white">
+                            <i class="iconify tabler--x text-base"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="h-full grow overflow-y-auto" data-simplebar="">
+                    <div class="divide-default-300 divide-y divide-dashed">
+                        <div id="skin" class="p-6">
+                            <h5 class="text-md mb-5 font-bold">Select Theme</h5>
+                            <div class="grid grid-cols-2 gap-3">
+                        
+            <div class="card-radio" id="skin-default">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-default" value="default">
+                <label class="form-label" for="demo-skin-default">
+                    <img src="assets/images/layouts/skin-default.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Default</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-luxe">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-luxe" value="luxe">
+                <label class="form-label" for="demo-skin-luxe">
+                    <img src="assets/images/layouts/skin-luxe.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Luxe</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-neon">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-neon" value="neon">
+                <label class="form-label" for="demo-skin-neon">
+                    <img src="assets/images/layouts/skin-neon.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Neon</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-retro">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-retro" value="retro">
+                <label class="form-label" for="demo-skin-retro">
+                    <img src="assets/images/layouts/skin-retro.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Retro</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-pixel">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-pixel" value="pixel">
+                <label class="form-label" for="demo-skin-pixel">
+                    <img src="assets/images/layouts/skin-pixel.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Pixel</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-galaxy">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-galaxy" value="galaxy">
+                <label class="form-label" for="demo-skin-galaxy">
+                    <img src="assets/images/layouts/skin-galaxy.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Galaxy</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-material">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-material" value="material">
+                <label class="form-label" for="demo-skin-material">
+                    <img src="assets/images/layouts/skin-material.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Material</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-minimal">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-minimal" value="minimal">
+                <label class="form-label" for="demo-skin-minimal">
+                    <img src="assets/images/layouts/skin-minimal.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Minimal</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-modern">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-modern" value="modern">
+                <label class="form-label" for="demo-skin-modern">
+                    <img src="assets/images/layouts/skin-modern.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Modern</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-saas">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-saas" value="saas">
+                <label class="form-label" for="demo-skin-saas">
+                    <img src="assets/images/layouts/skin-saas.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Saas</h5>
+            </div>
+    
+
+            <div class="card-radio" id="skin-flat">
+                <input class="hidden" type="radio" name="data-skin" id="demo-skin-flat" value="flat">
+                <label class="form-label" for="demo-skin-flat">
+                    <img src="assets/images/layouts/skin-flat.png" alt="layout-img" class="flex size-full rounded-md">
+                </label>
+                <h5 class="text-md text-default-600 mt-2.5 text-center">Flat</h5>
+            </div>
+    
+                            </div>
+                        </div>
+
+                        <div id="dir" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Theme Direction</h5>
+
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio">
+                                    <input class="hidden" type="radio" name="dir" id="direction-ltr" value="ltr">
+                                    <label class="form-label" for="direction-ltr">
+                                        <img src="assets/images/layouts/theme-light.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">LTR Mode</h5>
+                                </div>
+
+                                <div class="card-radio">
+                                    <input class="hidden" type="radio" name="dir" id="direction-rtl" value="rtl">
+                                    <label class="form-label" for="direction-rtl">
+                                        <img src="assets/images/layouts/theme-light.png" alt="layout img" class="flex size-full scale-x-[-1] rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">RTL Mode</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidenav-size" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Sidenav View</h5>
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio" id="sidenav-size-default">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-default" value="default">
+                                    <label class="form-label" for="sidenav-view-default">
+                                        <img src="assets/images/layouts/sidenav-size-default.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Default</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-size-compact">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-compact" value="compact">
+                                    <label class="form-label" for="sidenav-view-compact">
+                                        <img src="assets/images/layouts/sidenav-size-compact.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Compact</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-size-condensed">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-condensed" value="condensed">
+                                    <label class="form-label" for="sidenav-view-condensed">
+                                        <img src="assets/images/layouts/sidenav-size-condensed.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Condensed</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-size-on-hover">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-hover" value="on-hover">
+                                    <label class="form-label" for="sidenav-view-hover">
+                                        <img src="assets/images/layouts/sidenav-size-condensed.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">On Hover</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-size-on-hover-active">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-hover-active" value="on-hover-active">
+                                    <label class="form-label" for="sidenav-view-hover-active">
+                                        <img src="assets/images/layouts/sidenav-size-default.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">On Hover- Show</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-size-offcanvas">
+                                    <input class="hidden" type="radio" name="data-sidenav-size" id="sidenav-view-mobile" value="offcanvas">
+                                    <label class="form-label" for="sidenav-view-mobile">
+                                        <img src="assets/images/layouts/sidenav-size-offcanvas.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Offcanvas</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="theme" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Theme Mode</h5>
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio" id="theme-light">
+                                    <input class="hidden" type="radio" name="data-theme" id="layout-color-light" value="light">
+                                    <label class="form-label" for="layout-color-light">
+                                        <img src="assets/images/layouts/theme-light.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Light</h5>
+                                </div>
+
+                                <div class="card-radio" id="theme-dark">
+                                    <input class="hidden" type="radio" name="data-theme" id="layout-color-dark" value="dark">
+                                    <label class="form-label" for="layout-color-dark">
+                                        <img src="assets/images/layouts/theme-dark.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Dark</h5>
+                                </div>
+
+                                <div class="card-radio" id="theme-system">
+                                    <input class="hidden" type="radio" name="data-theme" id="layout-color-system" value="system">
+                                    <label class="form-label" for="layout-color-system">
+                                        <img src="assets/images/layouts/theme-system.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">System</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidenav-color" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Sidenav Color</h5>
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio" id="sidenav-color-light">
+                                    <input class="hidden" type="radio" name="data-menu-color" id="menu-color-light" value="light">
+                                    <label class="form-label" for="menu-color-light">
+                                        <img src="assets/images/layouts/sidenav-color-light.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Light</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-color-dark">
+                                    <input class="hidden" type="radio" name="data-menu-color" id="menu-color-dark" value="dark">
+                                    <label class="form-label" for="menu-color-dark">
+                                        <img src="assets/images/layouts/sidenav-color-dark.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Dark</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-color-gradient">
+                                    <input class="hidden" type="radio" name="data-menu-color" id="menu-color-gradient" value="gradient">
+                                    <label class="form-label" for="menu-color-gradient">
+                                        <img src="assets/images/layouts/sidenav-color-gradient.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Gradient</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-color-gray">
+                                    <input class="hidden" type="radio" name="data-menu-color" id="menu-color-gray" value="gray">
+                                    <label class="form-label" for="menu-color-gray">
+                                        <img src="assets/images/layouts/sidenav-color-gray.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Gray</h5>
+                                </div>
+
+                                <div class="card-radio" id="sidenav-color-image">
+                                    <input class="hidden" type="radio" name="data-menu-color" id="menu-color-image" value="image">
+                                    <label class="form-label" for="menu-color-image">
+                                        <img src="assets/images/layouts/sidenav-color-image.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Image</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="topbar-color" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Topbar Color</h5>
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio" id="topbar-color-light">
+                                    <input class="hidden" type="radio" name="data-topbar-color" id="layout-topbar-color-light" value="light">
+                                    <label class="form-label" for="layout-topbar-color-light">
+                                        <img src="assets/images/layouts/topbar-color-light.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Light</h5>
+                                </div>
+
+                                <div class="card-radio" id="topbar-color-dark">
+                                    <input class="hidden" type="radio" name="data-topbar-color" id="layout-topbar-color-dark" value="dark">
+                                    <label class="form-label" for="layout-topbar-color-dark">
+                                        <img src="assets/images/layouts/topbar-color-dark.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Dark</h5>
+                                </div>
+
+                                <div class="card-radio" id="topbar-color-gradient">
+                                    <input class="hidden" type="radio" name="data-topbar-color" id="layout-topbar-color-gradient" value="gradient">
+                                    <label class="form-label" for="layout-topbar-color-gradient">
+                                        <img src="assets/images/layouts/topbar-color-gradient.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Gradient</h5>
+                                </div>
+
+                                <div class="card-radio" id="topbar-color-gray">
+                                    <input class="hidden" type="radio" name="data-topbar-color" id="layout-topbar-color-gray" value="gray">
+                                    <label class="form-label" for="layout-topbar-color-gray">
+                                        <img src="assets/images/layouts/topbar-color-gray.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Gray</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="width" class="p-5">
+                            <h5 class="text-md mb-5 font-bold">Layout Width</h5>
+                            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-base">
+                                <div class="card-radio" id="width-fluid">
+                                    <input class="hidden" type="radio" name="data-layout-width" id="layout-width-fluid" value="fluid">
+                                    <label class="form-label" for="layout-width-fluid">
+                                        <img src="assets/images/layouts/width-fluid.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Fluid</h5>
+                                </div>
+
+                                <div class="card-radio" id="width-boxed">
+                                    <input class="hidden" type="radio" name="data-layout-width" id="layout-width-boxed" value="boxed">
+                                    <label class="form-label" for="layout-width-boxed">
+                                        <img src="assets/images/layouts/width-boxed.png" alt="layout img" class="flex size-full rounded-md">
+                                    </label>
+                                    <h5 class="text-md text-default-600 mt-2.5 text-center">Boxed</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="position" class="p-6">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-bold">Layout Position</h5>
+
+                                <div class="flex gap-1">
+                                    <div id="position-fixed">
+                                        <input type="radio" class="peer hidden" name="data-layout-position" id="layout-position-fixed" value="fixed">
+                                        <label class="btn btn-sm bg-warning/15 text-warning peer-checked:bg-warning peer-checked:text-white" for="layout-position-fixed">Fixed</label>
+                                    </div>
+                                    <div id="position-scrollable">
+                                        <input type="radio" class="peer hidden" name="data-layout-position" id="layout-position-scrollable" value="scrollable">
+                                        <label class="btn btn-sm bg-warning/15 text-warning peer-checked:bg-warning peer-checked:text-white" for="layout-position-scrollable">Scrollable</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidenav-user" class="p-6">
+                            <div class="flex items-center justify-between">
+                                <label class="m-0 font-bold" for="sidebaruser-check">Sidebar User Info</label>
+                                <input type="checkbox" class="form-switch" name="sidebar-user" id="sidebaruser-check">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-default-900/10 flex border-t p-5">
+                    <div class="grid w-full grid-cols-2 gap-4">
+                        <a href="https://wrapmarket.com/item/inspinia-multipurpose-admin-dashboard-template-WB0R5L90S?via=webapp" class="btn py-3 w-full bg-success hover:bg-success-hover text-white">
+                            <i class="iconify tabler--basket"></i> Buy Now
+                        </a>
+                        <button type="button" class="btn py-3 w-full bg-danger text-white hover:bg-danger-hover" id="reset-layout">
+                            <i class="iconify tabler--refresh"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> <script src="assets/js/vendors.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+    </body>
+</html>

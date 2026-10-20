@@ -1,0 +1,40 @@
+{
+  "skill_name": "inspinia-tailwind-frontend-design",
+  "evals": [
+    {
+      "id": 1,
+      "name": "config-diff-page-with-bulk-delete",
+      "prompt": "We use the INSPINIA Tailwind template for our ops console. I need a page that lets an engineer paste two versions of a config file and see what changed, and underneath it a table of saved snapshots with search, pagination, a select-all checkbox and a 'delete selected' button. Which Inspinia pieces should I use and what does the markup/JS look like?",
+      "expected_output": "Points at plugins-text-diff.html (jsdiff, assets/plugins/diff/diff.min.js, the TextDiff class with .diff-original/.diff-changed/.diff-output selectors rendering <ins>/<del>) for the diff, and at tables-custom.html + assets/js/pages/custom-table.js (search input, check-all checkbox, pagination, delete-selected) for the snapshot list — not DataTables. Markup uses .card/.card-header/.card-title, form-textarea/form-input, btn bg-primary hover:bg-primary-hover text-white, iconify tabler-- icons, and sits inside the page skeleton (page-title-head + container-fluid). Mentions script order (config.js head; vendors.min.js, app.js, diff.min.js, page script).",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "dark-condensed-shell-with-modal-and-date-range",
+      "prompt": "Build me a new Inspinia Tailwind admin page: dark theme, icon-only sidebar that expands on hover, a 'New campaign' button that opens a modal containing a name field and a start/end date range picker, and Save/Cancel buttons.",
+      "expected_output": "<html data-theme=\"dark\" data-sidenav-size=\"on-hover\"> (not CSS classes, not Bootstrap data-bs attrs); a Preline modal (trigger data-hs-overlay=\"#id\", panel class hs-overlay hidden … hs-overlay-open:…, close/cancel buttons carry the same data-hs-overlay=\"#id\" (the demo does not use data-hs-overlay-close)); a date range input with data-provider=\"flatpickr\" data-range-date and data-date-format, handled by app.js Plugins.initFlatPicker (no manual flatpickr() call needed); form-label/form-input classes; buttons btn bg-primary text-white hover:bg-primary-hover and btn bg-light text-dark; starts from pages-empty.html skeleton with page-title-head breadcrumb.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "kpi-row-with-theme-aware-sparklines",
+      "prompt": "Add a row of four KPI tiles (Orders, Revenue, Customers, Refunds) to our Inspinia Tailwind dashboard, each with a tiny trend chart, and make sure they still look right when the user switches to the 'galaxy' skin or dark mode.",
+      "expected_output": "Uses the stat-tile pattern from widgets.html / dashboard-*.html (card with icon in a bg-primary/10 text-primary box, data-target animated counter, badge bg-success/10 text-success for delta) in a grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-base; sparklines via ApexCharts registered through new CustomApexChart({selector, options}) with data-colors=\"primary\" (or chart-alpha etc.) so the MutationObserver in app.js re-renders on data-skin/data-theme change; explicitly warns against new ApexCharts() with literal hex colours and against bg-white/text-black.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "which-page-for-attachment-picker",
+      "prompt": "In our Inspinia Tailwind app I need a side panel where users can browse their uploaded documents, pick one to attach to a ticket, upload a new one, or download/delete existing ones. Is there something in the template I can start from?",
+      "expected_output": "Recommends apps-file-manager.html (folder/recent-files layout, storage quota sidebar, file rows with download/share/delete dropdown actions, dropzone upload) adapted into a Preline offcanvas (hs-overlay) or modal for the 'attach' flow; mentions the custom-table.js list engine used by the file list, Dropzone/FilePond from form-fileuploads.html for upload, and the pdf.js viewer (plugins-pdf-viewer.html) for in-app preview.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "bootstrap-habit-correction",
+      "prompt": "My Inspinia dropdown doesn't open. Here's my markup: <div class=\"dropdown\"><button class=\"btn btn-primary dropdown-toggle\" data-bs-toggle=\"dropdown\">Actions</button><ul class=\"dropdown-menu\"><li><a class=\"dropdown-item\">Edit</a></li></ul></div>. I'm on the Tailwind version.",
+      "expected_output": "Diagnoses that the Tailwind edition uses Preline, not Bootstrap JS: wrapper .hs-dropdown relative inline-flex, button .hs-dropdown-toggle (no data-bs-toggle), panel .hs-dropdown-menu with role=menu, items a.dropdown-item; button colour via btn bg-primary text-white hover:bg-primary-hover not btn-primary; optional [--placement:bottom-right]/[--auto-close:inside]; call HSStaticMethods.autoInit() if injected dynamically.",
+      "files": []
+    }
+  ]
+}
