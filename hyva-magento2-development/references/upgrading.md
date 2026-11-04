@@ -67,7 +67,11 @@ Smaller than 1.3 → 1.4: Tailwind stays on v4 and Alpine on v3. But **1.5.1 has
 - 1.5.1 needs the 1.5 theme module.
 - 1.5.3 needs theme module **≥ 1.5.3**, because of `x-html-safe` and the `Hyva\Theme\ViewModel\Product\Options` view model.
 
-Updating only the theme module stays safe, with two exceptions noted below (swatch changes and changed defaults in 1.5.3).
+Updating only the theme module stays safe, with two exceptions:
+- **The modal rewrite** (theme module 1.5.0) breaks custom JS that drives `hyva.modal` directly; see below.
+- **1.5.3 changes two defaults.**
+
+The swatch rewrite lives in the default theme's templates, so it only matters when the default theme itself is updated.
 
 ### 1.5.1 — breaking changes
 
@@ -229,12 +233,18 @@ Major Alpine v3 changes:
 
 ### Step-by-step: 1.3.10 / 1.3.11 CSP migration
 
-Hyvä 1.3.11 introduced the strict CSP option for the default theme. To check your existing Alpine code for CSP-incompatibility:
+Hyvä 1.3.11 introduced the strict CSP option for the default theme. The CSP migration tool in `hyva-themes/upgrade-helper-tools` converts existing Alpine code:
 ```bash
-./bin/hyva-csp-helper app/design/frontend/Acme/default/ | tee CSP-migration.md
+composer require --dev hyva-themes/upgrade-helper-tools:dev-main
+composer exec hyva-csp-helper app/design/frontend/Acme/default | tee CSP-migration.log
 ```
 
-The output lists every `x-data`, `@click`, etc. that uses inline expressions and would need to move to a registered `Alpine.data(...)` component. See `alpine-csp.md` for the conversion patterns.
+It **modifies the files in place** and prints the changes it made:
+- Run it on a clean git working tree, never in production. Then review the diff.
+- Finish whatever it couldn't convert by hand, using the patterns in `alpine-csp.md`.
+- It needs PHP 8.1+ but no full Magento install, and accepts several directories at once.
+
+See `references/sources/hyva-themes/writing-code/csp/migration-tool.md`.
 
 ## After any upgrade: build, deploy, test
 

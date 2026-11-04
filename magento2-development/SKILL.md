@@ -151,7 +151,7 @@ See `references/plugins-and-interception.md` and `references/events-and-observer
 Magento's `Api/` interfaces (e.g., `\Magento\Catalog\Api\ProductRepositoryInterface`, `\Magento\Catalog\Api\Data\ProductInterface`) are the stable contract. Always inject the interface, never the concrete class. `Api/` interfaces also auto-expose via REST/SOAP when listed in `webapi.xml`. Models, ResourceModels, and Collections in `Model/` are implementation details — use the repository.
 
 ### 7. Cache types — clearing the right one matters
-`bin/magento cache:flush` is the sledgehammer (clears EVERYTHING including OPcache + var/cache + Redis). `bin/magento cache:clean [type]` is targeted. Common types:
+`bin/magento cache:flush` is the sledgehammer: it empties the cache storage for every cache type (`var/cache` / `var/page_cache`, or the whole Valkey / Redis database). It does **not** reset PHP OPcache; reload php-fpm for that. `bin/magento cache:clean [type]` is targeted. Common types:
 - `config` — `app/etc/config.php`, `env.php`, `di.xml` merges. Almost every code change needs this.
 - `layout` — layout XML merge cache. Needed after editing `*.xml` under `view/*/layout/`.
 - `block_html` — block HTML output cache.

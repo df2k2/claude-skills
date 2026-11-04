@@ -265,7 +265,27 @@ Three config files:
 
 For MySQL-only setups, use `connection="db"` everywhere instead of `amqp`. For ActiveMQ Artemis, use `connection="stomp"`. Since 2.4.5 the `connection` attribute in queue XML is optional: omit it and the broker configured in `env.php` is auto-detected. That's the portable choice for a module that must run on either broker. `default_connection` in `env.php` is only needed when more than one broker is configured.
 
-To move an existing topic off MySQL without touching module XML, redefine it at runtime in `env.php`. Disable the `db` connection and enable the broker's:
+**How the connection is resolved.** When the queue XML omits `connection`, it is picked from `env.php`:
+- an `amqp` block → `amqp`;
+- otherwise a `stomp` block → `stomp`;
+- otherwise `db`.
+
+If **both** `amqp` and `stomp` are configured, `queue.default_connection` is required. So adding a broker block moves **every topic whose XML has no explicit `connection`** onto that broker, not just the one you had in mind. Only topics that declare `connection="db"` explicitly stay on MySQL until you override them.
+
+The broker itself is configured in `env.php` (STOMP port 61613; RabbitMQ is the `amqp` block with port 5672 and `virtualhost`):
+```php
+'queue' => [
+    'stomp' => [
+        'host' => 'activemq.example.com',
+        'port' => '61613',
+        'user' => 'artemis',
+        'password' => '…',
+    ],
+    'consumers_wait_for_messages' => 1,
+],
+```
+
+To move an existing topic that is pinned to MySQL without touching module XML, redefine it at runtime in `env.php`, next to the broker block above. Disable the `db` connection and enable the broker's:
 
 | Broker | Publisher | Connection |
 | --- | --- | --- |
@@ -411,7 +431,7 @@ Bulk endpoints are generated, not listed in `webapi.xml` directly. They show up 
 
 ## Original sources
 
-- `references/sources/commerce-php/development/components/message-queues/` — message queue guide; `index.md` has the broker table and the MySQL → AMQP/STOMP switch, `migration.md` covers the 2.4.4 → 2.4.5+ config changes (STOMP, optional `connection`, multiple named connections).
+- `references/sources/commerce-php/development/components/message-queues/` — message queue guide; `index.md` has the broker table and the MySQL → AMQP/STOMP switch. `configuration.md` has the connection-resolution rules and the `env.php` examples for AMQP, STOMP, and both (`default_connection`). `migration.md` covers the 2.4.4 → 2.4.5+ config changes (STOMP, optional `connection`, multiple named connections).
 - `references/sources/commerce-php/development/components/async-operations.md` — async/bulk pattern.
 - `references/sources/commerce-php/development/cli-commands/` — CLI command development.
 - `references/sources/devdocs-v2.4/config-guide/cron/` — cron docs (`custom-cron-ref.md`, `custom-cron-tut.md`).

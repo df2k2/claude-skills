@@ -335,15 +335,12 @@ type Query {
 
 Or implement `CacheIdentityInterface` and `CacheableQueryInterface` to fine-tune. Without this, dynamic queries (customer, cart) will be served stale.
 
-### Query batching
+### One operation per request (no array batching)
 
-```json
-[
-    { "query": "{ products(search:\"shoe\"){ items{ sku } } }" },
-    { "query": "{ categoryList{ id } }" }
-]
-```
-Posted to `/graphql`. Magento processes each in order.
+Magento's `/graphql` takes **one** operation per HTTP request: a JSON object with `query`, plus optional `variables` and `operationName`. The controller reads `$data['query']`, so a JSON **array** of operations, which some GraphQL servers accept, is not supported. To cut round-trips:
+- Request several *different* root fields in one query, e.g. `{ products(...) { … } categoryList { … } }`. No aliases are needed.
+- Replace aliased copies of the same field with one filtered query, e.g. `products(filter: { sku: { in: ["A", "B", "C"] } })`. The `sku`, `category_id`, and `url_key` filters take `eq` or `in`.
+- Send separate requests for the rest.
 
 ### Input limits (2.4.9+)
 
@@ -351,11 +348,22 @@ Posted to `/graphql`. Magento processes each in order.
 - **Aliases**: at most **10** per request by default.
 - **Query length**: at most **1,048,576 characters** (~1 MB) by default.
 
-Both are configured in **Stores → Configuration → Services → Magento Web API → GraphQL Input Limits**:
-- "Enable Maximum Alias Limit" / "Maximum Alias Allowed"
-- `webapi/graphql_validation/query_length_limit_enabled` and the related options
+They are configured under **Stores → Configuration → Services → Magento Web API → GraphQl Input Limits**. Config paths are from `Magento_GraphQl` `etc/adminhtml/system.xml` and `etc/config.xml`:
 
-Clients that fan out with many aliases (e.g. `p1: products(...) p2: products(...)` × 20) must split the request, or the limit must be raised.
+| Admin label | Config path | Default |
+| --- | --- | --- |
+| Enable Maximum Alias Limit | `graphql/validation/alias_limit_enabled` | `1` |
+| Maximum Alias Allowed | `graphql/validation/maximum_alias_allowed` | `10` |
+| Enable Query Characters Limit | `graphql/validation/query_length_limit_enabled` | `1` |
+| Allowed number of characters in a graphQL query | `graphql/validation/query_length_limit_allowed` | `1048576` |
+
+```
+bin/magento config:set graphql/validation/maximum_alias_allowed 20
+```
+
+Adobe's backward-incompatible-changes page writes `webapi/graphql_validation/…`. That is the admin form path (section/group/field). The fields declare `<config_path>graphql/validation/…</config_path>`, so `config:set`, `config.php`/`env.php`, and `core_config_data` use the `graphql/validation/…` paths. The same group also holds the older "Enable Input Limits" / "Maximum Page Size" settings (`graphql/validation/input_limit_enabled`, `graphql/validation/maximum_page_size`).
+
+Clients that fan out with many aliases (e.g. `p1: products(...) p2: products(...)` × 20) hit the alias limit. Collapse them into one `in` filter, split the request, or raise the limit.
 
 ### New in 2.4.9
 
@@ -457,6 +465,8 @@ Each resolver runs per matching item. For 1000 products, `items { my_complex_fie
 - `references/sources/commerce-webapi-openapi/*.yaml` — OpenAPI schemas per version.
 - `references/sources/commerce-webapi/graphql/schema/cart/mutations/clear-cart.md`, `wishlist/mutations/clear.md`, `customer/mutations/exchange-external-customer-token.md` — the 2.4.9 mutations.
 - `references/sources/commerce-php/development/backward-incompatible-changes/index.md` — 2.4.9 "GraphQL alias limit validation" and "GraphQL query length validation".
+- Config paths and defaults (not embedded): `magento/magento2` → `app/code/Magento/GraphQl/etc/adminhtml/system.xml` and `etc/config.xml`. Single-operation request parsing is in `app/code/Magento/GraphQl/Controller/GraphQl.php`.
+- `references/sources/commerce-webapi/graphql/schema/products/queries/products.md` — `FilterEqualTypeInput` (`eq` / `in`) for `sku`, `category_id`, `url_key`.
 - 2.4.9 release highlights (not embedded): `AdobeDocs/commerce-operations.en` → `help/_includes/release-notes/highlights/hl-commerce-v249.md`.
 - `references/sources/commerce-php/development/components/web-api/` — webapi.xml architecture.
 - `references/sources/commerce-php/development/components/service-contracts/` — service contracts (the substrate for REST/SOAP).

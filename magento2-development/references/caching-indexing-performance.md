@@ -109,7 +109,7 @@ If your block renders dynamic content tied to a database entity and doesn't retu
 ## Full Page Cache (FPC)
 
 The `full_page` cache stores entire rendered HTML pages. Backed by:
-- **Magento's built-in cache** (Redis / file / Memcached) — default, fine for small stores.
+- **Magento's built-in cache** (Valkey — Redis on older patches — or file / Memcached) — default, fine for small stores.
 - **Varnish** — recommended for production. Configure in **Stores → Configuration → Advanced → System → Full Page Cache**. Generate VCL with `bin/magento varnish:vcl:generate-vcl` or copy from `var/`.
 
 ### What invalidates FPC
@@ -278,7 +278,11 @@ You should see `magento2_product_1`, `magento2_category_1`, etc.
 - 2.4.9
 - patches after 2.4.5-p16, 2.4.6-p14, 2.4.7-p9, and 2.4.8-p4
 
-Redis 7.2 is no longer supported on those patches. The `env.php` structure is the same as for Redis; only the backend name and the `setup:config:set` flags change:
+Redis 7.2 is no longer supported on those patches.
+
+Versions: the system requirements list **Valkey 9** for 2.4.9 and **Valkey 8.1** for the latest 2.4.6–2.4.8 patches. The 2.4.9 release notes add Valkey 9.x support; the backward-incompatible-changes entry that introduced the `valkey` CLI option is titled "Valkey 8.x CLI command". Both are the same Valkey integration.
+
+The `env.php` structure is the same as for Redis; only the backend name and the `setup:config:set` flags change:
 
 ```
 bin/magento setup:config:set --cache-backend=valkey --cache-backend-valkey-server=127.0.0.1 --cache-backend-valkey-db=0

@@ -142,7 +142,7 @@ The **Alpine CSP build removes `x-html` entirely from 3.15 on**, so on CSP pages
 </div>
 ```
 
-For templates not migrated yet, **Stores → Configuration → Hyvä Themes → Developer → HTML Safe → "Map x-html-safe to x-html"** routes plain `x-html` through the same sanitizer. Its values:
+For templates not migrated yet, **Stores → Configuration → Hyvä Themes → Developer → HTML Safe → "Map x-html-safe to x-html"** routes plain `x-html` through the same sanitizer. Despite the label's word order, it maps *`x-html` onto* the `x-html-safe` sanitizer. Its values:
 - **Disabled** (default)
 - **On CSP pages only**
 - **On all pages**, which also sanitizes `x-html` on the regular build
@@ -219,14 +219,18 @@ In practice you usually use `$hyvaCsp->registerInlineScriptCallback(function() u
 
 ## Migrating standard Alpine code to CSP-safe
 
-Hyvä ships a migration helper:
+Hyvä ships a migration helper in `hyva-themes/upgrade-helper-tools`:
 ```bash
-./bin/hyva-csp-helper [DIRECTORY] | tee CSP-migration.md
+composer require --dev hyva-themes/upgrade-helper-tools:dev-main
+composer exec hyva-csp-helper app/design/frontend/Acme/default   # or app/code/Vendor/Module; several dirs allowed
 ```
 
-This scans your theme for inline expressions and produces a Markdown report with conversion suggestions. It's not 100% automatic but covers most of the conversion mechanically.
+It **rewrites the files in place** and prints what it changed. It is not a dry-run report:
+- Run it on a clean git working tree, never in production, and review the diff.
+- It isn't 100% automatic. Finish the leftovers by hand with the patterns above.
+- It needs PHP 8.1+ but no Magento install.
 
-There's also a more recent CSP migration tool — see `references/upgrading.md` for the latest tooling details.
+See `references/sources/hyva-themes/writing-code/csp/migration-tool.md`.
 
 ## A complete CSP-safe component
 
