@@ -289,7 +289,7 @@ Two web nodes with different `version` files → browser caches diverge → user
 ## Original sources
 
 - `references/sources/commerce-frontend-core/guide/themes/` — theme guide.
-- `references/sources/commerce-frontend-core/guide/themes/theme-inherit.md` — inheritance specifics.
-- `references/sources/commerce-frontend-core/guide/themes/theme-apply.md` — applying a theme.
+- `references/sources/commerce-frontend-core/guide/themes/inheritance.md` — inheritance specifics.
+- `references/sources/commerce-frontend-core/guide/themes/apply-storefront.md` (and `apply-admin.md`) — applying a theme.
 - `references/sources/devdocs-v2.4/frontend-dev-guide/themes/` — older theme docs.
 - `references/sources/commerce-frontend-core/guide/css/` — CSS / LESS guide.

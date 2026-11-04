@@ -1,7 +1,6 @@
 ---
 title: deleteCompareList mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: The deleteCompareList mutation deletes the specified comparison list. Run this mutation in the following circumstances:
 ---
 
 # deleteCompareList mutation
@@ -27,9 +26,9 @@ mutation {
 
 The `deleteCompareList` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-deleteCompareList)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#deletecomparelist)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-deleteCompareList)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#deletecomparelist)
 
 ## Example usage
 
@@ -66,3 +65,7 @@ mutation {
 *  [assignCompareListToCustomer mutation](assign-compare-list.md)
 *  [createCompareList mutation](create-compare-list.md)
 *  [removeProductsFromCompareList mutation](remove-from-compare-list.md)
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

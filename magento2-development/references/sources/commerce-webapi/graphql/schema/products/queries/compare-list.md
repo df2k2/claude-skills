@@ -1,7 +1,6 @@
 ---
 title: compareList query
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: The compareList query retrieves information about a list of products so that the shopper can compare those products.
 ---
 
 # compareList query
@@ -20,9 +19,9 @@ compareList(
 
 The `compareList` reference provides detailed information about the types and fields defined in this query.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-compareList)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/index.md#comparelist)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-compareList)
+* [On-Premises/Cloud](/reference/graphql/latest/index.md#comparelist)
 
 ## Example usage
 
@@ -115,3 +114,7 @@ The following query returns the information about products in the comparison lis
 *  [createCompareList mutation](../mutations/create-compare-list.md)
 *  [deleteCompareList mutation](../mutations/delete-compare-list.md)
 *  [removeProductsFromCompareList mutation](../mutations/remove-from-compare-list.md)
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

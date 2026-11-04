@@ -1,11 +1,9 @@
 ---
 title: giftRegistry query
-contributor_name: EY
+description: The giftRegistry query retrieves details about the specified gift registry. Use the customer query to return a list of valid uid values.
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../includes/commerce-only.md"/>
 
 # giftRegistry query
 
@@ -23,9 +21,9 @@ giftRegistry(uid: ID!): GiftRegistry
 
 The `giftRegistry` reference provides detailed information about the types and fields defined in this query.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-giftRegistry)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/index.md#giftregistry)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-giftRegistry)
+* [On-Premises/Cloud](/reference/graphql/latest/index.md#giftregistry)
 
 ## Example usage
 
@@ -205,3 +203,7 @@ query{
   }
 }
 ```
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+Thanks to EY for contributing this topic!

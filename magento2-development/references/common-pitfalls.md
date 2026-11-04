@@ -290,6 +290,27 @@ Some module is reading a missing config/data key. Look at the call stack in `sys
 - Mixing `use` and FQCN in the same class.
 - See `references/sources/commerce-php/coding-standards/` for the full set.
 
+## "Upgrading to 2.4.9 broke a custom module or integration"
+
+2.4.9 is a large platform jump. Check these before debugging anything else (full detail: `references/sources/commerce-php/development/backward-incompatible-changes/index.md`, section 2.4.9):
+
+**Platform and dependencies**
+- **PHP 8.5.** PHP 8.2 / 8.3 are dropped, and 8.4 is allowed only as an upgrade step. Extension `composer.json` constraints that stop at `~8.3.0` won't install.
+- **Symfony 7.4 LTS.** Custom classes that extend Symfony components (console commands, event subscribers, etc.) need type declarations and method signatures that match 7.4.
+- **Laminas MVC removed.** Core now uses a native MVC implementation. Code that relied on `laminas/laminas-mvc` classes coming in via Magento needs porting.
+- **Zend_Cache → `symfony/cache`.** Code that extended or replaced Zend cache classes or interfaces must use Symfony cache adapters. Plain `cache:clean` / `cache:flush` usage is unaffected.
+- **OAuth library removed.** `carlos-mg89/oauth` is replaced by native PHP OAuth functions, so direct uses of that library are gone.
+- **PHPUnit 12.** Unit tests written for PHPUnit 9/10 APIs need updating.
+
+**Admin and integrations**
+- **WYSIWYG is now HugeRTE (TinyMCE removed).** Re-test any admin customization that configured or extended TinyMCE.
+- **New Relic** reporting moved to NerdGraph. Set API Mode, NerdGraph URL, and Entity GUID in **Stores → Configuration → General → New Relic Reporting**.
+
+**API clients** — see `references/rest-graphql-webapi.md`
+- GraphQL requests over **10 aliases** or **~1 MB** are rejected.
+- CAPTCHA on Create Account now also applies to REST/GraphQL customer creation.
+- Store-view REST product updates no longer reset gallery inheritance.
+
 ## Final fallback: read the logs
 
 ```
@@ -308,3 +329,4 @@ Plus PHP logs (`/var/log/php-fpm.log` or per-distro) and the webserver's error l
 - `references/sources/devdocs-v2.4/ext-best-practices/` — older best practices.
 - `references/sources/devdocs-v2.4/coding-standards/` — older style.
 - `references/sources/commerce-php/development/security/` — security guide.
+- `references/sources/commerce-php/development/backward-incompatible-changes/index.md` — per-release backward-incompatible changes (2.4.9, 2.4.8, 2.4.7, …).

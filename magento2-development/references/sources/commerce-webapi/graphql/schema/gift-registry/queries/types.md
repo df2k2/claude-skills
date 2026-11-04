@@ -1,12 +1,9 @@
 ---
 title: giftRegistryTypes query
-contributor_name: Zilker Technology
-contributor_link: https://www.ztech.io/
+description: The giftRegistryTypes query returns a list of available gift registry types.
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../includes/commerce-only.md"/>
 
 # giftRegistryTypes query
 
@@ -22,9 +19,9 @@ giftRegistryTypes: [GiftRegistryType]
 
 The `giftRegistryTypes` reference provides detailed information about the types and fields defined in this query.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-giftRegistryTypes)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/index.md#giftregistrytypes)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-giftRegistryTypes)
+* [On-Premises/Cloud](/reference/graphql/latest/index.md#giftregistrytypes)
 
 ## Example usage
 
@@ -135,3 +132,7 @@ query{
   }
 }
 ```
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+Thanks to Zilker Technology for contributing this topic!

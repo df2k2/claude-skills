@@ -268,8 +268,8 @@ In `developer` mode, `setup:di:compile` and `setup:static-content:deploy` can us
 ## Original sources
 
 - `references/sources/commerce-php/development/build/composer-integration.md` — Composer setup.
-- `references/sources/commerce-php/development/build/module-development.md` (and surrounding files) — module overview.
+- `references/sources/commerce-php/development/build/index.md` (and the sibling `component-*.md` files) — module overview.
 - `references/sources/commerce-php/module-reference/` — every Magento core module documented.
-- `references/sources/devdocs-v2.4/extension-dev-guide/build.md` — extension dev guide.
+- `references/sources/devdocs-v2.4/extension-dev-guide/build/build.md` — extension dev guide.
 - `references/sources/devdocs-v2.4/extension-dev-guide/prepare/lifecycle.md` — module lifecycle.
 - `references/sources/devdocs-v2.4/extension-dev-guide/build/composer-integration.md` — same topic, older copy.

@@ -1,8 +1,6 @@
 ---
 title: GraphQL functional testing
 description: Learn how to use the Adobe Commerce and Magento Open Source test framework to create fixtures, define exceptions, and run finctional tests.
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
 keywords:
   - GraphQL
 ---
@@ -100,9 +98,9 @@ Fixture and rollback files are deprecated and should not be used for new WebAPI 
 
 To execute your tests, you often need to populate some data in your testing environment or set up particular config settings. Use data fixtures to create objects and config fixtures to define configuration settings.
 
-Data fixtures are special classes that allow you to create one or more instances of objects, such as `Customer`, `Cart` or `Product`. [Data fixture attribute](https://developer.adobe.com/commerce/testing/guide/integration/attributes/data-fixture/) in the _Application Testing Guide_ describes how to create and use data fixtures in your WebAPI tests.
+Data fixtures are special classes that allow you to create one or more instances of objects, such as `Customer`, `Cart` or `Product`. [Data fixture attribute](https://developer.adobe.com/commerce/testing/guide/integration/attributes/data-fixture) in the _Application Testing Guide_ describes how to create and use data fixtures in your WebAPI tests.
 
-[Configuration fixture attribute](https://developer.adobe.com/commerce/testing/guide/integration/attributes/config-fixture/) describes config fixtures.
+[Configuration fixture attribute](https://developer.adobe.com/commerce/testing/guide/integration/attributes/config-fixture) describes config fixtures.
 
 ## Defining expected exceptions
 
@@ -360,3 +358,7 @@ To run the `testFunction1` and `testFunction2` tests, which are part of the `my_
 ```bash
 vendor/bin/phpunit -c dev/tests/api-functional/phpunit_graphql.xml --group my_test_group dev/tests/api-functional/testsuite/Magento/GraphQl/MyTest.php
 ```
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

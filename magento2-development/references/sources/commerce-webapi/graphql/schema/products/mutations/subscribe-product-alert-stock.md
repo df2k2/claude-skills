@@ -1,9 +1,12 @@
 ---
 title: subscribeProductAlertStock mutation
-edition: saas
+description: The subscribeProductAlertStock mutation subscribes the logged-in customer to a stock availability alert for the specified product. When the product comes b...
+
 ---
 
 # subscribeProductAlertStock mutation
+
+<Fragment src="/includes/scp-mutation.md" />
 
 The `subscribeProductAlertStock` mutation subscribes the logged-in customer to a stock availability alert for the specified product. When the product comes back in stock, the customer receives an email notification.
 
@@ -21,7 +24,7 @@ mutation {
 
 ## Reference
 
-The [`subscribeProductAlertStock`](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-subscribeProductAlertStock) reference provides detailed information about the types and fields defined in this mutation.
+The [`subscribeProductAlertStock`](/reference/graphql/saas/mutations.md#subscribeproductalertstock) reference provides detailed information about the types and fields defined in this mutation.
 
 ## Example usage
 
@@ -55,12 +58,12 @@ mutation {
 
 ## Errors
 
-Error | Description
---- | ---
-`Customer is not logged in.` | The request does not include a valid customer authentication token.
-`Required parameter "sku" is missing.` | The `sku` field was not provided in the input.
-`Unable to subscribe to price alert. No such entity.` | No product exists with the specified SKU.
-`Unable to subscribe to stock alert` | An internal error occurred while creating the subscription.
+| Error | Description |
+| --- | --- |
+| `Customer is not logged in.` | The request does not include a valid customer authentication token. |
+| `Required parameter "sku" is missing.` | The `sku` field was not provided in the input. |
+| `Unable to subscribe to price alert. No such entity.` | No product exists with the specified SKU. |
+| `Unable to subscribe to stock alert` | An internal error occurred while creating the subscription. |
 
 ## Related topics
 

@@ -1,7 +1,6 @@
 ---
 title: createBraintreeClientToken mutation
-contributor_name: Something Digital (now Rightpoint)
-contributor_link: https://www.rightpoint.com/
+description: The createBraintreeClientToken mutation creates the client token for Braintree JavaScript SDK initialization.
 ediition: paas
 ---
 
@@ -21,7 +20,7 @@ mutation {
 
 ## Reference
 
-The [`createBraintreeClientToken`](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-createBraintreeClientToken) reference provides detailed information about the types and fields defined in this mutation.
+The [`createBraintreeClientToken`](/reference/graphql/latest/mutations.md#createbraintreeclienttoken) reference provides detailed information about the types and fields defined in this mutation.
 
 ## Example usage
 
@@ -45,6 +44,10 @@ mutation {
 
 ## Errors
 
-Error | Description
---- | ---
-`The Braintree payment method is not active.` | The [Braintree](https://experienceleague.adobe.com/en/docs/commerce-admin/stores-sales/payments/braintree) payment method is disabled in admin.
+| Error | Description |
+| --- | --- |
+| `The Braintree payment method is not active.` | The [Braintree](https://experienceleague.adobe.com/en/docs/commerce-admin/stores-sales/payments/braintree) payment method is disabled in admin. |
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Something Digital (now Rightpoint) for contributing this topic!](https://www.rightpoint.com/)

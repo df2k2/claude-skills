@@ -528,7 +528,7 @@ The mixin receives `undefined` because the target file doesn't actually export a
 
 - `references/sources/commerce-frontend-core/javascript/` — JS development.
 - `references/sources/commerce-frontend-core/ui-components/` — UI components.
-- `references/sources/commerce-frontend-core/javascript/custom_js.md` — custom JS.
+- `references/sources/commerce-frontend-core/javascript/custom.md` — custom JS.
 - `references/sources/devdocs-v2.4/javascript-dev-guide/` — older JS guide (more depth).
 - `references/sources/devdocs-v2.4/ui_comp_guide/` — older UI components guide.
-- `references/sources/commerce-frontend-core/javascript/js_mixins.md` — mixins.
+- `references/sources/commerce-frontend-core/javascript/mixins.md` — mixins.

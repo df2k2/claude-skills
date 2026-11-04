@@ -6,9 +6,7 @@ keywords:
   - REST
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../includes/commerce-only.md"/>
 
 # Manage company objects
 
@@ -32,32 +30,45 @@ GET /V1/company/
 
 The following table lists the parameters defined in `CompanyInterface`.
 
-Name | Description | Format | Requirements
---- | --- | --- | ---
-`id` | System-generated company ID | integer | Required for updates and deletes.
-`status` | 0 - Pending approval<br/>1 - Approved<br/>2 - Rejected<br/>3 - Blocked | integer | Optional
-`company_name` | Company name  | string  | Required to create or update a company.
-`legal_name`  | Legal name  | string  | Optional
-`company_email`  | Official email address of the company. It does not have to be unique.  | string | Required to create or update a company.
-`vat_tax_id`  | The company's Value Added Tax ID  | string  | Optional
-`reseller_id`  | Unique ID of the company reseller  | string  | Optional
-`comment`  | Additional details about the company | string | Optional
-`street` | Street address where the company is registered. The array can contain one or two lines. | Array[string] | Required to create or update a company.
-`city` | The company's city  | string  | Required to create or update a company.
-`country_id` | The country where the company is registered. | string  | Required to create or update a company.
-`region` | State or province | string | Required to create or update a company.
-`region_id` | An ID assigned to a state or province | string  | Optional
-`postcode` | The company's ZIP or postal code | string  | Required to create or update a company.
-`telephone` | The company contact's phone number | string | Required to create or update a company.
-`customer_group_id`  | Defines the company's shared catalog. A value of `1` assigns the default shared catalog. | integer | Required to create or update a company.
-`sales_representative_id` | User ID of the Sales Representative for the company | integer | Optional
-`reject_reason` | Specifies why a company's request to be a B2B customer is rejected | string | Optional
-`rejected_at` | A timestamp indicating when the company was rejected. | string | Optional
-`super_user_id` | The `customer_id` of the company administrator. When creating a company, the `customer_id` must already exist.  | integer | Required to create or update a company.
+| Name | Description | Format | Requirements |
+| --- | --- | --- | --- |
+| `id` | System-generated company ID | integer | Required for updates and deletes. |
+| `status` | 0 - Pending approval\<br/\>1 - Approved\<br/\>2 - Rejected\<br/\>3 - Blocked | integer | Optional |
+| `company_name` | Company name  | string  | Required to create or update a company. |
+| `legal_name`  | Legal name  | string  | Optional |
+| `company_email`  | Official email address of the company. It does not have to be unique.  | string | Required to create or update a company. |
+| `vat_tax_id`  | The company's Value Added Tax ID  | string  | Optional |
+| `reseller_id`  | Unique ID of the company reseller  | string  | Optional |
+| `comment`  | Additional details about the company | string | Optional |
+| `street` | Street address where the company is registered. The array can contain one or two lines. | Array[string] | Required to create or update a company. |
+| `city` | The company's city  | string  | Required to create or update a company. |
+| `country_id` | The country where the company is registered. | string  | Required to create or update a company. |
+| `region` | State or province | string | Required to create or update a company. |
+| `region_id` | An ID assigned to a state or province | string  | Optional |
+| `postcode` | The company's ZIP or postal code | string  | Required to create or update a company. |
+| `telephone` | The company contact's phone number | string | Required to create or update a company. |
+| `customer_group_id`  | Defines the company's shared catalog. A value of `1` assigns the default shared catalog. | integer | Required to create or update a company. |
+| `sales_representative_id` | User ID of the Sales Representative for the company | integer | Optional |
+| `reject_reason` | Specifies why a company's request to be a B2B customer is rejected | string | Optional |
+| `rejected_at` | A timestamp indicating when the company was rejected. | string | Optional |
+| `super_user_id` | The `customer_id` of the company administrator. When creating a company, the `customer_id` must already exist.  | integer | Required to create or update a company. |
 
-### Create a company
+**Company Address Book Extension Attributes:**
 
-The following example creates a company and assigns the default shared catalog (`customer_group_id`). The company admin (`super_user_id`) must be a previously-defined `customer_id`.
+The B2B Storefront Compatibility Package's `CompanyAddressStorefrontCompatibilityRest` module adds the following extension attributes to `CompanyInterface`. They can be set in the `extension_attributes` object of `POST` and `PUT` requests, and are always returned in the `extension_attributes` object of `GET` requests.
+
+<InlineAlert variant="info" slots="text" />
+
+`is_company_address_book_enabled` and `is_custom_shipping_address_allowed` are part of the B2B Storefront Compatibility Package and are only available on [Adobe Commerce as a Cloud Service](https://experienceleague.adobe.com/en/docs/commerce/cloud-service/overview).
+
+| Name | Description | Format | Requirements |
+| --- | --- | --- | --- |
+| `is_company_address_book_enabled` | Whether company users can manage the company's own address book. See [Create a company address](create-address.md). | boolean | Optional. Defaults to `false` for a new company. |
+| `is_custom_shipping_address_allowed` | Whether company users can enter a custom shipping address at checkout instead of selecting one from the company address book. Automatically saved as `false` whenever `is_company_address_book_enabled` is `false`, regardless of the value sent in the request. | boolean | Optional. Defaults to `false` for a new company. |
+
+## Create a company
+
+The following example creates a company and assigns the default shared catalog (`customer_group_id`). The company admin (`super_user_id`) must be a previously-defined `customer_id`. This example also enables the company's address book (`is_company_address_book_enabled`) and allows custom shipping addresses at checkout (`is_custom_shipping_address_allowed`).
 
 **Sample Usage:**
 
@@ -82,7 +93,11 @@ The following example creates a company and assigns the default shared catalog (
     "postcode": "99999",
     "telephone": "4155551212",
     "super_user_id": 5,
-    "customer_group_id": 1
+    "customer_group_id": 1,
+    "extension_attributes": {
+      "is_company_address_book_enabled": true,
+      "is_custom_shipping_address_allowed": true
+    }
   }
 }
 ```
@@ -112,12 +127,14 @@ The following example creates a company and assigns the default shared catalog (
     "quote_config": {
       "company_id": "2",
       "is_quote_enabled": false
-    }
+    },
+    "is_company_address_book_enabled": true,
+    "is_custom_shipping_address_allowed": true
   }
 }
 ```
 
-### Update the company
+## Update the company
 
 The following call changes the company status to Rejected (`2`) and explains why.
 
@@ -147,7 +164,11 @@ The following call changes the company status to Rejected (`2`) and explains why
     "telephone": "4155551212",
     "super_user_id": 5,
     "status": 2,
-    "reject_reason": "Failed background check."
+    "reject_reason": "Failed background check.",
+    "extension_attributes": {
+      "is_company_address_book_enabled": true,
+      "is_custom_shipping_address_allowed": true
+    }
   }
 }
 ```
@@ -177,12 +198,85 @@ The following call changes the company status to Rejected (`2`) and explains why
     "quote_config": {
       "company_id": "2",
       "is_quote_enabled": true
+    },
+    "is_company_address_book_enabled": true,
+    "is_custom_shipping_address_allowed": true
+  }
+}
+```
+
+## Disable a company's address book
+
+The following example disables the company address book for company `2`. Even though the request also sends `is_custom_shipping_address_allowed` as `true`, Adobe Commerce always saves it as `false` whenever `is_company_address_book_enabled` is `false`.
+
+**Sample Usage:**
+
+`PUT <host>/rest/<store_code>/V1/company/2`
+
+<CodeBlock slots="heading, code" repeat="2" languages="JSON, JSON" />
+
+#### Payload
+
+```json
+{
+  "company": {
+    "id": 2,
+    "company_name": "Test company",
+    "company_email": "newemail@example.com",
+    "customer_group_id": 1,
+    "street":[
+        "100 Big Tree Avenue"
+    ],
+    "city": "San Francisco",
+    "country_id": "US",
+    "region": "CA",
+    "region_id": "12",
+    "postcode": "99999",
+    "telephone": "4155551212",
+    "super_user_id": 5,
+    "extension_attributes": {
+      "is_company_address_book_enabled": false,
+      "is_custom_shipping_address_allowed": true
     }
   }
 }
 ```
 
-### Return all information about a company
+#### Response
+
+```json
+{
+  "id": 2,
+  "company_name": "Test company",
+  "company_email": "newemail@example.com",
+  "street": [
+    "100 Big Tree Avenue"
+  ],
+  "city": "San Francisco",
+  "country_id": "US",
+  "region": "California",
+  "region_id": "12",
+  "postcode": "99999",
+  "telephone": "4155551212",
+  "customer_group_id": 1,
+  "sales_representative_id": 1,
+  "reject_reason": null,
+  "rejected_at": null,
+  "super_user_id": 5,
+  "extension_attributes": {
+    "quote_config": {
+      "company_id": "2",
+      "is_quote_enabled": true
+    },
+    "is_company_address_book_enabled": false,
+    "is_custom_shipping_address_allowed": false
+  }
+}
+```
+
+`is_custom_shipping_address_allowed` is forced to `false` in the saved config and in the response, regardless of the value sent in the request, whenever `is_company_address_book_enabled` is `false`. Once the address book is disabled, requests to [create](create-address.md), [update](update-address.md), [delete](delete-address.md), or [set the default](set-default-address.md) company addresses return `400 Bad Request` with the message `Company address book is not enabled for this company.`
+
+## Return all information about a company
 
 This call returns detailed information about the specified company.
 **Sample Usage:**
@@ -223,12 +317,16 @@ This call returns detailed information about the specified company.
     "quote_config": {
       "company_id": "2",
       "is_quote_enabled": true
-    }
+    },
+    "is_company_address_book_enabled": false,
+    "is_custom_shipping_address_allowed": false
   }
 }
 ```
 
-### Delete a company
+`GET` requests always include `is_company_address_book_enabled` and `is_custom_shipping_address_allowed` in `extension_attributes`, defaulting to `false` for a company that has never had these values set.
+
+## Delete a company
 
 When you delete a company, Adobe Commerce assigns the "Inactive" status to all company members. The system also removes company ID from the customer profile of all company members.
 
@@ -250,7 +348,7 @@ When you delete a company, Adobe Commerce assigns the "Inactive" status to all c
 // `true`, indicating the request was successful
 ```
 
-### Search for companies
+## Search for companies
 
 The following call returns all companies that are located in California (`region_id` = `12`)
 
@@ -299,7 +397,9 @@ See [Search using REST APIs](../use-rest/performing-searches.md) for information
                 "use_config_settings": 1,
                 "quote_config": {
                     "is_quote_enabled": true
-                }
+                },
+                "is_company_address_book_enabled": false,
+                "is_custom_shipping_address_allowed": false
             }
         },
         {
@@ -329,7 +429,9 @@ See [Search using REST APIs](../use-rest/performing-searches.md) for information
                 "use_config_settings": 1,
                 "quote_config": {
                     "is_quote_enabled": true
-                }
+                },
+                "is_company_address_book_enabled": true,
+                "is_custom_shipping_address_allowed": true
             }
         }
     ],

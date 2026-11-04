@@ -1,22 +1,17 @@
 ---
 title: createCompanyRole mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: The createCompanyRole mutation defines a new company role. To create a role, you must provide an array of permissions that determine which resources the us...
 keywords:
   - B2B
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../../includes/commerce-only.md"/>
 
 # createCompanyRole mutation
 
 The `createCompanyRole` mutation defines a new company role. To create a role, you must provide an array of permissions that determine which resources the user can access.
 
-import B2BRoles from '/src/_includes/graphql/b2b-roles.md'
-
-<B2BRoles />
+<Fragment src="../../../../../includes/graphql/b2b-roles.md"/>
 
 Also, you can get the list of all resources defined within the company using the [`company`](../queries/company.md) query.
 
@@ -38,9 +33,9 @@ mutation {
 
 The `createCompanyRole` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-createCompanyRole)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#createcompanyrole)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-createCompanyRole)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#createcompanyrole)
 
 ## Example usage
 
@@ -132,7 +127,11 @@ mutation {
 
 ## Errors
 
-Error | Description
---- | ---
-`User role with this name already exists. Enter a different name to save this role.` | The company cannot have multiple company roles with the same name.
-`Unable to set "allow" for the resource because its parent resource(s) is set to "deny".` | To allow permission for the company role, you must allow all the permissions of the parent tree.
+| Error | Description |
+| --- | --- |
+| `User role with this name already exists. Enter a different name to save this role.` | The company cannot have multiple company roles with the same name. |
+| `Unable to set "allow" for the resource because its parent resource(s) is set to "deny".` | To allow permission for the company role, you must allow all the permissions of the parent tree. |
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

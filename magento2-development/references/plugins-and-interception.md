@@ -297,5 +297,5 @@ Then `bin/magento module:enable Acme_StockAlert && bin/magento setup:upgrade && 
 
 - `references/sources/commerce-php/development/components/plugins.md` — official plugin guide.
 - `references/sources/devdocs-v2.4/extension-dev-guide/plugins.md` — older but more examples.
-- `references/sources/devdocs-v2.4/ext-best-practices/extension-coding/plugins-bp.md` — best practices.
+- `references/sources/devdocs-v2.4/ext-best-practices/extension-coding/common-programming-bp.md` — best practices ("Using around plugins").
 - `references/sources/commerce-php/development/components/code-generation.md` — interceptor generation.

@@ -1,12 +1,9 @@
 ---
 title: moveCartItemsToGiftRegistry mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: The moveCartItemsToGiftRegistry mutation moves all items from the cart to a gift registry.
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../includes/commerce-only.md"/>
 
 # moveCartItemsToGiftRegistry mutation
 
@@ -31,9 +28,9 @@ mutation {
 
 The `moveCartItemsToGiftRegistry` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-moveCartItemsToGiftRegistry)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#movecartitemstogiftregistry)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-moveCartItemsToGiftRegistry)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#movecartitemstogiftregistry)
 
 ## Example usage
 
@@ -104,3 +101,7 @@ mutation {
   }
 }
 ```
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

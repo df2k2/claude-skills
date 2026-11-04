@@ -353,6 +353,7 @@ Check `var/log/exception.log` and `var/log/system.log`. Patch failures and decla
 - Referenced table doesn't exist yet — fix module sequence (`<sequence>`).
 - Existing rows violate the constraint — write a data patch to clean them first.
 - `onDelete="CASCADE"` against `sales_order` could massively cascade-delete. Think carefully before using it on volatile tables.
+- **MySQL 8.4** (2.4.8+) turns `restrict_fk_on_non_standard_key` **on** by default. A `<constraint xsi:type="foreign">` whose `referenceColumn` is not a primary/unique key (a non-unique or partial key) is rejected. Point foreign keys at a unique key. For legacy schemas, set `restrict_fk_on_non_standard_key=OFF` or start MySQL with `--skip-restrict-fk-on-non-standard-key`.
 
 ### Decimal precision/scale mismatches
 `decimal scale="4" precision="20"` vs `scale="2" precision="12"` — Magento will issue an ALTER even for a precision change. Match Magento's conventions when extending core tables (e.g., for prices, `scale="4" precision="20"` is standard).
@@ -369,8 +370,9 @@ Long `referenceId` values get truncated and conflict. Keep names under 64 charac
 ## Original sources
 
 - `references/sources/commerce-php/development/components/declarative-schema/` — full declarative schema docs.
-- `references/sources/commerce-php/development/components/declarative-schema/db-schema.md`
-- `references/sources/commerce-php/development/components/declarative-schema/data-patches.md`
-- `references/sources/commerce-php/development/components/declarative-schema/whitelist.md`
+- `references/sources/commerce-php/development/components/declarative-schema/configuration.md` — `db_schema.xml` reference.
+- `references/sources/commerce-php/development/components/declarative-schema/patches.md` — data and schema patches.
+- `references/sources/commerce-php/development/components/declarative-schema/migration-scripts.md` — "Create a schema whitelist" (`db_schema_whitelist.json`).
 - `references/sources/devdocs-v2.4/extension-dev-guide/declarative-schema/` — older guide.
-- `references/sources/devdocs-v2.4/extension-dev-guide/declarative-schema/dynamic-data.md` — data patches.
+- `references/sources/devdocs-v2.4/extension-dev-guide/declarative-schema/data-patches.md` — data patches.
+- `references/sources/commerce-php/development/backward-incompatible-changes/index.md` — 2.4.8 "MySQL 8.4 foreign key restrictions" and "Updated default collation for MySQL".

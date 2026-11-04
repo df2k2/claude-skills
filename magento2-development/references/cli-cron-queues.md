@@ -4,7 +4,7 @@ For background and offline work, Magento offers three mechanisms:
 
 1. **CLI commands** — `bin/magento <command>`. Symfony Console under the hood. Run by humans or scripts.
 2. **Cron jobs** — `crontab.xml` declarations, scheduled by `bin/magento cron:run`.
-3. **Message queues** — async/bulk processing through `queue_*.xml`. Backed by MySQL by default, or RabbitMQ (Adobe Commerce on Cloud requires RabbitMQ).
+3. **Message queues** — async/bulk processing through `queue_*.xml`. Backed by MySQL by default, or an external broker: RabbitMQ (AMQP) or Apache ActiveMQ Artemis (STOMP). Adobe Commerce on Cloud requires an external broker.
 
 ## Custom CLI commands
 
@@ -198,9 +198,10 @@ Some Magento jobs have system config toggles — check `system.xml` of the modul
 
 ## Message queues — async background work
 
-Magento supports two queue backends:
-- **MySQL** (default, no setup) — fine for low/medium volume.
-- **RabbitMQ** — required for Adobe Commerce on Cloud; better for high volume.
+Magento supports three queue backends:
+- **MySQL** (`connection="db"`, default, no setup) — fine for low/medium volume; not scalable for production.
+- **RabbitMQ** (`connection="amqp"`, AMQP 0.9.1) — the classic external broker; RabbitMQ 4.3 on the latest patches.
+- **Apache ActiveMQ Artemis** (`connection="stomp"`, STOMP) — Adobe's recommended long-term replacement for RabbitMQ. Available since 2.4.5 and fully supported on 2.4.6–2.4.9. On Adobe Commerce on Cloud it is delivered as AWS ActiveMQ. Use ANYCAST addressing for point-to-point delivery across multiple consumers.
 
 ### Anatomy
 
@@ -262,7 +263,31 @@ Three config files:
 </config>
 ```
 
-For MySQL-only setups, use `connection="db"` everywhere instead of `amqp`.
+For MySQL-only setups, use `connection="db"` everywhere instead of `amqp`. For ActiveMQ Artemis, use `connection="stomp"`. Since 2.4.5 the `connection` attribute in queue XML is optional: omit it and the broker configured in `env.php` is auto-detected. That's the portable choice for a module that must run on either broker. `default_connection` in `env.php` is only needed when more than one broker is configured.
+
+To move an existing topic off MySQL without touching module XML, redefine it at runtime in `env.php`. Disable the `db` connection and enable the broker's:
+
+| Broker | Publisher | Connection |
+| --- | --- | --- |
+| RabbitMQ | `amqp-magento` | `amqp` |
+| ActiveMQ Artemis | `stomp-magento` | `stomp` |
+
+```php
+'queue' => [
+    'topics' => ['inventory.update' => ['publisher' => 'stomp-magento']],
+    'config' => [
+        'publishers' => [
+            'inventory.update' => [
+                'connections' => [
+                    'stomp' => ['name' => 'stomp', 'exchange' => 'magento', 'disabled' => false],
+                    'db'    => ['name' => 'db',    'exchange' => 'magento', 'disabled' => true],
+                ],
+            ],
+        ],
+    ],
+    'consumers' => ['inventory.update' => ['connection' => 'stomp']],
+],
+```
 
 ### Publishing
 ```php
@@ -376,7 +401,7 @@ Add `$this->appState->setAreaCode(Area::AREA_ADMINHTML)` in `execute()`. For bac
 - Module sequence missing — your module's `<sequence>` doesn't include `Magento_MessageQueue`.
 
 ### MySQL queue is slow / locks
-With high volume on the default MySQL backend, the `queue_message` table grows and queue lookups slow down. Switch to RabbitMQ or aggressively prune `queue_message` for completed messages.
+With high volume on the default MySQL backend, the `queue_message` table grows and queue lookups slow down. Switch to an external broker (RabbitMQ or ActiveMQ Artemis) or aggressively prune `queue_message` for completed messages.
 
 ### CSV imports of products — use async/bulk
 Magento's classic CSV import (`bin/magento import:product`) is single-threaded. For volume, use the REST POST `/V1/products` via `async/bulk/` — many parallel consumers can process.
@@ -386,9 +411,9 @@ Bulk endpoints are generated, not listed in `webapi.xml` directly. They show up 
 
 ## Original sources
 
-- `references/sources/commerce-php/development/components/message-queues/` — message queue guide.
+- `references/sources/commerce-php/development/components/message-queues/` — message queue guide; `index.md` has the broker table and the MySQL → AMQP/STOMP switch, `migration.md` covers the 2.4.4 → 2.4.5+ config changes (STOMP, optional `connection`, multiple named connections).
 - `references/sources/commerce-php/development/components/async-operations.md` — async/bulk pattern.
 - `references/sources/commerce-php/development/cli-commands/` — CLI command development.
-- `references/sources/devdocs-v2.4/extension-dev-guide/cron/` — cron docs.
+- `references/sources/devdocs-v2.4/config-guide/cron/` — cron docs (`custom-cron-ref.md`, `custom-cron-tut.md`).
 - `references/sources/devdocs-v2.4/extension-dev-guide/message-queues/` — older message queue docs.
 - `references/sources/devdocs-v2.4/extension-dev-guide/cli-cmds/` — CLI command docs.

@@ -6,9 +6,7 @@ keywords:
   - REST
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../includes/commerce-only.md"/>
 
 # Integrate with the Company module
 
@@ -20,3 +18,7 @@ The `Company` module allows multiple buyers that belong to the same company to v
 - [Manage company users](company-users.md)
 - [Manage company roles](roles.md)
 - [Manage company structures](company-structures.md)
+- [Create a company address](create-address.md)
+- [Update a company address](update-address.md)
+- [Delete a company address](delete-address.md)
+- [Set a company address as default](set-default-address.md)

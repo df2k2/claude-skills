@@ -1,12 +1,11 @@
 ---
 title: company query
+description: The company query returns details about the user's company. The request must include the customer token of a company user.
 keywords:
   - B2B
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../../includes/commerce-only.md"/>
 
 # company query
 
@@ -26,9 +25,9 @@ This query requires a valid [customer authentication token](../../../customer/mu
 
 The `company` reference provides detailed information about the types and fields defined in this query.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-company)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/index.md#company)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-company)
+* [On-Premises/Cloud](/reference/graphql/latest/index.md#company)
 
 ## Example usage
 
@@ -102,7 +101,7 @@ query{
 
 The following query returns the customer's company structure.
 
-<!--- To do: Replace the response after creating a proper structure and add a tree depicting the structure -->
+\<!--- To do: Replace the response after creating a proper structure and add a tree depicting the structure --\>
 
 **Request:**
 
@@ -381,6 +380,134 @@ query{
         ]
       },
       "payment_methods": []
+    }
+  }
+}
+```
+
+### Return the company addresses and config
+
+The following query returns a list of company's addresses and a config object related to addresses.
+
+**Request:**
+
+```graphql
+query{
+  company{
+    id
+      config {
+          address_book_enabled
+          address_book_custom_shipping_address_enabled
+      }
+      addresses(pageSize: 20, currentPage: 1) {
+          total_count
+          page_info {
+              page_size
+              current_page
+              total_pages
+          }
+          items {
+              id
+              nickname
+              company_id
+              address_type
+              is_default
+              firstname
+              lastname
+              company
+              street
+              city
+              country_code
+              region_id
+              region {
+                  region_id
+                  region
+                  region_code
+              }
+              postcode
+              telephone
+              fax
+              vat_id
+              custom_attributes {
+                  code
+                  ... on AttributeValue {
+                      value
+                  }
+              }
+          }
+      }
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "company": {
+      "config": {
+        "address_book_enabled": true,
+        "address_book_custom_shipping_address_enabled": true
+      },
+      "addresses": {
+        "total_count": 2,
+        "page_info": {
+          "page_size": 20,
+          "current_page": 1,
+          "total_pages": 1
+        },
+        "items": [
+          {
+            "id": "MTI=",
+            "nickname": "HQ Billing",
+            "company_id": "Mw==",
+            "address_type": "BILLING",
+            "is_default": true,
+            "firstname": "John",
+            "lastname": "Doe",
+            "company": "Acme Corp",
+            "street": ["123 Main St"],
+            "city": "Austin",
+            "country_code": "US",
+            "region_id": 57,
+            "region": {
+              "region_id": 57,
+              "region": "Texas",
+              "region_code": "TX"
+            },
+            "postcode": "78701",
+            "telephone": "5551234567",
+            "fax": null,
+            "vat_id": "US123456789",
+            "custom_attributes": []
+          },
+          {
+            "id": "MTM=",
+            "nickname": "Warehouse",
+            "company_id": "Mw==",
+            "address_type": "SHIPPING",
+            "is_default": false,
+            "firstname": "Jane",
+            "lastname": "Smith",
+            "company": "Acme Corp",
+            "street": ["456 Oak Ave"],
+            "city": "Dallas",
+            "country_code": "US",
+            "region_id": 57,
+            "region": {
+              "region_id": 57,
+              "region": "Texas",
+              "region_code": "TX"
+            },
+            "postcode": "75201",
+            "telephone": "5559876543",
+            "fax": null,
+            "vat_id": null,
+            "custom_attributes": []
+          }
+        ]
+      }
     }
   }
 }

@@ -1,14 +1,11 @@
 ---
 title: updateCompanyRole mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: Use the updateCompanyRole mutation to update the company role and permissions.
 keywords:
   - B2B
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../../includes/commerce-only.md"/>
 
 # updateCompanyRole mutation
 
@@ -16,9 +13,7 @@ Use the `updateCompanyRole` mutation to update the company role and permissions.
 
 You can get the role ID and the list of all resources defined within the company using the [`company`](../queries/company.md) query.
 
-import B2BRoles from '/src/_includes/graphql/b2b-roles.md'
-
-<B2BRoles />
+<Fragment src="../../../../../includes/graphql/b2b-roles.md"/>
 
 You can change or add permissions to the company role using the `permissions` attribute.
 
@@ -44,9 +39,9 @@ mutation {
 
 The `updateCompanyRole` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-updateCompanyRole)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#updatecompanyrole)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-updateCompanyRole)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#updatecompanyrole)
 
 ## Example usage
 
@@ -172,8 +167,12 @@ mutation {
 
 ## Errors
 
-Error | Description
---- | ---
-`User role with this name already exists. Enter a different name to save this role.` | The company cannot have multiple company roles with the same name.
-`Unable to set "allow" for the resource because its parent resource(s) is set to "deny".` | To allow permission for the company role, you must allow all the permissions of the parent tree.
-`No such entity with roleId = xxx` | The company role with ID `xxx` doesn't exist.
+| Error | Description |
+| --- | --- |
+| `User role with this name already exists. Enter a different name to save this role.` | The company cannot have multiple company roles with the same name. |
+| `Unable to set "allow" for the resource because its parent resource(s) is set to "deny".` | To allow permission for the company role, you must allow all the permissions of the parent tree. |
+| `No such entity with roleId = xxx` | The company role with ID `xxx` doesn't exist. |
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

@@ -1,14 +1,11 @@
 ---
 title: deleteCompanyTeam mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: Use the deleteCompanyTeam mutation to delete a company team by ID. You can get the team ID with the company query.
 keywords:
   - B2B
 ---
 
-import CommerceOnly from '/src/_includes/commerce-only.md'
-
-<CommerceOnly />
+<Fragment src="../../../../../includes/commerce-only.md"/>
 
 # deleteCompanyTeam mutation
 
@@ -32,9 +29,9 @@ mutation {
 
 The `deleteCompanyTeam` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-deleteCompanyTeam)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#deletecompanyteam)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-deleteCompanyTeam)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#deletecompanyteam)
 
 ## Example usage
 
@@ -63,3 +60,7 @@ mutation {
   }
 }
 ```
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

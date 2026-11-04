@@ -364,6 +364,10 @@ bin/magento module:enable Magento_TwoFactorAuth   # already enabled by default
 # In admin: System → Permissions → 2FA → ...
 ```
 
+Changes in 2.4.9:
+- **2FA providers:** when several providers are enabled, an admin user only has to set up **one** of them to sign in. Additional providers can be added later by verifying identity with an existing method or an email link.
+- **Admin password length:** a new minimum length setting, `admin/security/minimum_password_length` (**Stores → Configuration → Advanced → Admin → Security**), is enforced on admin user create/update. Custom admin-user creation scripts must comply with it.
+
 To disable for dev (local-only):
 ```
 bin/magento module:disable Magento_TwoFactorAuth

@@ -1,8 +1,6 @@
 ---
 title: Step 2. Add a new image 
 description: We will learn how to add a new image to a product.
-contributor_name: Goivvy LLC
-contributor_link: https://www.goivvy.com/
 keywords:
   - REST
 ---
@@ -11,7 +9,7 @@ keywords:
 
 In this step, we will add the following image to the product with SKU `MJ03`.
 
-![New Image](../../../_images/api-new-image.png)
+![New Image](../../../images/api-new-image.png)
 
 We need to convert this image into a `base64` string.
 
@@ -72,4 +70,8 @@ The response provides the new image `id` for the added image.
 
 Refresh the `MJ03` product page and see if your new image was added.
 
-![New Product Image](../../../_images/api-frontend-new-image.png)
+![New Product Image](../../../images/api-frontend-new-image.png)
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Goivvy LLC for contributing this topic!](https://www.goivvy.com/)

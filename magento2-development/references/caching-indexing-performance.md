@@ -243,23 +243,28 @@ A full reindex on a large catalog (100k+ products) takes 30-60 minutes. Use queu
 
 ## OpenSearch / Elasticsearch
 
-Magento 2.4+ requires OpenSearch (2.4.7+) or Elasticsearch 8 (2.4.6 only). The `catalogsearch_fulltext` indexer pushes documents to it.
+OpenSearch is the search engine on every supported line:
+- OpenSearch 3 on 2.4.8+ (recommended on 2.4.9).
+- OpenSearch 2.19 or 3 on the latest 2.4.6 / 2.4.7 patches.
+- Elasticsearch 8 (`Magento_Elasticsearch8`) is still listed for 2.4.7 / 2.4.8, but not for 2.4.9. `Magento_Elasticsearch7` was deprecated in 2.4.7 (ES7 reached end-of-life in August 2023) and is gone from current code.
+
+The `catalogsearch_fulltext` indexer pushes documents to the search engine.
 
 Configure: **Stores → Configuration → Catalog → Catalog → Catalog Search**.
 
 CLI:
 ```
-bin/magento config:set catalog/search/engine elasticsearch7
-bin/magento config:set catalog/search/elasticsearch7_server_hostname elastic.local
-bin/magento config:set catalog/search/elasticsearch7_server_port 9200
-bin/magento config:set catalog/search/elasticsearch7_index_prefix magento2
+bin/magento config:set catalog/search/engine opensearch
+bin/magento config:set catalog/search/opensearch_server_hostname opensearch.local
+bin/magento config:set catalog/search/opensearch_server_port 9200
+bin/magento config:set catalog/search/opensearch_index_prefix magento2
 ```
 
-(For OpenSearch, replace `elasticsearch7` with `opensearch` in 2.4.7+.)
+`opensearch_enable_auth`, `opensearch_username`, `opensearch_password`, and `opensearch_server_timeout` sit under the same `catalog/search/` prefix. A store still on Elasticsearch 8 uses the equivalent `elasticsearch8_*` keys.
 
 Inspect indexes:
 ```
-curl http://elastic.local:9200/_cat/indices?v
+curl http://opensearch.local:9200/_cat/indices?v
 ```
 
 You should see `magento2_product_1`, `magento2_category_1`, etc.
@@ -267,9 +272,28 @@ You should see `magento2_product_1`, `magento2_category_1`, etc.
 ### Search-Engine reindex
 `bin/magento indexer:reindex catalogsearch_fulltext` rebuilds the index from scratch. Common after upgrading the engine, changing analyzers, or recovering from a corrupted index.
 
-## Cache backends — Redis, Memcached, file
+## Cache backends — Valkey / Redis, Memcached, file
 
-Configure in `app/etc/env.php`:
+**Valkey has replaced Redis on current releases.** It is a Redis-protocol-compatible fork. Valkey is *required* for cache on:
+- 2.4.9
+- patches after 2.4.5-p16, 2.4.6-p14, 2.4.7-p9, and 2.4.8-p4
+
+Redis 7.2 is no longer supported on those patches. The `env.php` structure is the same as for Redis; only the backend name and the `setup:config:set` flags change:
+
+```
+bin/magento setup:config:set --cache-backend=valkey --cache-backend-valkey-server=127.0.0.1 --cache-backend-valkey-db=0
+bin/magento setup:config:set --page-cache=valkey --page-cache-valkey-server=127.0.0.1 --page-cache-valkey-db=1
+bin/magento setup:config:set --session-save=valkey --session-save-valkey-host=127.0.0.1 --session-save-valkey-db=2
+```
+
+These write the following into `env.php`:
+- **2.4.9+**: `'backend' => 'valkey'`, the simplified name that runs on Symfony Cache.
+- **Up to 2.4.8**: `'backend' => 'Magento\\Framework\\Cache\\Backend\\Valkey'`.
+- **Session**: `'save' => 'valkey'`.
+
+2.4.9 also replaced the Zend_Cache internals with `symfony/cache`. `cache:flush` and `cache:clean` behave the same, but custom code that extended Zend cache classes must move to Symfony cache adapters. On 2.4.9, phpredis is used when installed, with automatic fallback to Predis.
+
+Older patches, and installs that predate the Valkey requirement, use the Redis form. Configure it in `app/etc/env.php`:
 
 ```php
 'cache' => [
@@ -308,9 +332,9 @@ Configure in `app/etc/env.php`:
 ],
 ```
 
-Three separate Redis databases: `default` cache (db 0), FPC (db 1), session (db 2). Don't share databases — different eviction policies needed.
+Three separate Redis/Valkey databases: `default` cache (db 0), FPC (db 1), session (db 2). Don't share databases — different eviction policies needed.
 
-Use `bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=...` to write env.php for you.
+Use `bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=...` (or the `valkey` flags above) to write env.php for you.
 
 ## Performance checklist for production
 
@@ -320,9 +344,9 @@ Use `bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-se
 4. **All cache types enabled** — `bin/magento cache:enable`.
 5. **Indexers on schedule mode** — `bin/magento indexer:set-mode schedule --all`.
 6. **Cron running** — `bin/magento cron:install` or systemd unit.
-7. **Search engine** — OpenSearch/Elasticsearch running, indexed.
+7. **Search engine** — OpenSearch running, indexed.
 8. **PHP OPcache** — enabled, `opcache.validate_timestamps=0`, `opcache.memory_consumption=512+`.
-9. **Redis** — cache, FPC, session moved off MySQL/file.
+9. **Valkey** (Redis on older patches) — cache, FPC, session moved off MySQL/file.
 10. **Varnish** — in front of php-fpm for FPC. VCL from `bin/magento varnish:vcl:generate-vcl`.
 11. **JS bundling/minification** — controversial; often disabled in HTTP/2 environments. Test before/after.
 12. **CSS merge/minify** — usually on.
@@ -364,8 +388,8 @@ Use `bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-se
 ### "I disabled `block_html` cache but pages are still cached"
 FPC (`full_page`) caches whole pages. Disable that too in dev. `block_html` only matters when FPC is off.
 
-### "Cache writes failing silently in Redis"
-- Redis is full and `maxmemory-policy` is `noeviction` (default). Switch to `allkeys-lru` for cache databases, but NEVER for the session database.
+### "Cache writes failing silently in Valkey / Redis"
+- The server is full and `maxmemory-policy` is `noeviction` (default in both Valkey and Redis). Switch to `allkeys-lru` for cache databases, but NEVER for the session database.
 
 ### "Indexer:reindex throws OOM on large catalog"
 - Raise CLI `memory_limit` (`php -d memory_limit=4G bin/magento indexer:reindex ...`).
@@ -376,6 +400,8 @@ FPC (`full_page`) caches whole pages. Disable that too in dev. `block_html` only
 - `references/sources/commerce-php/development/cache/` — cache type guide.
 - `references/sources/commerce-php/development/components/indexing/` — indexer architecture.
 - `references/sources/devdocs-v2.4/extension-dev-guide/cache/` — older cache docs.
-- `references/sources/devdocs-v2.4/extension-dev-guide/indexing/` — older indexer docs.
+- `references/sources/devdocs-v2.4/extension-dev-guide/indexing.md` and `indexing-custom.md` — older indexer docs.
+- `references/sources/commerce-php/development/backward-incompatible-changes/index.md` — 2.4.9 "Valkey 8.x CLI command" and "Zend_Cache replaced with symfony/cache"; 2.4.7 "Elasticsearch 7 deprecation".
+- Valkey setup (not embedded): `AdobeDocs/commerce-operations.en` → `help/configuration/cache/valkey-pg-cache.md`, `valkey-session.md`.
 - `references/sources/devdocs-v2.4/performance-best-practices/` — performance guide (essential reading).
 - `references/sources/commerce-php/best-practices/` — best practices.

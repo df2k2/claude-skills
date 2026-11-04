@@ -1,5 +1,6 @@
 ---
 title: storeConfig query
+description: The storeConfig query defines information about a store's configuration. You can query a non-default store by changing the header in your GraphQL request.
 ---
 
 # storeConfig query
@@ -14,13 +15,13 @@ The `storeConfig` query defines information about a store's configuration. You c
 
 The `storeConfig` reference provides detailed information about the types and fields defined in this query.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#query-storeConfig)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/index.md#storeconfig)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#query-storeConfig)
+* [On-Premises/Cloud](/reference/graphql/latest/index.md#storeconfig)
 
 ## Example usage
 
-The [Commerce API playground](https://experienceleague.adobe.com/developer/commerce/storefront/playgrounds/commerce-services/) provides a sample `storeConfig` query that you can run against a live instance of Adobe Commerce with Luma sample data. Note that the responses may vary, depending on the configuration of the Commerce instance.
+The [Commerce API playground](https://experienceleague.adobe.com/en/tools/commerce-storefront/playgrounds/commerce-services/) provides a sample `storeConfig` query that you can run against a live instance of Adobe Commerce with Luma sample data. Note that the responses may vary, depending on the configuration of the Commerce instance.
 
 ### Query a store's configuration
 
@@ -217,6 +218,42 @@ The following query returns information about the store's customer configuration
       "minimum_password_length": "6",
       "required_character_classes_number": "2",
       "create_account_confirmation": false
+    }
+  }
+}
+```
+
+### Query a store's persistent cart and account sharing configuration
+
+<Fragment src="../../includes/saas-only.md"/>
+
+The following query returns the store's persistent shopping cart settings (**Stores** > Settings > **Configuration** > **Customers** > **Persistent Shopping Cart**) and the account sharing scope (**Stores** > Settings > **Configuration** > **Customers** > **Customer Configuration** > **Account Sharing Options** > **Share Customer Accounts**).
+
+The `share_customer_accounts_scope` field returns `0` when customer accounts are shared globally across all stores and `1` when accounts are scoped per website.
+
+**Request:**
+
+```graphql
+{
+    storeConfig {
+        persistent_enabled
+        persistent_shopping_cart
+        persistent_options_wishlist
+        share_customer_accounts_scope
+    }
+}
+```
+
+**Response:**
+
+```json
+{
+  "data": {
+    "storeConfig": {
+      "persistent_enabled": true,
+      "persistent_shopping_cart": true,
+      "persistent_options_wishlist": false,
+      "share_customer_accounts_scope": 0
     }
   }
 }

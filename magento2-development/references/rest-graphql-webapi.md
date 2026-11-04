@@ -345,6 +345,26 @@ Or implement `CacheIdentityInterface` and `CacheableQueryInterface` to fine-tune
 ```
 Posted to `/graphql`. Magento processes each in order.
 
+### Input limits (2.4.9+)
+
+2.4.9 rejects oversized GraphQL requests before execution:
+- **Aliases**: at most **10** per request by default.
+- **Query length**: at most **1,048,576 characters** (~1 MB) by default.
+
+Both are configured in **Stores → Configuration → Services → Magento Web API → GraphQL Input Limits**:
+- "Enable Maximum Alias Limit" / "Maximum Alias Allowed"
+- `webapi/graphql_validation/query_length_limit_enabled` and the related options
+
+Clients that fan out with many aliases (e.g. `p1: products(...) p2: products(...)` × 20) must split the request, or the limit must be raised.
+
+### New in 2.4.9
+
+- `clearCart` is available in Magento Open Source. Previously it was Commerce-only, and the schema page still carries the Commerce-only badge.
+- New mutations: `clearWishlist` (removes all wishlist items) and `exchangeExternalCustomerToken` (integration-token login that returns a customer token plus customer data).
+- New field: `OrderTotal.grand_total_excl_tax`. New queries return the `uid` of the applied customer group, customer segments, and cart rules.
+- reCAPTCHA is now enforced on `updateCustomer`, `updateCustomerV2`, `contactUs`, and `applyCouponsToCart` when it is enabled for the matching storefront form.
+- When CAPTCHA/reCAPTCHA is on for Create Account, customer creation via **REST and GraphQL** must pass it too. Headless and integration clients that create customers will start failing until they send a token.
+
 ## Authentication for GraphQL
 
 Same tokens as REST:
@@ -394,8 +414,16 @@ Or embedded:
 - `references/sources/commerce-webapi-openapi/admin-schema-2.4.9.yaml` — full OpenAPI 3 spec for admin (integration token) endpoints in 2.4.9.
 - `references/sources/commerce-webapi-openapi/customer-schema-2.4.9.yaml` — customer-scoped endpoints.
 - `references/sources/commerce-webapi-openapi/guest-schema-2.4.9.yaml` — guest endpoints.
+- `references/sources/commerce-webapi-openapi/accs-schema.yaml` — Adobe Commerce as a Cloud Service (SaaS) REST schema. Doc pages badged "SaaS only" (e.g. `commerce-webapi/rest/saas-integrations/`) don't exist on a self-hosted or Cloud (PaaS) install.
 
 ## Common gotchas
+
+### Store-view product update via REST changed gallery behavior (2.4.9)
+`PUT /V1/products/{sku}` in a store-view scope used to make images/videos stop inheriting from the global gallery. From 2.4.9:
+- Omitting `media_gallery_entries`, or sending `null`, **preserves** inheritance.
+- Setting an individual field to `null` inside `media_gallery_entries` (`label`, `position`, `disabled`, `video_title`, `video_description`) **restores** inheritance for that field.
+
+Integrations that relied on the old reset behavior need adjusting.
 
 ### 404 on a new endpoint after adding `webapi.xml`
 `cache:clean config config_webservice`. Plus restart of php-fpm if op-cached.
@@ -427,6 +455,9 @@ Each resolver runs per matching item. For 1000 products, `items { my_complex_fie
 - `references/sources/commerce-webapi/graphql/` — GraphQL guide and reference.
 - `references/sources/commerce-webapi/get-started/` — authentication, versioning.
 - `references/sources/commerce-webapi-openapi/*.yaml` — OpenAPI schemas per version.
+- `references/sources/commerce-webapi/graphql/schema/cart/mutations/clear-cart.md`, `wishlist/mutations/clear.md`, `customer/mutations/exchange-external-customer-token.md` — the 2.4.9 mutations.
+- `references/sources/commerce-php/development/backward-incompatible-changes/index.md` — 2.4.9 "GraphQL alias limit validation" and "GraphQL query length validation".
+- 2.4.9 release highlights (not embedded): `AdobeDocs/commerce-operations.en` → `help/_includes/release-notes/highlights/hl-commerce-v249.md`.
 - `references/sources/commerce-php/development/components/web-api/` — webapi.xml architecture.
 - `references/sources/commerce-php/development/components/service-contracts/` — service contracts (the substrate for REST/SOAP).
 - `references/sources/devdocs-v2.4/graphql/` — older but extensive GraphQL guide.

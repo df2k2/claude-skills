@@ -4,6 +4,13 @@ Adobe Commerce (formerly **Magento Commerce** / **Magento Enterprise Edition**) 
 
 A third tier — **Adobe Commerce on Cloud** — is Adobe Commerce + managed infrastructure (AWS via Adobe Cloud Manager, ECE-Tools, GitHub-style git-push deploys).
 
+There is also **Adobe Commerce as a Cloud Service** (ACCS, "SaaS"), an Adobe-hosted service with its own API surface:
+- **REST base URL:** `https://<region>.api.commerce.adobe.com/<tenant-id>/<endpoint>`. There is no `/rest` and no store code in the path; the store scope goes in a `Store` HTTP header.
+- **SaaS-only REST APIs:** see `commerce-webapi/rest/saas-integrations/`. The schema is `commerce-webapi-openapi/accs-schema.yaml`.
+- **Doc badges:** the developer docs mark pages **SaaS only** (ACCS) or **PaaS only** (self-hosted Open Source / Adobe Commerce, and Adobe Commerce on Cloud).
+
+This skill's module / `di.xml` / plugin / `app/code/` guidance targets PaaS. For an ACCS store, confirm what customization the service allows before proposing in-process PHP changes.
+
 Before answering anything that depends on commerce-only features, **confirm the edition**.
 
 ## Quick detection
@@ -95,6 +102,8 @@ Things Adobe Commerce can do that Open Source cannot:
 - **Page Builder dynamic blocks** — Banner with customer-segment targeting. Page Builder itself is Open Source, but the "dynamic block" content type is Commerce.
 
 ## Cloud-specific concerns
+
+**Version enforcement:** starting **June 1, 2027**, Adobe will stop maintaining Cloud environments that run unsupported Commerce versions and may suspend their traffic, taking the storefront offline. Cloud projects must be on a supported release line (see the support dates in `SKILL.md` → "Versions this skill targets") or migrate to ACCS before their line's end of extended support.
 
 Adobe Commerce on Cloud adds operational constraints. If the user is on Cloud:
 
@@ -227,4 +236,6 @@ On Cloud, `app/etc/env.php` is sometimes regenerated per-deploy from environment
 - `references/sources/commerce-php/module-reference/` — every Magento module (Open Source AND Adobe Commerce) listed and documented.
 - `references/sources/devdocs-v2.4/b2b/` — B2B development guide.
 - `references/sources/devdocs-v2.4/inventory/` — MSI (multi-source inventory).
-- `references/sources/devdocs-v2.4/release-notes/` — release notes per version per edition.
+- `references/sources/devdocs-v2.4/release-notes/` — release notes per version per edition (archived; stops at early 2.4.x).
+- `references/sources/commerce-webapi-openapi/intro/accs-intro.md` and `references/sources/commerce-webapi/rest/saas-integrations/` — ACCS URL format and SaaS-only APIs.
+- Lifecycle and Cloud enforcement (not embedded): `AdobeDocs/commerce-operations.en` → `help/release/lifecycle-policy.md`, `help/release/versions.md`.

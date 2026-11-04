@@ -1,17 +1,18 @@
 ---
 title: CartItemInterface attributes and implementations
+description: The CartItemInterface has the following implementations:
 ---
 
 # CartItemInterface attributes and implementations
 
-The [`CartItemInterface`](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-CartItemInterface) has the following implementations:
+The [`CartItemInterface`](/reference/graphql/latest/types-c-e.md#cartiteminterface) has the following implementations:
 
-*  [BundleCartItem]https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-BundleCartItem
-*  [ConfigurableCartItem](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-ConfigurableCartItem)
-*  [DownloadableCartItem](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-DownloadableCartItem)
-*  [GiftCardCartItem](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-GiftCardCartItem)
-*  [SimpleCartItem](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-SimpleCartItem)
-*  [VirtualCartItem](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#definition-VirtualCartItem)
+*  [BundleCartItem](/reference/graphql/latest/types-a-b.md#bundlecartitem)
+*  [ConfigurableCartItem](/reference/graphql/latest/types-c-e.md#configurablecartitem)
+*  [DownloadableCartItem](/reference/graphql/latest/types-c-e.md#downloadablecartitem)
+*  [GiftCardCartItem](/reference/graphql/latest/types-f-i.md#giftcardcartitem)
+*  [SimpleCartItem](/reference/graphql/latest/types-q-s.md#simplecartitem)
+*  [VirtualCartItem](/reference/graphql/latest/types-t-z.md#virtualcartitem)
 
 ## Example usage
 

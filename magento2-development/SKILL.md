@@ -1,6 +1,6 @@
 ---
 name: magento2-development
-description: "Build, customize, and debug Adobe Commerce / Magento Open Source 2.4.x — PHP backend (modules, plugins, observers, DI), database (declarative schema, EAV, repositories), frontend (layout XML, themes, RequireJS, Knockout UI components, LESS), Web APIs (REST, SOAP, GraphQL), admin area, CLI/cron/queues, caching/indexing, and Adobe Commerce-only features (B2B, Page Builder, Target Rule, Staging, MSI). Use this skill whenever the user works on a Magento 2 / Adobe Commerce store and asks to write or debug a custom module, di.xml, plugin (around/before/after), event observer, layout XML, .phtml, view model, system.xml config, declarative db_schema.xml, data/schema patch, EAV attribute, repository/collection, service contract interface, webapi.xml endpoint, GraphQL schema/resolver, admin route/menu/ACL, UI component (admin grid/form/listing), RequireJS config / mixin, Knockout component, LESS theme override, custom CLI command, cron job, message-queue consumer, or any back-office or storefront customization. Trigger on mentions of Magento, Magento 2, Adobe Commerce, Magento Commerce, M2, MEQP/MFTF, app/code, vendor/magento, bin/magento, di.xml, etc/module.xml, events.xml, plugins, ObjectManager (rare), interception, virtual types, preferences, factories, proxies, layout handles, catalog_product_view, Magento_Ui, ui_component, uiComponent, mixins.js, x-magento-init, requirejs-config.js, knockout, $.mage, jQuery widget, KO bindings, declarative schema, db_schema.xml, data patch, schema patch, EAV, eav_attribute, ResourceModel, Collection, AbstractModel, repository interface, service contract, SearchCriteria, GraphQL resolver, webapi.xml, REST integration token, OAuth, admin token, integration, system config, scope, store view, system.xml, acl.xml, menu.xml, FPC, Varnish, ESI, indexer, mview, message queue, rabbitmq, async-bulk, MSI/Inventory, Page Builder content type, Adobe Commerce B2B / company / requisition / shared catalog, Target Rule, Staging, Reward Points, customer segment. Trigger even when the user just says \"a Magento store\" — Magento has its own deep conventions that differ sharply from Laravel/Symfony/Shopify/WooCommerce; generic PHP/MVC advice will mislead them. NOTE: if the store also runs Hyvä, prefer the `hyva-magento2-development` skill for storefront work — Hyvä replaces most of Magento's frontend stack."
+description: "Build, customize, and debug Adobe Commerce / Magento Open Source 2.4.x — PHP backend (modules, plugins, observers, DI), database (declarative schema, EAV, repositories), frontend (layout XML, themes, RequireJS, Knockout UI components, LESS), Web APIs (REST, SOAP, GraphQL), admin area, CLI/cron/queues, caching/indexing, and Adobe Commerce-only features (B2B, Page Builder, Target Rule, Staging, MSI). Use this skill whenever the user works on a Magento 2 / Adobe Commerce store and asks to write or debug a custom module, di.xml, plugin (around/before/after), event observer, layout XML, .phtml, view model, system.xml config, declarative db_schema.xml, data/schema patch, EAV attribute, repository/collection, service contract interface, webapi.xml endpoint, GraphQL schema/resolver, admin route/menu/ACL, UI component (admin grid/form/listing), RequireJS config / mixin, Knockout component, LESS theme override, custom CLI command, cron job, message-queue consumer, or any back-office or storefront customization. Trigger on mentions of Magento, Magento 2, Adobe Commerce, Magento Commerce, M2, MEQP/MFTF, app/code, vendor/magento, bin/magento, di.xml, etc/module.xml, events.xml, plugins, ObjectManager (rare), interception, virtual types, preferences, factories, proxies, layout handles, catalog_product_view, Magento_Ui, ui_component, uiComponent, mixins.js, x-magento-init, requirejs-config.js, knockout, $.mage, jQuery widget, KO bindings, declarative schema, db_schema.xml, data patch, schema patch, EAV, eav_attribute, ResourceModel, Collection, AbstractModel, repository interface, service contract, SearchCriteria, GraphQL resolver, webapi.xml, REST integration token, OAuth, admin token, integration, system config, scope, store view, system.xml, acl.xml, menu.xml, FPC, Varnish, ESI, Valkey / Redis cache backend, OpenSearch, indexer, mview, message queue, rabbitmq, ActiveMQ Artemis / STOMP, async-bulk, MSI/Inventory, Page Builder content type, Adobe Commerce B2B / company / requisition / shared catalog, Target Rule, Staging, Reward Points, customer segment. Trigger even when the user just says \"a Magento store\" — Magento has its own deep conventions that differ sharply from Laravel/Symfony/Shopify/WooCommerce; generic PHP/MVC advice will mislead them. NOTE: if the store also runs Hyvä, prefer the `hyva-magento2-development` skill for storefront work — Hyvä replaces most of Magento's frontend stack."
 ---
 
 # Adobe Commerce / Magento 2 Development
@@ -10,26 +10,39 @@ Magento 2 (and its commercial twin, Adobe Commerce) is a PHP eCommerce framework
 This skill ships with two layers of documentation:
 
 1. **Curated references** in `references/*.md` — synthesized, opinionated guides for the patterns you'll hit most. Read these first.
-2. **Embedded source docs** in `references/sources/` — the full official Adobe Commerce docs (`commerce-php`, `commerce-webapi`, `commerce-frontend-core`) plus the archived `magento/devdocs` v2.4 tree, totaling ~2,700 markdown files. Use `Grep` to search them when the curated reference isn't enough.
+2. **Embedded source docs** in `references/sources/` — the full official Adobe Commerce docs (`commerce-php`, `commerce-webapi`, `commerce-frontend-core`) plus the archived `magento/devdocs` v2.4 tree, totaling ~2,850 files (snapshot 2026-11-04; upstream commit SHAs are in `references/sources/INDEX.md`). Use `Grep` to search them when the curated reference isn't enough.
 
 Each curated reference file ends with an "Original sources" pointer to the embedded files. The full source tree is large enough that top-down reading wastes time — search with Grep.
 
 ## Versions this skill targets
 
-- **Magento Open Source / Adobe Commerce**: 2.4.6-p10, 2.4.7-p5, 2.4.8-p1, 2.4.9 (current line in 2026). The 2.4.4 / 2.4.5 lines are EOL.
-- **PHP**: 8.1, 8.2, 8.3. PHP 8.4 supported from 2.4.8+. PHP 7.4 is gone.
-- **MariaDB / MySQL**: MariaDB 10.6 / MySQL 8.0 / 8.4. MySQL 5.7 dropped.
-- **Elasticsearch / OpenSearch**: OpenSearch 2.x (2.4.7+) or Elasticsearch 8.x (2.4.6 only). Elasticsearch 7 is EOL.
-- **Composer**: 2.7+ (Magento dropped Composer 1 long ago).
-- **Node.js**: 18+ for static deploy / Grunt (only relevant if compiling LESS locally).
-- **Redis**: 7.2+ for cache/session.
-- **RabbitMQ**: 3.13+ when message queues are configured (required in Adobe Commerce on Cloud).
+Status as of 2026-11-04, from `AdobeDocs/commerce-operations.en` (`help/release/versions.md`, `help/installation/system-requirements.md`, 2.4.9 release highlights):
+
+- **Current line: 2.4.9** (GA 2026-05-12, regular support until 2029-05-31). Latest patches of the older lines (all 2026-05-12): **2.4.8-p5** (support until 2028-05-31), **2.4.7-p10** (until 2027-05-31), **2.4.6-p15** (regular support ended 2026-08-11). Adobe Commerce customers get one extra year of extended support on 2.4.6 and 2.4.7.
+- **2.4.10-alpha1** (2026-10-13) is a pre-release. Don't target it unless the user says so.
+- **2.4.4 / 2.4.5** extended support ended in April / August 2026. Treat them as EOL.
+
+| Line (latest patch) | PHP | Database | Search | Cache / session | Message broker | Composer |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2.4.9 | 8.5 (8.4 only as an upgrade step) | MariaDB 12.3 (11.8+), MySQL 8.4 | OpenSearch 3 | Valkey 9 | RabbitMQ 4.3 or ActiveMQ Artemis 2 | 2.10 |
+| 2.4.8-p5 | 8.4, 8.3 | MariaDB 11.4 / 11.8, MySQL 8.4 | OpenSearch 3 (Elasticsearch 8) | Valkey 8.1 | RabbitMQ 4.3 or ActiveMQ Artemis 2 | 2.10 |
+| 2.4.7-p10 | 8.3, 8.2 | MariaDB 10.11 / 11.8 (MySQL not supported) | OpenSearch 2.19 / 3 (Elasticsearch 8) | Valkey 8.1 | RabbitMQ 4.3 or ActiveMQ Artemis 2 | 2.10 |
+| 2.4.6-p15 | 8.2, 8.1 | MariaDB 10.11 (MySQL not supported) | OpenSearch 2.19 / 3 | Valkey 8.1 | RabbitMQ 4.3 or ActiveMQ Artemis 2 | 2.2.26+ |
+
+- **Valkey replaces Redis.** Redis 7.2 is no longer supported on the latest patches. Valkey is required for cache on 2.4.9 and on patches after 2.4.5-p16, 2.4.6-p14, 2.4.7-p9, and 2.4.8-p4. It is protocol-compatible: `env.php` keeps the same structure and only the backend name changes (`--cache-backend=valkey`). See `references/caching-indexing-performance.md`.
+- **ActiveMQ Artemis (STOMP)** is Adobe's long-term replacement for RabbitMQ (AMQP). It is supported on 2.4.6–2.4.9.
+- **Other services:** Varnish 8 and nginx 1.30 on all the latest patches. **Node.js**: 18+, only relevant for static deploy / Grunt if you compile LESS locally.
 
 If the user is on an older version (2.4.4, 2.4.5, 2.3.x), ask before proceeding. Big breakpoints:
 - 2.3 → 2.4: declarative schema mandatory, jQuery 1.x → 3.x, Elasticsearch required.
 - 2.4.4 → 2.4.5: PHP 7.4 dropped, AdminAdobeIms (admin SSO) added.
-- 2.4.6 → 2.4.7: PHP 8.3 supported, OpenSearch default, Redis 7 required.
-- 2.4.7 → 2.4.8: PHP 8.4 added, security/composer dependency churn.
+- 2.4.6 → 2.4.7: PHP 8.3 supported, OpenSearch default, Redis 7 required (since replaced by Valkey on current patches).
+- 2.4.7 → 2.4.8: PHP 8.4 added, MySQL 8.4 foreign-key restrictions, security/composer dependency churn.
+- 2.4.8 → 2.4.9:
+  - Platform: PHP 8.5 (8.2/8.3 dropped), Symfony 7.4 LTS, a native MVC layer replacing Laminas MVC, `symfony/cache` replacing Zend_Cache, PHPUnit 12.
+  - Services and admin: the admin WYSIWYG moved from TinyMCE to HugeRTE. Valkey 9, OpenSearch 3, and ActiveMQ Artemis are supported.
+  - GraphQL: requests are limited to 10 aliases and 1 MB of query text by default.
+  - Full list: `references/sources/commerce-php/development/backward-incompatible-changes/index.md`.
 
 ## When to consult this skill vs. when to just answer
 

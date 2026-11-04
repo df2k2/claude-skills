@@ -1,12 +1,10 @@
 ---
 title: Step 1. Plan the product
 description: In this step of the tutorial you will plan the product
-contributor_name: Goivvy LLC
-contributor_link: https://www.goivvy.com/magento-optimization-service
 keywords:
   - REST
---- 
- 
+---
+
 # Step 1. Plan the product
 
 To create a bundle product with REST, you need:
@@ -23,14 +21,14 @@ RAM and Monitor sizes will be the customizable aspect of the bundle product. We 
 
 The table below has the general characteristics of the desktop computer we are creating:
 
-Characteristic | Description
---- | ---
-Attribute Set | Default
-Product Name | Desktop Computer
-SKU | Desktop-Computer
-Tax Class | Taxable Goods
-Visibility | Catalog, Search
-Description | Desktop computer
+| Characteristic | Description |
+| --- | --- |
+| Attribute Set | Default |
+| Product Name | Desktop Computer |
+| SKU | Desktop-Computer |
+| Tax Class | Taxable Goods |
+| Visibility | Catalog, Search |
+| Description | Desktop computer |
 
 ## Find attribute values
 
@@ -145,10 +143,10 @@ GET http://domain.com/rest/default/V1/products/attribute-sets/4/attributes
 
 Because this response can be very long, we have abbreviated the example response above. The table below has attributes that are relevant in this tutorial.
 
-Admin label | Selected value | Attribute ID | attribute_code  | Attribute value
---- | --- | --- | --- | ---
-Tax Class | Taxable Goods | 134 | `tax_class_id` | 2
-Visibility | Catalog, Search | 99 | `visibility` | 4
+| Admin label | Selected value | Attribute ID | attribute_code  | Attribute value |
+| --- | --- | --- | --- | --- |
+| Tax Class | Taxable Goods | 134 | `tax_class_id` | 2 |
+| Visibility | Catalog, Search | 99 | `visibility` | 4 |
 
 <InlineAlert variant="warning" slots="text"/>
 
@@ -197,3 +195,7 @@ We can see from the above response that the `id` for `What's New` is equal to `3
 ## Verify this step
 
 Since we are only gathering information, there is nothing to verify.
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Goivvy LLC for contributing this topic!](https://www.goivvy.com/magento-optimization-service)

@@ -40,9 +40,16 @@ To add a custom favicon in the Admin, do the following:
 
 If caching is enabled in your Admin, you get a notification that refreshing certain cache types is required. Click the link provided in the notification, and then click **Flush Magento Cache**. You can also navigate to **System** > Tools > **Cache Management** and click **Flush Magento Cache**, or run `bin/magento cache:flush`.
 
+<InlineAlert variant="info" slots="text"/>
+
+A custom `.ico` favicon can only be uploaded if **Stores** > **Configuration** > **Advanced** > **Developer** > **Image Processing Settings** is configured to use ImageMagick.
+
 ## Add custom favicons manually
 
-To override the default 16px x 16px favicon manually, add your custom `favicon.ico` in the `<your_theme_dir>/Magento_Theme/web/`directory.
+To manually override the default 16x16 pixel favicon:
+
+- For **Adobe Commerce**, place your custom `favicon.ico` in `<your_theme_dir>/Magento_Enterprise/web/`.
+- For **Magento Open Source**, place the `favicon.ico` in `<your_theme_dir>/Magento_Theme/web/`.
 
 To add favicon icons of other sizes, take the following steps:
 

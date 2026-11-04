@@ -1,12 +1,14 @@
 ---
 title: exchangeExternalCustomerToken mutation
+description: This mutation provides the capability for social login authentication.
+ee_only: true
 ---
 
 # exchangeExternalCustomerToken mutation
 
 <InlineAlert variant="info" slots="text" />
 
-This mutation is part of the [Storefront Compatibility Package](https://experienceleague.adobe.com/developer/commerce/storefront/setup/configuration/storefront-compatibility/v248/). It will be added to Adobe Commerce 2.4.9.
+This mutation was created for the [Storefront Compatibility Package](https://experienceleague.adobe.com/en/tools/commerce-storefront/setup/configuration/storefront-compatibility/v248/) and is now available on Adobe Commerce 2.4.9.
 
 The `exchangeExternalCustomerToken` mutation provides the capability for social login authentication using App Builder. With integration token credentials, it allows a shopper to log in. If the shopper does not have an account, the mutation creates one.. It returns a customer authentication token.
 
@@ -72,14 +74,14 @@ mutation {
 
 ## Errors
 
-Error | Description
---- | ---
-`"Email" is not a valid email address.` | The value provided in the `input`.`email` argument has an invalid format.
-`Field CustomerCreateInput.email of required type String! was not provided` | The `input`.`email` argument was omitted.
-`Field CustomerCreateInput.lastname of required type String! was not provided` | The `input`.`lastname` argument was omitted.
-`Field CustomerCreateInput.firstname of required type String! was not provided` | The `input`.`firstname` argument was omitted.
-`Field "xyz" is not defined by type CustomerCreateInput.` | The `input`.`xyz` argument is not defined in the schema.
-`You do not have permission to access this resource.` | The user does not have required permission to use the mutation.
+| Error | Description |
+| --- | --- |
+| `"Email" is not a valid email address.` | The value provided in the `input`.`email` argument has an invalid format. |
+| `Field CustomerCreateInput.email of required type String! was not provided` | The `input`.`email` argument was omitted. |
+| `Field CustomerCreateInput.lastname of required type String! was not provided` | The `input`.`lastname` argument was omitted. |
+| `Field CustomerCreateInput.firstname of required type String! was not provided` | The `input`.`firstname` argument was omitted. |
+| `Field "xyz" is not defined by type CustomerCreateInput.` | The `input`.`xyz` argument is not defined in the schema. |
+| `You do not have permission to access this resource.` | The user does not have required permission to use the mutation. |
 
 ## Related topic
 

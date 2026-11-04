@@ -1,14 +1,13 @@
 ---
 title: assignCompareListToCustomer mutation
-contributor_name: Atwix
-contributor_link: https://www.atwix.com/
+description: The assignCompareListToCustomer mutation assigns the specified comparison list to the logged-in customer. Use this mutation when a customer creates a compa...
 ---
 
 # assignCompareListToCustomer mutation
 
 The `assignCompareListToCustomer` mutation assigns the specified comparison list to the logged-in customer. Use this mutation when a customer creates a comparison list as a guest, but subsequently logs in.
 
-This mutation requires a valid [customer authentication token](../../customer/mutations/generate-token.md).
+This mutation requires a valid [customer authentication token](generate-token.md).
 
 ## Syntax
 
@@ -26,9 +25,9 @@ mutation {
 
 The `assignCompareListToCustomer` reference provides detailed information about the types and fields defined in this mutation.
 
-* &#8203;<Edition name="saas" /> [Adobe Commerce as a Cloud Service](https://developer.adobe.com/commerce/webapi/graphql-api/saas/index.html#mutation-assignCompareListToCustomer)
+* [Adobe Commerce as a Cloud Service](/reference/graphql/saas/mutations.md#assigncomparelisttocustomer)
 
-* &#8203;<Edition name="paas" /> [On-Premises/Cloud](https://developer.adobe.com/commerce/webapi/graphql-api/index.html#mutation-assignCompareListToCustomer)
+* [On-Premises/Cloud](/reference/graphql/latest/mutations.md#assigncomparelisttocustomer)
 
 ## Example usage
 
@@ -127,3 +126,7 @@ mutation {
 *  [createCompareList mutation](../../products/mutations/create-compare-list.md)
 *  [deleteCompareList mutation](../../products/mutations/delete-compare-list.md)
 *  [removeProductsFromCompareList mutation](../../products/mutations/remove-from-compare-list.md)
+
+<Edition slots="text" backgroundcolor="gray"/>
+
+[Thanks to Atwix for contributing this topic!](https://www.atwix.com/)

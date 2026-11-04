@@ -1,18 +1,31 @@
 # Source docs — topic-to-file index
 
-This is the topic map for the embedded official Adobe Commerce / Magento 2 documentation. The `sources/` tree contains 2,692 markdown files (~28 MB), too many for top-down reading. Use this file plus `Grep` to find what you need.
+This is the topic map for the embedded official Adobe Commerce / Magento 2 documentation. The `sources/` tree contains 2,852 files (~34 MB: markdown plus the OpenAPI YAML schemas), too many for top-down reading. Use this file plus `Grep` to find what you need.
 
-Four trees are embedded:
+Five trees are embedded, from four upstream GitHub repos:
 
 | Tree | What | Files |
 | --- | --- | --- |
-| `commerce-php/` | Adobe's modern PHP development guide. Authoritative for 2.4.4+. | 832 |
-| `commerce-webapi/` | REST, SOAP, GraphQL reference + tutorials. | 503 |
-| `commerce-webapi-openapi/` | OpenAPI 3 YAML schemas (admin/customer/guest) for 2.4.6-2.4.9. | 13 |
+| `commerce-php/` | Adobe's modern PHP development guide. Authoritative for 2.4.4+. | 835 |
+| `commerce-webapi/` | REST, SOAP, GraphQL reference + tutorials. Pages marked with the `saas-only` / `paas-only` includes apply only to Adobe Commerce as a Cloud Service (SaaS) or only to on-prem/Cloud infrastructure (PaaS). | 645 |
+| `commerce-webapi-openapi/` | OpenAPI 3 YAML schemas (admin/customer/guest) for 2.4.6–2.4.9, plus `accs-schema.yaml` (Adobe Commerce as a Cloud Service) and two `intro/` pages. | 15 |
 | `commerce-frontend-core/` | Themes, layouts, templates, JS, UI components, Page Builder. | 262 |
 | `devdocs-v2.4/` | Archived `magento/devdocs` v2.4 tree. Larger and older but covers niches the AdobeDocs repos haven't migrated yet. | 1,095 |
 
 The AdobeDocs repos are the current source of truth; devdocs is the older archive. If both have a page on a topic, prefer the AdobeDocs one but fall back to devdocs for depth.
+
+## Snapshot
+
+Refreshed 2026-11-04 from:
+
+| Upstream repo | Commit | Commit date |
+| --- | --- | --- |
+| `AdobeDocs/commerce-php` | `4651205e5463985fd74aa7f84f75ebf881fe6620` | 2026-11-03 |
+| `AdobeDocs/commerce-webapi` | `02f6598e0ae8a4b80f31b2140e60936ec5e993c2` | 2026-11-03 |
+| `AdobeDocs/commerce-frontend-core` | `edf491c2a062e51c4d7837fd4e4f9e79df3a682e` | 2026-10-27 |
+| `magento/devdocs` | archived on GitHub (last push 2024-11-15); tree unchanged since the 2026-05-16 build | — |
+
+Release status and system requirements are **not** in these trees. They live in `AdobeDocs/commerce-operations.en` (`help/release/versions.md`, `help/installation/system-requirements.md`, the per-release highlights), which is summarized in `SKILL.md` → "Versions this skill targets".
 
 ## Search recipes
 
@@ -37,9 +50,9 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 
 ### Modules — anatomy, registration, dependencies
 - `commerce-php/development/build/composer-integration.md` — Composer setup for modules
-- `commerce-php/development/build/module-development.md` — module dev overview
+- `commerce-php/development/build/index.md` — module build overview; the sibling `component-*.md` files cover registration, file structure, naming, and load order
 - `commerce-php/module-reference/` — every Magento core module documented
-- `devdocs-v2.4/extension-dev-guide/build.md` — older module-build guide
+- `devdocs-v2.4/extension-dev-guide/build/build.md` — older module-build guide
 - `devdocs-v2.4/extension-dev-guide/prepare/lifecycle.md` — module lifecycle
 
 ### Dependency injection, plugins, observers
@@ -60,25 +73,25 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 - `commerce-php/development/components/attributes.md` — attribute system
 - `commerce-php/development/components/add-attributes.md` — adding EAV attributes
 - `commerce-php/development/components/api-concepts.md` — service contract concepts
+- `commerce-php/tutorials/admin/custom-boolean-field-attribute.md`, `custom-dropdown-field-attribute.md`, `custom-multiselect-field-attribute.md` — step-by-step tutorials for adding a custom product attribute of each input type
 - `devdocs-v2.4/extension-dev-guide/service-contracts/` — older detailed guide
 - `devdocs-v2.4/extension-dev-guide/searching-with-repositories.md` — older
 - `devdocs-v2.4/extension-dev-guide/attributes.md` — older
 
 ### Database — declarative schema, data patches
 - `commerce-php/development/components/declarative-schema/` — declarative schema
-  - `db-schema.md` — `db_schema.xml` reference
-  - `data-patches.md` — data patches
-  - `schema-patches.md` — schema patches
-  - `whitelist.md` — whitelist mechanism
+  - `configuration.md` — `db_schema.xml` reference (tables, columns, indexes, constraints)
+  - `patches.md` — data patches and schema patches
+  - `migration-scripts.md` — migrating install/upgrade scripts; "Create a schema whitelist" (`db_schema_whitelist.json`)
 - `devdocs-v2.4/extension-dev-guide/declarative-schema/` — older
-- `devdocs-v2.4/extension-dev-guide/declarative-schema/dynamic-data.md` — data patches in detail
+- `devdocs-v2.4/extension-dev-guide/declarative-schema/data-patches.md` — data patches in detail
 - `devdocs-v2.4/extension-dev-guide/build/` — setup script lifecycle
 
 ### Layout, blocks, templates, themes
 - `commerce-frontend-core/guide/themes/` — theme architecture
-  - `theme-structure.md`
-  - `theme-inherit.md` — theme fallback / inheritance
-  - `theme-apply.md` — applying a theme
+  - `structure.md` — theme directory structure
+  - `inheritance.md` — theme fallback / inheritance
+  - `apply-storefront.md` / `apply-admin.md` — applying a theme
 - `commerce-frontend-core/guide/layouts/` — layout XML
 - `commerce-frontend-core/guide/templates/` — .phtml templates
 - `commerce-php/development/components/view-models.md` — view models
@@ -90,8 +103,8 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 
 ### Frontend JavaScript, RequireJS, mixins, UI components, Knockout
 - `commerce-frontend-core/javascript/` — JS dev guide
-- `commerce-frontend-core/javascript/js_mixins.md` — mixin pattern
-- `commerce-frontend-core/javascript/custom_js.md` — custom JS
+- `commerce-frontend-core/javascript/mixins.md` — mixin pattern
+- `commerce-frontend-core/javascript/custom.md` — custom JS
 - `commerce-frontend-core/ui-components/` — UI component reference (admin grids/forms/listings)
 - `commerce-frontend-core/guide/validations/` — JS validation
 - `commerce-frontend-core/page-builder/` — Page Builder content types
@@ -105,16 +118,17 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
   - `rest/use-rest/` — using REST
   - `rest/tutorials/` — examples
   - `rest/reference/` — generated reference
+  - `rest/saas-integrations/` — REST APIs that exist only on Adobe Commerce as a Cloud Service (SaaS): cart custom price, catalog price rules, company roles, custom email, custom regions, gift card accounts, login as customer, order management, S3 uploads, shipping discounts, store credit, system configuration
 - `commerce-webapi/graphql/` — GraphQL guide
   - `graphql/develop/` — building schemas/resolvers
   - `graphql/usage/` — using GraphQL
-  - `graphql/queries/` — query catalog
-  - `graphql/mutations/` — mutation catalog
+  - `graphql/schema/<area>/queries/` and `graphql/schema/<area>/mutations/` — query and mutation catalog by area (`cart`, `customer`, `products`, `orders`, `b2b`, `wishlist`, `uploads`, …)
+  - `graphql/release-notes.md` — GraphQL changes per release, but it **stops at 2.4.0**; for newer changes use `commerce-php/development/backward-incompatible-changes/index.md`
 - `commerce-webapi/reference/` — overall reference
 - `commerce-webapi-openapi/admin-schema-2.4.6.yaml` (and -2.4.7, -2.4.8, -2.4.9) — OpenAPI 3 admin schema per version
 - `commerce-webapi-openapi/customer-schema-2.4.*.yaml` — customer-scoped endpoints
 - `commerce-webapi-openapi/guest-schema-2.4.*.yaml` — guest endpoints
-- `commerce-webapi-openapi/accs-schema.yaml` — Adobe Commerce Cloud Services
+- `commerce-webapi-openapi/accs-schema.yaml` — Adobe Commerce as a Cloud Service (SaaS) REST schema
 - `commerce-php/development/components/web-api/` — webapi.xml architecture
 - `devdocs-v2.4/graphql/` — older but extensive GraphQL guide
 - `devdocs-v2.4/rest/` — older REST guide
@@ -133,7 +147,7 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 - `commerce-php/development/components/message-queues/` — message queue architecture
 - `commerce-php/development/components/async-operations.md` — async/bulk REST
 - `commerce-php/development/components/code-generation.md` — code generation
-- `devdocs-v2.4/extension-dev-guide/cron/` — cron docs
+- `devdocs-v2.4/config-guide/cron/` — cron configuration (`custom-cron-ref.md`, `custom-cron-tut.md`)
 - `devdocs-v2.4/extension-dev-guide/message-queues/` — older queue docs
 - `devdocs-v2.4/extension-dev-guide/cli-cmds/` — older CLI guide
 
@@ -143,7 +157,7 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 - `commerce-frontend-core/guide/caching.md` — frontend caching
 - `commerce-frontend-core/guide/best-practices.md` — frontend perf
 - `devdocs-v2.4/extension-dev-guide/cache/` — older cache docs
-- `devdocs-v2.4/extension-dev-guide/indexing/` — older indexer docs
+- `devdocs-v2.4/extension-dev-guide/indexing.md`, `indexing-custom.md` — older indexer docs
 - `devdocs-v2.4/performance-best-practices/` — server-level perf guide (essential reading)
 - `commerce-php/best-practices/` — overall best practices
 
@@ -154,7 +168,8 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 - `devdocs-v2.4/config-guide/` — config guide
 - `devdocs-v2.4/comp-mgr/` — Component Manager (deprecated web UI)
 - `devdocs-v2.4/install-gde/` — installation guide
-- `devdocs-v2.4/release-notes/` — release notes per version
+- `commerce-php/development/backward-incompatible-changes/index.md` — backward-incompatible changes per release (2.4.9, 2.4.8, 2.4.7, …); read before any upgrade
+- `devdocs-v2.4/release-notes/` — release notes per version (archived; stops at early 2.4.x)
 
 ### Security
 - `commerce-php/development/security/` — security guide for developers
@@ -165,7 +180,7 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 - `commerce-php/module-reference/` — lists ALL modules including Commerce ones
 - `devdocs-v2.4/b2b/` — B2B development guide
 - `devdocs-v2.4/inventory/` — MSI (multi-source inventory)
-- `devdocs-v2.4/extension-dev-guide/staging/` — Staging (Commerce)
+- `devdocs-v2.4/extension-dev-guide/staging.md` — Staging (Commerce)
 
 ### Coding standards, testing
 - `commerce-php/coding-standards/` — current coding standards
@@ -192,7 +207,7 @@ grep -n "/V1/products/{sku}" magento2-development/references/sources/commerce-we
 
 Each curated `references/*.md` file ends with an "Original sources" section pointing to the most relevant `sources/*` files. Start there. If you need more:
 
-1. Search the topic across all four trees: `grep -rln "topic" magento2-development/references/sources`
+1. Search the topic across all trees: `grep -rln "topic" magento2-development/references/sources`
 2. Read the AdobeDocs hit first (more current).
 3. If the AdobeDocs entry is sparse, read the devdocs-v2.4 entry — it's usually deeper.
 4. For exact REST endpoint shape: check `commerce-webapi-openapi/admin-schema-2.4.9.yaml`.
@@ -200,10 +215,10 @@ Each curated `references/*.md` file ends with an "Original sources" section poin
 
 ## Refreshing the sources
 
-The sources are pinned to whichever commit Adobe Docs and `magento/devdocs` had when this skill was last built. To refresh:
+The sources are pinned to the commits in the Snapshot table above. To refresh:
 
 ```bash
 bash scripts/magento2/fetch_docs.sh
 ```
 
-See that script for the clone-and-filter logic. It re-clones the four GitHub repos and rewrites `references/sources/` with the latest content.
+See that script for the clone-and-filter logic. It re-clones the four GitHub repos and rewrites `references/sources/` with the latest content. `magento/devdocs` is archived, so re-cloning it (~560 MB) only reproduces the same tree; the three AdobeDocs repos are the ones that change. After refreshing, update the Snapshot table and the file counts above.
