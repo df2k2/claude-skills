@@ -2,92 +2,114 @@
 
 # Example PSP Integration: Iframe Payment Form
 
-## Overview
-
-Many Payment Service Provider (PSP) SDKs render an iframe to display their payment form inside Hyva Checkout.
-On the Magento integration side, iframe-based PSP integration typically requires calling a method on the SDK, passing a CSS selector for the target element where the SDK will render the iframe containing the form fields.
+Many Payment Service Provider (PSP) SDKs render an iframe to display their payment form inside Hyvä Checkout. On the Magento integration side, iframe-based PSP integration typically requires calling a method on the SDK and passing a CSS selector for the target element where the SDK renders the iframe containing the payment form fields.
 
 This page walks through an imaginary but realistic example of a Magewire payment method template that loads a PSP SDK, initializes an iframe payment form, and passes the resulting payment token back to the Magewire component.
 
-## Magewire Payment Method Template with PSP Iframe
+## How the Integration Works
 
-The example template below demonstrates the full lifecycle of an iframe-based PSP payment integration in Hyva Checkout:
+The full lifecycle of an iframe-based PSP payment integration in Hyvä Checkout follows these steps:
 
-1. When the visitor selects the payment method, the template renders a container `div` for the iframe.
-2. The PSP SDK library is loaded dynamically via a `script` tag.
-3. After the SDK loads, `initPspForm()` configures the SDK with merchant credentials and mounts the iframe.
-4. When the visitor completes the payment form, the SDK triggers a callback that passes the payment token to the Magewire component via `Magewire.find().setPaymentToken()`.
+1. The PSP SDK script is loaded as part of the initial page render via layout XML.
+2. When the customer selects the payment method, a container `div` for the iframe is rendered.
+3. An Alpine component initializes the SDK and mounts the iframe into the container.
+4. When the customer completes the payment form, the SDK callback passes the payment token to the Magewire component via `Magewire.find().setPaymentToken()`.
 
-Magewire payment component template
+## Loading the PSP SDK via Layout XML
+
+Hyvä Checkout enforces strict CSP on all checkout pages. This means scripts injected at runtime (for example, via `document.createElement('script')`) will be blocked because dynamically injected scripts cannot receive a nonce. The PSP SDK script must be loaded as part of the initial page render instead.
+
+Add a dedicated block for the SDK script to the `hyva.checkout.api-v1.after` container in the `hyva_checkout_index_index` layout handle. This container renders with the initial checkout page on both release lines. (The Magewire 1 `magewire.plugin.scripts` container of older examples only renders on Checkout 3.x while the [v1bc module](../magewire/v1bc.html) is enabled.)
+
+view/frontend/layout/hyva\_checkout\_index\_index.xml
 
 ```
-<div>
-    <!-- Magewire payment component template -->
-    <!-- Rendered when the visitor selects this payment method -->
+<body>
+    <referenceContainer name="hyva.checkout.api-v1.after">
+        <!-- Load the PSP SDK with the checkout page as part of the initial render -->
+        <block name="checkout.payment.psp.sdk-loader"
+               template="Example_Psp::checkout/payment/psp-sdk-loader.phtml"
+        />
+    </referenceContainer>
+</body>
+```
 
-    <!-- wire:ignore prevents Magewire from overwriting SDK-rendered content -->
-    <div id="#examplePspFormContainer" wire:ignore>
-        <!-- The PSP iframe will be rendered here by the SDK -->
+The SDK loader template registers the external SDK script source and registers the Alpine initialization component used by the payment method template. The `$hyvaCsp->registerInlineScript()` call authorizes the inline script with a nonce so strict CSP allows it to execute.
+
+Example\_Psp::checkout/payment/psp-sdk-loader.phtml
+
+```
+<?php
+/** @var \Hyva\Theme\ViewModel\HyvaCsp $hyvaCsp */
+?>
+<script src="<?= $block->getViewFileUrl('Example_Psp::js/sdk.js') ?>"></script>
+<script>
+    // Register the Alpine component that initializes the PSP iframe.
+    // Using Alpine.data() is required for strict CSP compatibility on checkout pages.
+    function initExamplePspPayment() {
+        return {
+            init() {
+                // Mount the PSP iframe into the container element when the component initializes.
+                // The component name in layout is used to find the Magewire instance.
+                const componentName = this.$el.dataset.componentName;
+
+                window.ExamplePaymentSdk.configure({
+                    merchantKey: this.$el.dataset.merchantKey,
+                    callback: ({ token }) => {
+                        // Pass the payment token to the Magewire component when the form is complete.
+                        Magewire.find(componentName).setPaymentToken(token);
+                    }
+                }).then(paymentMethod => {
+                    paymentMethod.mount('#examplePspFormContainer');
+                });
+            }
+        }
+    }
+
+    window.addEventListener('alpine:init', () => {
+        Alpine.data('initExamplePspPayment', initExamplePspPayment);
+    }, { once: true });
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>
+```
+
+Why load the SDK in a separate block?
+
+Hyvä Checkout uses Magewire to dynamically update component templates. Scripts inside a Magewire component template are only evaluated during the initial page render - subsequent Magewire updates will not re-evaluate them. Loading the SDK and the Alpine component registration in a separate layout block ensures both are available regardless of when the payment method template renders. See [Move Scripts to Page Load](../devdocs/csp/csp-move-scripts-page-load.html) for more on this pattern.
+
+## Magewire Payment Method Template
+
+The Magewire payment method template renders when the customer selects the payment method. It provides the iframe container and initializes the Alpine component using the data attributes to pass configuration to the SDK loader script.
+
+Example\_Psp::checkout/payment/method/example-psp.phtml
+
+```
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Example\Psp\Magewire\Payment\Method\ExamplePsp $magewire */
+?>
+<div
+    x-data="initExamplePspPayment"
+    data-merchant-key="<?= $escaper->escapeHtmlAttr($magewire->getMerchantKey()) ?>"
+    data-component-name="<?= $escaper->escapeHtmlAttr($block->getNameInLayout()) ?>"
+>
+    <!-- wire:ignore prevents Magewire from overwriting SDK-rendered content on re-render -->
+    <div id="examplePspFormContainer" wire:ignore>
+        <!-- The PSP iframe renders here -->
     </div>
-
-    <script>
-        // This script is only evaluated once, the first time it is rendered.
-        (() => {
-
-          // Initialize the PSP SDK and mount the iframe into the container
-          async function initPspForm(SDK) {
-            // Configure the SDK with merchant credentials and a payment callback
-            const paymentMethod = await SDK.configure({
-              merchantKey: '<?= $escaper->escapeJs($magewire->getMerchantKey()) ?>',
-              callback: ({token}) => {
-                // When the visitor completes the PSP form, pass the token to Magewire
-                const component = '<?= $escaper->escapeJs($block->getNameInLayout()) ?>';
-                Magewire.find(component).setPaymentToken(token);
-              }
-            });
-
-            // Mount the iframe into the target container element
-            const target = '#examplePspFormContainer';
-            document.querySelector(target) && paymentMethod.mount(target);
-          }
-
-          // Load the SDK library file dynamically when needed
-          if (! window.ExamplePaymentSdk) {
-            // Inject the SDK script tag and initialize on load
-            const script = document.createElement('script');
-            script.src = '<?= $block->getViewFileUrl('Example_Psp::js/sdk.js') ?>';
-            script.onload(() => initPspForm(ExamplePaymentSdk));
-            document.head.append(script);
-          } else {
-            // SDK already loaded (e.g. visitor re-selected this method), initialize immediately
-            initPspForm(ExamplePaymentSdk);
-          }
-
-        })()
-    </script>
 </div>
 ```
-
-Adapt to your PSP
-
-The code above is intended as a structural example only. You will need to adjust method names, configuration options, and callback signatures to match the API of your specific Payment Service Provider.
 
 ## Protecting SDK-Rendered DOM with `wire:ignore`
 
-The `wire:ignore` attribute on the iframe container `div` is critical for iframe-based PSP integrations in Hyva Checkout. Without `wire:ignore`, any content the PSP SDK renders inside the container (including the iframe) will disappear after the first Magewire round-trip.
+The `wire:ignore` attribute on the iframe container `div` is critical for iframe-based PSP integrations in Hyvä Checkout. Without `wire:ignore`, any content the PSP SDK renders inside the container - including the iframe itself - will disappear after the first Magewire round-trip.
 
-The following snippet shows how `wire:ignore` is applied to the container element:
+When a subsequent Magewire request re-renders the payment method component template, the server returns an empty container element. The `wire:ignore` attribute tells Magewire to skip updating that element, preserving the iframe and all its contents.
 
-Container with wire:ignore attribute
+## Related Topics
 
-```
-<div id="#examplePspFormContainer" wire:ignore>
-    <!-- The PSP iframe will be rendered here by the SDK -->
-</div>
-```
-
-When a subsequent Magewire request re-renders the payment method component template, the server returns an empty `<div id="#examplePspFormContainer" wire:ignore>` without the SDK-generated content. The `wire:ignore` attribute tells Magewire to skip updating that element, preserving the iframe and all its contents on the page.
-
-Script tags are only evaluated during the initial preceding request
-
-When `<script>` tags are rendered by Magewire component templates, the browser only evaluates them during the **initial preceding request**. If the same script appears in subsequent Magewire responses, the browser ignores it. This means changes to the JavaScript code will not take effect on re-render, but any **state** created during the initial preceding request (such as SDK instances and event listeners) **will persist**.
+- **[Move Scripts to Page Load](../devdocs/csp/csp-move-scripts-page-load.html)** - How to extract inline scripts from Magewire component templates for CSP compliance
+- **[CSP Script Authorization](../devdocs/csp/csp-script-validation.html)** - How nonce-based script authorization works in Hyvä Checkout
+- **[Payment Integration API](../devdocs/payments/payment-integration-api.html)** - How to register payment methods in layout XML and implement `EvaluationInterface`
+- **[JS-driven Payment Method](js-payment-method.html)** - Building JavaScript-driven payment integrations using the Frontend Payment API

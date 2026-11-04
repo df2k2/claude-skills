@@ -1,19 +1,32 @@
 <!-- source: https://docs.hyva.io/hyva-commerce/features/media-optimization/index.html -->
 
-# Media Optimisation
+# Media Optimization
 
-Media Optimisation provides developers and admin users control over image output on the storefront, including resizing, compression and conversion to modern formats such as WebP and AVIF. All with the aim of ensuring the images served to the browser are as small as possible, both in terms of dimensions and file size, to aid with storefront performance.
+Media Optimization gives developers and admins control over image output on the storefront, including resizing, compression, and conversion to modern formats such as WebP and AVIF. The goal is to serve images that are as small as possible, in both dimensions and file size, to improve storefront performance.
 
-Media Optimisation currently offers 3 main features:
+Available with Hyvä Commerce 1.2.0
 
-1. A [developer friendly API](features/developer-api.html) to allow you to resize and convert images within your block/template output
-2. Default implementations that utilise the above API, such as within [Hyvä CMS](features/hyva-cms-integration.html) components
-3. An observer that scans the output of all blocks on a page and [automatically replaces images](features/automatic-image-replacement.html) found in HTML or CSS with optimized versions
+Media Optimization is generally available since `1.0.0`, which shipped with Hyvä Commerce `1.2.0`. It was first released as `0.1.0` on 9 September 2025. See [Installation](installation.html) for setup.
 
-In addition, a [`bin/magento` CLI command](features/flushing-generated-images.html) is provided to allow removing generated images by path, and there are a large number of [configuration](configuration.html) options provided in the Magento admin panel that allow control over:
+## What Media Optimization Does
 
-- The engine used to convert/resize images (GD/Imagick)
-- Which formats to output (e.g. WebP/AVIF)
-- The modes and formats used for automatic image replacement in HTML/CSS
-- A wide range of quality and compression controls for each engine, for both resizing and conversion
-- And many more...
+Media Optimization offers three main capabilities:
+
+1. A [developer-friendly API](features/developer-api.html) to resize and convert images in your own block and template output.
+2. Default implementations that use that API, such as in [Hyvä CMS](features/hyva-cms-integration.html) components.
+3. An observer that scans all block output on a page and [automatically replaces images](features/automatic-image-replacement.html) in HTML or CSS with optimized versions.
+
+A [`bin/magento` CLI command](features/flushing-generated-images.html) removes generated images by path, and a wide range of [configuration](configuration.html) options in the Magento admin control the engine, output formats, replacement modes, and quality settings.
+
+## Installing Media Optimization
+
+Ready to get started? Follow [Installing Media Optimization](installation.html) to add it to your Magento store.
+
+## More Information
+
+- [Configuration](configuration.html): system check, image and replacement settings, viewport breakpoints, and engine settings.
+- [Automatic Image Replacement](features/automatic-image-replacement.html): replace images across HTML and CSS automatically.
+- [Image Processing Engines](features/engines.html): GD and Imagick, format support, and performance tuning.
+- [Hyvä CMS Integration](features/hyva-cms-integration.html): which built-in Hyvä CMS component images are optimized.
+- [Flushing Generated Images](features/flushing-generated-images.html): the CLI command for removing generated images.
+- [Developer API](features/developer-api.html): output optimized responsive `<picture>` elements from your templates.

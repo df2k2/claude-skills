@@ -26,7 +26,7 @@ For example, to exclude the CSS from the `magento2-hyva-checkout` module:
 }
 ```
 
-This configuration is used by the `hyva-sources` command. For more details, see the [documentation on the hyva-sources command](using-hyva-modules/sources.html).
+This configuration is used by the `hyva-sources` command. For more details, see the [documentation on the hyva-sources command](./using-hyva-modules/sources.html).
 
 ## Tailwind v3 (Hyvä 1.3.x and earlier)
 

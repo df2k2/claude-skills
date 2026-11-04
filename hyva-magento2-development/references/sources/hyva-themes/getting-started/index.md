@@ -6,6 +6,12 @@ This guide walks you through installing the Hyvä Theme on a Magento 2 store. It
 
 ## Hyvä Theme System Requirements
 
+PHP 8.1 support ends in 2027
+
+From 2027 onwards, Hyvä products will be built with PHP `8.2` and newer code. Existing installations on PHP `8.1` won't break right away, but PHP `8.1` will no longer be supported from then. Plan your upgrade to PHP `8.2` or higher.
+
+This also affects Magento versions that only run on PHP `8.1`: Magento `2.4.4` and `2.4.5` (including all their patch releases) will no longer be supported from 2027. Upgrade to Magento `2.4.6` or higher, always using the latest patch release (for example `2.4.6-p15`).
+
 Before installing the Hyvä Theme, make sure your environment meets these minimum requirements:
 
 - Magento `2.4.4-p9`, `2.4.5-p8`, `2.4.6-p7`, `2.4.7-p1` or higher
@@ -19,9 +25,6 @@ We recommend building the Tailwind CSS bundle on a development or staging instan
 
 Full Magento system requirements are available in the [Magento devdocs](https://experienceleague.adobe.com/en/docs/commerce-operations/installation-guide/system-requirements).
 
-Hyvä no longer supports PHP 7.4
-
-As of 2026, Hyvä requires PHP `8.1` or higher. If you're still on PHP `7.4`, upgrade before installing or updating the Hyvä Theme.
 
 CSP support requires Magento 2.4.4 or higher
 
@@ -114,7 +117,7 @@ See the FAQ on [setup:static-content:deploy fails minifying CSS](../faqs/static-
 
 Experimental: On-the-fly JS minification and merging
 
-The `hyva-themes/magento2-minification` module minifies HTML, JS, and CSS on the fly with better results than the native Magento minification, rather than during static content deployment. It is currently experimental but can be tested already. For more information, see the module readme.
+The `hyva-themes/magento2-minification` module minifies HTML, JS, and CSS on the fly with better results than the native Magento minification, rather than during static content deployment. It is currently experimental but can be tested already. For more information, see the [module readme](../performance/hyva-minification-readme.html).
 
 ## Enabling Required GraphQL Modules for Hyvä
 

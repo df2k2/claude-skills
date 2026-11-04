@@ -13,7 +13,7 @@ This is a feature release for Hyvä CMS that includes various bug fixes and impr
 ##### Component children fields
 
 Component children fields must now be declared in the root of the component declaration, in `hyva_cms/components.json`.
-See [example here](../features/cms/creating-components.html#creating-parent-child-component-relationships).
+See [example here](../features/cms/component-nesting.html#creating-parent-child-component-relationships).
 
 If your project has **custom components** that use children fields, you will need to update them to the new format.
 To help with this, there is a migration script that will help you with the upgrade.
@@ -128,4 +128,4 @@ The changelog is available [here](changelog.html#060-2025-06-26).
 
 ## Known Issues
 
-See bugfixes in the [1.0.0 release](upgrading-to-1.0.0.html).
+See bugfixes in the [1.0.0 release](./upgrading-to-1.0.0.html).

@@ -4,8 +4,8 @@
 
 Available Certifications:
 
-- [Hyvä Associate Developer Certification](associate-developer-certification.html)
-- [Hyvä Professional Developer Certification](professional-developer-certification.html)
+- [Hyvä Associate Developer Certification](./associate-developer-certification.html)
+- [Hyvä Professional Developer Certification](./professional-developer-certification.html)
 
 ## Certification FAQ:
 

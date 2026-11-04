@@ -1,6 +1,6 @@
 <!-- source: https://docs.hyva.io/hyva-commerce/features/cms/creating-custom-component-fields-types.html -->
 
-# Creating Custom Component Fields Types
+# Creating Custom Hyvä CMS Component Field Types
 
 Advanced Developer Topic
 
@@ -94,21 +94,21 @@ $errorMessage = (string) ($block->getData('errorMessage') ?? '');
     <div class="radio-group flex gap-4">
         <?php foreach ($options as $option): ?>
             <label class="inline-flex items-center">
-                <input type="radio"
+                <input
+                    type="radio"
                     name="<?= $escaper->escapeHtmlAttr("{$uid}_{$fieldName}") ?>"
                     value="<?= $escaper->escapeHtmlAttr($option['value']) ?>"
                     <?= $option['value'] === $fieldValue ? 'checked' : '' ?>
-                    @change="
-                        updateWireField(
-                            '<?= $escaper->escapeHtmlAttr($uid) ?>',
-                            '<?= $escaper->escapeHtmlAttr($fieldName) ?>',
-                            $event.target.value
-                        )
-                    "
+                    @change="updateWireField(
+                        '<?= $escaper->escapeHtmlAttr($uid) ?>',
+                        '<?= $escaper->escapeHtmlAttr($fieldName) ?>',
+                        $event.target.value
+                    )"
                     class="form-radio <?= $hasError ? 'error field-error' : '' ?>"
                     <?php foreach ($filteredAttributes as $attr => $attrValue): ?>
                         <?= $escaper->escapeHtmlAttr($attr) ?>="<?= $escaper->escapeHtmlAttr($attrValue) ?>"
-                    <?php endforeach; ?>>
+                    <?php endforeach; ?>
+                >
                 <span class="ml-2"><?= $escaper->escapeHtml($option['label']) ?></span>
             </label>
         <?php endforeach; ?>
@@ -176,14 +176,19 @@ This container is required for Hyvä CMS to inject validation error messages. If
 
 ### Field Value Update Methods
 
-Hyvä CMS provides two Alpine.js methods for updating field values in custom field types:
+The composer's `updateWireField(uid, fieldName, value)` and `updateField(uid, fieldName, value)` helpers update the browser document and its preview. Despite its name, `updateWireField` does not synchronize a Magewire server document. Magento validates the complete document when it is saved.
 
-- **`updateWireField(uid, fieldName, value)`** *(recommended default)*: Updates both the preview and the server state through Magewire immediately. This method ensures server-side validation runs on every change and keeps the component state synchronized. Use this method unless you have a specific performance reason to avoid it.
-- **`updateField(uid, fieldName, value)`** *(specialized use)*: Updates the preview directly via AJAX, bypassing Magewire. The field value is read from local state until the user saves the component. Use this method only when implementing debounced inputs or other scenarios where you need to minimize server requests for performance reasons.
+For new integrations, use the editor command API, including from your own Alpine component:
 
-Alpine Component Integration Limitation
+```
+await window.liveview.editor.run('field.update', {
+    uid,
+    field: fieldName,
+    value,
+});
+```
 
-If you add custom Alpine.js components to your field template, you cannot set field values through `updateField` or `updateWireField` from within your Alpine component. Keep input fields outside your Alpine component and update them with vanilla JavaScript from within your component.
+Use `fields.update` with a `fields` object when changing several fields together. Keep the normal field markup and validation hooks described on this page. See [Moving to CmsConnect](cms-connect.html) for the migration details.
 
 ### Field Attributes and HTML5 Validation
 
@@ -191,7 +196,7 @@ The `$filteredAttributes` variable in the template example provides access to fi
 
 Hyvä CMS automatically validates custom field types against HTML5 validation attributes when they are present. Apply the filtered attributes to your input elements to enable this validation.
 
-For more information about available field attributes and how validation works, see the [Field Attributes and Validation](creating-components.html#adding-html5-validation-and-field-attributes) section in the component creation guide.
+For more information about available field attributes and how validation works, see the [Field Attributes and Validation](./component-fields.html#adding-html5-validation-and-field-attributes) section in the component creation guide.
 
 ## Dynamically Setting Custom Field Type Values
 
@@ -260,37 +265,35 @@ declare(strict_types=1);
 
 use Magento\Backend\Block\Template;
 use Magento\Framework\Escaper;
-use Hyva\CmsLiveviewEditor\Magewire\LiveviewComposer;
 
 /** @var Template $block */
 /** @var Escaper $escaper */
-/** @var LiveviewComposer $magewire */
 
 $uid = (string) $block->getData('uid');
 $fieldName = (string) $block->getData('name');
 $fieldValue = (string) $block->getData('value');
 
-// Validation markup (see "Required Markup Patterns" section)
-$hasError = isset($magewire->errors[$uid][$fieldName]);
+// Validation state comes from block data (see "Required Markup Patterns" section)
+$hasError = $block->getData('hasError');
 ?>
 <div class="field-container" id="field-container-<?= $escaper->escapeHtmlAttr("{$uid}_{$fieldName}") ?>" <?= $hasError ? 'data-error' : '' ?>>
     <!-- Hidden input stores the field value -->
-    <input type="hidden"
+    <input
+        type="hidden"
         id="<?= $escaper->escapeHtmlAttr("{$uid}_{$fieldName}") ?>"
         name="<?= $escaper->escapeHtmlAttr("{$uid}_{$fieldName}") ?>"
         value="<?= $escaper->escapeHtmlAttr($fieldValue) ?>"
-        @change="
-            updateWireField(
-                '<?= $escaper->escapeHtmlAttr($uid) ?>',
-                '<?= $escaper->escapeHtmlAttr($fieldName) ?>',
-                $event.target.value
-            )
-        "
+        @change="updateWireField(
+            '<?= $escaper->escapeHtmlAttr($uid) ?>',
+            '<?= $escaper->escapeHtmlAttr($fieldName) ?>',
+            $event.target.value
+        )"
         class="<?= $hasError ? 'error field-error' : '' ?>"
     >
 
     <!-- Trigger button dispatches event to open handler -->
-    <button type="button"
+    <button
+        type="button"
         class="btn btn-primary"
         @click="$dispatch('toggle-product-select', {
             isOpen: true,
@@ -309,11 +312,11 @@ $hasError = isset($magewire->errors[$uid][$fieldName]);
 </div>
 ```
 
-This field template uses a hidden input to store the field value and a button that dispatches the `toggle-product-select` event to open the handler modal. The event passes the component UID, field name, and current field value as initialization data. The validation markup follows the same patterns described earlier in the "Required Markup Patterns" section.
+This field template uses a hidden input to store the field value and a button that dispatches the `toggle-product-select` event to open the handler modal. The event passes the component UID, field name, and current field value as initialization data. The validation markup follows the same patterns described earlier in the [Required Markup Patterns for Custom Field Type Templates](#required-markup-patterns-for-custom-field-type-templates) section.
 
 Inline Enhanced Controls
 
-For inline enhanced controls (like searchable select), implement the enhanced UI directly in the field template using Alpine.js. You don't need a separate handler modal template—all functionality lives in the field template itself.
+For inline enhanced controls (like searchable select), implement the enhanced UI directly in the field template using Alpine.js. You don't need a separate handler modal template. All functionality lives in the field template itself.
 
 #### Step 2: Create the Handler Modal Template (Optional)
 
@@ -403,9 +406,9 @@ function initProductSelectHandler() {
 The handler modal uses the `x-htmldialog` Alpine.js plugin to manage modal open/close state. The two critical methods are:
 
 - **`initializeModal`**: Receives data from the field template event, parses the current field value, and opens the modal
-- **`saveProducts`**: Dispatches the `editor-change` event with the selected data, which updates the field value and triggers Magewire synchronization
+- **`saveProducts`**: Dispatches the `editor-change` event with the selected data, which updates the field value through the editor
 
-The rest of the Alpine.js component implements your specific selection logic—search, filtering, data fetching, and UI interaction patterns.
+The rest of the Alpine.js component implements your specific selection logic: search, filtering, data fetching, and UI interaction patterns.
 
 #### Step 3: Register the Field Template and Handler Modal
 
@@ -426,7 +429,7 @@ etc/adminhtml/di.xml
 </type>
 ```
 
-The field template registration uses the same `Hyva\CmsLiveviewEditor\Model\CustomField` DI type as basic custom field types (described earlier in this guide).
+The field template registration uses the same `Hyva\CmsLiveviewEditor\Model\CustomField` DI type as basic custom field types, described earlier in [Registering Custom Field Types in Dependency Injection](#registering-custom-field-types-in-dependency-injection).
 
 Register your field handler in your module's layout XML at `view/adminhtml/layout/liveview_editor_index.xml`:
 
@@ -434,18 +437,22 @@ view/adminhtml/layout/liveview\_editor\_index.xml
 
 ```
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
     <body>
         <referenceContainer name="content">
-            <block name="product_selector_handler"
-                   template="YourVendor_YourModule::handlers/product-selector-handler.phtml"/>
+            <block
+                name="product_selector_handler"
+                template="YourVendor_YourModule::handlers/product-selector-handler.phtml"
+            />
         </referenceContainer>
     </body>
 </page>
 ```
 
-This layout XML ensures the handler modal is rendered once on the Hyvä CMS editor page and available to all components using this field type. For inline enhanced controls, you only need the field template registration—no layout XML is required.
+This layout XML ensures the handler modal is rendered once on the Hyvä CMS editor page and available to all components using this field type. For inline enhanced controls, you only need the field template registration, and no layout XML is required.
 
 Then add the field to your component configuration in `components.json`:
 
@@ -493,11 +500,11 @@ $dispatch('editor-change', {
     name: this.uid,                    // String: component UID (not fieldName!)
     field: this.fieldName,             // String: field name
     value: this.selectedProducts,      // Any: new field value (will be JSON-encoded)
-    saveState: true                    // Boolean: true triggers Magewire sync
+    saveState: true                    // Boolean: request the committed field-update path
 })
 ```
 
-The `editor-change` event is a global Hyvä CMS event that updates the hidden input field, triggers Magewire synchronization (if `saveState: true`), and updates the preview. The `value` property can be any JSON-serializable data structure—Hyvä CMS will automatically encode it when storing.
+The `editor-change` event is a global Hyvä CMS event used by field pickers. The editor applies the value to the component and updates its preview. `saveState` does not persist the document or publish it; save and publish remain explicit actions. Replies whose component UID is not in the current tree are ignored by the composer. The `value` property can carry a JSON-serializable value matching the field declaration.
 
 Event Name vs Field Name
 
@@ -518,9 +525,3 @@ All built-in handlers are located in `Hyva_CmsLiveviewEditor::page/js/` in the H
 Starting Point for Custom Handlers
 
 Copy a built-in handler that most closely matches your use case as a starting point. The product handler demonstrates the modal-based pattern with visual selection, the link handler shows multi-step workflows with conditional fields, and the searchable select demonstrates inline enhanced controls. These patterns provide a foundation, but you can implement Field Handlers in whatever way best serves your specific requirements.
-
-## Related Topics
-
-- **[Creating Components](creating-components.html)** - Learn how to create custom components that use your custom field types and Field Handlers
-- **[Field Attributes and Validation](creating-components.html#adding-html5-validation-and-field-attributes)** - Detailed information about field validation in Hyvä CMS
-- **[Component Configuration Schema](component-declaration-schema.html)** - Reference for configuring custom field types in `components.json`

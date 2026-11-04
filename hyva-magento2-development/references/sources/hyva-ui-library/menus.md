@@ -47,4 +47,4 @@ providing more flexibility in layout and design.
 
 For implementation details and specific examples, refer to the documentation for each UI component.
 
-[![Preview of Menu C with banner](images/menu-c-preview.jpg)](images/menu-c-preview.jpg)
+[![Preview of Menu C with banner](./images/menu-c-preview.jpg)](./images/menu-c-preview.jpg)

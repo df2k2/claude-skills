@@ -183,7 +183,7 @@ window.dispatchEvent(new CustomEvent(
 
 Modals are commonly displayed in response to selecting an action, often to surface an error message or warning, so, for
 the convenience of developers implementing actions, the switcher component is
-[merged with the `hyva.modal()` view utility](../../../hyva-themes/view-utilities/modal-dialogs/index.html#merge-hyvamodal-with-your-code)
+[merged with the `hyva.modal()` view utility](../../../hyva-themes/view-utilities/modal-dialogs/index.html#alpinejs-x-htmldialog)
 to ensure it is available to them by default.
 
 ### Removing Actions

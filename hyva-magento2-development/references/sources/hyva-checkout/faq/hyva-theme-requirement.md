@@ -8,7 +8,7 @@ However, the rest of your store pages **do not** need to run on a Hyvä Theme. Y
 
 Using Hyvä Checkout with a Luma-based store?
 
-Check out the [Luma Checkout FAQ](luma-checkout-faq.html) for a full walkthrough of the theme fallback approach.
+Check out the [Luma Checkout FAQ](./luma-checkout-faq.html) for a full walkthrough of the theme fallback approach.
 
 ## Configuring the Hyvä Theme Fallback for Checkout
 

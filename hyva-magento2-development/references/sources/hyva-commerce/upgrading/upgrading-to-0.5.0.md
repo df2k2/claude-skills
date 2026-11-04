@@ -22,4 +22,4 @@ The changelog is available [here](changelog.html#050-2025-06-04).
 
 ## Known Issues
 
-See bugfixes in the [0.6.0 release](upgrading-to-0.6.0.html).
+See bugfixes in the [0.6.0 release](./upgrading-to-0.6.0.html).

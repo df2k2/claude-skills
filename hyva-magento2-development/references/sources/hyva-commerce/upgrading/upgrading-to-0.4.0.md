@@ -74,13 +74,13 @@ bin/magento hyva:liveview:patch 0.4.0
 
 Only affects custom integrations of Hyvä CMS with other content types
 
-This change only impacts projects that have [extended Hyvä CMS for other content types](../features/cms/extending-for-other-content-types.html).
+This change only impacts projects that have [extended Hyvä CMS for other content types](./../features/cms/extending-for-other-content-types.html).
 You can skip this section if you not extended Hyvä CMS in this way.
 
-Hyvä CMS now uses the [The CMS Tailwind JIT module](../../hyva-themes/cms/cms-tailwind-jit-module.html) for Tailwind JIT compilation.
+Hyvä CMS now uses the [The CMS Tailwind JIT module](../../hyva-themes/cms/tailwind-jit/index.html) for Tailwind JIT compilation.
 If you've extended Hyvä CMS for custom content types, update your `Hyva\CmsLiveviewEditor\Api\ProviderInterface` implementations to support Tailwind JIT compilation.
 
-Also review [Extending for Other Content Types](../features/cms/extending-for-other-content-types.html) and the Hyva\_CmsMagento module to see how to include TW JIT compilation in your integration.
+Also review [Extending for Other Content Types](./../features/cms/extending-for-other-content-types.html) and the Hyva\_CmsMagento module to see how to include TW JIT compilation in your integration.
 
 #### New Console Commands
 
@@ -193,4 +193,4 @@ The changelog is available [here](changelog.html#040-2025-05-29).
 
 ## Known Issues
 
-See bugfixes in the [0.5.0 release](upgrading-to-0.5.0.html).
+See bugfixes in the [0.5.0 release](./upgrading-to-0.5.0.html).

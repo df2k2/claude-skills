@@ -6,7 +6,7 @@ The `1.2.0` release for Hyvä Commerce introduces the GA (General Availability) 
 
 ## Notable news
 
-Admin Dashboard `1.0.0` revitalizes the Magento admin panel's dashboard. It contains our initial batch of widgets. Dashboards are user specific, allowing admin users to display the data relevant to them, with the ability to configure options, resize and reorder every widget instance. See our [Admin Dashboard Widgets](../features/admin-dashboard/devdocs/widget-types/available-types.html) page for more details.
+Admin Dashboard `1.0.0` revitalizes the Magento admin panel's dashboard. It contains our initial batch of widgets. Dashboards are user specific, allowing admin users to display the data relevant to them, with the ability to configure options, resize and reorder every widget instance. See our [Admin Dashboard Widgets](../features/admin-dashboard/devdocs/available-widget-types.html) page for more details.
 
 Media Optimisation `1.0.0` adds the ability to automatically replace images across the storefront, along with a developer API. Images can be resized to admin configurable sizes, and converted to WebP and AVIF formats. It includes support for animated GIFs (as WebP), the GD and Imagick image libraries, logging, along with a huge range of admin configuration, as well as a system check tool to ensure your server meets the minimum requirements.
 
@@ -24,12 +24,12 @@ components, how they have been changed, and the steps required to update any cus
 - `getTitle(?WidgetInstanceInterface $widgetInstance)` function originally only declared in the `AbstractWidgetType` class
 - `getProperties(string $propertyType)` function to replace separate `getConfigurableProperties` and `getDisplayProperties` functions
 - `getPropertyByName(string $propertyType, string $propertyName)` function to replace separate `getConfigurablePropertyByName` and `getDisplayPropertyByName` functions
-- `getTrailingAction(?WidgetInstanceInterface $widgetInstance)` function to provide trailing action configuration array
+- `getTrailingAction(?WidgetInstanceInterface $widgetInstance)` function to provide [trailing action](../features/admin-dashboard/devdocs/widget-xml.html#trailing_action) configuration array
 - Constants to reference new configuration keys
-  - [`cache_lifetime`](../features/admin-dashboard/devdocs/widget-types/xml.html#cache_lifetime)
-  - [`full_screen`](../features/admin-dashboard/devdocs/widget-types/xml.html#full_screen)
-  - [`trailing_action`](../features/admin-dashboard/devdocs/widget-types/xml.html#trailing_action)
-- Constant to reference the default widget category name
+  - [`cache_lifetime`](../features/admin-dashboard/devdocs/widget-xml.html#cache_lifetime)
+  - [`full_screen`](../features/admin-dashboard/devdocs/widget-xml.html#full_screen)
+  - [`trailing_action`](../features/admin-dashboard/devdocs/widget-xml.html#trailing_action)
+- Constant to reference the default [widget category](../features/admin-dashboard/devdocs/widget-xml.html#category) name
 
 ##### Changed
 
@@ -58,9 +58,9 @@ Any class implementing `WidgetTypeInterface` directly must:
 ##### Added
 
 - Added new `?WidgetInstanceInterface $widgetInstance` parameter to the `getTitle()` function
-- Default implementation for the `getProperties()` function which returns the input properties by key
-- Default implementation for the `getPropertyByName()` function which returns the input property of a given type and name
-- Default implementation for the `getTrailingAction()` function which returns an array of link data for the trailing action feature
+- Default implementation for the `getProperties()` function which returns the [input properties](../features/admin-dashboard/devdocs/configurable-inputs.html) by key
+- Default implementation for the `getPropertyByName()` function which returns the [input property](../features/admin-dashboard/devdocs/configurable-inputs.html) of a given type and name
+- Default implementation for the `getTrailingAction()` function which returns an array of link data for the [trailing action](../features/admin-dashboard/devdocs/widget-xml.html#trailing_action) feature
 
 ##### Changed
 
@@ -118,12 +118,12 @@ Any class implementing `WidgetInstanceInterface` directly must:
 ##### Added
 
 - New constructor argument `Hyva\AdminDashboardFramework\Model\Cache\Type\AdminDashboard $adminDashboardCache`
-- Implementation for the `getPropertyValues()` function which returns the input property values by key
-- Implementation for the `getPropertyValue()` function which returns the input property value of a given type and name
+- Implementation for the `getPropertyValues()` function which returns the [input property values](../features/admin-dashboard/devdocs/configurable-inputs.html) by key
+- Implementation for the `getPropertyValue()` function which returns the [input property value](../features/admin-dashboard/devdocs/configurable-inputs.html) of a given type and name
 
 ##### Changed
 
-- `getDisplayData()` function now takes a boolean `$loadFromCache` argument, which defaults to `true` and determines whether to serve the display data from the `hyva_admin_dashboard` cache
+- `getDisplayData()` function now takes a boolean `$loadFromCache` argument, which defaults to `true` and determines whether to serve the display data from the [`hyva_admin_dashboard` cache](../features/admin-dashboard/devdocs/dashboard-cache.html)
 
 ##### Removed
 
@@ -165,9 +165,9 @@ Update any of your references to the base classes mentioned above to add the `Ab
 
 ##### Added
 
-- `cache_lifetime` XML configuration option
-- `full_screen` XML configuration option
-- `trailing_action` XML configuration option
+- [`cache_lifetime`](../features/admin-dashboard/devdocs/widget-xml.html#cache_lifetime) XML configuration option
+- [`full_screen`](../features/admin-dashboard/devdocs/widget-xml.html#full_screen) XML configuration option
+- [`trailing_action`](../features/admin-dashboard/devdocs/widget-xml.html#trailing_action) XML configuration option
 - Added new `$defaultCacheLifetime` constructor argument to `Hyva\AdminDashboardFramework\Model\Config\Widget\Converter`
 - Added new `$categoryNames` constructor argument to `Hyva\AdminDashboardFramework\Model\Config\Widget\Converter`
 

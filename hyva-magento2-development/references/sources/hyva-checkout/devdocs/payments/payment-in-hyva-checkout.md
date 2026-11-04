@@ -29,7 +29,7 @@ A Hyvä Checkout payment integration is responsible for four things:
 
 - **Displaying payment UI** - Rendering forms, buttons, or PSP-provided iframes when the customer selects the payment method
 - **Gathering payment data** - Collecting tokens, authorization codes, or other data required by the PSP
-- **Communicating completion status** - Returning `Evaluation\Success` when ready to proceed, or `Evaluation\Blocking` when waiting for customer action
+- **Communicating completion status** - Returning `Evaluation\Success` when ready to proceed, or an `Evaluation\ErrorMessage` with a message when waiting for customer action
 - **Storing data for order placement** - Passing payment tokens to the underlying Magento Payment Method via `additional_data`
 
 The actual payment capture happens via the Magento Payment Method. This is the same backend processing layer used in Luma, which means existing payment gateway code can often be reused.

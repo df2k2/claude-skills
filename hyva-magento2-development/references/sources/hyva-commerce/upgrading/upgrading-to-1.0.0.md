@@ -10,7 +10,7 @@ This is the first General Availability release for Hyvä Commerce that includes 
 
 This release marks the end of the Early Access phase of Hyvä Commerce, and includes the first stable versions (`1.0.0`) of Hyvä CMS, the Admin Theme and Image Editor. Read our [blog post](https://www.hyva.io/blog/news/hyva-commerce.html) for all the details.
 
-While each of the features in this release contain a variety of minor new features, enhancements and bug fixes, the main change is that they now adhere to same versioning and backwards compatibility pledge of Hyvä's other products. For more details see the [Release Process page](../release-process-status.html).
+While each of the features in this release contain a variety of minor new features, enhancements and bug fixes, the main change is that they now adhere to same versioning and backwards compatibility pledge of Hyvä's other products. For more details see the [Release Process page](../faqs/release-process-status.html).
 
 ### Hyvä CMS
 

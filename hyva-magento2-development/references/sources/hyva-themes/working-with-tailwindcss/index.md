@@ -62,7 +62,7 @@ The Hyva Default Theme ships with different TailwindCSS versions depending on th
 
 IDE and Editor Support for TailwindCSS
 
-TailwindCSS plugins are available for popular IDEs and editors. Check the [Editor Setup documentation](editor-setup.html) for PHPStorm and VSCode configuration, including Intellisense support that makes writing TailwindCSS classes much easier.
+TailwindCSS plugins are available for popular IDEs and editors. Check the [Editor Setup documentation](./editor-setup.html) for PHPStorm and VSCode configuration, including Intellisense support that makes writing TailwindCSS classes much easier.
 
 Share Your Learning Resources
 
@@ -70,7 +70,7 @@ If you have learning material that could help other Hyva developers, feel free t
 
 ## Related Topics
 
-- [Generating CSS with TailwindCSS](generating-css.html) - How to compile TailwindCSS in your Hyva theme
-- [Hyva Theme CSS Files](hyva-theme-css-files.html) - Understanding the CSS file structure in Hyva
-- [Editor Setup for TailwindCSS](editor-setup.html) - Configure your IDE for TailwindCSS development
-- [Dynamic Tailwind Classes](dynamic-tailwind-classes.html) - Working with dynamic class names in Hyva templates
+- [Generating CSS with TailwindCSS](./generating-css.html) - How to compile TailwindCSS in your Hyva theme
+- [Hyva Theme CSS Files](./hyva-theme-css-files.html) - Understanding the CSS file structure in Hyva
+- [Editor Setup for TailwindCSS](./editor-setup.html) - Configure your IDE for TailwindCSS development
+- [Dynamic Tailwind Classes](./dynamic-tailwind-classes.html) - Working with dynamic class names in Hyva templates

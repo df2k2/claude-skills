@@ -9,8 +9,12 @@ It allows you to define which browsers your project needs to support.
 
 **Why is it important for Hyvä?**
 
-Hyvä versions 1.3.6 and newer integrate Browserlist to maintain browser compatibility based on the [supported browsers list](../faqs/supported-browsers.html).
-This ensures your project works seamlessly with the targeted browsers while using the latest Tailwind CSS versions.
+Hyvä versions 1.3.6 through 1.4.0 integrated Browserlist to maintain browser compatibility based on the [supported browsers list](../faqs/supported-browsers.html).
+This ensured your project worked seamlessly with the targeted browsers while using Tailwind CSS v3.
+
+Not supported in Hyvä 1.4 and newer
+
+From Hyvä 1.4, Tailwind CSS v4 uses a custom build of lightningcss for CSS processing. This build does not read browserlist configuration, so the setup described on this page no longer applies. See [Extending Browser Support](../faqs/supported-browsers.html#extending-browser-support) for available options.
 
 ## Adding or Configuring Browserlist
 

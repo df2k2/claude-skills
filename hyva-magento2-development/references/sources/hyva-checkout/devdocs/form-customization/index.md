@@ -56,16 +56,16 @@ Your customizations primarily use form modifiers to register callbacks. These ca
 Hyvä Checkout provides several PHP interfaces that work together to power form customization. Here is a quick overview of each:
 
 **EntityFormInterface**
-: Represents the complete form instance. This is the top-level object you interact with when customizing a form.
+:   Represents the complete form instance. This is the top-level object you interact with when customizing a form.
 
 **EntityFormModifierInterface**
-: Your entry point for registering customizations. Implement this interface in your module to hook into the form lifecycle.
+:   Your entry point for registering customizations. Implement this interface in your module to hook into the form lifecycle.
 
 **EntityFieldInterface**
-: Represents an individual input field. Use this interface to read or change field properties like labels, validation rules, and default values.
+:   Represents an individual input field. Use this interface to read or change field properties like labels, validation rules, and default values.
 
 **EntityFormElementInterface**
-: Represents any form component, including fields, labels, separators, and other elements. This is the base interface that EntityFieldInterface extends.
+:   Represents any form component, including fields, labels, separators, and other elements. This is the base interface that EntityFieldInterface extends.
 
 For detailed method signatures and usage examples, see the [Entity Form Interfaces](entity-form-interfaces.html) reference.
 
@@ -73,6 +73,7 @@ For detailed method signatures and usage examples, see the [Entity Form Interfac
 
 - **[Entity Form Interfaces](entity-form-interfaces.html)** - Full reference for EntityFormInterface, EntityFieldInterface, and related interfaces
 - **[Entity Form Modifiers](entity-form-modifiers.html)** - How to register and implement form modifier classes
+- **[Street Address Lines](street-address-lines.html)**: per-line validation messages, rules and styling for the street field
 - **[Field Attributes](field-attributes.html)** - Available attributes you can set on form fields
 - **[Setting Field Values](setting-field-values.html)** - How to set and override field values programmatically
 - **[Interdependent Fields](interdependent-fields.html)** - Working with fields that depend on each other's values

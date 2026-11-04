@@ -1,27 +1,36 @@
 ---
 name: hyva-magento2-development
-description: "Build, customize, and debug Hyvä themes for Magento 2 — covering Hyvä 1.4.x with Tailwind CSS v4 and Alpine.js v3. Use this skill whenever the user works on a Hyvä Magento store and asks to write a phtml template, Alpine component, layout XML override, view model, child theme, compatibility module for a Luma extension, Hyvä Checkout (Magewire) code, or any storefront customization. Trigger on mentions of Hyvä, Hyva, @private-content-loaded, x-data, $viewModels, hyva.config.json, tailwind-source.css, hyva-themes/magento2-* packages, Hyva\\Theme PHP classes, hyva_* layout handles, hyva JS helpers (hyva.postForm, hyva.getFormKey, hyva.formatPrice), section data, CSP-compatible Alpine, or Tailwind v3→v4 migration. Trigger even when the user only says this Magento store uses Hyvä — Hyvä replaces Knockout, RequireJS, LESS, UI components, and jQuery so generic Magento 2 frontend advice will mislead them."
+description: "Build, customize, and debug Hyvä themes for Magento 2 — covering Hyvä 1.5.x (current) and 1.4.x with Tailwind CSS v4 and Alpine.js v3, plus Hyvä Checkout 3.x (Magewire 3) and 1.x (Magewire 1). Use this skill whenever the user works on a Hyvä Magento store and asks to write a phtml template, Alpine component, layout XML override, view model, child theme, compatibility module for a Luma extension, Hyvä Checkout (Magewire) code, or any storefront customization. Trigger on mentions of Hyvä, Hyva, @private-content-loaded, x-data, $viewModels, hyva.config.json, tailwind-source.css, hyva-themes/magento2-* packages, Hyva\\Theme PHP classes, hyva_* layout handles, hyva JS helpers (hyva.postForm, hyva.getFormKey, hyva.formatPrice), hyva.modal / x-htmldialog, x-html-safe, x-defer, swatches/gallery overrides, hyva-tokens / hyva-fonts / design tokens / Google Stitch, section data, CSP-compatible Alpine, Magewire 3 / v1bc / wire:model.live, Hyvä 1.4→1.5 upgrade, or Tailwind v3→v4 migration. Trigger even when the user only says this Magento store uses Hyvä — Hyvä replaces Knockout, RequireJS, LESS, UI components, and jQuery so generic Magento 2 frontend advice will mislead them."
 ---
 
 # Hyvä Themes Development for Magento 2
 
 Hyvä is a frontend stack for Magento 2 that **replaces** Luma's Knockout/RequireJS/LESS/UI-components pile with Tailwind CSS + Alpine.js + native browser APIs. It still uses Magento's PHP layer (layout XML, blocks, view models, phtml), but the JavaScript and CSS world looks completely different. Generic Magento 2 frontend advice will lead the user astray — most of what Luma developers know about `$.ajax`, `<script type="text/x-magento-init">`, `data-mage-init`, `Magento_Ui/js/grid/columns/...`, RequireJS shims, `mixins.js`, etc. simply does not apply.
 
-This skill keeps the latest Hyvä conventions (1.4.x with Tailwind v4 and Alpine v3) front-of-mind while you work.
+This skill keeps the latest Hyvä conventions (1.5.x, plus the still-maintained 1.4.x, on Tailwind v4 and Alpine v3) front-of-mind while you work.
 
 ## Versions this skill targets
 
-- **Hyvä Theme**: 1.4.x (Default Theme + theme-module)
-- **Tailwind CSS**: v4 (CSS-first config via `@theme`, `hyva.config.json` + `tailwind-source.css`)
-- **Alpine.js**: v3 (with optional CSP-safe build for PCI-DSS compliance)
-- **Magento**: 2.4.4-p9 / 2.4.5-p8 / 2.4.6-p7 / 2.4.7-p1 or higher
-- **PHP**: 8.1+ (7.4 dropped in 2026)
-- **Node.js**: 20+ (for Hyvä 1.4.x build)
+Status as of 2026-11-04 (docs.hyva.io and the `hyva-themes` GitHub repos):
 
-If the user is on an older Hyvä release, ask which version. The big breakpoints:
+- **Hyvä Theme**: **1.5.x is current** (1.5.3, 2026-10-12). Its first release was 1.5.1 (2026-07-01); there is no 1.5.0 default theme.
+  - **1.4.x is still maintained** in parallel (1.4.11, 2026-10-12).
+  - Update `hyva-themes/magento2-theme-module` together with the default theme; 1.5.3 needs theme module ≥ 1.5.3.
+- **Tailwind CSS**: v4, CSS-first config via `@theme`, `hyva.config.json` + `tailwind-source.css`. **4.3 on 1.5.1+**, 4.1 on the latest 1.4.x.
+- **Alpine.js**: v3, with an optional CSP-safe build for PCI-DSS compliance. The CSP build (3.15+) has no `x-html`; use `x-html-safe` (1.5.3+).
+- **Magento**: 2.4.4-p9 / 2.4.5-p8 / 2.4.6-p7 / 2.4.7-p1 or higher. **Magento 2.4.9 + PHP 8.5 needs theme module ≥ 1.4.6.**
+- **PHP**: 8.1+, with 8.5 since theme module 1.4.6. From 2027 Hyvä builds for PHP 8.2+, which drops PHP 8.1 and with it Magento 2.4.4 / 2.4.5.
+- **Node.js**: 20+ on the build machine.
+- **Hyvä Checkout**: **3.x on Magewire 3** is current (3.0.1; PHP 8.2–8.5; Magento 2.4.6+). **1.x on Magewire 1** is the previous line (1.3.15). 3.x ships `v1bc`, which keeps Magewire 1 code running. See `references/hyva-checkout.md`.
+
+If the user is on an older Hyvä release, ask which version (`composer show hyva-themes/magento2-default-theme hyva-themes/magento2-theme-module`). The big breakpoints:
 - 1.0.x / 1.1.x → Tailwind v2, Alpine v2
 - 1.2.x / 1.3.x → Tailwind v3, Alpine v3
 - 1.4.x → Tailwind v4, Alpine v3, no reset-theme parent
+- 1.5.x:
+  - 1.5.1: Tailwind 4.3, PHP-rendered swatches + gallery (swatch overrides break), and `hyva.modal` on native `<dialog>` / `x-htmldialog`.
+  - 1.5.3: default theme no longer needs GraphQL, Font API (`npx hyva-fonts`), `x-html-safe`, Heroicons → Lucide.
+  - See `references/upgrading.md`.
 
 ## When to consult this skill vs. when to just answer
 
@@ -38,19 +47,23 @@ Always consult it when the work touches a Hyvä theme. The JS/CSS conventions ar
 
 Before writing code, confirm a few things if not already obvious:
 
-1. **Hyvä version** (1.4.x assumed; older needs different patterns)
+1. **Hyvä version** (1.5.x assumed; 1.4.x is still common, and its swatch/modal code differs; older needs different patterns)
 2. **CSP mode or not?** Strict CSP changes how Alpine components are written (`x-data="myComponent"` instead of `x-data="{ open: false }"`). Hyvä Checkout, payment pages, and Hyvä's CSP build all require this.
 3. **Are they working in a child theme or the default theme?** Customizations belong in a child theme.
 4. **Is the work for a custom theme, a module, or a compatibility module for an existing Luma extension?**
+5. **For checkout work: Hyvä Checkout 3.x (Magewire 3) or 1.x (Magewire 1)?** `wire:model`, events, and lifecycle hooks behave differently. A version starting `3.` or `1.4.` means 3.x.
 
-Don't pepper them with all four if the request is clear — only confirm what's actually ambiguous.
+Don't pepper them with all five if the request is clear — only confirm what's actually ambiguous.
 
 ## How to find what you need
 
 This skill ships with two layers of documentation:
 
 1. **Curated references** in `references/*.md` — synthesized, opinionated guides for the patterns you'll hit most. Read these first.
-2. **Embedded source docs** in `references/sources/` — the full official Hyvä documentation (every page from docs.hyva.io, ~375 markdown files). Drop into these when the curated reference isn't enough, or when you need version-specific detail / canonical wording. See `references/sources/INDEX.md` for a topic-to-file map.
+2. **Embedded source docs** in `references/sources/` — the official Hyvä documentation. That is ~520 markdown files, snapshot 2026-11-04:
+   - the docs.hyva.io pages for the theme, checkout, and UI library;
+   - the Hyvä Admin and coding-standard docs from GitHub.
+   Drop into these when the curated reference isn't enough, or when you need version-specific detail / canonical wording. See `references/sources/INDEX.md` for a topic-to-file map and what was left out.
 
 Each curated reference file ends with an "Original sources" pointer to the relevant embedded files. Use `Grep` to search across `references/sources/` for keywords, function names, or version notes — the tree is large enough that top-down reading wastes time.
 
@@ -67,8 +80,9 @@ The curated references cover the topics deeply. Read the one(s) that match the t
 | `window.hyva` helpers — `hyva.postForm`, `hyva.getFormKey`, `hyva.formatPrice`, `hyva.str`, `hyva.replaceDomElement`, `hyva.activateScripts`, `hyva.alpineInitialized` | `references/window-hyva-helpers.md` |
 | Section data — receiving customer/cart in Alpine, default values, force reload | `references/section-data.md` |
 | Make a Luma module work with Hyvä — compatibility module structure, hyva-themes.json registration | `references/compatibility-modules.md` |
-| Customize Hyvä Checkout — Magewire components, `hyva-checkout.xml`, payment integrations | `references/hyva-checkout.md` |
-| Upgrade Hyvä versions, migrate Tailwind v3→v4 / Alpine v2→v3 | `references/upgrading.md` |
+| Customize Hyvä Checkout — Checkout 3.x vs 1.x, Magewire 3 / v1bc, components, `hyva-checkout.xml`, payment integrations | `references/hyva-checkout.md` |
+| Modals and dialogs — `hyva.modal`, `x-htmldialog`, confirmation dialogs (native `<dialog>` since 1.5) | `references/sources/hyva-themes/view-utilities/modal-dialogs/` + the 1.5 notes in `references/upgrading.md` |
+| Upgrade Hyvä versions (1.4→1.5, 1.3→1.4), migrate Tailwind v3→v4 / Alpine v2→v3 | `references/upgrading.md` |
 | Performance — view model cache tags, FPC, ESI, deferred rendering, CWV | `references/performance.md` |
 | Common gotchas — captcha, minification, GraphQL modules, theme inheritance, missing styles | `references/common-pitfalls.md` |
 
@@ -80,7 +94,7 @@ These are mistakes a Luma-experienced developer will make on Hyvä unless steere
 Hyvä has none of them. Use `window.fetch` (not `$.ajax`), Alpine.js (not Knockout's `data-bind`), and inline `<script>` tags or theme module JS (not `requirejs-config.js` or `text!*` plugins). If you see `define([...])` in Hyvä code, that's a smell.
 
 ### Don't use UI components or `<script type="text/x-magento-init">`
-Hyvä's `default.xml` strips most of Magento's UI-component plumbing. The minicart, product gallery, swatches, etc. are all reimplemented as Alpine components. If a tutorial says "extend the Magento_Catalog/js/product/view/provider component," that path doesn't exist here.
+Hyvä's `default.xml` strips most of Magento's UI-component plumbing. The minicart, product gallery, swatches, etc. are all reimplemented in Hyvä: Alpine components, and since 1.5.1 the gallery and swatches are PHP-rendered markup that Alpine only hydrates. If a tutorial says "extend the Magento_Catalog/js/product/view/provider component," that path doesn't exist here.
 
 ### Don't put customizations in `Hyva/default`
 The default theme is a vendor package. Always work in a child theme at `app/design/frontend/Vendor/ThemeName/` with parent `Hyva/default`. See `references/theme-setup.md`.

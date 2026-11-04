@@ -148,7 +148,7 @@ There are a number of possible solutions:
 
 ## Making Existing Modules Hyvä-Compatible
 
-Making an existing module compatible with Hyvä is almost the same as creating a full compatibility module. The main difference is that you need to manually register your module for inclusion in the `hyva-themes.json` file. This process is explained in detail in the [Registering a module for inclusion in `hyva-themes.json`](technical-deep-dive.html#registering-a-module-for-inclusion-in-hyva-themesjson) section. This allows your theme to scan for and import the necessary CSS from your module.
+Making an existing module compatible with Hyvä is almost the same as creating a full compatibility module. The main difference is that you need to manually register your module for inclusion in the `hyva-themes.json` file. This process is explained in detail in the [Registering a module for inclusion in `hyva-themes.json`](./technical-deep-dive.html#registering-a-module-for-inclusion-in-hyva-themesjson) section. This allows your theme to scan for and import the necessary CSS from your module.
 
 For the rest, you follow most of the same steps. However, you now need to ensure that the `phtml`, CSS, and JavaScript code is compatible with both Luma and Hyvä themes.
 

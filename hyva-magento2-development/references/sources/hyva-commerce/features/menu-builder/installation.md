@@ -2,58 +2,73 @@
 
 # Installing Menu Builder
 
-Currently available in beta
+Menu Builder is generally available since `1.0.0` with Hyvä Commerce `1.3.0` and requires Hyvä CMS `1.2.0`. Menu Builder `1.1.0` ships with Hyvä Commerce `1.4.0` and requires Hyvä CMS `1.3.0`.
 
-Menu Builder is currently available in beta, which means some of the features, specifications, and details provided herein are subject to change. We recommend checking back regularly for the most up-to-date information and viewing our [roadmap](https://www.hyva.io/roadmap) in regard to the general availability release.
-
-## Prerequisites
-
-See [Hyvä Commerce Prerequisites](../../getting-started/index.html#hyva-commerce-prerequisites).
+This guide covers installing Menu Builder with Composer, both with a license key and via the Hyvä Commerce GitLab repositories for agency and technology partners.
 
 ## Installation
 
-Separate Installation Required
+For prerequisites, see [Hyvä Commerce Installation Page](../../getting-started/index.html#hyva-commerce-prerequisites).
 
-During the beta phase of a new feature, new packages are not included in the main Hyvä Commerce metapackage and must be installed separately. The Hyvä Commerce [metapackage](../../getting-started/index.html) can also be installed, but is not required.
+Menu Builder needs a matching Hyvä CMS version:
 
-### With a License Key
+| Menu Builder | Hyvä CMS |
+| --- | --- |
+| `1.0.x` | `1.2.0` or later |
+| `1.1.0` | `1.3.0` or later |
 
-1. Require the `hyva-themes/commerce-module-menu-builder` package
+Installation via Hyvä Commerce Metapackage Recommended
+
+The below steps are for installing Menu Builder only. While this is supported to provide greater flexibility and control over installed features, in most cases, we recommend installing all Hyvä Commerce features using our [metapackage](../../getting-started/index.html).
+
+1. Require the `hyva-themes/commerce-module-menu-builder` package:
 
    ```
    composer require hyva-themes/commerce-module-menu-builder
    ```
-2. Run `bin/magento setup:upgrade`
-3. Make sure to clean your browser cache
+2. Run a setup upgrade:
+
+   ```
+   bin/magento setup:upgrade
+   ```
+3. Clear your browser cache.
 
 ### For Agency and Technology Partners
 
-If you have access to the Hyvä Commerce GitLab repositories as Gold/Platinum Agency Partner, or a Technology Partner, you can install Hyvä Commerce in development environments using SSH key authentication.
+If you have access to the Hyvä Commerce GitLab repositories as a Gold/Platinum Agency Partner or a Technology Partner, you can install Hyvä Commerce in development environments using SSH key authentication.
 
-You can configure the git repositories in your root `composer.json` and use the repositories directly as git repos beneath your vendor directory. You can check out tags and branches, make commits and push contributions.
+You can configure the Git repositories in your root `composer.json` and use them directly as Git repos beneath your vendor directory. This lets you check out tags and branches, make commits, and push contributions.
 
-This installation method is not suited for deployments, because GitLab requires SSH key authorization.
+Development Environments Only
 
-1. Ensure your public SSH key is added to your account on gitlab.hyva.io.
-2. Set minimum-stability to `dev` in the Magento composer.json
+This installation method is not suited for deployments, because GitLab requires SSH key authorization and project changes can break production deployments.
+
+Installation Steps
+
+1. Make sure your public SSH key is added to your account on `gitlab.hyva.io`.
+2. Set minimum-stability to `dev` in the Magento `composer.json`:
 
    ```
    composer config minimum-stability dev
    ```
-3. Add the Menu Builder and base Hyvä Commerce module repositories to the Magento `composer.json`
+3. Add the Menu Builder and base Hyvä Commerce module repositories to the Magento `composer.json`:
 
    ```
    composer config repositories.hyva-themes/commerce-module-commerce git git@gitlab.hyva.io:hyva-commerce/module-commerce.git
    composer config repositories.hyva-themes/commerce-module-menu-builder git git@gitlab.hyva.io:hyva-commerce/module-menu-builder.git
    ```
-4. Require the `hyva-themes/commerce-module-menu-builder` package
+4. Require the `hyva-themes/commerce-module-menu-builder` package using the `dev-main` branch:
 
    ```
-   composer require hyva-themes/commerce-module-menu-builder:dev-main
+   composer require --prefer-source 'hyva-themes/commerce-module-menu-builder:dev-main'
    ```
-5. Run `bin/magento setup:upgrade`
-6. Make sure to clean your browser cache
+5. Run a setup upgrade:
+
+   ```
+   bin/magento setup:upgrade
+   ```
+6. Clear your browser cache.
 
 ## Additional Setup
 
-No further steps are required. For more details on how to configure Menu Builder settings, see the [configuration guide](configuration.html).
+No further setup steps are required. To learn how to create and render menus, see [Creating Menus](creating-menus.html).

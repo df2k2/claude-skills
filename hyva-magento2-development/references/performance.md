@@ -84,7 +84,7 @@ When the product is updated, Magento invalidates the cache tag, the FPC entry is
 
 ## Critical CSS / preload
 
-Hyvä injects critical CSS into `<head>` for first paint. Custom fonts and large images benefit from preload hints. Use the `headAdditional` block / view model to inject:
+Hyvä injects critical CSS into `<head>` for first paint. Custom fonts and large images benefit from preload hints. On Hyvä 1.5.3+, `npx hyva-fonts` (see `tailwind-v4.md`) self-hosts the configured fonts and generates fallback-font metrics, which avoids CLS from font swapping. It can also generate the preload snippet. Otherwise, use the `headAdditional` block / view model to inject:
 
 ```php
 <link rel="preload" href="<?= $escaper->escapeUrl($block->getViewFileUrl('fonts/Inter.woff2')) ?>"
@@ -140,10 +140,19 @@ Be careful — prerendering executes JS and counts as a page view. Test analytic
 
 ## bfcache (back/forward cache)
 
-The browser caches the entire page on back/forward. Hyvä is bfcache-friendly *if* you don't:
-- Use `unload` event listeners
-- Open WebSockets or unfinished fetches without cleanup
-- Set `Cache-Control: no-store` on the response
+The browser caches the entire page on back/forward. Hyvä (Default Theme 1.4+) supports bfcache, but it is **off by default**. **Magento itself** sends `Cache-Control: no-store` on every frontend response, in PHP (`Http::setNoCacheHeaders()`) and in the Varnish VCL, and `no-store` always opts a page out. Hyvä's theme module already restores the JS state of its own components on `pageshow`.
+
+To enable it, pick **one** option:
+1. **Recommended:** apply the Magento core fix from [magento/magento2#40750](https://github.com/magento/magento2/pull/40750). It covers both PHP and all VCL versions. Until it is merged, use the patch files in [GrimLink/magento-patch-bfcache](https://github.com/GrimLink/magento-patch-bfcache) with `cweagans/composer-patches` or `vaimo/composer-patches`.
+2. Enable **Stores → Configuration → Hyvä Themes → System → Cache Options → Enable Bfcache**, which removes `no-store` in PHP. On Varnish, also remove it from `vcl_deliver`, e.g. with `elgentos/magento2-varnish-extended`, or the one-line VCL patch in the source doc.
+
+The Mage-OS Theme Optimization module also ships bfcache support, enabled by default, with its own `pageshow` handler.
+
+Even with `no-store` gone, a page stays out of bfcache if your code:
+- Uses `unload` event listeners
+- Leaves WebSockets open or fetches unfinished without cleanup
+
+Custom components should re-sync state on `pageshow` when `event.persisted` is true, e.g. cart counts or open drawers.
 
 Test with Chrome DevTools → Application → Back-forward cache.
 
@@ -169,7 +178,7 @@ Or use the [Hyvä Lighthouse CI integration](https://docs.hyva.io/hyva-themes/pe
 - **Use Tailwind utility classes** instead of writing custom CSS in `theme/` whenever possible — utilities are deduplicated and tree-shaken.
 - **Inline small SVGs** via `Hyva\Theme\ViewModel\Svg` — avoids HTTP round-trips for icons.
 - **Defer non-critical JS** by putting `<script>` blocks at the end of components or using `defer` attributes for separate JS files.
-- **Use `x-intersect` (`@alpinejs/intersect`)** for content below the fold:
+- **Use `x-intersect`** (Alpine's Intersect plugin, bundled with Hyvä) for content below the fold:
   ```html
   <div x-data x-intersect.once="fetchData()">…</div>
   ```
@@ -180,7 +189,9 @@ Or use the [Hyvä Lighthouse CI integration](https://docs.hyva.io/hyva-themes/pe
       <template x-if="items"><ul>…</ul></template>
   </div>
   ```
-- **Avoid GraphQL waterfalls.** If a page needs 3 GraphQL queries, batch them in one request.
+- **Defer whole components with `x-defer`** (Hyvä plugin), e.g. `x-defer="intersect"`, so non-critical Alpine components don't initialize until needed.
+- **Render in PHP, hydrate with Alpine.** Since 1.5.1 the PDP gallery and configurable swatches are PHP-rendered, which removes swatch pop-in and PDP CLS and cuts PDP HTML by ~10% (PLP ~8%). Follow the same pattern in custom components rather than building markup in an `x-for` loop. Custom gallery elements go in the `gallery.additional` container.
+- **Avoid GraphQL waterfalls.** If a page needs 3 GraphQL queries, batch them in one request. Since 1.5.3 the default theme itself no longer calls GraphQL.
 - **Don't ship 50 KB of dynamic Tailwind class data** with every page; share it via section data or a global JSON endpoint cached in localStorage.
 
 ## Profiling slow pages

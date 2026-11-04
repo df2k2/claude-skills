@@ -4,7 +4,7 @@
 
 This release introduces a refreshed design for the checkout page, aimed at improving both aesthetics and user experience. The update includes several stylistic changes. These changes are designed to enhance usability and create a more visually appealing checkout process for users.
 
-Please refer to the [changelog](changelog.html#120-2025-03-05) for details.
+Please refer to the [changelog](changelog-1.x.html#120-2025-03-05) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 Then, to upgrade, run the command
@@ -147,4 +147,4 @@ There are quite a number of backward incompatible changes in this release, but w
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

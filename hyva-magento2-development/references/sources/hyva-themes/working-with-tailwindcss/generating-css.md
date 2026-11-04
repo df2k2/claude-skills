@@ -6,14 +6,14 @@ Hyvä themes use Tailwind CSS to generate optimized stylesheets. Rather than shi
 
 ## Installing npm Dependencies for Tailwind CSS
 
-Before generating CSS, you need to install the required Node.js packages. Navigate to the `web/tailwind` directory inside your Hyvä theme and run `npm ci`:
+Before generating CSS, you need to install the required Node.js packages. Navigate to the `web/tailwind` directory inside your Hyvä theme and run `npm ci --ignore-scripts`:
 
 ```
 cd path/to/project/app/design/frontend/Acme/default/web/tailwind
-npm ci
+npm ci --ignore-scripts
 ```
 
-The `npm ci` command performs a clean install based on the `package-lock.json` file, ensuring consistent dependency versions across environments.
+The `npm ci` command performs a clean install based on the `package-lock.json` file, ensuring consistent dependency versions across environments. The `--ignore-scripts` flag prevents packages from executing lifecycle scripts during installation, which protects against supply chain attacks.
 
 Minimum Node.js version requirements per Hyvä version
 
@@ -50,7 +50,7 @@ Running npm commands without changing directories
 You can run `npm` commands from any directory by passing the `--prefix` argument with the path to your theme's `web/tailwind` folder:
 
 ```
-npm --prefix path/to/project/app/design/frontend/Acme/default/web/tailwind ci
+npm --prefix path/to/project/app/design/frontend/Acme/default/web/tailwind ci --ignore-scripts
 npm --prefix path/to/project/app/design/frontend/Acme/default/web/tailwind run build
 ```
 
@@ -76,21 +76,21 @@ Note
 
 Replace `http://your-magento.test` with your actual Magento development URL.
 
-For setup details and advanced configuration, see the dedicated [Using browser-sync](using-browser-sync.html) page or the official [browser-sync documentation](https://browsersync.io/docs).
+For setup details and advanced configuration, see the dedicated [Using browser-sync](./using-browser-sync.html) page or the official [browser-sync documentation](https://browsersync.io/docs).
 
 ## Deprecated and Removed npm Commands
 
 The following npm commands have been removed from Hyvä and should no longer be used:
 
 `npm run build-prod` (removed in Hyvä 1.4.0)
-: This command was identical to `npm run build` but included a success message. Use `npm run build` instead.
+:   This command was identical to `npm run build` but included a success message. Use `npm run build` instead.
 
 `npm run build-dev` (deprecated in Hyvä 1.2.0, removed in Hyvä 1.4.0)
-: This command generated a development CSS build without watch functionality. It existed before Tailwind's JIT mode made watch builds fast enough for development. Use `npm run watch` instead.
+:   This command generated a development CSS build without watch functionality. It existed before Tailwind's JIT mode made watch builds fast enough for development. Use `npm run watch` instead.
 
 ## Related Topics
 
-- [Tailwind CSS Purging Settings](tailwind-purging-settings.html) - Configure which files Tailwind scans for CSS classes
-- [Hyvä Theme CSS Files](hyva-theme-css-files.html) - Understand the CSS file structure in Hyvä themes
-- [Using browser-sync](using-browser-sync.html) - Set up live reloading for faster development
-- [Dynamic Tailwind Classes](dynamic-tailwind-classes.html) - Handle dynamically generated Tailwind class names
+- [Tailwind CSS Purging Settings](./tailwind-purging-settings.html) - Configure which files Tailwind scans for CSS classes
+- [Hyvä Theme CSS Files](./hyva-theme-css-files.html) - Understand the CSS file structure in Hyvä themes
+- [Using browser-sync](./using-browser-sync.html) - Set up live reloading for faster development
+- [Dynamic Tailwind Classes](./dynamic-tailwind-classes.html) - Handle dynamically generated Tailwind class names

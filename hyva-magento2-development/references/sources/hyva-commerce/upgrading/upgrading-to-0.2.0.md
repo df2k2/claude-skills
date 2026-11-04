@@ -105,4 +105,4 @@ The changelog is available [here](changelog.html#020-2025-04-17).
 
 ## Known Issues
 
-See bugfixes in the [0.3.0 release](upgrading-to-0.3.0.html).
+See bugfixes in the [0.3.0 release](./upgrading-to-0.3.0.html).

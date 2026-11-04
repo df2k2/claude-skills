@@ -2,7 +2,7 @@
 
 # Custom Sliders
 
-Same as with the [product slider](product-sliders.html) creating a slider is as easy as creating the following xml:
+Same as with the [product slider](./product-sliders.html) creating a slider is as easy as creating the following xml:
 
 ```
 <page>

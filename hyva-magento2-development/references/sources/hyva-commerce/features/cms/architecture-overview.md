@@ -2,84 +2,135 @@
 
 # Hyvä CMS Architecture and Technical Overview
 
-This document provides a technical overview of Hyvä CMS architecture, explaining how the system works from both user and developer perspectives.
+Hyvä CMS is a component-based content system for Magento. Content is stored as structured JSON, rendered through Magento templates, and edited through the Liveview Editor.
 
-## Introduction to Hyvä CMS
+This architecture gives merchants a visual editing workflow while developers keep control over component fields, rendering, data access, validation, and theme integration.
 
-Hyvä CMS is a component-based content management system built for Magento that provides a live preview editing experience. Hyvä CMS stores content as structured JSON data representing a tree of components. Each component is declared in a `components.json` file defining its editable fields and a template file rendering its HTML output.
+## Module Overview
 
-The Hyvä CMS system enables merchants to build content visually using a component-based editor while maintaining full control over the rendered HTML through Magento template files. This approach combines the ease of visual editing with the flexibility of custom templates.
+Hyvä CMS is split into modules with clear responsibilities.
 
-## System Architecture Overview
+| Module | Responsibility |
+| --- | --- |
+| `liveview-editor` | Core editor UI, preview system, component discovery, version history, translations, Tailwind JIT integration, preview security, editor preferences, and component CLI tools. |
+| `liveview-connect` | CmsConnect supplies approved server actions and fragment rendering for the browser-owned editor document. |
+| `magewire-compat` | Temporary compatibility classes and entry points for integrations with the previous internal Magewire fork. |
+| `admin-styles` | Shared design tokens, package styles and an optional combined build. See [Admin Styles](admin-styles.html). |
+| `magento-cms` | Integration with Magento CMS pages and CMS blocks, including storage tables, rendering plugins, REST APIs, GraphQL queries, version history, and Tailwind CSS storage. |
+| `magento-attributes` | Integration with product and category EAV attributes such as descriptions. It resolves compatible attributes, stores attribute content, and replaces frontend attribute output when Hyvä CMS is enabled. |
+| `components-base` | Built-in component declarations and templates such as rows, columns, headings, images, banners, cards, accordions, CMS blocks, widgets, and product sliders. |
+| `scheduling` | Scheduled publication for supported Hyvä CMS content providers. |
+| `template` | Templates, snippets, preview thumbnails, default templates, and template/snippet editor providers. |
+| `cms-import-export` | ZIP Import/Export, JSON Import/Export, media handling, translations, history, and instance component transfer. |
+| `instance-components` | Admin-created database-backed components. |
 
-Hyvä CMS consists of multiple modules that work together to provide the complete content management solution. Each module handles a specific aspect of the CMS functionality, from content editing to frontend rendering.
+## Supported Content Types
 
-**liveview-editor**: The liveview-editor module provides the Liveview Editor interface, preview system, component discovery, content storage handling, version history, and more. This module contains the core editing experience that merchants interact with in the Magento admin panel.
+Core modules support:
 
-**hyva-cms-magewire**: The hyva-cms-magewire module is a forked version of [Magewire v1.11.1](https://github.com/magewirephp/magewire/tree/1.11.1) customized for Hyvä CMS and admin panel use. This module provides reactive PHP components with property persistence and dynamic rendering capabilities for the editor interface. The Magewire framework enables the real-time updates that make the Liveview Editor responsive.
+- CMS pages
+- CMS blocks
+- Product attributes
+- Category attributes
+- Templates
+- Snippets
 
-**magento-cms**: The magento-cms module serves as the integration layer connecting Hyvä CMS with Magento's native CMS Page and CMS Block entities. This module uses plugins to intercept content retrieval methods and replace Magento's default content with Hyvä CMS rendered content. The magento-cms module ensures seamless integration with existing Magento CMS functionality.
+Hyvä Commerce companion packages can add further content types through the same provider contracts, storage model, and Liveview Editor. For example, [Menu Builder](../menu-builder/index.html) adds navigation menus.
 
-**components-base**: The components-base module provides pre-built components including text, headings, grids, groups, images, buttons, cards, banners, sliders, accordions, and other base components. These components can and often should be overridden or disabled in your project module to align with your project's design system and brand guidelines. The components-base module serves as a starting point that developers customize for their specific needs.
+Custom modules can add more content types by implementing the Hyvä CMS provider contracts and editor integration. See [Extending for Other Content Types](extending-for-other-content-types.html).
 
-**scheduling**: The scheduling module provides a content scheduling system allowing merchants to schedule content publication and unpublishing at specific times. This module manages the timing of content state changes, enabling merchants to prepare content in advance and schedule it to go live automatically.
+## Component Discovery
 
-## How Hyvä CMS Works
+Code-defined components are declared in `etc/hyva_cms/components.json` files inside Magento modules. The component collector scans installed modules, validates declarations against the JSON schema, processes includes and option sources, and builds a unified registry.
 
-### User Perspective: Content Editing Workflow
+The registry contains the component label, category, template path, fields, child-component rules, descriptions, context flags, and variant settings. In production mode, component data is cached in the `hyva_cms` cache. Developer mode keeps iteration faster by avoiding stale component cache behavior.
 
-Merchants enable Hyvä CMS on CMS Pages and CMS Blocks through the Magento admin panel. Once enabled, merchants can open the Liveview Editor to build content using components. The Liveview Editor provides a live preview that updates in real-time as changes are made, allowing merchants to see exactly how their content will appear on the frontend.
+Database-backed [instance components](features/instance-components.html) are collected separately by `InstanceComponentCollector` and merged into the same provider registry with the `instance/` prefix, stored in the `hyva_cms_instance_component` table. They are an additional source, not a replacement for module-defined components: they don't support child components, may use `content`, `design`, and `advanced` sections like normal declarations, and the `hyva_cms` cache is cleaned after saving.
 
-Available Content Types
+## Content Storage
 
-CMS Pages and Blocks are currently supported. Catalog and product attributes support is coming soon. Third-party content types like blogs may also support Hyvä CMS, depending on the vendor.
+Hyvä CMS stores content as JSON component trees. A content item usually has separate draft and published content, plus version history and Tailwind CSS data.
 
-Content is managed in two states: draft (work in progress) and published (live on the frontend). Merchants can save drafts, preview them via shareable URLs, and publish when ready. The Hyvä CMS system maintains version history automatically, allowing merchants to review and revert to previous versions if needed.
+CMS pages and blocks use dedicated Hyvä CMS tables that reference Magento's native `cms_page` and `cms_block` records. Product and category attribute content uses dedicated attribute liveview tables and stores enabled attributes plus base and store-specific content.
 
-### Technical Architecture: Component Discovery and Registration
+Version history is stored separately so merchants can restore or compare earlier versions without changing the current draft or published state.
 
-The Hyvä CMS component discovery system scans all Magento modules for component declarations. Components are declared in JSON files (`etc/hyva_cms/components.json`) within Magento modules. The `Component\Collector` class scans all modules, validates declarations against a JSON schema, processes includes and source model options, and builds a unified component registry. The component registry is cached in Magento's production mode for performance, ensuring fast component lookup during rendering.
+## Rendering
 
-Each component declaration must include a unique identifier and editable fields definition. The template path is optional in the component declaration; if not specified, Hyvä CMS defaults to a standard template path within the module's directory structure. The Component\Collector validates that all required fields are present and correct during component discovery. During rendering, if a component template is not found, Hyvä CMS displays an error message in the editor preview with a hint to help developers identify and fix the missing template.
+When Hyvä CMS is enabled for a supported item, frontend rendering loads the published Hyvä CMS JSON and renders each component using Magento's template system.
 
-### Technical Architecture: Content Storage
+The root renderer walks the component tree and delegates each component to its declared PHTML template. Component templates receive `Hyva\CmsLiveviewEditor\Block\Element`, so they can use helper methods for editor attributes, images, links, child rendering, classes, block IDs, and rich text output.
 
-Hyvä CMS stores content as structured JSON data in dedicated database tables. Each content group contains a tree of components, with user-entered field values stored within each component's JSON structure. The JSON structure preserves the hierarchical relationship between components, allowing nested layouts and component groups.
+In preview mode, Hyvä CMS injects the editor integration attributes (such as `data-liveview-element` and the root `getEditorAttrs()` values) into each component's first element automatically, and strips them from public storefront output. Templates can opt out with `$block->setData('auto_attributes', false)`.
 
-Version history is stored in separate database tables. Each time content is saved, Hyvä CMS creates a new version record in the version history table. This version history system enables merchants to review changes over time and revert to earlier versions when needed.
+From Hyvä CMS `1.1.0`, the Liveview wrapper elements render with `display: contents` in the editor preview and are left out of the storefront markup. To restore the legacy wrapper divs on the storefront, enable **Enable Legacy Liveview-Content Wrapper Divs** under `Stores → Configuration → Hyvä Commerce → Hyvä CMS → Advanced` (config path `hyva_cms/advanced/legacy_liveview_wrapper`).
 
-### Technical Architecture: Frontend Rendering
+For product and category attributes, frontend plugins replace the native attribute HTML with rendered Hyvä CMS content when content is enabled and published.
 
-When Hyvä CMS is enabled for a CMS Page or CMS Block entity, plugins intercept Magento's content retrieval methods (`getContent()` for pages and blocks). The plugins check if Hyvä CMS is enabled for the entity, load the published content JSON from the database, and render it using the component system.
+## Liveview Editor
 
-The `ROOT.phtml` template serves as the entry point for Hyvä CMS rendering. The ROOT template iterates through the component tree stored in the JSON data and renders each component using its declared template path. Component templates follow Magento's standard template system and can use ViewModels, block methods, and all Magento template features. This approach ensures that Hyvä CMS components have full access to Magento's rendering capabilities while maintaining the structured content model.
+See [Liveview Editor](editor.html) for the interface. The browser owns the unsaved content tree and CmsConnect provides approved server actions. Local editing uses the editor command bus; Magento validates and persists the complete document and supplies trusted lookups and PHP-rendered previews. See [Moving from Magewire to CmsConnect](cms-connect.html) for the boundaries and compatibility guidance.
 
-### Technical Architecture: Liveview Editor
+The preview iframe loads a storefront URL. Editor updates are pushed into the preview so merchants can see the result without full page reloads. Preview URLs use security tokens that allow draft preview sharing without publishing the content. The editor and preview communicate through a structured `postMessage` layer, the [Liveview Bridge](liveview-bridge.html).
 
-The Liveview Editor uses the forked Magewire framework for reactive state management. The `LiveviewComposer` Magewire component class manages the content tree, handles saves, and coordinates preview updates. When merchants make changes in the editor, the LiveviewComposer class syncs component properties and triggers preview updates.
+Editor features include:
 
-The LiveviewComposer class maintains the component tree structure in memory as merchants edit. Each component's editable fields are bound to Magewire properties, enabling two-way data binding between the editor interface and the component data. When merchants save changes, the LiveviewComposer serializes the component tree to JSON and persists it to the database.
+- Navigator and a tabs bar for recent content
+- Responsive preview modes and split view
+- Context editing directly in the preview
+- Rich text editing with TipTap, including Magento variables and directives
+- Monaco-powered HTML editing
+- Version history, plus session-level undo and redo
+- Translations
+- Templates and snippets
+- Import/Export
+- Scheduling
+- Per-user editor preferences, favourite components, and keyboard shortcuts
+- Instance components
 
-### Technical Architecture: Preview System
+## Tailwind CSS Generation
 
-The Liveview Editor displays preview content in an iframe that loads a frontend URL. When merchants make changes in the editor, the parent window makes AJAX requests to fetch updated content, then sends that content to the iframe via postMessage for real-time updates. This architecture enables the live preview experience without requiring full page reloads.
+Hyvä CMS generates Tailwind CSS for content so that classes used in components produce styles without a full theme rebuild. Generated CSS is scoped to each entity with a wrapper selector in the form `.hcms-{type}-{id}` (for example `.hcms-page-42`), which keeps content styles from leaking into the rest of the page. CSS is stored per entity, theme, and edition (draft, published, or scheduled).
 
-Preview URLs can also be opened in new tabs and shared with colleagues. These preview URLs include security tokens that are valid for one week, allowing merchants to share draft content for review. Preview rendering uses the same component templates as the frontend, ensuring accuracy between preview and live content. Preview requests bypass cache to show draft content, ensuring merchants always see their latest changes.
+Compilation can run in one of two ways, selected in store configuration:
 
-## Extension Points
+- **In-browser** Just-In-Time compilation, which compiles styles in the editor. This is the default.
+- **Server-side** compilation through a Node-based Tailwind compiler.
 
-Hyvä CMS is designed to be extensible, providing multiple extension points for developers to customize and extend the system. Developers can create custom components, override base components, define custom field types, and add support for additional content types beyond CMS Pages and Blocks.
+Both paths produce the same scoped output and support Tailwind v3 and v4. The strategy toggle is provided by the `hyva-themes/commerce-module-cms-tailwind-jit-bridge` package. For configuration, the server-side recommendation for new projects, and backward-compatibility details, see [Tailwind CSS Compilation](tailwind-compilation.html).
 
-The component system allows developers to declare new components in their own modules, following the same JSON declaration format used by the components-base module. Developers can also override existing component templates to customize rendering, or disable base components entirely if they don't fit the project's needs.
+Projects should still prefer component templates and design-system options over asking merchants to enter Tailwind classes manually.
 
-Custom field types enable developers to create specialized input controls for component editing. These custom field types integrate with the Liveview Editor interface, providing merchants with appropriate editing controls for complex data types.
+## Scheduling
 
-Adding support for additional content types requires implementing the Hyvä CMS integration layer for the target entity. This typically involves creating plugins that intercept content retrieval methods and implementing the necessary database schema to store Hyvä CMS content for the new entity type.
+See [Content Scheduling](features/content-scheduling.html) for the merchant workflow and configuration. Architecturally, the scheduling module stores releases and scheduled items separately from drafts and published content. Cron publishes due releases by asking the registered schedule provider for each content type to apply content, Tailwind CSS, version history, and any content-type-specific settings.
 
-## Related Topics
+Hyvä CMS scheduling is separate from Adobe Commerce Content Staging.
 
-- **[Creating Components](creating-components.html)** - Learn how to build custom components for your Hyvä CMS implementation
-- **[Overriding Existing Components](overriding-existing-components.html)** - Customize base components to match your design system
-- **[Component Declaration Schema](component-declaration-schema.html)** - Reference documentation for component field definitions and structure
-- **[Creating Custom Field Types](creating-custom-component-fields-types.html)** - Build specialized input controls for component editing
-- **[Extending for Other Content Types](extending-for-other-content-types.html)** - Add Hyvä CMS support to custom Magento entities
+The scheduling module is available from Hyvä CMS `1.0.2`.
+
+## Templates, Snippets, and Instance Components
+
+Templates and snippets are stored as Hyvä CMS content providers. Templates act as full starting layouts. Snippets store selected components that can be inserted into other content. See [Templates And Snippets](features/templates-and-snippets.html) for the merchant workflow. Templates, snippets and instance components are available from Hyvä CMS `1.2.0`.
+
+Instance components are database-backed component definitions. They can define fields and a lightweight HTML template through the admin UI. They are merged into the normal component registry and can be exported with content that uses them. See [Instance Components](features/instance-components.html) for the merchant workflow.
+
+## APIs
+
+REST APIs expose admin CRUD operations for CMS pages, blocks, version history, Tailwind CSS records, catalog attribute content, scheduling entities, templates, and snippets. GraphQL exposes published CMS page and CMS block content for frontend use. The REST and GraphQL APIs are available from Hyvä CMS `1.1.0`.
+
+See [Hyvä CMS APIs](apis.html).
+
+## Developer Extension Points
+
+Developers can extend Hyvä CMS by:
+
+- Creating code-defined components.
+- Overriding base component templates or declarations.
+- Adding custom field types.
+- Registering option sources for component fields.
+- Adding support for custom content types.
+- Adding schedule providers for custom content types.
+- Adding custom instance-template field renderers.
+- [Allowing custom head assets](adding-assets-to-liveview-editor.html) (CSS or JavaScript) in the Liveview Editor.
+- Integrating with REST APIs or GraphQL.

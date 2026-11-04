@@ -111,7 +111,7 @@ This is the recommended approach for theming and creating variations like a "dar
 
 Learn more about CSS Variables
 
-For a complete guide on how to use CSS Variables with Tailwind CSS in your Hyvä theme, please refer to the [CSS Variables + TailwindCSS documentation](css-variables-plus-tailwindcss.html).
+For a complete guide on how to use CSS Variables with Tailwind CSS in your Hyvä theme, please refer to the [CSS Variables + TailwindCSS documentation](./css-variables-plus-tailwindcss.html).
 
 ### Defining CSS Variable Values
 

@@ -37,6 +37,10 @@ The following template snippet shows two ways to target the `street` key inside 
 <button wire:click="$set('address.street', 'Bag End')">Correct Street</button>
 ```
 
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+The `wire:model="address.street"` binding sends the input value for `$address['street']` with the component's next request. Use `wire:model.live="address.street"` to sync it on every change. The `$set()` call updates the same nested key directly, without needing a dedicated PHP method.
+
 The `wire:model="address.street"` binding keeps the input in sync with `$address['street']` on the Magewire component. The `$set()` call updates the same nested key directly, without needing a dedicated PHP method.
 
 ## Lifecycle Hook Methods for Magewire Array Properties
@@ -49,10 +53,15 @@ For the `$address` array property, updating the `street` key triggers a method n
 // Lifecycle hook: fires when address.street is updated
 public function updatedAddressStreet(string $value): string
 {
-    // Return the (optionally modified) value to be stored
-    return $value;
+    // Assign the (optionally modified) value and return it:
+    // Magewire 1 stores the return value, Magewire 3 ignores it and keeps the assignment.
+    $this->address['street'] = trim($value);
+
+    return $this->address['street'];
 }
 ```
+
+Magewire 3 also calls `updatedAddress($value, $key)` for every nested key, with `$key` set to `street` in this example. See [Lifecycle Hooks](https://docs.magewirephp.nl/pages/essentials/lifecycle-hooks.html) in the Magewire 3 docs.
 
 Naming Convention for Nested Array Lifecycle Hooks
 

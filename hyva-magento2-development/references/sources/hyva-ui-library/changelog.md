@@ -4,10 +4,51 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased](https://gitlab.hyva.io/hyva-themes/ui/hyva-ui/-/compare/2.7.1...main)
+## [Unreleased](https://gitlab.hyva.io/hyva-themes/ui/hyva-ui/-/compare/2.9.0...main)
+
+## [2.9.0](https://gitlab.hyva.io/hyva-themes/ui/hyva-ui/-/compare/2.8.0...2.9.0) - 2026-10-12
+
+### Added
+
+- New experimental Component **Dark Mode A** for switching between a light and dark theme with a header toggle, following the system preference by default
+- New `presets` folder with design token presets as `design.tokens.json` files
+- New Preset **Hyvä Dark**, a dark-only version of the **Dark Mode A** palette
+- New Preset **Koti**, based on the Koti sample data theme
+
+### Changed
+
+- Replaced **Gallery A-basic** with **Gallery A-fashion**, rebuilt on the Hyvä Default Theme 1.5 gallery, now requires Hyvä Default Theme 1.5 or higher
+- Added a `zoom` option to **Gallery A** to choose between `lightbox`, `magnifier` or `none`
+- Removed the `navdir`, `navarrows`, `navoverflow` and `autoplay` options and the `mask-overflow.css` utility from **Gallery A**
+- Changed **Ajax ATC A** to show each selected product in the modal when adding grouped products
+- Changed **Ajax ATC A** to use `x-html-safe` instead of `x-html`, now requires Hyvä Theme Module 1.5.3 or higher
+- Replaced `x-collapse` in **Product Data B** with the CSS `details-animate` utility from **Accordion A**, the **Alpine Collapse** plugin is no longer required
+- Added a note to the **Alpine Collapse** plugin about `x-collapse` modifiers like `.min` not working with `interpolate-size`
+
+### Fixed
+
+- Fixed **Ajax ATC A** opening an empty modal when the added product could not be found in the cart
+- Fixed the expand animation of **Product Data B** not working in Chromium-based browsers with Hyvä 1.4 or higher
+- Fixed outdated file paths in the **Accordion A** README
+
+## [2.8.0](https://gitlab.hyva.io/hyva-themes/ui/hyva-ui/-/compare/2.7.1...2.8.0) - 2026-06-30
+
+### Added
+
+- New Component **Map A** for displaying Google Maps with one or more location markers, with support for the `AdvancedMarkerElement` API when a Map ID is provided
+- New Component **Embed A** for embedding YouTube and Vimeo videos with an optional lazy-load mode
+
+### Fixed
+
+- Fixed invalid reCAPTCHA implementation in **Popup A-newsletter-image** and **Popup B-newsletter-title**: replaced the outdated `getRecaptchaData` approach with the correct `viewModelRecaptcha` layout argument, added missing `Magento_ReCaptchaNewsletter/layout/default.xml`, and added missing `<body>` wrapper in `Magento_Newsletter/layout/default.xml`
+- Fixed invalid icons in example templates for **Modal A** and in **Notification A/B**
+- Fixed wrong block reference name for the orders link in **Footer B** (`customer.header.orders.link` renamed to `customer.footer.orders.link`),
+  many thanks to Lars de Weert (Made by Mouses) for their contribution!
+- Fixed missing image height in **Banner B-split** causing the image not to stretch to fill its container
+- Fixed incorrect `qtyHasNewValue` logic in **Minicart A/B**,
+  many thanks to Finn Reinhardt (Basecom) for their contribution!
 
 ## [2.7.1](https://gitlab.hyva.io/hyva-themes/ui/hyva-ui/-/compare/2.7.0...2.7.1) - 2026-03-23
 

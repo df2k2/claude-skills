@@ -22,13 +22,32 @@ Hyvä's theme module already handles the second blocker for all native Hyvä com
 
 ## Enabling bfcache
 
-### Step 1: Enable the setting
+There are two ways to remove the `no-store` blocker. Pick one, there is no need to combine them.
+
+### Option 1: apply the Magento core patch (recommended)
+
+[magento/magento2#40750](https://github.com/magento/magento2/pull/40750) is an open pull request that fixes both the PHP header and all Varnish VCL versions at the core level.
+
+Until the PR is merged, use the [magento-patch-bfcache](https://github.com/GrimLink/magento-patch-bfcache) repository, which provides ready-made patch files. Clone it into a `patches` directory in your Magento root and apply using a Composer patch tool such as [cweagans/composer-patches](https://github.com/cweagans/composer-patches) or [vaimo/composer-patches](https://github.com/vaimo/composer-patches):
+
+```
+git clone https://github.com/GrimLink/magento-patch-bfcache patches
+mv patches/patches.json .
+composer patches-relock
+composer patches-repatch
+```
+
+With the patch applied, the Hyvä **Enable Bfcache** setting is not needed.
+
+### Option 2: enable the Hyvä setting and update the Varnish VCL
+
+#### Step 1: Enable the setting
 
 Enable bfcache in the Magento admin under `Stores → Configuration → Hyvä Themes → System → Cache Options → Enable Bfcache`.
 
 This removes `no-store` from the `Cache-Control` header at the PHP level. For stores not using Varnish as the full page cache backend, this is the only step required.
 
-### Step 2: Update the Varnish VCL
+#### Step 2: Update the Varnish VCL
 
 If you are using Varnish, the `no-store` directive is also set in the VCL and must be removed separately. The recommended option is the [Elgentos VarnishExtended](https://github.com/elgentos/magento2-varnish-extended) module, which generates an updated VCL that removes `no-store` along with other improvements.
 
@@ -77,17 +96,37 @@ index 4e07ac5..e32be55 100644
 
 For Fastly-specific instructions, see the [Mage-OS Theme Optimization module documentation](https://github.com/mage-os/module-theme-optimization/blob/main/README.md#backforward-cache).
 
-### Alternative: apply the Magento core patch
+## Using the Mage-OS Theme Optimization module
 
-[magento/magento2#40750](https://github.com/magento/magento2/pull/40750) is an open pull request that fixes both the PHP header and all Varnish VCL versions at the core level. This covers both Step 1 and Step 2 in one go.
+The [Mage-OS Theme Optimization](https://github.com/mage-os/module-theme-optimization) module also ships bfcache support, and it is enabled by default. Besides removing the `no-store` header, it adds its own `pageshow` handler script to every page.
 
-Until the PR is merged, use `magerun2` to generate the patch file:
+Do not combine the Mage-OS bfcache handler with Hyvä
 
-```
-magerun2 github:pr --patch 40750
-```
+Hyvä Default Theme already resets its components on a bfcache restore. It clears messages, closes the cart drawer, menus and popups, refreshes the form key and reloads the customer section data. The Mage-OS handler repeats this work, so every restore runs the same logic twice (including a second customer section data request) and the page loads JavaScript it does not need.
 
-Then apply the generated patch using a tool such as [cweagans/composer-patches](https://github.com/cweagans/composer-patches).
+For the same reason, the Mage-OS settings **Update Mini Cart on User Interaction** and **Auto Close Menu** have no effect on Hyvä. Hyvä always closes the menus and reloads the mini cart on restore.
+
+How to resolve this depends on which part of the module you rely on:
+
+- **You use option 1 or option 2 above:** disable the Mage-OS bfcache feature under `Stores → Configuration → Advanced → System → Back/Forward Cache → Enable Back/Forward Cache`, or run:
+
+  ```
+  bin/magento config:set system/bfcache/general/enable 0
+  ```
+- **You use the Mage-OS module to remove the `no-store` header** (for example on Fastly): keep the setting enabled and only remove the handler script. Add the following to the `Magento_Theme/layout/default.xml` file in your theme:
+
+  ```
+  <?xml version="1.0"?>
+  <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+      <body>
+          <referenceBlock name="theme-optimization.bfcache.main" remove="true"/>
+      </body>
+  </page>
+  ```
+
+Login state on restore
+
+The Mage-OS handler reloads the full page when the login state changed after the page was cached. Hyvä does not reload the page. It refreshes the customer section data instead, which updates the customer menu and mini cart without losing the bfcache speed gain.
 
 ## Handling restored page state
 
@@ -124,4 +163,5 @@ eventListeners: {
 - [web.dev: Back/forward cache](https://web.dev/articles/bfcache)
 - [MDN Glossary: bfcache](https://developer.mozilla.org/en-US/docs/Glossary/bfcache)
 - [Core Fix: magento/magento2#40750](https://github.com/magento/magento2/pull/40750)
+- [Patch: magento-patch-bfcache](https://github.com/GrimLink/magento-patch-bfcache)
 - [Example Gist: for pageshow event](https://gist.github.com/GrimLink/a7bfd9152cfb81d32cc8e2a183ff09ef)

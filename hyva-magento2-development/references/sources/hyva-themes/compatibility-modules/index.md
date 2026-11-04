@@ -15,6 +15,6 @@ If you prefer videos to written content, you might enjoy this tutorial series.
 
 ## Making Existing Modules Hyvä-Compatible
 
-If you are not creating a new compatibility module but want to make an existing module Hyvä-compatible, you need to register it to be included in the `hyva-themes.json` file. This process is explained in the [Registering a module for inclusion in `hyva-themes.json`](technical-deep-dive.html#registering-a-module-for-inclusion-in-hyva-themesjson) section.
+If you are not creating a new compatibility module but want to make an existing module Hyvä-compatible, you need to register it to be included in the `hyva-themes.json` file. This process is explained in the [Registering a module for inclusion in `hyva-themes.json`](./technical-deep-dive.html#registering-a-module-for-inclusion-in-hyva-themesjson) section.
 
-For a more detailed explanation of how to make existing modules compatible, please see the [Making Existing Modules Hyvä-Compatible](getting-started.html#making-existing-modules-hyva-compatible) section in our Getting Started documentation.
+For a more detailed explanation of how to make existing modules compatible, please see the [Making Existing Modules Hyvä-Compatible](./getting-started.html#making-existing-modules-hyva-compatible) section in our Getting Started documentation.

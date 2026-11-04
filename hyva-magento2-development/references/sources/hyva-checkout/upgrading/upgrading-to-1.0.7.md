@@ -3,7 +3,7 @@
 # Upgrading to 1.0.7
 
 This backwards compatible maintenance release fixes a number of issues.
-Please refer to the [changelog](changelog.html#107-2023-06-19) for details.
+Please refer to the [changelog](changelog-1.x.html#107-2023-06-19) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 Then, to upgrade, run the command
@@ -53,4 +53,4 @@ This release contains no backwards incompatible changes.
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

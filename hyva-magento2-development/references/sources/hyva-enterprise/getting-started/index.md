@@ -12,14 +12,20 @@ A separate Hyvä Enterprise license is required in addition to your Hyvä Commer
 
 Before installing Hyvä Enterprise, check that your environment meets the requirements below. Only install the prerequisites for the features you actually plan to use.
 
-### Core Platform Requirements
+### Hyvä Enterprise Prerequisites
+
+PHP 8.1 support ends in 2027
+
+From 2027 onwards, Hyvä products will be built with PHP `8.2` and newer code. Existing installations on PHP `8.1` won't break right away, but PHP `8.1` will no longer be supported from then. Plan your upgrade to PHP `8.2` or higher.
+
+This also affects Magento versions that only run on PHP `8.1`: Magento `2.4.4` and `2.4.5` (including all their patch releases) will no longer be supported from 2027. Upgrade to Magento `2.4.6` or higher, always using the latest patch release (for example `2.4.6-p15`).
 
 These requirements apply to all Hyvä Enterprise installations:
 
 - **Adobe Commerce** 2.4.4 or higher - The current implementation targets 2.4.6. Versions 2.4.4 and 2.4.5 have not been fully tested and may have issues. B2B currently requires 2.4.6+.
 - **[Hyvä Themes](../../hyva-themes/getting-started/index.html)** 1.2.9, 1.3.10, or higher - Some older Hyvä Enterprise versions support earlier 1.3.x releases.
-- **[Hyvä Checkout](../../hyva-checkout/getting-started/index.html)** 1.3.0 or higher - Only required for checkout features. Requires a Hyvä Checkout license. Some older versions support 1.1.x and 1.2.x.
-- **PHP** 8.0 or newer
+- **[Hyvä Checkout](../../hyva-checkout/getting-started/index.html)** 1.3.15 or higher - Only required for checkout features. Some older versions support 1.1.x and 1.2.x. Checkout 3.x needs the releases of the Hyvä Enterprise checkout modules that support it, see [Release Lines and Magewire Versions](../../hyva-checkout/getting-started/release-lines.html#running-a-store-on-checkout-3x).
+- **PHP** 8.1 or later
 
 Release notes for related products:
 
@@ -65,40 +71,46 @@ Adobe Data Connection enables behavioral data collection for Adobe Experience Pl
 
 Follow Adobe's [Data Connection installation guide](https://experienceleague.adobe.com/en/docs/commerce/data-connection/fundamentals/install) to configure the connector. See the [Data Connection release notes](https://experienceleague.adobe.com/en/docs/commerce/data-connection/release-notes) for version details.
 
-## Installing Hyvä Enterprise for Hyvä Themes
+## Installing the full Hyvä Enterprise product suite
 
-Hyvä Enterprise for Hyvä Themes provides frontend compatibility for Adobe Commerce enterprise features. Install only the metapackages for the features you need. All packages come from your Hyvä packagist.com license key.
+For Hyvä Enterprise licensees that purchased or upgraded after 1st July 2026
 
-**Before you begin**, make sure you have:
+Hyvä Enterprise product suite features are only included with licenses purchased (or upgraded) from 1st July 2026 or if you have a separate [Hyvä Commerce](../../hyva-commerce/index.html) license for the same domain. For more details, including how to upgrade from the legacy license, see [our blog post](https://www.hyva.io/blog/news/new-hyva-enterprise-all-inclusive.html).
 
 1. Installed and configured [Hyvä Themes](../../hyva-themes/getting-started/index.html)
 2. Installed any Adobe Commerce features you plan to use (B2B, Live Search, Product Recommendations, Data Connection)
 
-Pick the metapackage(s) that match your feature requirements and run the corresponding Composer commands:
+Metapackage vs. Individual Features
 
-Adobe Commerce Base Features (GTM, customer attributes)
+The instructions below install all features via the Hyvä Commerce metapackage. To install individual features instead, see the relevant feature's installation page under the Features section.
 
-Install the base Hyvä Enterprise metapackage for Adobe Commerce compatibility:
+1. Require the relevant package. For non B2B users:
 
-Install Adobe Commerce compatibility metapackage
+   ```
+   composer require hyva-themes/enterprise
+   ```
 
-```
-composer require hyva-themes/magento2-hyva-enterprise-commerce
-bin/magento setup:upgrade
-```
+   For B2B users:
 
+   ```
+   composer require hyva-themes/enterprise-b2b
+   ```
+2. Run a setup upgrade:
 
-B2B Features (company accounts, shared catalogs, quote templates, purchase orders)
+   ```
+   bin/magento setup:upgrade
+   ```
+3. Run Tailwind to generate storefront styles. Replace the path below with the path to your theme's `web/tailwind` folder:
 
-Install the B2B metapackage for Adobe Commerce B2B compatibility. This package automatically includes the base metapackage as a dependency:
+   ```
+   bin/magento hyva:config:generate
+   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci --ignore-scripts
+   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ run build
+   ```
 
-Install B2B metapackage
+## Installing Additional Add-on Packages
 
-```
-composer require hyva-themes/magento2-hyva-enterprise-b2b
-bin/magento setup:upgrade
-```
-
+The below packages are optional and must be installed separately.
 
 Data Connection (Adobe Experience Platform integration)
 
@@ -135,34 +147,58 @@ composer require hyva-themes/magento2-hyva-enterprise-product-recommendations
 bin/magento setup:upgrade
 ```
 
+## Legacy / Standalone Installation
 
-DEPRECATED: Adobe Sensei Combined Metapackage
+### Installing Hyvä Enterprise for Hyvä Themes
 
-The combined Adobe Sensei metapackage is deprecated. Install the Data Connection, Live Search, and Product Recommendations metapackages separately instead.
+Hyvä Enterprise for Hyvä Themes provides frontend compatibility for Adobe Commerce enterprise features. Install only the metapackages for the features you need. All packages come from your Hyvä packagist.com license key.
 
-Deprecated Sensei metapackage
+**Before you begin**, make sure you have:
+
+1. Installed and configured [Hyvä Themes](../../hyva-themes/getting-started/index.html)
+2. Installed any Adobe Commerce features you plan to use (B2B, Live Search, Product Recommendations, Data Connection)
+
+Pick the metapackage(s) that match your feature requirements and run the corresponding Composer commands (for additional add-on packages, see the section above):
+
+Adobe Commerce Base Features (GTM, customer attributes)
+
+Install the base Hyvä Enterprise metapackage for Adobe Commerce compatibility:
+
+Install Adobe Commerce compatibility metapackage
 
 ```
-composer require hyva-themes/magento2-hyva-enterprise-sensei
+composer require hyva-themes/magento2-hyva-enterprise-commerce
+bin/magento setup:upgrade
+```
+
+
+B2B Features (company accounts, shared catalogs, quote templates, purchase orders)
+
+Install the B2B metapackage for Adobe Commerce B2B compatibility. This package automatically includes the base metapackage as a dependency:
+
+Install B2B metapackage
+
+```
+composer require hyva-themes/magento2-hyva-enterprise-b2b
 bin/magento setup:upgrade
 ```
 
 Metapackage dependencies
 
-The B2B and Sensei-related metapackages include the base Adobe Commerce metapackage as a dependency. You don't need to install the base metapackage separately when using B2B or Sensei features.
+The B2B metapackage includes the base Adobe Commerce metapackage as a dependency. You don't need to install the base metapackage separately when using B2B features.
 
-### Building Tailwind CSS After Hyvä Enterprise Installation
+#### Building Tailwind CSS After Hyvä Enterprise Installation
 
 After installing any Hyvä Enterprise metapackage for Hyvä Themes, rebuild Tailwind CSS to include styles from the new compatibility modules. Replace the path below with the path to your theme's `web/tailwind` folder:
 
 Build Tailwind CSS for Hyvä Themes
 
 ```
-npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci
+npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci --ignore-scripts
 npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ run build
 ```
 
-## Installing Hyvä Enterprise for Hyvä Checkout
+### Installing Hyvä Enterprise for Hyvä Checkout
 
 Hyvä Enterprise for Hyvä Checkout provides checkout-specific compatibility for Adobe Commerce enterprise features. These packages extend Hyvä Checkout with B2B checkout flows and enterprise feature support.
 
@@ -207,23 +243,19 @@ Metapackage dependencies
 
 The B2B Checkout metapackage includes the base Commerce Checkout metapackage as a dependency. You don't need to install the Commerce Checkout metapackage separately when using B2B features.
 
-### Building Tailwind CSS After Hyvä Enterprise for Hyvä Checkout Installation
+#### Building Tailwind CSS After Hyvä Enterprise for Hyvä Checkout Installation
 
 After installing any Hyvä Enterprise package for Hyvä Checkout, rebuild Tailwind CSS to include styles from the new compatibility modules. Replace the path below with the path to your theme's `web/tailwind` folder:
 
 Build Tailwind CSS for Hyvä Checkout
 
 ```
-npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci
+npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci --ignore-scripts
 npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ run build
 ```
 
-### Configuring Customer Custom Attributes in Hyvä Checkout
+## Configuring Adobe Commerce Customer Custom Attributes in Hyvä Checkout
 
 If you use [Customer Custom Attributes](https://experienceleague.adobe.com/en/docs/commerce-admin/customers/customer-accounts/attributes/attribute-properties) in Adobe Commerce, you can configure which attributes appear on checkout address forms.
 
 Navigate to **Stores > Configuration > Hyvä Themes > Checkout > Components** and find the shipping/billing address groups to set up attribute display settings.
-
-Customer Custom Attributes compatibility
-
-Customer Custom Attributes is not yet fully supported at checkout. Check the [Hyvä Enterprise compatibility tracker](https://gitlab.hyva.io/hyva-public/enterprise-compatibility-tracker/-/boards/37) for current status and known limitations.

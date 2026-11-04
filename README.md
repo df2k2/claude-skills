@@ -9,7 +9,7 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 | Skill | What it covers | Size |
 |---|---|---|
 | [`magento2-development/`](magento2-development/) | Adobe Commerce / Magento Open Source 2.4.x — PHP modules, DI, plugins, observers, EAV, declarative schema, layout XML, RequireJS / Knockout / UI components, Web APIs (REST / SOAP / GraphQL), admin area, CLI / cron / queues, indexing & caching, and Adobe Commerce-only features (B2B, Page Builder, Target Rule, Staging, MSI). Targets 2.4.9 / 2.4.8-p5 / 2.4.7-p10 / 2.4.6-p15. Ships ~2 850 source files (markdown + OpenAPI YAML) from the official AdobeDocs and `magento/devdocs` repos (snapshot 2026-11-04). | 35 MB |
-| [`hyva-magento2-development/`](hyva-magento2-development/) | Hyvä themes for Magento 2 — Hyvä 1.4.x with Tailwind CSS v4 and Alpine.js v3, phtml templates, Alpine components, view models, hyva.config.json, hyva-themes/magento2-* packages, Magewire / Hyvä Checkout, compatibility modules for Luma extensions, Tailwind v3→v4 migration. | 3.4 MB |
+| [`hyva-magento2-development/`](hyva-magento2-development/) | Hyvä themes for Magento 2 — Hyvä 1.5.x (current) and 1.4.x with Tailwind CSS v4 and Alpine.js v3, phtml templates, Alpine components, view models, hyva.config.json, hyva-themes/magento2-* packages, Hyvä Checkout 3.x (Magewire 3) and 1.x (Magewire 1), compatibility modules for Luma extensions, Hyvä 1.4→1.5 and Tailwind v3→v4 migration. Ships ~520 Hyvä docs pages (snapshot 2026-11-04). | 4.8 MB |
 | [`ordergroove-api-development/`](ordergroove-api-development/) | OrderGroove subscription commerce platform — every REST endpoint, every GraphQL type, every webhook payload, the Subscription Manager front-end widget, platform integrations (Shopify, Recharge migration, etc.), Purchase POST, 1-click actions. | 11 MB |
 | [`printful-api-development/`](printful-api-development/) | Printful print-on-demand developer API (v1 stable + v2 open beta) — catalog, orders, mockup generator, files, shipping rates, webhooks (incl. HMAC-SHA256 verification), Sync Products, warehouse products, approval sheets, OAuth scopes, Personal Access Tokens. Ships the full v2 OpenAPI spec (39 paths, 134 schemas) plus the official v1 PHP SDK source. | 908 KB |
 | [`akeneo-pim-api-development/`](akeneo-pim-api-development/) | Akeneo PIM Web API — REST (SaaS/Serenity OpenAPI 3.1.0 + classic CE/EE Swagger 2.0), GraphQL, the Event Platform (webhooks), Apps/Connections OAuth + UI Extensions, Catalogs + product mapping, the Akeneo MCP server, and the official `akeneo/api-php-client`. Ships both specs (289 ops total), the Postman collection, the PHP client source, and the `pim-api-docs` prose. | 12 MB |
@@ -30,7 +30,7 @@ Each skill is a self-contained directory with a `SKILL.md` (the entry point + de
 │   ├── evals/
 │   └── references/
 │       ├── *.md
-│       └── sources/                       ← Hyvä docs from hyva-themes/website + community docs
+│       └── sources/                       ← Hyvä docs from docs.hyva.io (scripts/hyva/*.txt) + GitHub (hyva-themes/magento2-hyva-admin, hyva-coding-standard)
 ├── ordergroove-api-development/
 │   ├── SKILL.md
 │   └── references/

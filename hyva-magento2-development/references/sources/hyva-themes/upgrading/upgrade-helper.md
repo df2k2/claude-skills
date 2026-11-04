@@ -26,7 +26,7 @@ composer global require --dev hyva-themes/upgrade-helper-tools:dev-main
 
 For Manual Use (Gitlab Access is needed!)
 
-If you prefer not to use Composer, you can clone the [repository](https://github.com/hyva-themes/upgrade-helper-tools) or copy a single script to your local machine.
+If you prefer not to use Composer, you can clone the [repository](https://gitlab.hyva.io/hyva-themes/upgrade-helpers/) or copy a single script to your local machine.
 
 ## Migrating from Tailwind CSS v3 to v4
 

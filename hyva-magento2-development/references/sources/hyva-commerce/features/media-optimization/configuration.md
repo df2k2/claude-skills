@@ -1,26 +1,24 @@
 <!-- source: https://docs.hyva.io/hyva-commerce/features/media-optimization/configuration.html -->
 
-# Media Optimisation Configuration
+# Configuring Media Optimization
 
-The Media Optimization settings can be found under *Configuration > Hyva Themes > Media Optimisation*.
+Media Optimization settings are in the Magento admin under `Stores → Settings → Configuration → Hyvä Commerce → Media Optimization`. This page walks through each configuration group.
 
 ## System Check
 
-System Check does not provide configuration options, but rather provides details and diagnostics on the resize and conversion libraries installed, such as whether certain features are supported.
+System Check does not provide configuration options. It reports details and diagnostics on the installed resize and conversion libraries, such as whether specific features are supported.
 
-The System Check can be found at *Configuration > Hyva Themes > Media Optimisation > Platform Compatibility Check > System Check*
+Find it under `Stores → Settings → Configuration → Hyvä Commerce → Media Optimization → Platform Compatibility Check → System Check`.
 
-[![System Check Configuration](images/system-check-config.jpg)](images/system-check-config.jpg)
+## Image Optimization Settings
 
-## Image Optimisation Settings
+These options enable the overall functionality, select the engines and output formats used, and enable logging.
 
-These configuration options allow you to enable the overall functionality of Media Optimisation, select engines and outputs used, and enable logging.
-
-[![Image Optimisation Configuration](images/image-optimization-config.jpeg)](images/image-optimization-config.jpeg)
+[![Image Optimization configuration](./images/image-optimization-config.jpg)](./images/image-optimization-config.jpg)
 
 ### Core Settings
 
-The module ships with defaults that work well for most stores. Enable optimisation and select your desired output formats to get started.
+The module ships with defaults that work well for most stores. Enable optimization and select your output formats to get started.
 
 The Retina setting controls whether the module generates 2x and 3x resolution variants for high-density displays. This improves image quality on modern devices but increases storage requirements and initial processing time.
 
@@ -30,28 +28,20 @@ WebP provides good compression with broad browser support. AVIF offers better co
 
 ## Automatic Image Replacement Settings
 
-These configuration options allow you to enable/disable automatic image replacement, set the mode used for replacing both HTML (e.g. `<img>`) and CSS (e.g. `background-image`), the input formats to target and the final formats to output to.
+These options enable or disable [automatic image replacement](features/automatic-image-replacement.html), set the replacement mode for HTML (for example `<img>`) and CSS (for example `background-image`), the input formats to target, and the output formats to generate. For what each mode does and when to use it, see [Replacement Modes](features/automatic-image-replacement.html#replacement-modes).
 
-[![Automatic Image Replacement Configuration](images/image-optimization-config.jpeg)](images/image-optimization-config.jpeg)
-
-### Replacement Modes
-
-The simple replacement mode maintains HTML structure while updating image URLs, making it the safest option for most sites. Picture mode provides better optimisation but changes the DOM structure, which may affect JavaScript that expects specific elements.
-
-For CSS, simple mode replaces URLs with optimized versions while image-set mode generates modern image-set declarations.
+[![Automatic Image Replacement configuration](./images/automatic-image-replacement-config.jpg)](./images/automatic-image-replacement-config.jpg)
 
 ## Viewport Breakpoints
 
 Viewport Breakpoints configure responsive image sizing based on viewport width, avoiding unnecessarily large images being sent to smaller screens.
 
-[![Viewport Breakpoints Configuration](images/viewport-breakpoints-config.png)](images/viewport-breakpoints-config.png)
+[![Viewport Breakpoints configuration](./images/viewport-breakpoints-config.jpg)](./images/viewport-breakpoints-config.jpg)
 
-Define breakpoint rows with a minimum viewport width, an optional maximum viewport width, and the generated image width to use for that range. Images will never be generated larger than the original. Leave the Generated Image Width empty for viewports above the largest breakpoint to serve the original image size.
+Define breakpoint rows with a minimum viewport width, an optional maximum viewport width, and the generated image width to use for that range. Images are never generated larger than the original. Leave the Generated Image Width empty for viewports above the largest breakpoint to serve the original image size.
 
-Viewport Breakpoints are applied when using the [Developer API](features/developer-api.html) or the [Automatic Image Replacement](features/automatic-image-replacement.html) feature in picture mode. They are not applied in a simple replacement mode. This feature is the main reason why we recommend using the picture mode over the simple mode - it allows sending much smaller images to mobile browsers.
+Breakpoints apply when using the [Developer API](features/developer-api.html) or [Automatic Image Replacement](features/automatic-image-replacement.html#replacement-modes) in picture mode.
 
-## GD|Imagick Resize|Conversion Engine Settings
+## Engine Settings
 
-These configuration options allow for setting engine-specific quality, compression, encoding speed settings and more.
-
-For detailed information about engine selection, requirements, and when to use each engine, see the [Engines documentation](features/engines.html).
+The GD and Imagick engines each expose their own quality, compression, and encoding-speed settings for both resizing and conversion. For engine selection, requirements, and when to use each, see [Image Processing Engines](features/engines.html).

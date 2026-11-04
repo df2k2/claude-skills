@@ -2,9 +2,14 @@
 
 # Customizing GraphQL
 
-The Hyvä default theme uses GraphQL queries occasionally, for example on the cart page.
+Since 1.5.3, the Hyvä default theme no longer uses GraphQL (see [Upgrading to 1.5.3](../upgrading/upgrading-to-1-5-3.html#graphql-is-no-longer-required-by-the-default-theme)).
+GraphQL queries are still used by older theme versions, the optional `hyva-themes/magento2-graphql-cart` extension and third-party modules.
 
 The queries and mutations are built either in the templates or in view models like `\Hyva\Theme\ViewModel\Cart\GraphQlQueriesWithVariables`.
+
+Require the package in your module
+
+The default theme no longer installs `hyva-themes/magento2-graphql-view-model`. A module that uses the `GraphqlViewModel` must add the package to its own `require`.
 
 Often customizations require adding new fields to the requested data, or changing or adding GraphQL arguments.
 

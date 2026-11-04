@@ -6,7 +6,7 @@ On pages with short content viewed on tall screens,
 the default theme may display a large empty space below the footer,
 which can affect the page’s appearance.
 
-[![Original footer positioning](images/footer-at-screen-bottom.jpg)](images/footer-at-screen-bottom.jpg)
+[![Original footer positioning](./images/footer-at-screen-bottom.jpg)](./images/footer-at-screen-bottom.jpg)
 
 If you want the footer to always stick to the bottom of the screen,
 regardless of the page's content height, you can achieve this with a few CSS adjustments.
@@ -37,4 +37,4 @@ even if there’s not enough content to push it down naturally.
 After applying these changes, the footer will appear at the bottom of the page,
 with any extra space positioned above it, providing a more consistent layout across different screen sizes.
 
-[![Changed footer positioning](images/footer-at-screen-bottom-changed.jpg)](images/footer-at-screen-bottom-changed.jpg)
+[![Changed footer positioning](./images/footer-at-screen-bottom-changed.jpg)](./images/footer-at-screen-bottom-changed.jpg)

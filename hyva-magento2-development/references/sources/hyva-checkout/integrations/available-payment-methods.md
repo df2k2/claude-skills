@@ -7,6 +7,10 @@ Hyvä Checkout supports a wide range of payment providers through compatibility 
 - **Full feature overview**: [Checkout Feature Matrix](https://www.hyva.io/hyva-checkout-feature-matrix)
 - **Live status tracking**: [Checkout integration tracker board](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/boards/87)
 
+Checkout 3.x compatibility
+
+Unless stated otherwise, the integrations listed here that are built on Magewire target Hyvä Checkout 1.x (Magewire 1). On Checkout 3.x checkout pages they run through the [Magewire 1 backward compatibility module (v1bc)](../faq/what-is-v1bc.html). Check with the vendor whether an integration supports Checkout 3.x.
+
 Who provides support?
 
 Each integration tracker ticket is labeled `Vendor` or `Community` to indicate who is responsible for the implementation and first-line support. For most integrations, reach out to the payment provider or integration developer first. The Hyvä team is happy to help connect you with the right contact if needed.
@@ -26,7 +30,8 @@ The following payment methods have tracked Hyvä Checkout integrations. Methods 
 Installation
 
 ```
-composer require hyva-themes/magento2-hyva-checkout-adobe-payments
+composer require magento/hyva-checkout-adobe-payment-services
+bin/magento module:enable Magento_PaymentServicesHyvaCheckout
 bin/magento setup:upgrade
 ```
 
@@ -38,6 +43,17 @@ Installation
 
 ```
 composer require hyva-themes/magento2-hyva-checkout-adyen-payment-v2
+bin/magento setup:upgrade
+```
+
+### Airwallex
+
+- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/656)
+
+Installation
+
+```
+composer require hyva-themes/magento2-hyva-checkout-airwallex
 bin/magento setup:upgrade
 ```
 
@@ -61,6 +77,18 @@ bin/magento setup:upgrade
 
 - [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/623)
 - [Compatibility module repository](https://docs.brippo.com/#configure-checkout)
+
+### Briqpay
+
+- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/690)
+- [Compatibility module repository](https://github.com/Briqpay-Extensions/briqpay-m2-hyva-checkout-extension)
+
+Installation
+
+```
+composer require briqpay/module-payments-hyva-checkout
+bin/magento setup:upgrade
+```
 
 ### Buckaroo
 
@@ -92,6 +120,18 @@ bin/magento setup:upgrade
 
 - [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/577)
 - [Compatibility module repository](https://github.com/ITECOMMPAY/hyva-magento)
+
+### ePay
+
+- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/878)
+- [Compatibility module repository](https://github.com/ePay/magento2-epic-payment-hyva-checkout)
+
+Installation
+
+```
+composer require epay/magento2-epic-payment-hyva-checkout:^1.0
+bin/magento setup:upgrade
+```
 
 ### ESTO Payments (CSP compatible)
 
@@ -255,6 +295,19 @@ bin/magento setup:upgrade
 
 - [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/631)
 - [Compatibility module repository](https://github.com/Vendic/hyva-checkout-omnikassa-payment)
+
+### Revolut Payment Gateway
+
+- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/681)
+- [Compatibility module repository](https://github.com/revolut-engineering/magento2-hyva-compatibility)
+
+Installation
+
+```
+composer require revolut/module-payment-hyva-checkout
+bin/magento module:enable Revolut_PaymentHyva
+bin/magento setup:upgrade
+```
 
 ### Rvvup
 

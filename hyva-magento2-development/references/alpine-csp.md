@@ -129,6 +129,24 @@ setQty(e) { this.qty = hyva.safeParseNumber(e.target.value); }
 
 `hyva.safeParseNumber` is available since Hyvä 1.3.11 specifically for this use case.
 
+## `x-html` is gone under CSP — use `x-html-safe` (Hyvä 1.5.3+)
+
+The **Alpine CSP build removes `x-html` entirely from 3.15 on**, so on CSP pages an `x-html` binding renders nothing. Hyvä's theme module (1.5.3+) ships an `x-html-safe` directive. It is a drop-in replacement that rebuilds the HTML from a tag and attribute **allowlist**:
+- The input is parsed inert via `DOMParser`; disallowed tags are dropped but their text is kept.
+- `x-*` / `:*` / `@*` attributes never survive, so injected content can't add Alpine behavior.
+- It loads automatically and works on both the standard and CSP builds.
+
+```html
+<div x-data="productInfo">
+    <div x-html-safe="description"></div>
+</div>
+```
+
+For templates not migrated yet, **Stores → Configuration → Hyvä Themes → Developer → HTML Safe → "Map x-html-safe to x-html"** routes plain `x-html` through the same sanitizer. Its values:
+- **Disabled** (default)
+- **On CSP pages only**
+- **On all pages**, which also sanitizes `x-html` on the regular build
+
 ## Toggling boolean state cleanly: `hyva.createBooleanObject`
 
 Inverting a boolean (`open = !open`) is forbidden under CSP. Hyvä provides a helper that returns an object with a method to flip the value:
@@ -281,11 +299,16 @@ In a CSP-strict theme, that inline `<script>` needs to be registered with the CS
 - **`x-show="someArray.length > 0"` is forbidden** — use a `get hasItems()` getter.
 - **Conditional class with ternary is forbidden** — `:class="active ? 'on' : 'off'"` won't run. Use a getter or `:class="cssClass"` returning the string.
 - **Magic properties like `$store` and `$dispatch` work normally** — those are part of the runtime, not evaluated expressions.
+- **`x-html` silently renders nothing** on CSP pages (Alpine CSP 3.15+) — switch to `x-html-safe`, or enable the "Map x-html-safe to x-html" setting.
+- **Negation shortcut:** you can declare a method named with a leading `!` (e.g. `['!deleted']() { return !this.deleted; }`), so `x-show="!deleted"` keeps working under CSP. Handy when converting existing components.
 
 ## Original sources
 
 - `references/sources/hyva-themes/writing-code/csp/index.md` — full CSP overview, PCI-DSS background, and links to all CSP topics
-- The CSP docs in the source tree cover: compatibility, default theme CSP installation, Magento CSP configuration, Alpine CSP build, example components, constructor functions, properties, property mutation, x-model alternatives, x-for patterns, `hyva.createBooleanObject`, CSP and block caching, in-context payment buttons, migration tooling
+- One page per topic in `references/sources/hyva-themes/writing-code/csp/`:
+  - Alpine CSP: `alpine-csp.md`, `alpine-csp-properties.md`, `alpine-csp-property-mutation.md`, `alpine-csp-x-model.md`, `alpine-csp-x-for.md`, `alpine-csp-hyva-createbooleanobject.md`, `alpine-csp-html-safe.md`, `alpine-csp-constructor-functions.md`, `alpine-csp-example-component.md`
+  - Setup and tooling: `csp-compatibility.md`, `hyva-default-theme-csp-installation.md`, `csp-magento-configuration.md`, `content-security-policy-allowlist.md`, `nonce-and-sha-hashes.md`, `csp-and-block-caching.md`, `csp-in-context-payment-buttons.md`, `migration-tool.md`
+- `references/sources/hyva-themes/working-with-alpinejs/alpine-plugins/x-html-safe.md` — the sanitizer, allowlist, and the mapping setting
 - `references/sources/hyva-checkout/devdocs/` — Hyvä Checkout CSP-specific documentation (checkout always runs strict CSP)
 - `references/sources/hyva-themes/upgrading/upgrade-helper.md` — covers `hyva-csp-helper` migration script
 

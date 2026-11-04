@@ -122,6 +122,8 @@ bin/magento setup:upgrade
 
 See `theme-setup.md` for the full list of required GraphQL modules.
 
+On Default Theme **1.5.3+** the storefront no longer calls GraphQL. Keep the modules enabled anyway: `Hyva_Theme` still requires `magento/module-quote-graph-ql`. A "GraphQL module missing" error there usually comes from a third-party module, or from an old override of the review / recently-viewed templates.
+
 ## Inline `<script>` blocks blocked by CSP
 
 Either:
@@ -161,6 +163,15 @@ If the upgrade was 1.3.x → 1.4.x:
 - New Tailwind v4 build might be larger if you didn't run `find-deprecated-classes.js` and there are old + new classes both present.
 - Check that `web/css/styles.css` in production is the v4 build, not a leftover v3.
 - Run Lighthouse before and after — sometimes the regression is a single image preload that broke.
+
+## Swatches, modals, or new classes broken after 1.4 → 1.5
+
+- **Swatches:**
+  - **PDP swatches missing, unclickable, or throwing `… is not a function`** → a child-theme override of a 1.4 swatch template. The 1.5.1 templates are rewritten and many JS methods were removed. Remove the override, or migrate it (`upgrading.md` → "1.4.x → 1.5.x").
+  - **Clicking a selected swatch no longer clears it** → intended in 1.5.1; swatches are now a radio group.
+- **Modals:** **custom modal looks unstyled or focus/Escape behave differently** → since 1.5 the Hyvä modal is a native `<dialog>`. `withOverlayClasses()` / `withContainerClasses()` / `excludeSelectorsFromFocusTrap()` are deprecated. Style the backdrop with `backdrop:*` utilities, or install `hyva-themes/magento2-legacy-modal-compatibility` short-term.
+- **Tailwind:** **some default-theme classes have no CSS** → the child theme is still on Tailwind 4.1. Hyvä 1.5 templates use 4.3 utilities.
+- **Icons:** **icons look thinner or outlined after 1.5.3** → the default theme switched from Heroicons to Lucide. Overrides that still use Heroicons keep rendering them.
 
 ## Compatibility module isn't recognized as Hyvä-compatible
 

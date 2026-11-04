@@ -43,6 +43,8 @@ Magewire is the server-driven component framework that powers Hyvä Checkout. It
 
 Checkout components can be built with other technology stacks, but the `hyvaCheckout` frontend API works best with Magewire-driven components. Non-Magewire components require more custom wiring to integrate with the checkout core.
 
+The Magewire version depends on your Hyvä Checkout release line. Checkout 3.x runs on Magewire 3 and Checkout 1.x runs on Magewire 1, and their component APIs differ in places such as events, lifecycle hooks and `wire:model` modifiers. Checkout 3.x keeps Magewire 1 code working through the [v1bc module](../magewire/v1bc.html), but new components are best written for Magewire 3. See [Release Lines and Magewire Versions](release-lines.html) and [Magewire in Hyvä Checkout](../magewire/index.html) before you write your first component.
+
 ### Layout XML and the `hyva_checkout_components.xml` Handle
 
 Hyvä Checkout uses a structured layout system with dedicated handles and containers for every part of the checkout. The key conventions are:

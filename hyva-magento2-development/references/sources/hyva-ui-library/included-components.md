@@ -31,12 +31,14 @@ The following table lists the components available in Hyvä UI.
 | Cookie-notice | `A-full-width` | Full-width site cookie notice. |
 |  | `B-overlay` | Overlay modal style cookie prompt. |
 |  | `C-simple-elegant` | Minimal, elegant consent banner. |
+| Dark-mode | `A-toggle` | Light and dark theme toggle in the header. |
+| Embed | `A-basic` | YouTube and Vimeo embeds with optional lazy loading. |
 | Error-page | `A-simple` | Minimal error/404 template. |
 |  | `B-split` | Image plus message error layout. |
 | Footer | `A-clean` | Basic footer layout. |
 |  | `B-4-column-newsletter` | Footer with newsletter signup and 4 columns. |
 |  | `C-mega` | Mega footer with many links/sections. |
-| Gallery | `A-basic` | Simple image gallery. |
+| Gallery | `A-fashion` | Slider on mobile, image grid on desktop. |
 |  | `B-fancy` | Enhanced gallery styles/transitions. |
 |  | `C-grid` | Grid-based gallery. |
 |  | `D-splide` | Carousel using Splide. |
@@ -48,6 +50,7 @@ The following table lists the components available in Hyvä UI.
 | Loaders | `A-spinner` | Classic spinner loader. |
 |  | `B-ping` | Subtle pulse/ping loader. |
 |  | `C-dancers` | Dancing Blocks loader. |
+| Map | `A-default` | Google Maps with one or more location markers. |
 | Menu | `A-simple-static-links` | Basic link list menu. |
 |  | `B-4-column-megamenu` | Multi-column mega menu. |
 |  | `C-vertical-dropdown-4-column` | Vertical dropdown with columns. |
@@ -86,6 +89,11 @@ The following table lists the components available in Hyvä UI.
 
 For more details, please refer to each component's `README.md` file.
 For a visual reference, refer to the PDF and Figma files.
+
+## Available Presets
+
+Next to components, Hyvä UI ships design token presets that restyle your whole theme at once.
+See [Design Token Presets](presets.html) for the available presets and how to use them.
 
 ## UI Figma Assets
 

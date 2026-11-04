@@ -188,6 +188,7 @@ Example - validate with confirmation and password prompt
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 The example uses native browser `confirm` and `prompt` dialogs for simplicity, but you can use any approach as long as it returns a `Promise<boolean>`.
@@ -229,6 +230,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ### Advanced Exception Handling with Error Codes
@@ -279,6 +281,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ### Multiple Payment Methods with a Single Handler
@@ -307,6 +310,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ### Redirect to a Payment Service Provider after Order Placement
@@ -346,6 +350,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ### Using Magewire with a JS Payment Method
@@ -397,6 +402,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         Alpine.data('hyvaCheckoutJsOnlyPaymentMethod', hyvaCheckoutJsOnlyPaymentMethod);
     }, { once: true });
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 #### Option B: Access Magewire via the Window Object
@@ -423,6 +429,7 @@ Example\_Module::hyva-checkout/page/js/api/v1/alpinejs/payment/method/hyva.phtml
         });
     })();
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ## Related Topics

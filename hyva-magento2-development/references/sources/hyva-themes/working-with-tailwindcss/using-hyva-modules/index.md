@@ -4,11 +4,15 @@
 
 The `@hyva-themes/hyva-modules` npm package extends TailwindCSS with tools that automate style management across your Hyvä theme and any installed third-party modules. Think of it as the glue that brings everything together - module styles, CSS variables, and design tokens - so you don't have to wire them up manually.
 
-The Hyvä Modules package provides three core capabilities:
+The Hyvä Modules package provides these core capabilities:
 
 - **Source and config merging** - Automatically discovers and merges styles from [Hyvä-compatible modules](../registering-a-module-for-tailwind-compilation.html) into your theme build
 - **CSS variable helpers** - Provides `twProps` and `twVar` functions for using CSS custom properties in Tailwind v2/v3 configurations
 - **Design token integration** - Converts exported design tokens (from tools like Figma) into TailwindCSS-compatible CSS
+- **Self hosted fonts** - Downloads the fonts your theme uses and generates their `@font-face` rules, so nothing is requested from a third party at runtime
+- **Prose typography styles** - A lightweight CSS-native replacement for `@tailwindcss/typography` with lower specificity, CSS variable customization, and no default max-width
+- **Form styles** - A port of `@tailwindcss/forms` optimized for Tailwind v4, themed entirely through CSS custom properties
+- **Fallback utilities** - Re-adds deprecated Tailwind v2/v3 utilities removed in v4 for third-party module compatibility
 
 ## Compatibility Module Support in Tailwind v4
 
@@ -36,7 +40,7 @@ hyva.config.json
 }
 ```
 
-For full details on configuration options and usage, see the [dedicated `hyva-sources` documentation](sources.html).
+For full details on configuration options and usage, see the [dedicated `hyva-sources` documentation](./sources.html).
 
 ## Compatibility Module Support in Tailwind v3
 
@@ -102,11 +106,14 @@ Hyvä provides a way to integrate design tokens directly into your TailwindCSS b
 2. Place the exported token file in your theme directory.
 3. Run `npx hyva-tokens` to generate a CSS file you can import into your theme.
 
-For step-by-step instructions and advanced options, see the [dedicated `hyva-tokens` documentation](tokens.html).
+For step-by-step instructions and advanced options, see the [dedicated `hyva-tokens` documentation](./tokens.html).
 
 ## Related Topics
 
-- [`hyva-sources` command reference](sources.html) - Full documentation for the Tailwind v4 source generation command
-- [`hyva-tokens` command reference](tokens.html) - Full documentation for the design token conversion command
+- [`hyva-sources` command reference](./sources.html) - Full documentation for the Tailwind v4 source generation command
+- [`hyva-tokens` command reference](./tokens.html) - Full documentation for the design token conversion command
+- [Hyvä Prose Typography](./prose.html) - How the Hyvä prose module works and how to revert to `@tailwindcss/typography`
+- [Hyvä Form Styles](./forms.html) - CSS variable theming, utility classes, and explicit class selectors for form elements
+- [Fallback Utilities](./fallback.html) - Deprecated Tailwind v2/v3 utilities re-added for third-party module compatibility
 - [Registering a Module for Tailwind Compilation](../registering-a-module-for-tailwind-compilation.html) - How to make a third-party module Hyvä-compatible
 - [CSS Variables and TailwindCSS](../css-variables-plus-tailwindcss.html) - All methods for using CSS variables with Tailwind in Hyvä

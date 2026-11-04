@@ -5,7 +5,7 @@
 Hyvä Checkout `1.3.7` improves payment method initialization, Magewire component handling outside checkout, and the display of prices and shipping totals.
 It also enhances checkout form styling, message handling, and theme `^1.4.0` compatibility, with an updated Magewirephp version.
 
-Please refer to the [changelog](changelog.html#137-2025-12-02) for details.
+Please refer to the [changelog](changelog-1.x.html#137-2025-12-02) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -94,4 +94,4 @@ These templates include key frontend logic updates that must be applied during t
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

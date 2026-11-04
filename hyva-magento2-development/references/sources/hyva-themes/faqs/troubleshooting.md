@@ -51,7 +51,7 @@ The simplest way to resolve this issue is to remove the outdated `node_modules` 
 
    ```
    rm -rf node_modules
-   npm install
+   npm install --ignore-scripts
    ```
 
 This will remove the existing `node_modules` folder and install the packages again,
@@ -102,7 +102,7 @@ bin/magento setup:upgrade
 
 Note
 
-For more information on a similar issue, refer to our guide on [Resolving Top-Menu Varnish Issues](resolving-top-menu-varnish-issues.html).
+For more information on a similar issue, refer to our guide on [Resolving Top-Menu Varnish Issues](./resolving-top-menu-varnish-issues.html).
 
 ## How to fix "Invalid form key" issue with enabled Cloudflare Rocket Loader?
 
@@ -153,3 +153,191 @@ sub vcl_hash {
 ```
 
 (Thanks to Maximilian Fickers from basecom.de to allow us to share their solution)
+
+## "Argument must be of type array, null given" TypeError after `setup:di:compile`
+
+### Symptoms: HTTP 500 on every storefront page
+
+After deploying to a production-mode environment (or building one in CI), **every storefront page** returns HTTP 500 and renders Magento's generic error page:
+
+```
+There has been an error processing your request
+
+Exception printing is disabled by default for security reasons.
+Error log record number: 82462993a0bd96355d69cba82165df648e947a73168214ddf481748c35176deb
+```
+
+Looking up the referenced record in `var/report/<record-number>` (or `var/log/exception.log`) shows a `TypeError` raised while the object manager builds a Hyvä service. The trace is most commonly one of these:
+
+```
+Type Error occurred when creating object:
+Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\SpecialCaseLayoutResetPool,
+Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\SpecialCaseLayoutResetPool::__construct():
+Argument #1 ($specialCases) must be of type array, null given,
+called in .../vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php on line 126
+```
+
+```
+Type Error occurred when creating object:
+Hyva\Theme\Service\HyvaThemes,
+Hyva\Theme\Service\HyvaThemes::__construct():
+Argument #1 ($hyvaBaseThemes) must be of type array, null given,
+called in .../vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php on line 126
+```
+
+The tell-tale sign is a **required `array` constructor argument that receives `null`**, thrown through `ObjectManager/Factory/AbstractFactory.php`.
+
+#### Variant: the same error during `setup:static-content:deploy`
+
+In production mode JS/CSS minification is active, so Hyvä's minifier-skip plugin resolves `HyvaThemes` for **every** asset. When the compiled configuration is stale, `setup:static-content:deploy` fails with the same `TypeError` raised **once per minifiable file** (thousands of identical errors) and the deploy does not complete:
+
+```
+Type Error occurred when creating object: Hyva\Theme\Service\HyvaThemes,
+Hyva\Theme\Service\HyvaThemes::__construct(): Argument #1 ($hyvaBaseThemes) must be of type array, null given
+
+#0 .../vendor/magento/framework/ObjectManager/Factory/Compiled.php(108): Magento\Framework\ObjectManager\Factory\AbstractFactory->createObject('Hyva\\Theme\\Serv...', Array)
+#1 .../vendor/magento/framework/ObjectManager/Factory/Compiled.php(...): ...->create('Hyva\\Theme\\Serv...')
+#2 .../DisableJsAndCssMinifierForHyvaPlugin.php(29): ...->get('Hyva\\Theme\\Serv...')
+#3 ...->DisableJsAndCssMinifierForHyvaPlugin->__construct(Object(...ThemeProvider), NULL)
+   ... (repeats for every js/css asset)
+```
+
+The failure disables its own fix
+
+Once the compiled metadata is poisoned, `bin/magento` itself hits the same `TypeError` while building its command list and silently falls back to a minimal set, so the cache commands disappear:
+
+```
+$ bin/magento cache:flush
+There are no commands defined in the "cache" namespace.
+```
+
+A remediation script that just runs `bin/magento cache:flush` will therefore no-op. See [Resolution](#resolution-flush-the-config-cache-and-recompile) for how to recover.
+
+### Cause: stale compiled DI configuration
+
+`setup:di:compile` compiled a stale, pre-merged DI configuration that was cached before the Hyvä module was registered, so a required `array` argument was baked in as `null`. For the full explanation and how to prevent it in build pipelines, see [Why a stale DI config cache injects null into Hyvä services](stale-di-config-cache.html).
+
+### Resolution: flush the config cache and recompile
+
+Flush the config cache and recompile so the DI configuration is re-merged from the current `etc/di.xml` files:
+
+```
+bin/magento cache:flush
+bin/magento setup:di:compile
+```
+
+If `bin/magento cache:flush` reports `There are no commands defined in the "cache" namespace` (see the warning above), the CLI is running on the poisoned compile and can't flush. Recover with either:
+
+```
+bin/magento setup:upgrade      # re-warms the config cache from a complete module list, then:
+bin/magento setup:di:compile
+```
+
+or by clearing the stale entry from the cache backend directly (e.g. Redis) before recompiling:
+
+```
+redis-cli -n <config-cache-db> flushdb
+bin/magento setup:di:compile
+```
+
+To prevent it in **build pipelines**, always flush the cache immediately before compiling:
+
+```
+bin/magento deploy:mode:set production --skip-compilation
+bin/magento cache:flush            # drop the stale global::DiConfig
+bin/magento setup:di:compile
+```
+
+## Hyvä head scripts missing on pages from controllers that don't extend `Action`
+
+Info
+
+This is caused by how Magento core builds the layout and only shows up in an edge case.
+We document it here because the symptoms are only visible in Hyvä themes.
+
+### Symptoms: Alpine components break on a single route
+
+On some pages `hyva.js` and `hyva-variables.js` are missing from the `<head>`. The browser console shows errors such as:
+
+```
+hyva.alpineInitialized is not a function
+hyva.createBooleanObject is not a function
+```
+
+Alpine components on that page stop working. For example, the customer account dropdown is open on page load and can't be closed.
+
+The affected routes have a controller that implements `Magento\Framework\App\Action\HttpGetActionInterface` and returns a page result, but does **not** extend `Magento\Framework\App\Action\Action`. An example from Magento core is Login as Customer (`loginascustomer/login/index`).
+
+The problem always occurs with the layout cache disabled. With the layout cache enabled it occurs when the cache is cold and an affected route is the first to build the layout. In that case the full page cache can store and serve the broken page.
+
+### Cause: the layout is built twice
+
+Controllers that extend `Action` get `Magento\Framework\App\ViewInterface` through their context, so it exists before the layout is built.
+For other controllers, `ViewInterface` is first created while the layout is being generated (it is a dependency of blocks such as the swatch renderer in the `catalog_list_item` handle, which Hyvä loads on every page for Page Builder product widgets).
+
+The constructor of `Magento\Framework\App\View` creates a new page, which registers a new layout builder, so the layout is built a second time.
+During that second build the `head.additional` block declared in the Hyvä default theme is treated as an override, and Magento removes the children that were added to it by the `default_hyva` handle, including the Hyvä head scripts.
+
+### Resolution: create the view before the layout is built
+
+If you maintain the controller, inject `ViewInterface` in its constructor. You don't need to use it, requesting it is enough:
+
+```
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\ViewInterface;
+use Magento\Framework\View\Result\PageFactory;
+
+class Index implements HttpGetActionInterface
+{
+    public function __construct(
+        private PageFactory $pageFactory,
+        ViewInterface $view // Creates the view before the layout is built
+    ) {}
+
+    public function execute()
+    {
+        return $this->pageFactory->create();
+    }
+}
+```
+
+For controllers you can't change, such as Magento core or third party modules, add an observer for the `controller_action_predispatch` event in your own module.
+The event is dispatched before any controller runs, so injecting `ViewInterface` there creates it in time for every route:
+
+etc/frontend/events.xml
+
+```
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="init_view_before_layout" instance="Vendor\Module\Observer\InitView"/>
+    </event>
+</config>
+```
+
+Observer/InitView.php
+
+```
+<?php
+
+declare(strict_types=1);
+
+namespace Vendor\Module\Observer;
+
+use Magento\Framework\App\ViewInterface;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+
+class InitView implements ObserverInterface
+{
+    // Requesting the view creates it before the first layout build
+    public function __construct(private ViewInterface $view) {}
+
+    public function execute(Observer $observer): void
+    {
+    }
+}
+```
+
+After adding either fix, flush the layout and full page cache so no broken pages remain cached.

@@ -95,15 +95,62 @@ Hyva Checkout emits a shipping method message when the customer picks a shipping
 
 ## Updating Component Listeners with Plugins
 
-Every Magewire component in Hyva Checkout can define event listeners using the `$listeners` property, provided by the [Magewire `Event` trait](https://github.com/magewirephp/magewire/blob/main/src/Model/Concern/Event.php). The `Event` trait also exposes a `getListeners()` method, which makes it straightforward to customize a component's listeners using the [Magento plugin system](https://developer.adobe.com/commerce/php/development/components/plugins).
+Common use cases for modifying checkout component listeners include adding a listener for a new event, removing an existing listener, or changing the method that runs when a particular event fires. How you do it depends on the release line.
 
-Common use cases for modifying checkout component listeners include adding a listener for a new event, removing an existing listener, or changing the method that runs when a particular event fires.
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
 
-### How to Customize Checkout Component Listeners
+On Checkout 3.x, change the listeners of a component placement with the `magewire:listeners` block argument in layout XML. Each item name is an event name and its value is the component method to call:
+
+- Add an item to add a listener.
+- Give an existing event a different method to reassign it.
+- Set an item to `xsi:type="null"` to remove a listener, including one declared in the component's `$listeners` property or with an `#[On]` attribute.
+
+The following example changes the listeners of the price summary totals component (`Hyva\Checkout\Magewire\Checkout\PriceSummary`, block `price-summary.total-segments`). It re-renders the component on a custom `my_module_option_changed` event and stops it from reacting to `payment_method_selected`.
+
+view/frontend/layout/hyva\_checkout\_components.xml
+
+```
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="price-summary.total-segments">
+            <arguments>
+                <argument name="magewire:listeners" xsi:type="array">
+                    <!-- Adding a new listener: re-render on the "my_module_option_changed" event -->
+                    <item name="my_module_option_changed" xsi:type="string">$refresh</item>
+                    <!-- Removing a listener: stop reacting to the "payment_method_selected" event -->
+                    <item name="payment_method_selected" xsi:type="null"/>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
+```
+
+In your own components, declare listeners with the `Magewirephp\Magewire\Attributes\On` attribute on the method instead of the `$listeners` property:
+
+Declaring a listener with #[On]
+
+```
+use Magewirephp\Magewire\Attributes\On;
+
+#[On('shipping_address_saved')]
+public function onShippingAddressSaved(): void
+{
+    // React to the event
+}
+```
+
+Plugins on `getListeners()` (the Checkout 1.x approach) still apply to every component while the [v1bc module](../../magewire/v1bc.html) is enabled. Magewire 3 declares `getListeners()` as protected, so Magento can't intercept it by itself, and v1bc calls the plugins instead. Without v1bc, these plugins don't run.
+
+Every Magewire component in Hyva Checkout can define event listeners using the `$listeners` property, provided by the [Magewire `Event` trait](https://github.com/magewirephp/magewire/blob/1.x/src/Model/Concern/Event.php). The `Event` trait also exposes a `getListeners()` method, which makes it straightforward to customize a component's listeners using the [Magento plugin system](https://developer.adobe.com/commerce/php/development/components/plugins).
 
 Customizing a Magewire component's event listeners requires two steps: defining a plugin in `etc/frontend/di.xml` and implementing the listener modification logic in a plugin class.
 
 **Step 1:** Register the plugin in `etc/frontend/di.xml`. The following example targets a hypothetical `Hyva\Checkout\Magewire\Checkout\Foo` component.
+
+etc/frontend/di.xml
 
 ```
 <?xml version="1.0"?>
@@ -117,6 +164,8 @@ Customizing a Magewire component's event listeners requires two steps: defining 
 ```
 
 **Step 2:** Implement the plugin class with an `afterGetListeners` method. This after-plugin receives the current `$listeners` array and returns the modified version.
+
+Plugin/UpdateFooListeners.php
 
 ```
 <?php

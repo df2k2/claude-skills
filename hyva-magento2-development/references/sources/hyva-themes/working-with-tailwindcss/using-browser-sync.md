@@ -11,7 +11,7 @@ You can run browser-sync directly on your machine.
 Make sure browser-sync is installed locally, or install it with:
 
 ```
-npm install -g browser-sync
+npm install -g browser-sync --ignore-scripts
 ```
 
 You can run browser-sync from your Hyvä theme:

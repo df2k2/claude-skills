@@ -33,3 +33,13 @@ including handling wrapper keys and known limitations.
 
 How to define design tokens directly in `hyva.config.json` without an external token file.
 Covers inline definitions and dark mode support for straightforward setups.
+
+## [Using Google Stitch](google-stitch.html)
+
+How to use a Google Stitch Markdown export as your token source with `hyva-tokens`.
+Covers the automatic `colors` to `color` rename, missing tint fallbacks, and configuration.
+
+## [Using Claude Design](claude-design.html)
+
+How to use a Claude Design W3C DTCG JSON export as your token source with `hyva-tokens`.
+Covers the required `src` configuration and handling structural wrapper keys.

@@ -1,12 +1,30 @@
 <!-- source: https://docs.hyva.io/hyva-enterprise/index.html -->
 
-# Overview Hyvä Enterprise
+# Hyvä Enterprise
 
-Hyvä Enterprise is a stand-alone commercial product, currently available to Hyvä Themes licensees only.
+[Hyvä Enterprise](https://www.hyva.io/hyva-enterprise.html) is our product suite focused on merchant friendly features for both the admin panel and storefront. It builds on top of Adobe Commerce and includes [Hyvä Theme](https://www.hyva.io/hyva-theme-license.html) and [Hyvä Checkout](https://www.hyva.io/hyva-checkout.html) along with providing compatibility with Adobe Commerce, the B2B suite add-on and Adobe Services (Live Search, Product Recommendations, and Data Connection) for [Hyvä Themes](../hyva-themes/getting-started/index.html) and [Hyvä Checkout](../hyva-checkout/index.html).
 
-A Hyvä Enterprise license can be purchased at [www.hyva.io/hyva-enterprise.html](https://www.hyva.io/hyva-enterprise.html).
+Ready to install it? Continue to [Installing Hyvä Enterprise](./getting-started/index.html).
 
-Hyvä Enterprise provides compatibility with Adobe Commerce, the B2B suite add-on and Adobe Services (Live Search, Product Recommendations, and Data Connection) for [Hyvä Themes](../hyva-themes/getting-started/index.html) and [Hyvä Checkout](../hyva-checkout/index.html).
+Magento Open Source User?
+
+See [Hyvä Commerce](../hyva-commerce/index.html), which offers the same features but is built on top of Magento Open Source.
+
+Hyvä Enterprise is made up of several products. See our [Features](./features.html) page for details of each. See below for Adobe Commerce compatibility offerings.
+
+For Hyvä Enterprise licensees that purchased or upgraded before 1st July 2026
+
+Hyvä Enterprise Features are only included with licenses purchased (or upgraded) from 1st July 2026. For more details, including how to upgrade, see [our blog post](https://www.hyva.io/blog/news/new-hyva-enterprise-all-inclusive.html).
+
+## Adobe Commerce Compatibility Offerings
+
+Alongside all the features Hyvä provides, Hyvä Enterprise is split into separate compatibility offerings for Hyvä Themes and Hyvä Checkout, each of which focuses on 3 areas:
+
+- Adobe Commerce - all base Adobe Commerce functionality
+- B2B - all features from the B2B Suite
+- Adobe Sensei - Live Search and Product Recommendations
+
+For more details, including pricing, subscription options and FAQs, see [www.hyva.io/hyva-enterprise.html](https://www.hyva.io/hyva-enterprise.html).
 
 More on Adobe Services packages (and Sensei)
 
@@ -27,26 +45,13 @@ The 'Data Connection' is a further new metapackage, just for the data connection
 
 In summary, we're aligning with the metapackages Adobe provides, and providing a choice on what to install.
 
-Hyvä Enterprise is sold as a single product (i.e. one license) via a yearly subscription, but is split into separate compatibility offerings for Hyvä Themes and Hyvä Checkout, each of which focus on 3 areas:
-
-- Adobe Commerce - all base Adobe Commerce functionality
-- B2B - all features from the B2B Suite
-- Adobe Sensei - Live Search and Product Recommendations
-
-For more details, including pricing, subscription options and FAQs, see [www.hyva.io/hyva-enterprise.html](https://www.hyva.io/hyva-enterprise.html).
-
-Documentation status
-
-The Hyvä Enterprise documentation is still being completed. Please check back frequently.
-If you have any questions, please reach out in the `#hyva-enterprise` [Slack](https://www.hyva.io/slack) channel.
-
 ## Compatibility status
 
 You can track the status of all Hyvä Enterprise offerings via our [Feature Matrix](https://www.hyva.io/hyva-enterprise-feature-matrix) and [Compatibility Tracker](https://gitlab.hyva.io/hyva-public/enterprise-compatibility-tracker/-/boards).
 
 ## Installation Guide
 
-Please follow our [installation guide](getting-started/index.html).
+Please follow our [installation guide](./getting-started/index.html).
 
 ## Providing feedback & getting help
 

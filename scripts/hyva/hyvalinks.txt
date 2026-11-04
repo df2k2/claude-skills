@@ -17,7 +17,7 @@ https://docs.hyva.io/hyva-commerce/features/media-optimization/index.html
 https://docs.hyva.io/hyva-commerce/features/menu-builder/index.html
 https://docs.hyva.io/hyva-commerce/getting-started/index.html
 https://docs.hyva.io/hyva-commerce/index.html
-https://docs.hyva.io/hyva-commerce/release-process-status.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/release-process-status.html
 https://docs.hyva.io/hyva-commerce/upgrading/index.html
 https://docs.hyva.io/hyva-enterprise/devdocs/commerce/switcher-component.html
 https://docs.hyva.io/hyva-enterprise/eds/index.html
@@ -46,10 +46,10 @@ https://docs.hyva.io/hyva-themes/certification/associate-developer-certification
 https://docs.hyva.io/hyva-themes/certification/index.html
 https://docs.hyva.io/hyva-themes/certification/professional-developer-certification.html
 https://docs.hyva.io/hyva-themes/cms/cms-content-text-styling.html
-https://docs.hyva.io/hyva-themes/cms/cms-tailwind-jit-module.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-themes/cms/cms-tailwind-jit-module.html
 https://docs.hyva.io/hyva-themes/cms/full-bleed-cms-content.html
 https://docs.hyva.io/hyva-themes/cms/index.html
-https://docs.hyva.io/hyva-themes/cms/using-tailwind-classes-in-cms-content.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-themes/cms/using-tailwind-classes-in-cms-content.html
 https://docs.hyva.io/hyva-themes/compatibility-modules/core-magento-compat-modules.html
 https://docs.hyva.io/hyva-themes/compatibility-modules/development-guidelines.html
 https://docs.hyva.io/hyva-themes/compatibility-modules/from-luma-to-hyva/migrating-js-and-templates.html
@@ -166,7 +166,7 @@ https://docs.hyva.io/hyva-widgets/what-are-hyva-widgets.html
 https://docs.hyva.io/hyva-widgets/widget-types/hyva-multi-field-widget.html
 https://docs.hyva.io/welcome/how-does-the-partner-program-work.html
 https://docs.hyva.io/welcome/security-advisories.html
-https://docs.hyva.io/welcome/slack-channels.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/welcome/slack-channels.html
 https://docs.hyva.io/welcome/support.html
 https://docs.hyva.io/welcome/technical-vision.html
 https://docs.hyva.io/welcome/the-hyva-portal/index.html

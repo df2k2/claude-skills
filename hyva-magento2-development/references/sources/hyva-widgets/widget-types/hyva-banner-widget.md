@@ -17,7 +17,7 @@
 - Container - Apply container to the widget content. These uses the theme container size. If a different size is needed, add a custom class in your themes `tailwind.config.js`.
 - Banner inner content container - Apply container to the widget inner content. This is used with a removed container on the whole widget to achieve fluid 100% width design of the background and the contained data. It uses the native container sizes for the theme. If a different size is needed, add a custom class in your themes `tailwind.config.js`.
 
-![](img/banner_content.png)
+![](./img/banner_content.png)
 
 ## Banner styles Options
 
@@ -28,7 +28,7 @@
 - Shading - Yes/No. If "Yes", a transparent shading is applied to the banner image. Use this to ensure there is contrast between the image and the content.
 - Shading color - Color picker for the shading. Will be applied only if the Shading option is set to "Yes".
 
-![](img/banner_styles.png)
+![](./img/banner_styles.png)
 
 ## Animations Options
 
@@ -39,7 +39,7 @@ Note
 Animations only work with Hyvä 1.1.10.
 Earlier releases of Hyvä do not include the x-intersect plugin.
 
-![](img/banner_animations.jpg)
+![](./img/banner_animations.jpg)
 
 ## Banner spacing Options
 
@@ -49,4 +49,4 @@ This fields allows adding styling to the main element. For whitespace around the
 Example: `mt-8 mb-8 mr-4 ml-4`.
 It is also possible to specify other Tailwind CSS classes like `card rounded shadow`.
 
-![](img/banner_spacing.png)
+![](./img/banner_spacing.png)

@@ -4,6 +4,8 @@
 
 Hyvä 1.4.x and newer ships with Tailwind v4. You're configuring tokens, debugging missing styles, customizing colors, building CSS, or trying to add a Tailwind plugin. (For older Hyvä on Tailwind v3, see `upgrading.md`.)
 
+**Minor version matters.** The latest 1.4.x is on Tailwind **4.1**. Hyvä **1.5.1+** is on **4.3**, and its templates use v4.3-only utilities such as the extended logical-property classes. A child theme upgraded to 1.5 must bump its `tailwindcss` dependency to 4.3, or those classes silently don't generate.
+
 ## What changed in v4 (vs. v3)
 
 - **CSS-first config.** No `tailwind.config.js`. Theme values are defined in CSS via `@theme { … }` blocks.
@@ -121,6 +123,37 @@ DTCG format example:
     }
 }
 ```
+
+**Token sources and options (`@hyva-themes/hyva-modules` ≥ 1.4, shipped with Hyvä 1.5.2):**
+- `tokens.src` can point at a **Google Stitch** Markdown export (`"tokens": { "src": "DESIGN.md" }`). Only its YAML frontmatter is read, and Stitch's `colors` group is renamed to `color` automatically.
+- **Figma** and **Claude Design** exports have their own guides under `design-tokens/`.
+- `stripPrefix` and `rename` unwrap key paths and align group names without a custom build step.
+- New tokens `ink` / `ink-muted` sit alongside `fg` / `fg-secondary`. The old names still work.
+- A default `theme.css` provides a fallback palette (`primary`, `secondary`, `background`, `surface`, `ink`, `ink-muted`) in `oklch`. Lighter/darker tints are derived via `color-mix()`, which fills the variants a Stitch export usually omits.
+
+Update with `npm install @hyva-themes/hyva-modules@latest` in the child theme's `web/tailwind/`.
+
+## Fonts — `npx hyva-fonts` (Hyvä 1.5.3+, hyva-modules ≥ 1.5)
+
+Self-host fonts without hand-writing `@font-face`. Configure families in `hyva.config.json`:
+
+```json
+{
+    "fonts": [
+        { "name": "Inter", "cssVariable": "--font-sans", "weights": ["100 900"] }
+    ]
+}
+```
+
+1. Run `npx hyva-fonts`. The 1.5.3 default theme's `generate` script already does. It downloads the files to `web/fonts/generated/` and writes `generated/hyva-fonts.css` (`@font-face` + an `@theme` variable).
+2. Add `@import "./generated/hyva-fonts.css";` to `tailwind-source.css`. The file is generated even with no fonts configured, so the import is always safe.
+
+`provider` options:
+- `fontsource` (default)
+- `google-fonts`, `bunny-fonts`, `fontshare`
+- `local` for files already in the theme. Adobe Fonts isn't supported (license).
+
+The Font API also generates fallback-font metrics against layout shift and a preload snippet. It is optional; child themes only need hyva-modules 1.5 if they add `npx hyva-fonts`.
 
 ## CSS components and utilities
 
@@ -284,7 +317,10 @@ Hyvä compiles a separate stylesheet for emails (because email clients don't run
 6. Is there a stale `web/css/styles.css` from before? Delete it and rebuild.
 
 **Build fails on Node version:**
-Hyvä 1.4.x requires Node.js 20+. Check `node --version`.
+Hyvä 1.4.x and 1.5.x require Node.js 20+ on the build machine. Check `node --version`.
+
+**Older browsers lose styles:**
+From 1.4, Tailwind v4 processes CSS through its bundled lightningcss, which targets iOS Safari 15.4+. Hyvä's supported-browser baseline is now Chrome / Edge / Opera / Android WebView 111, Firefox 102, Safari 16, and Samsung Internet 22. If a project must support older browsers, configure `postcss-preset-env`, or a custom lightningcss build with a browserslist target. Some features, such as flex `gap`, still need manual fallbacks (see `faqs/supporting-older-mobile-safari.md`).
 
 **Old class names from v3 still in templates:**
 Use the upgrade helper:
@@ -322,12 +358,15 @@ Detailed steps: see the Hyvä upgrade docs and `upgrading.md` reference.
 - `references/sources/hyva-themes/working-with-tailwindcss/tailwind-purging-settings.md` — purge / scan configuration
 - `references/sources/hyva-themes/working-with-tailwindcss/dynamic-tailwind-classes.md` — handling dynamically built class names
 - `references/sources/hyva-themes/working-with-tailwindcss/css-variables-plus-tailwindcss.md` — using CSS variables with Tailwind
-- `references/sources/hyva-themes/working-with-tailwindcss/design-tokens/index.md` — design tokens overview
-- `references/sources/hyva-themes/working-with-tailwindcss/using-hyva-modules/index.md` — `hyva-sources` and `hyva-tokens` commands
+- `references/sources/hyva-themes/working-with-tailwindcss/design-tokens/index.md` — design tokens overview; `formats.md`, `simple-tokens.md`, `figma.md`, `google-stitch.md`, `claude-design.md`, `faq.md` for each token source
+- `references/sources/hyva-themes/working-with-tailwindcss/using-hyva-modules/index.md` — `hyva-sources` and `hyva-tokens` commands; `sources.md`, `tokens.md`, `init.md`, `fallback.md`, `forms.md`, `prose.md`
+- `references/sources/hyva-themes/working-with-tailwindcss/using-hyva-modules/fonts.md` — the `hyva-fonts` Font API
+- `references/sources/hyva-themes/faqs/supported-browsers.md` — browser baseline under Tailwind v4 / lightningcss
 - `references/sources/hyva-themes/working-with-tailwindcss/overriding-module-css.md` — overriding module-supplied CSS
 - `references/sources/hyva-themes/working-with-tailwindcss/sharing-common-css-between-themes.md` — multi-theme CSS sharing
 - `references/sources/hyva-themes/working-with-tailwindcss/registering-a-module-for-tailwind-compilation.md` — module → Tailwind scanning
 - `references/sources/hyva-themes/working-with-tailwindcss/troubleshooting.md` — Tailwind-specific troubleshooting
+- `references/sources/hyva-themes/working-with-tailwindcss/updating-to-tailwind-4.md` — v3→v4 migration
 - `references/sources/hyva-themes/working-with-tailwindcss/updating-to-tailwind-3.md` — v2→v3 migration
 - `references/sources/hyva-themes/upgrading/updating-tailwindcss.md` — general Tailwind upgrade philosophy
-- `references/sources/hyva-themes/cms/cms-tailwind-jit-module.md` — using Tailwind classes in CMS content
+- `references/sources/hyva-themes/cms/tailwind-jit/index.md` — using Tailwind classes in CMS content (CMS Tailwind JIT module; client- and server-side compilation in the same folder)

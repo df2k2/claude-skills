@@ -6,6 +6,10 @@ Hyvä Checkout supports a wide range of shipping providers through community mem
 
 This page lists tracked shipping integrations and links to their repositories. Updates are tracked on the [checkout integration tracker board](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/boards/87).
 
+Checkout 3.x compatibility
+
+Unless stated otherwise, the integrations listed here that are built on Magewire target Hyvä Checkout 1.x (Magewire 1). On Checkout 3.x checkout pages they run through the [Magewire 1 backward compatibility module (v1bc)](../faq/what-is-v1bc.html). Check with the vendor whether an integration supports Checkout 3.x.
+
 Each shipping method that requires a Compatibility module also has a repository. These repositories are hosted by service providers, extension developers, or the Hyvä team. Repository addresses are listed on the relevant integration tracker tickets.
 
 Support responsibility
@@ -40,14 +44,28 @@ The integration tracker uses `Vendor` and `Community` labels on each ticket to i
 
 ### In store pickup
 
-- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/670)
+Beta release - not for production use
+
+The Hyvä Checkout In-Store Pickup module is in beta (`1.0.0-beta1`). It is intended for testing and evaluation only. Do **not** run it on a production store. Install it in a development or staging environment so you can validate it ahead of a stable release.
+
+The Hyvä team maintains this module. It adds Magento's in-store pickup (Magento Inventory) to Hyvä Checkout: a **Ship to me** / **Pick up in store** choice above the shipping details and a store picker for the pickup method.
+
+Requirements:
+
+- **Hyvä Checkout 1.x:** version `1.3.15` or later.
+- **Hyvä Checkout 3.x:** version `3.0.0` or later, with the [Magewire 1 backward compatibility module (v1bc)](../magewire/v1bc.html) enabled.
+- **Magento:** the Magento Inventory in-store pickup modules enabled, and the **In-Store Pickup Delivery** shipping method enabled for the website.
+
+Composer only installs the beta when the version constraint or your project's stability settings allow it, so require it with the `@beta` flag:
 
 Installation
 
 ```
-composer require hyva-themes/magento2-hyva-checkout-shipping-type-click-and-collect
+composer require hyva-themes/magento2-hyva-checkout-in-store-pickup:^1.0@beta
 bin/magento setup:upgrade
 ```
+
+After installing, rebuild the theme's Tailwind CSS so the module's styles are compiled.
 
 ### Post.nl
 
@@ -57,6 +75,18 @@ Installation
 
 ```
 composer require hyva-themes/magento2-hyva-checkout-postnl
+bin/magento setup:upgrade
+```
+
+### DHL eCommerce for Magento 2
+
+- [Integration tracker ticket](https://gitlab.hyva.io/hyva-public/checkout-integration-tracker/-/work_items/683)
+- [Compatibility module](https://github.com/dhlparcel/plugin-magento2-hyva-release)
+
+Installation
+
+```
+composer require dhlparcel/magento2-plugin-hyva
 bin/magento setup:upgrade
 ```
 

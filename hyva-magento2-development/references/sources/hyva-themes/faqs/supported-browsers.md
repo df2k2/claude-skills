@@ -5,8 +5,6 @@
 We at Hyvä strive to support as many browsers versions as we can,
 but our supported versions depend on the tools we use to build Hyvä: TailwindCSS and AlpineJS.
 
-For native TailwindCSS, supported browsers are relatively new, with the introduction of CSS Properties such as `inset`. To be able to support older browsers we added [browserlist](https://browsersl.ist/) and [postcss-preset-env](https://preset-env.cssdb.org/) to keep supporting older browsers.
-
 As for AlpineJS, the oldest browsers we support are based on the Javascript features used in AlpineJS.
 
 ## Supported Browsers
@@ -15,13 +13,13 @@ At the time of writing, Hyvä supports the following browsers.
 
 | Browser | Desktop | Android | iOS [1](#fn:ios) |
 | --- | --- | --- | --- |
-| Chrome | 103 | 103 |  |
-| Edge | 103 | 103 |  |
+| Chrome | 111 | 111 |  |
+| Edge | 111 | 111 |  |
 | Safari | 16 [2](#fn:s) |  | 16 [2](#fn:s) |
 | Firefox | 102 | 102 |  |
-| Opera | 103 | 103 |  |
-| Android Browser/WebView |  | 103 |  |
-| Samsung Internet |  | 18 (Chromium 99) |  |
+| Opera | 111 | 111 |  |
+| Android Browser/WebView |  | 111 |  |
+| Samsung Internet |  | 22 (Chromium 111) |  |
 
 How are supported browsers determined?
 
@@ -29,19 +27,15 @@ The versions in the table reflect the browsers released in June 2022, based on t
 
 ## Unsupported Browsers
 
-- **Internet Explorer (IE):** Officially [retired by Microsoft on June 15, 2022](https://blogs.windows.com/windowsexperience/2022/06/15/internet-explorer-11-has-retired-and-is-officially-out-of-support-what-you-need-to-know/).
-  Magento also [dropped support for IE years ago with 2.4.0](https://experienceleague.adobe.com/en/docs/commerce-operations/release/notes/magento-open-source/2-4-0#:~:text=The%20Internet%20Explorer%2011.x%20browser%20is%20no%20longer%20supported).
-  Continuing to support comes with a significant cost, which is why we decided against it a long time ago.
 - **Opera Mini:** is primarily used on feature phones and is based on Opera 12.1 via Opera server. It is used mostly as a dedicated client for specific websites.
 
 ## Extending Browser Support
 
-We have a dedicated page on [supporting older iOS Safari versions](supporting-older-mobile-safari.html), which is also useful for extending the support for older versions of other browsers.
+We have a dedicated page on [supporting older iOS Safari versions](./supporting-older-mobile-safari.html), which is also useful for extending the support for older versions of other browsers.
 
-With Hyvä 1.3.6 we have added [postcss-preset-env](https://preset-env.cssdb.org/), you can use this postcss plugin to keep using modern CSS and convert this to older CSS,
-to configure the supported browsers [see the docs on browserlist](../working-with-tailwindcss/using-browserlist.html).
+From Hyvä 1.4, Tailwind CSS v4 handles CSS processing through its bundled lightningcss, which targets a minimum of iOS Safari 15.4. This covers most modern browsers without additional configuration.
 
-But do note things like flex gap need manual adjustment as explained in the [supporting older iOSdSafari versions]
+If your project requires support for older browsers, you can configure [postcss-preset-env](https://preset-env.cssdb.org/) or a custom lightningcss build with a [browserlist](../working-with-tailwindcss/using-browserlist.html) target to extend that coverage. Note that some CSS features, such as flex gap, still require manual adjustments as described on the [supporting older iOS Safari versions](./supporting-older-mobile-safari.html) page.
 
 ---
 

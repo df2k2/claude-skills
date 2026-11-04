@@ -1,93 +1,24 @@
 <!-- source: https://docs.hyva.io/hyva-themes/ai/features-providers/integration-guide.html -->
 
-# Hyvä AI Providers Integration Guide
+# Hyvä AI Integration Guide
 
-This guide covers how to integrate new AI providers and create custom AI-powered features using the Hyvä AI framework.
+The base module defines feature handlers, providers, registries and execution routing. Provider packages own service-specific configuration. Worker and CMS modules consume those contracts without making every provider a dependency.
 
-## Why This Architecture?
+Update the base/provider packages together; see [Installation](installation.html) and [Upgrade Compatibility](upgrading.html).
 
-The Hyvä AI framework provides a clean, secure way to add AI features without reinventing the wheel every time.
+## Add a Short Synchronous Feature
 
-### Single Secure Endpoint
+Implement `Hyva\Ai\Api\HandlerInterface` with:
 
-All AI requests go through one admin controller:
-
-```
-POST /admin/hyva_ai/ai/process/handler/{your_handler}
-```
-
-You don't write controllers that call AI APIs directly. Instead, you register a handler and the framework does the rest:
-
-- **ACL protected** - Uses Magento's `Magento_Backend::content` resource
-- **Consistent error handling** - All errors logged, clean JSON responses
-- **No API keys in frontend** - Keys stay server-side, never exposed to JavaScript
-
-### Provider Agnostic
-
-Your code doesn't care which AI provider is configured:
-
-```
-<?php
-declare(strict_types=1);
-
-// Your handler just specifies a model
-public function getOptions(): array
-{
-    return ['model' => $this->config->getSelectedModel()]; // e.g., 'gpt-4o' or 'gemini-2.5-flash'
-}
-```
-
-The framework automatically resolves `gpt-4o` → OpenAI provider, `gemini-2.5-flash` → Gemini provider. If the merchant switches providers, your code doesn't change.
-
-### Clean Separation
-
-| Layer | Responsibility |
+| Method | Contract |
 | --- | --- |
-| **Handler** | Prepare prompts, process responses |
-| **Framework** | Route to provider, handle errors, manage config |
-| **Provider** | Talk to external API |
+| `getName(): string` | Stable feature identifier, for example `product_description`. |
+| `getOptions(): array` | Registered model ID and model options. |
+| `getData(array $requestData): array` | Validated, server-prepared provider request. |
 
-You focus on your feature logic. The framework handles the plumbing.
+The framework resolves the provider from the model and calls its `process()` method. An optional handler `processResponse(array $response, array $originalData): array` transforms the result; it is not a required interface method.
 
----
-
-## Architecture Overview
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                  Your Implementation                     │
-│                     (Handler + UI)                       │
-└──────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│              Process Controller (built-in)               │
-│   • Validates handler exists                             │
-│   • Resolves provider from model                         │
-│   • Checks provider is configured                        │
-│   • Handles errors consistently                          │
-└──────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌───────────────────────────────────────────────────────────┐
-│                   Base Framework                          │
-│   ProviderPool ─── ProviderResolver ─── OptionsSchemaPool │
-└───────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌───────────────────────────────────────────────────┐
-│                      Providers                    │
-│        OpenAI    │    Gemini    │    DeepL        │
-└───────────────────────────────────────────────────┘
-```
-
----
-
-## Part 1: Using AI in Your Feature
-
-The simplest way to add AI to your module.
-
-### Step 1: Create a Handler
+A handler can look like this:
 
 ```
 <?php
@@ -96,12 +27,14 @@ declare(strict_types=1);
 namespace Vendor\Module\Model\Handler;
 
 use Hyva\Ai\Api\HandlerInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Exception\LocalizedException;
 
-class ProductDescriptionHandler implements HandlerInterface
+class ProductDescription implements HandlerInterface
 {
-    public function __construct(
-        private readonly ScopeConfigInterface $config
-    ) {}
+    public function __construct(private readonly ScopeConfigInterface $config)
+    {
+    }
 
     public function getName(): string
     {
@@ -111,119 +44,95 @@ class ProductDescriptionHandler implements HandlerInterface
     public function getOptions(): array
     {
         return [
-            'model' => $this->config->getValue('vendor_module/ai/model') ?? 'gpt-4o',
-            'temperature' => 0.7,
-            'max_tokens' => 1000
+            'model' => (string) $this->config->getValue('vendor_module/ai/model'),
+            'max_tokens' => 1000,
         ];
     }
 
     public function getData(array $requestData): array
     {
-        $productName = $requestData['product_name'] ?? '';
-        $keywords = $requestData['keywords'] ?? '';
+        $name = trim((string) ($requestData['product_name'] ?? ''));
+        if ($name === '' || strlen($name) > 500) {
+            throw new LocalizedException(__('Enter a product name of at most 500 bytes.'));
+        }
 
-        return [
-            'messages' => [[
-                'messages' => [
-                    ['role' => 'system', 'content' => 'You are a product copywriter.'],
-                    ['role' => 'user', 'content' => "Write a description for: {$productName}. Keywords: {$keywords}"]
-                ]
-            ]]
-        ];
+        return ['messages' => [[
+            'messages' => [
+                ['role' => 'system', 'content' => 'Write a short product description without inventing specifications.'],
+                ['role' => 'user', 'content' => $name],
+            ],
+        ]]];
     }
 
-    // Optional: transform the response
     public function processResponse(array $response, array $originalData): array
     {
-        return [
-            'description' => $response['responses'][0] ?? '',
-            'product_name' => $originalData['request_data']['product_name'] ?? ''
-        ];
+        return ['description' => $response['responses'][0] ?? ''];
     }
 }
 ```
 
-### Step 2: Register the Handler
+Register the handler in `etc/di.xml`:
 
 ```
-<!-- etc/di.xml -->
-<type name="Hyva\Ai\Controller\Adminhtml\Ai\Process">
-    <arguments>
-        <argument name="handlers" xsi:type="array">
-            <item name="product_description" xsi:type="object">Vendor\Module\Model\Handler\ProductDescriptionHandler</item>
-        </argument>
-    </arguments>
-</type>
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Hyva\Ai\Controller\Adminhtml\Ai\Process">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="product_description" xsi:type="object">Vendor\Module\Model\Handler\ProductDescription</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
 ```
 
-### Step 3: Call It From JavaScript
+Generate the admin URL server-side with the route `hyva_ai/ai/process` and `handler=product_description`. Do not hard-code the admin front name or secret-key segment. Post `data` as JSON inside the form-encoded request, with the admin form key:
 
 ```
-async function generateDescription(productName, keywords) {
-    const response = await fetch('/admin/hyva_ai/ai/process/handler/product_description', {
+async function generateDescription(processUrl, formKey, productName) {
+    const response = await fetch(processUrl, {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        credentials: 'same-origin',
         body: new URLSearchParams({
-            form_key: window.FORM_KEY,
-            data: JSON.stringify({ product_name: productName, keywords: keywords })
-        })
+            form_key: formKey,
+            data: JSON.stringify({ product_name: productName }),
+        }),
     });
-
+    if (!response.ok) throw new Error('The AI request could not be completed.');
     const result = await response.json();
-
-    if (result.success) {
-        return result.data.description;
-    } else {
-        throw new Error(result.message);
-    }
+    if (!result.success) throw new Error(result.message);
+    return result.data.description;
 }
 ```
 
-That's it. The framework handles provider resolution, API calls, and error handling.
+The built-in controller uses `Magento_Backend::content` ACL and returns a JSON envelope with `success`, `provider`, `handler`, `data`, `count` and `message` on success. Error envelopes contain `success: false` and a message. Feature-specific entity permissions and output validation remain your responsibility. Generating text is not authorisation to save or publish it.
 
-### Response Format
+The example returns a proposal.
 
-The controller always returns:
+Validate generated content before saving it
 
-```
-{
-    "success": true,
-    "provider": "openai",
-    "handler": "product_description",
-    "data": { /* your processResponse output */ },
-    "message": "AI processing completed successfully."
-}
-```
+A saving controller must enforce its own form-key, ACL, entity and content validation. Do not render generated text as trusted HTML.
 
-Or, on error:
+## Feature Execution Overrides
 
-```
-{
-    "success": false,
-    "message": "OpenAI API key is not configured."
-}
-```
+`Hyva\Ai\Model\ExecutionConfig::getMode($feature)` resolves:
 
----
+1. `hyva_ai/<feature>/execution_mode` when present and not `default`.
+2. `hyva_ai/execution/mode`.
+3. `legacy` if the general value is absent.
 
-## Part 2: Adding a New AI Provider
+Handler controller execution is scoped by the registered handler name, including the configured check and provider call. Handler options also gain `_execution_feature` for server-side calls. For a custom entry point, use `ExecutionConfig::withFeature()` around the complete configured-check/call operation; it restores the previous context even on failure.
 
-To add a provider (e.g., Anthropic), you need:
+A transport that does not support a provider leaves that provider on its direct route. A missing selected transport is an error. AI Worker handles its own runtime selection: configured Node/Cloudflare takes priority, with PHP worker backup when enabled. Provider failures are reported without switching providers or using the direct PHP adapter. Providers and transports must use bounded requests. The synchronous path still waits in PHP; use [worker sessions or jobs](../../../hyva-commerce/features/ai-worker/developer-integration.html) for longer work.
 
-| Component | Purpose |
-| --- | --- |
-| `ProviderConfig` | Default settings (model, temperature, max tokens) |
-| `Client` | Makes API calls to the AI service |
-| `Provider` | Implements `ProviderInterface` |
-| `OptionsSchema` | Declares configurable options |
-| `Model Source` | Lists available models |
+## Add a Provider Package
 
-### ProviderInterface
+Keep service-specific classes, encrypted credential fields, model lists, schemas and tests in that provider's module. Require the base AI module, not other providers or CMS. Add worker/CMS dependencies only when the package actually needs those APIs.
+
+Implement `Hyva\Ai\Api\ProviderInterface`:
 
 ```
-<?php
-declare(strict_types=1);
-
 interface ProviderInterface
 {
     public function process(array $data, array $options = []): array;
@@ -232,193 +141,47 @@ interface ProviderInterface
 }
 ```
 
-The `process()` method receives messages and returns responses:
+Register the implementation in `Hyva\Ai\Model\ProviderPool.providers`, keyed by provider ID. The standard message shape is an array of batches, each containing `messages`; return `['responses' => ['text for batch one', 'text for batch two']]` in the same order.
 
-```
-<?php
-declare(strict_types=1);
+Use `ProviderConfigInterface` for provider defaults: `getProviderName()`, `getDefaultModel()`, `getDefaultTemperature()` and `getDefaultMaxTokens()`. Register the config in `RouteProviderRequests.providerConfigs` so routed calls that omit options retain the provider's defaults.
 
-// Input
-$data = [
-    'messages' => [
-        ['messages' => [
-            ['role' => 'system', 'content' => '...'],
-            ['role' => 'user', 'content' => '...']
-        ]]
-    ]
-];
+A direct adapter should use the shared request budget, close active sessions before network I/O, bound connection/read time and retries, and reject incomplete responses. Do not extend PHP/server execution limits in a provider implementation.
 
-// Output - must have 'responses' key
-return ['responses' => ['Generated text here']];
-```
+## Register Models and Options
 
-### ProviderConfigInterface
+Merge entries into `Hyva\Ai\Model\ProviderResolver.providerModels` under your provider ID:
 
-```
-<?php
-declare(strict_types=1);
+| Entry | Meaning |
+| --- | --- |
+| `source_model` | Existing provider model-source class implementing `OptionSourceInterface`. It must accept the configured options in its constructor for the resolver's source path. |
+| `options` | Model entries with `value` and `label`. |
+| `display_label` | Label used by the guided provider picker. |
+| `direct` | Whether the catalog should expose direct execution; defaults to true. |
+| `worker_adapter` | Declare true only when the deployed worker supports this provider protocol. |
 
-interface ProviderConfigInterface
-{
-    public function getProviderName(): string;      // e.g., 'anthropic'
-    public function getDefaultModel(): string;      // e.g., 'claude-sonnet-4-20250514'
-    public function getDefaultTemperature(): float; // e.g., 0.3
-    public function getDefaultMaxTokens(): int;     // e.g., 4000
-}
-```
+`ModelCatalog` consumes these registrations. Its optional `metadata` argument is keyed by model ID with `current`, `capabilities` (such as `text` and `translation`) and `hidden_options`. Unannotated third-party models are visible by default. Metadata changes the picker; it does not prove account availability or implement an adapter.
 
-### Registration
+Implement `Hyva\Ai\Api\Provider\OptionsSchemaInterface` and register in `Hyva\Ai\Model\Provider\OptionsSchemaPool.schemas`. Extending `AbstractOptionsSchema` supplies type normalization based on field definitions; an integer default keeps a numeric option integer-valued. Schemas provide `getProviderId()`, `getFields()` and `normalizeOptions()`.
 
-```
-<!-- etc/di.xml -->
+The existing `ProviderOptions` block constructor/virtual-type configuration remains supported. Optional `capability` and `workerOnly` arguments narrow the picker for a feature.
 
-<!-- 1. Add to provider pool -->
-<type name="Hyva\Ai\Model\ProviderPool">
-    <arguments>
-        <argument name="providers" xsi:type="array">
-            <item name="anthropic" xsi:type="object">Vendor\AiAnthropic\Model\Provider\AnthropicProvider</item>
-        </argument>
-    </arguments>
-</type>
+## Credentials, Images and Connection Tests
 
-<!-- 2. Register models so framework can resolve provider from model name -->
-<type name="Hyva\Ai\Model\ProviderResolver">
-    <arguments>
-        <argument name="providerModels" xsi:type="array">
-            <item name="anthropic" xsi:type="array">
-                <item name="source_model" xsi:type="string">Vendor\AiAnthropic\Model\Config\Source\Model</item>
-                <item name="label" xsi:type="string">Anthropic</item>
-                <item name="options" xsi:type="array">
-                    <item name="claude-sonnet-4-20250514" xsi:type="array">
-                        <item name="value" xsi:type="string">claude-sonnet-4-20250514</item>
-                        <item name="label" xsi:type="string">Claude Sonnet 4</item>
-                    </item>
-                </item>
-            </item>
-        </argument>
-    </arguments>
-</type>
+| Contract/registry | Registration and responsibility |
+| --- | --- |
+| `Hyva\Ai\Api\ProviderApiKeyResolverInterface` | Implement `getApiKey($store = null): string` and `isConfigured($store = null): bool`. Register in `Hyva\Ai\Model\ApiKeyResolverPool.resolvers`. |
+| `ConfigPathApiKeyResolver` | Base virtual-type implementation in `Hyva\Ai\Model\ApiKeyResolver`, configured with `configPath` and `envVar` (pass an empty string when no environment override is needed). Keeps provider ownership separate from the worker. |
+| `Hyva\Ai\Model\Provider\StreamDialectPool.dialects` | Provider-owned PHP request encoding, model validation and SSE parsing through `StreamDialectInterface`. |
+| `Hyva\Ai\Model\Provider\ImageDialectPool.dialects` | Provider-owned PHP image request/response handling through `ImageDialectInterface`. Neither registration requires the worker package. |
+| `Hyva\Ai\Model\ImageModelRegistry.models` | Entries keyed by model ID with `provider`, `label` and optional `current`. A runtime image adapter is separately required. |
+| `Hyva\Ai\Api\ConnectionTesterInterface` | Implement `test(string $model): void`, returning normally on success or throwing an appropriate localized failure. Register in `ConnectionTesterPool.testers`. |
 
-<!-- 3. Register options schema (optional, for admin config UI) -->
-<type name="Hyva\Ai\Model\Provider\OptionsSchemaPool">
-    <arguments>
-        <argument name="schemas" xsi:type="array">
-            <item name="anthropic" xsi:type="object">Vendor\AiAnthropic\Model\Provider\OptionsSchema</item>
-        </argument>
-    </arguments>
-</type>
-```
+Connection tests belong to the provider package and use its saved credential. The shared connection-test controller checks a registered model and configuration ACL. Test with the least expensive operation that proves the intended capability. DeepL checks usage without sending translation text; the text providers make a small direct model request.
 
-### Admin Config
+## Extend Execution or Tools
 
-```
-<!-- etc/adminhtml/system.xml -->
-<section id="hyva_ai">
-    <group id="anthropic" translate="label" sortOrder="30" showInDefault="1">
-        <label>Anthropic Configuration</label>
-        <field id="api_key" translate="label" type="obscure" sortOrder="10" showInDefault="1">
-            <label>API Key</label>
-            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-        </field>
-    </group>
-</section>
-```
+Implement `RequestTransportInterface` with `supports(string $provider): bool` and `process(string $provider, array $data, array $options = []): array`. Register it in `Hyva\Ai\Plugin\RouteProviderRequests.transports` and label it in `Hyva\Ai\Model\Config\Source\ExecutionMode.transports`.
 
----
+For tool routing, implement `ToolTransportInterface`, which adds `chatWithTools(string $provider, array $messages, array $tools, array $options = []): array`. Providers that expose native tools implement `ToolCapableProviderInterface`. Its return shape is text, tool calls and an optional stop reason; tool-call arguments must be validated by the feature before any execution.
 
-## Message Format
-
-All providers use OpenAI-compatible messages:
-
-```
-<?php
-declare(strict_types=1);
-
-$messages = [
-    ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-    ['role' => 'user', 'content' => 'Hello!'],
-    ['role' => 'assistant', 'content' => 'Hi there!'],
-    ['role' => 'user', 'content' => 'How are you?']
-];
-```
-
-Providers convert internally (e.g., Gemini maps `system` → `user`, `assistant` → `model`).
-
----
-
-## Available Models
-
-### OpenAI
-
-`gpt-5`, `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `gpt-4`, `gpt-3.5-turbo`
-
-Config: `hyva_ai/openai/api_key`
-
-### Gemini
-
-`gemini-2.5-pro`, `gemini-2.5-flash`, `gemini-2.5-flash-lite`
-
-Config: `hyva_ai/gemini/api_key`
-
-### DeepL
-
-`deepl-api`
-
-Config: `hyva_ai/deepl/api_key`, `hyva_ai/deepl/api_type`
-
----
-
-## Options Schema
-
-For configurable provider options, extend `AbstractOptionsSchema`:
-
-```
-<?php
-declare(strict_types=1);
-
-class OptionsSchema extends AbstractOptionsSchema
-{
-    public function getProviderId(): string
-    {
-        return 'your_provider';
-    }
-
-    public function getFields(): array
-    {
-        return [
-            [
-                'id' => 'temperature',
-                'type' => 'number',
-                'label' => __('Temperature'),
-                'default' => 0.3,  // float default = float type
-            ],
-            [
-                'id' => 'max_tokens',
-                'type' => 'number',
-                'label' => __('Max Tokens'),
-                'default' => 4000,  // int default = int type
-            ]
-        ];
-    }
-}
-```
-
-The base class normalizes config values to correct PHP types automatically.
-
----
-
-## Dynamic Provider Options Block
-
-For admin config that changes based on selected model:
-
-```
-<!-- etc/adminhtml/di.xml -->
-<virtualType name="Vendor\Module\Block\ProviderOptions"
-             type="Hyva\Ai\Block\Adminhtml\System\Config\ProviderOptions">
-    <arguments>
-        <argument name="modelFieldId" xsi:type="string">your_section_group_model</argument>
-    </arguments>
-</virtualType>
-```
-
-The block automatically shows relevant options when users change model selection.
+The legacy `worker` provider and its saved underlying provider/model selections remain supported. New transport integrations should keep the real provider/model choice separate from the execution method.

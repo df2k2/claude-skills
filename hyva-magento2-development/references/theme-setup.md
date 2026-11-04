@@ -45,7 +45,13 @@ bin/magento config:set dev/css/minify_files 0
 
 ## Required GraphQL modules
 
-Hyvä uses GraphQL for several features. If the install previously ran Luma, GraphQL modules may have been disabled. Required modules include:
+Hyvä uses GraphQL for several features. If the install previously ran Luma, GraphQL modules may have been disabled.
+
+**Since Default Theme 1.5.3** the storefront makes no GraphQL calls of its own: the review form, customer review list, and recently-viewed widget went server-side or browser-storage. The modules must still be **installed and enabled**, because `Hyva_Theme` still requires `magento/module-quote-graph-ql`. If nothing else uses GraphQL, the `/graphql` route can then be blocked. Two cases still call GraphQL:
+- Overrides of those three templates keep calling it until they are updated.
+- Modules that use `GraphqlViewModel` or the customer section's `signin_token` must now `require` `hyva-themes/magento2-graphql-view-model` / `magento2-graphql-tokens` themselves.
+
+On 1.4.x and 1.5.1–1.5.2, the modules below are required at runtime. Required modules include:
 
 `Magento_BundleGraphQl`, `Magento_CatalogCustomerGraphQl`, `Magento_CatalogGraphQl`, `Magento_CatalogRuleGraphQl`, `Magento_CatalogUrlRewriteGraphQl`, `Magento_ConfigurableProductGraphQl`, `Magento_CustomerGraphQl`, `Magento_DirectoryGraphQl`, `Magento_DownloadableGraphQl`, `Magento_EavGraphQl`, `Magento_GraphQl`, `Magento_GroupedProductGraphQl`, `Magento_QuoteGraphQl`, `Magento_GraphQlCache`, `Magento_RelatedProductGraphQl`, `Magento_ReviewGraphQl`, `Magento_SalesGraphQl`, `Magento_StoreGraphQl`, `Magento_SwatchesGraphQl`, `Magento_UrlRewriteGraphQl`, `Magento_WishlistGraphQl`.
 

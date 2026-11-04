@@ -2,72 +2,62 @@
 
 # Full Bleed CMS Content
 
-By default, Hyvä applies a `container` class to all pages, ensuring a consistent and structured layout. However, there are instances where you might want to break free from this container to create a more immersive, full-width experience.
+By default, Hyvä applies a `container` class to all pages to keep content within a consistent max-width. Sometimes you want a section to break out of that container and span the full browser viewport. This page covers three techniques for achieving a full-bleed layout in CMS content.
 
-Down here you will find a few method to achieve this.
+## Method 1: Page Builder Full-Width Layout
 
-## Method 1: Leveraging the Page Builder
+The quickest option if you're already using Page Builder. Switch the page layout to "Page -- Full Width" in the page design settings, then use a Page Builder Row block for any sections that need a constrained container. Everything outside the Row stretches edge to edge.
 
-The Magento Page Builder provides a straightforward approach for full-width CMS content.
+## Method 2: CSS Full-Bleed Techniques
 
-Simply switch the page layout design to "*Page -- Full Width*" and utilize the Page Builder "*Row*" block for sections requiring structured content.
+These CSS-based approaches require the [CMS Tailwind JIT module](tailwind-jit/index.html) so that Tailwind utility classes used in CMS content are compiled and injected automatically.
 
-## Method 2: The CSS Full Bleed methods
+### Viewport Full-Bleed Technique
 
-Before embarking on the CSS route, ensure you've installed the [CMS Tailwind JIT](cms-tailwind-jit-module.html) module.
-
-This module enables the application of Tailwind classes directly from CMS content.
-
-### Viewport full Bleed technique
+This technique uses negative margins and viewport-width sizing to break an element out of its container.
 
 Warning
 
-This method introduces an overflow on the page and can lead to unexpected behavior in certain edge cases. It is considered the least recommended option.
+This method adds horizontal overflow to the page and can cause unexpected behavior in some edge cases. It is the least recommended of the CSS approaches.
 
-First ensure the parent element of the full-width content has an overflow: hidden property, typically `.page-main` or `body`.
-
-Apply the following classes to your element to break free from the container:
+First, ensure the parent element has `overflow: hidden` set. This is typically `.page-main` or `body`. Then apply these Tailwind classes to the element you want to be full-width:
 
 ```
 ml-[50%] w-screen -translate-x-1/2
 ```
 
-### Border image technique
+### Border Image Technique
 
-This technique utilizes border-image to break free from the container:
+This technique uses `border-image` with a conic gradient to paint a background color across the full viewport width. Apply this Tailwind arbitrary value to the element:
 
 ```
 [border-image:conic-gradient(theme(colors.blue.400)_0_0)_fill_0//0_100vw]
 ```
 
-This border image employs a clever trick to create a solid color, as border-image doesn't support solid colors directly.
+Replace `theme(colors.blue.400)` with any color from your theme. The conic gradient is used because `border-image` does not support solid colors directly. This approach avoids the horizontal scrollbar that the Viewport Full-Bleed technique can introduce, and border images support more creative patterns beyond simple solid colors.
 
-Replace `theme(colors.blue.400)` with your desired color to match your branding.
+## Method 3: CSS Grid Full-Bleed
 
-This method eliminates the horizontal scrollbars introduced by the Viewport Full Bleed technique.
+This approach restructures the `.columns` container using CSS grid, giving you fine-grained control over which elements break out of the centered column. It requires familiarity with CSS grid.
 
-Additionally, border images allow for more creative patterns beyond simple colors.
+The grid creates three columns: two equal outer columns and one centered content column. All direct children of `.main` default to the center column. Any child with the `.fullbleed` class spans all three columns to achieve full-width.
 
-## Method 3: CSS Grid method
-
-This method requires modifying how the main page layout `.columns` container is handled.
-
-It involves more CSS adjustments and assumes proficiency in CSS grid.
-
-Code Sample: Applying CSS Grid to CMS Pages
+CSS Grid full-bleed implementation for CMS pages
 
 ```
+/* Apply grid-based layout only to CMS pages */
 .cms-page-view .columns {
-    /* Unset the container */
+    /* Remove the default container constraints */
     max-width: 100%;
     padding-inline: 0;
     margin-inline: 0;
 
-    /* Apply grid based container on the main content wrapper */
+    /* Apply a three-column grid to the main content wrapper */
     & .main {
         --max-width: var(--container-sm);
         --padding: --spacing(6);
         display: grid;
+        /* Center column is constrained by max-width; outer columns fill remaining space */
         grid-template-columns:
             1fr
             min((var(--max-width) - (var(--padding) * 2)), calc(100% - (var(--padding) * 2)))
@@ -90,11 +80,12 @@ Code Sample: Applying CSS Grid to CMS Pages
             --max-width: var(--container-2xl);
         }
 
+        /* All direct children sit in the center column by default */
         & > * {
             grid-column-start: 2;
         }
 
-        /* If the content needs to escape use full */
+        /* Add .fullbleed to any element that should span the full viewport width */
         & .fullbleed {
             width: 100%;
             grid-column: 1 / -1;
@@ -103,6 +94,7 @@ Code Sample: Applying CSS Grid to CMS Pages
 }
 ```
 
-This code snippet applies CSS grid to only CMS pages, ensuring a consistent layout for non-CMS pages.
+## Related Topics
 
-To ensure a seamless transition to this method, carefully test and refine your CSS code to achieve the desired full-width effect while maintaining overall page structure and responsiveness.
+- **[CMS Tailwind JIT Module](tailwind-jit/index.html)** - Required for Methods 2 to apply Tailwind classes in CMS content.
+- **[Installing the CMS Tailwind JIT Module](tailwind-jit/installation.html)** - How to install and configure the CMS Tailwind JIT module.

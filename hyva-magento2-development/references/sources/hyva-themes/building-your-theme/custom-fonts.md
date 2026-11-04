@@ -2,6 +2,10 @@
 
 # Using Custom Fonts
 
+A faster way in Tailwind v4
+
+On Tailwind v4, [`hyva-fonts`](../working-with-tailwindcss/using-hyva-modules/fonts.html) does everything on this page for you. It downloads the font files into your theme, writes the `@font-face` rules, generates a metrics matched fallback, and keeps the preload hints in step with your configuration. This page is still worth reading to understand what it produces, or if you want to wire it up by hand.
+
 There are a few ways to add a custom font to your Hyvä theme. The steps are always the same: load the font, register it in your CSS, then use it in your styles. Done carelessly though, font loading can hurt your Google ranking metrics — so let's walk through it properly.
 
 ## Step 1: Load a font
@@ -167,6 +171,8 @@ Preloading can hurt LCP
 Preloading fonts blocks the first render, which negatively impacts your Largest Contentful Paint (LCP) score. For fonts used above the fold, this can actually make things worse, not better.
 
 A better approach is to set accurate fallback fonts with matching `line-height` values to reserve space. You can also use `size-adjust` and `ascent-override` on the fallback font to minimize layout shift without blocking render. Some tools can [calculate these values dynamically](https://www.industrialempathy.com/perfect-ish-font-fallback/?font=Montserrat) for Google Fonts.
+
+[`hyva-fonts`](../working-with-tailwindcss/using-hyva-modules/fonts.html#reducing-layout-shift-with-fallback-fonts) generates those values for you, measured from the font file itself, and does it for any font rather than only the ones on Google Fonts.
 
 If you've tested your setup and preloading is the right call, add this to the `<head>` section of `Magento_Theme/layout/default_head_blocks.xml`:
 

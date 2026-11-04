@@ -40,7 +40,7 @@ However, since tastes are different, here are some other resources to get starte
 Tip
 
 AlpineJS plugins are available for IDEs and Editors,
-we have docs for PHPStorm and VSCode on the [Editor Setup Docs](editor-setup.html) which includes Intellisense to make it easier to write AlpineJS.
+we have docs for PHPStorm and VSCode on the [Editor Setup Docs](./editor-setup.html) which includes Intellisense to make it easier to write AlpineJS.
 
 Tip
 

@@ -27,11 +27,11 @@ You can leverage these pre-built components to enhance your Magento store's fron
 
 Explore the resources below to get a comprehensive overview of the Hyvä UI Library.
 
-- **Demo Videos:** Watch our [introduction videos](videos.html) to see the components in action.
-- **Component List:** See the [complete list of available components](included-components.html).
-- **Component Previews:** Explore the dedicated docs for the [Product Gallery](product-gallery.html) and [Menus](menus.html) for a detailed preview.
-- **Design Files:** You can also explore the visual design and component structure in the provided [Figma](figma.html) and PDF files.
+- **Demo Videos:** Watch our [introduction videos](./videos.html) to see the components in action.
+- **Component List:** See the [complete list of available components](./included-components.html).
+- **Component Previews:** Explore the dedicated docs for the [Product Gallery](./product-gallery.html) and [Menus](./menus.html) for a detailed preview.
+- **Design Files:** You can also explore the visual design and component structure in the provided [Figma](./figma.html) and PDF files.
 
 ## Getting Started
 
-Ready to use Hyvä UI? Follow our [Getting Started Guide](getting-started.html) for installation and setup instructions.
+Ready to use Hyvä UI? Follow our [Getting Started Guide](./getting-started.html) for installation and setup instructions.

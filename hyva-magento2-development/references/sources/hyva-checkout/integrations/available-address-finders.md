@@ -4,6 +4,10 @@
 
 Hyvä Checkout supports a range of address autocomplete and address finder integrations, maintained by community members and third-party vendors. This page lists all tracked address autocomplete extensions available for Hyvä Checkout license holders.
 
+Checkout 3.x compatibility
+
+Unless stated otherwise, the integrations listed here that are built on Magewire target Hyvä Checkout 1.x (Magewire 1). On Checkout 3.x checkout pages they run through the [Magewire 1 backward compatibility module (v1bc)](../faq/what-is-v1bc.html). Check with the vendor whether an integration supports Checkout 3.x.
+
 Support for address autocomplete integrations
 
 Most address autocomplete integrations are maintained by community members or vendors, not the Hyvä core team. For first-line support, reach out to the provider or integrator listed on the integration tracker ticket. If you need help finding the right contact, the Hyvä team is happy to point you in the right direction.

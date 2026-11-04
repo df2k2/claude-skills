@@ -8,8 +8,8 @@ The Hyva Checkout two-column accordion layout replaces the default breadcrumb-ba
 
 ## Preview
 
-[![Preview of the Hyva Checkout accordion layout at step 1](images/checkout-accordion-step-1.jpg)](images/checkout-accordion-step-1.jpg)
-[![Preview of the Hyva Checkout accordion layout at step 2](images/checkout-accordion-step-2.jpg)](images/checkout-accordion-step-2.jpg)
+[![Preview of the Hyva Checkout accordion layout at step 1](./images/checkout-accordion-step-1.jpg)](./images/checkout-accordion-step-1.jpg)
+[![Preview of the Hyva Checkout accordion layout at step 2](./images/checkout-accordion-step-2.jpg)](./images/checkout-accordion-step-2.jpg)
 
 ## Creating the Accordion Layout XML Handle
 

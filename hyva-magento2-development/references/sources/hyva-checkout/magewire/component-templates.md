@@ -80,7 +80,32 @@ You can call any component method and render its return value directly in the te
 
 ### Reading Magewire Component Properties
 
-Magewire provides several ways to read component properties in templates:
+How you read component properties in templates depends on the Magewire version:
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+Read component properties in templates with direct property access:
+
+```
+<div>
+    <!-- Direct property access -->
+    <?= __('Using direct access: %1', $magewire->myprop) ?>
+</div>
+<div>
+    <!-- Use isset() to check whether a property has a value -->
+    <?= __('Is the property set: %1', isset($magewire->myprop)) ?>
+</div>
+```
+
+Magewire 3 has no magic getter, has or setter methods
+
+Magewire 3 components don't provide magic `get`, `has` or `set` methods for properties, matching Livewire 3. A call like `$magewire->getMyprop()` throws a `BadMethodCallException`, unless the component runs in v1 mode, where the v1bc module still provides `getFoo()` and `hasFoo()`. Use direct access instead:
+
+```
+$component->foo = $newValue;
+```
+
+Magewire 1 provides several ways to read component properties in templates:
 
 ```
 <div>

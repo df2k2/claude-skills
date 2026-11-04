@@ -76,6 +76,8 @@ The following example shows a complete input element with all three Magewire val
 >
 ```
 
+`wire:model.defer` defers the value on both release lines. Magewire 3 ignores the `.defer` modifier, because its plain `wire:model` is deferred already, but keep it: on Checkout 3.x, the v1bc module turns a plain `wire:model` of a component in v1 mode into a live binding.
+
 ## Triggering Magewire Form Validation
 
 Magewire form validation is automatically triggered after Magewire updates an element during subsequent requests.
@@ -83,6 +85,10 @@ Magewire form validation is automatically triggered after Magewire updates an el
 To trigger validation on the frontend without a Magewire server roundtrip, call the Alpine `validate()` method to validate all fields, or use `@change="onChange"` on individual form elements.
 
 ## Submitting a Magewire Form with JavaScript Validation
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+Using `wire:submit="submitForm"` on a form conflicts with the Hyvä JavaScript form validation. On Magewire 3, `wire:submit` prevents the browser's default form submission by itself, so you no longer need the `.prevent` modifier, but the conflict remains. To work around the conflict, call `validate()` first and then invoke the Magewire form component method only if validation passes.
 
 Using `wire:submit.prevent="submitForm"` on a form conflicts with the Hyvä JavaScript form validation. To work around the conflict, call `validate()` first and then invoke the Magewire form component method only if validation passes.
 
@@ -95,6 +101,14 @@ The following button triggers validation and submits the Magewire form on succes
     <?= $escaper->escapeHtml(__('Save')) ?>
 </button>
 ```
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+Why does `wire:submit` conflict with form validation?
+
+As soon as the form is submitted, Magewire 3 marks the form's text inputs and textareas `readonly`, and its selects, checkboxes, radio buttons and submit buttons `disabled`, until the server responds. Like on Magewire 1, the form elements change state while the frontend validation should still run.
+
+By using a button with `@click` and calling `validate()` manually, you keep full control over the validation flow before Magewire sends the request.
 
 Why does `wire:submit.prevent` conflict with form validation?
 

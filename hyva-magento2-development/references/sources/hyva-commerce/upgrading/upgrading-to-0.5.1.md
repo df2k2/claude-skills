@@ -20,4 +20,4 @@ The changelog is available [here](changelog.html#051-2025-06-17).
 
 ## Known Issues
 
-See bugfixes in the [0.5.2 release](upgrading-to-0.5.2.html).
+See bugfixes in the [0.5.2 release](./upgrading-to-0.5.2.html).

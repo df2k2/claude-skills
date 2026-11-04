@@ -2,12 +2,22 @@
 
 # Menu Builder
 
-Currently available in beta
+Menu Builder is a Hyvä Commerce feature that lets you build storefront menus visually with the Hyvä CMS editor, right from the Magento admin. It adds a new **Menu** option under `Content → Elements` in the admin panel, where you create and manage menus without touching template code.
 
-Menu Builder is currently available in beta, which means some of the features, specifications, and details provided herein are subject to change. We recommend checking back regularly for the most up-to-date information and viewing our [roadmap](https://www.hyva.io/roadmap) in regard to the general availability release.
+Available with Hyvä Commerce 1.3.0
 
-The Menu Builder, included with [Hyvä Commerce](https://www.hyva.io/hyva-commerce.html), adds a new *Menu* option to the *Magento > Content* section of the admin panel which allows for the creation of menus with the Hyvä CMS editor - for more information on how to build menus, see [Building Flexible Menus](features/building-flexible-menus.html).
+Menu Builder is generally available since `1.0.0`, which shipped with Hyvä Commerce `1.3.0` and requires Hyvä CMS `1.2.0`. Menu Builder `1.1.0`, shipped with Hyvä Commerce `1.4.0`, requires Hyvä CMS `1.3.0` and gives menus their own admin permissions. See [Installation](installation.html) for setup and the [Commerce upgrade guide](../../upgrading/upgrading-to-1.4.0.html) for deployment requirements.
 
-[![Menu Builder Demo](images/hc-menubuilder-demo.gif "Menu Builder demo")](images/hc-menubuilder-demo.gif)
+[![Menu Builder Demo](./images/hc-menubuilder-demo.webp "Menu Builder demo")](./images/hc-menubuilder-demo.webp)
 
-Menus can be rendered in multiple ways: via Design Configuration (Header Topmenu Navigation and Footer Menu), the Hyvä CMS Editor, Magento Widgets, shortcodes, layout XML, or directly in phtml templates. See [Configuration](configuration.html#rendering-a-menu) for details on each method.
+## Installing Menu Builder
+
+Ready to get started? Follow [Installing Menu Builder](installation.html) to add it to your Magento store.
+
+## More Information
+
+- [Creating Menus](creating-menus.html): create a menu in the admin and build it with components, links, rich content, and catalog categories.
+- [Displaying Menus](displaying-menus.html): show a menu on your storefront through Design Configuration, the CMS editor, or Magento widgets.
+- [Developer Documentation](devdocs/index.html): render menus from theme code, and build custom menu components with category import, dynamic category trees, and preview locking.
+- [Changelog](changelog.html): what's included in each release.
+- [FAQs](faqs.html): common questions about menus, categories, translation, and the CMS requirement.

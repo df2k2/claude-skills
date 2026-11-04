@@ -86,14 +86,14 @@ Simply place your `.svg` files in your theme's `web/svg` directory.
 Replace any default Lucide icon by placing an SVG file with the same name in the `web/svg/lucide/` directory of your theme.
 
 For a complete walkthrough on how to implement this,
-please follow our detailed guide on [using custom SVG icons in your theme](custom.html).
+please follow our detailed guide on [using custom SVG icons in your theme](./custom.html).
 
 ### Additional Hyvä Icon Packs
 
 We offer official modules for other popular icon sets:
 
-- [Hyvä Heroicons v2](heroicons.html)
-- [Hyvä Payment Icons](payment-icons.html)
+- [Hyvä Heroicons v2](./heroicons.html)
+- [Hyvä Payment Icons](./payment-icons.html)
 
 ### Third-Party Icon Packs
 

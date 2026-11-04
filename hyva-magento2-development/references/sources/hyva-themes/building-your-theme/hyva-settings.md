@@ -10,6 +10,8 @@ Version Compatibility
 
 This reference covers settings from the latest version of `hyva-themes/magento2-theme-module`. The module can be safely updated to the latest version at any time.
 
+Some settings need template changes in the theme and have no or only partial effect with an older theme version. These settings list the Default Theme version they require.
+
 ## Message Display Settings in Hyvä Themes
 
 The **Success Message Default Timeout** setting controls how long success messages stay visible on the storefront. Set a value in milliseconds to auto-hide success messages after a delay, or leave the field empty to keep messages visible until the customer dismisses them manually.
@@ -20,6 +22,21 @@ The **Success Message Default Timeout** setting controls how long success messag
 - **If a timeout is desired:** Common values range from 3000–10000 ms
 
 This setting only affects success messages. Error and warning messages always remain visible until the customer closes them.
+
+## Cart Item Order Settings
+
+The **Show Newest Items First** setting controls the order of the items on the cart page and in the mini cart. Both use the same order. This setting is also available under **Sales > Checkout > Shopping Cart**.
+
+**Path:** Hyvä Themes > General > Cart
+
+- **Default:** `Yes`
+- **When to change:** Set this to `No` to show the oldest items first on both the cart page and the mini cart.
+
+The order also applies when the cart page is split over multiple pages.
+
+Version Requirement
+
+The mini cart follows this setting from Hyvä default theme version 1.5.3. On older theme versions, the setting only changes the cart page, and the mini cart keeps showing the newest items first.
 
 ## Hyvä Demo Content Settings
 
@@ -49,7 +66,7 @@ The **Defer until idle timeout** sets the delay in milliseconds before deferred 
 The **Defer components** field lists CSS selectors for Alpine.js components that should be deferred. Each selector identifies a component whose initialization will be delayed.
 
 - **Default:** A predefined list of selectors for common Hyvä components
-- **Best practice:** Prefer adding the `x-defer` directive directly in your template files instead of using this admin setting. The template-level approach gives you finer control over the deferral trigger (`intersect`, `interact`, `idle`, or `event:eventname`). See [The Alpine.js x-defer plugin](../working-with-alpinejs/alpine-plugins/x-defer.html) for details.
+- **Best practice:** Prefer adding the `x-defer` directive directly in your template files instead of using this admin setting. The template-level approach gives you finer control over the deferral trigger (`intersect`, `interact`, `idle`, or `event:eventname`). See [The Alpine.js x-defer plugin](../../hyva-themes/working-with-alpinejs/alpine-plugins/x-defer.html) for details.
 
 When to Use the Admin Setting vs. Template Directives
 
@@ -88,6 +105,15 @@ The **Eagerness** setting controls when the browser begins speculating on links:
 - **`Conservative`** - Speculates only on mouse-down or touch-start
 
 For a deeper dive into speculation rules, trade-offs, and analytics considerations, see [Speculation Rules](../performance/speculation-rules.html).
+
+## Short Description Fallback Settings
+
+The **Use Description as Short Description Fallback** setting controls whether an excerpt of the product description is shown when a product has no short description, on the product page and in product lists. The excerpt is the first paragraph or the first sentence of the description. The setting can be changed per website and store view.
+
+**Path:** Hyvä Themes > Catalog > Product Details
+
+- **Default:** `Yes`
+- **When to disable:** Set this to `No` if products without a short description should not show an excerpt of the description.
 
 ## Compare Products Settings in Hyvä Catalog
 
@@ -145,6 +171,7 @@ Enabling client-side breadcrumbs triggers a JavaScript category tree lookup on e
 ## Product List Item Cache Settings
 
 The product list item cache settings control HTML caching for individual product items on category listing pages. Caching product list item HTML reduces PHP processing time and speeds up category page rendering in Hyvä themes.
+Disabling product list item HTML caching can help reduce the load on your cache storage backend (e.g., Redis), especially on sites with a large number of products.
 
 **Path:** Hyvä Themes > Catalog > Developer
 
@@ -153,7 +180,7 @@ The product list item cache settings control HTML caching for individual product
 | **Enable Product List Item block\_html Caching** | `Yes` | Caches the rendered HTML of each product item block |
 | **Product List Item Block Cache Lifetime** | `3600` (1 hour) | How long cached product HTML remains valid, in seconds |
 
-Keep caching enabled for best performance. Reduce the cache lifetime if your product data changes frequently (e.g., flash sales with rapidly changing prices). Increase the lifetime for catalogs that rarely change.
+Keep caching enabled for best performance. Reduce the cache lifetime if your product data changes frequently (e.g., flash sales with rapidly changing prices). Increase the lifetime for catalogs that rarely change. Alternatively, disable product list item caching to reduce the pressure on your cache backend.
 
 ## Google GTag Integration Settings
 
@@ -194,6 +221,20 @@ The **Enable SVG Icon Caching** setting caches rendered SVG icon output in the M
 - **Trade-off:** Enabling SVG caching increases cache storage usage in your Redis or other cache backend. On stores with many unique SVG icons, this can add meaningful load to the cache infrastructure.
 - **When to enable:** Consider enabling SVG icon caching on stores where profiling shows significant time spent in SVG rendering, or on pages that display many product cards with SVG-based icons.
 
+## HTML Safe Settings
+
+The **Map x-html-safe to x-html** setting controls how dynamic HTML content from older templates and third-party modules is displayed. When enabled, this content is filtered through a list of allowed HTML tags and attributes before it is shown. This mainly helps stores with a CSP theme, where such content is otherwise not displayed at all.
+
+**Path:** Hyvä Themes > Developer > HTML Safe
+
+- **`Disabled (default)`**: Nothing changes. Content that is not updated for CSP stays empty on CSP pages.
+- **`On CSP pages only`**: The content is filtered and displayed on CSP pages. Other pages are unchanged.
+- **`On all pages`**: The content is filtered on every page.
+
+Test Before Enabling
+
+Filtering can remove tags or attributes from existing content, which can change how it looks. Test your storefront before enabling this setting in production, and let your developer review the [mapping documentation](../working-with-alpinejs/alpine-plugins/x-html-safe.html#mapping-x-html-to-x-html-safe).
+
 ## Bfcache Settings for Instant Back-Forward Navigation
 
 The **Enable Bfcache** setting activates support for the browser's back-forward cache (bfcache) in Hyvä themes. Bfcache stores complete page snapshots in memory so that pressing the browser's back or forward button restores pages instantly instead of reloading them. This setting is mirrored from **Advanced > System > Full Page Cache**.
@@ -204,10 +245,11 @@ The **Enable Bfcache** setting activates support for the browser's back-forward 
 
 Additional Server Configuration Required
 
-Enabling bfcache in the Magento Admin is not enough on its own. You also need to modify your Varnish or Fastly VCL configuration to remove `no-store` from the `Cache-Control` header. Without this server-side change, browsers will not cache pages for back-forward navigation. See the full [Bfcache implementation guide](../performance/bfcache.html) for step-by-step instructions.
+Enabling bfcache in the Magento Admin is not enough on its own. You also need to modify your Varnish or Fastly VCL configuration to remove `no-store` from the `Cache-Control` header. Without this server-side change, browsers will not cache pages for back-forward navigation. The recommended alternative is the Magento core patch, which handles both the PHP header and the VCL, so this setting is not needed. See the full [Bfcache implementation guide](../performance/bfcache.html) for step-by-step instructions, and for how to combine it with the Mage-OS Theme Optimization module.
 
 ## Related Topics
 
-- [The Alpine.js x-defer plugin](../working-with-alpinejs/alpine-plugins/x-defer.html) - Deferring component initialization at the template level
+- [The Alpine.js x-defer plugin](../../hyva-themes/working-with-alpinejs/alpine-plugins/x-defer.html) - Deferring component initialization at the template level
 - [Speculation Rules](../performance/speculation-rules.html) - Detailed guide on prefetching and prerendering
 - [Bfcache implementation guide](../performance/bfcache.html) - Server configuration for instant back-forward navigation
+- [The Alpine.js x-html-safe plugin](../working-with-alpinejs/alpine-plugins/x-html-safe.html) - Sanitized HTML rendering for CSP and standard themes

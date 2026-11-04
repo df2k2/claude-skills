@@ -289,7 +289,7 @@ The method takes up to three arguments:
 
 The boolean object provides methods matching the property name to access the component state.
 For example, if the property name `hidden` is used, the state can be accessed with `hidden` and `!hidden`.
-For more information, please refer to the detailed [`hyva.createBooleanObject` method documentation in the CSP docs](csp/alpine-csp-hyva-createbooleanobject.html).
+For more information, please refer to the detailed [`hyva.createBooleanObject` method documentation in the CSP docs](./csp/alpine-csp-hyva-createbooleanobject.html).
 
 ## hyva.safeParseNumber(rawValue)
 

@@ -4,7 +4,7 @@
 
 This release is a maintenance release, mostly focused on bug fixes.
 
-Please refer to the [changelog](changelog.html#135-2025-09-18) for details.
+Please refer to the [changelog](changelog-1.x.html#135-2025-09-18) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -31,4 +31,4 @@ composer update --with-dependencies hyva-themes/magento2-hyva-checkout:1.3.5
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

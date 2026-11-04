@@ -23,7 +23,7 @@ should update their implementations to support the new scheduling functionality.
 #### Multi-domain Improvements
 
 Multi-store/domain setups are now auto-configured, Hyvä CMS no longer needs manual CSP settings to be applied.
-For more information, see the [documentation](../features/cms/installation.html#multi-store-domain-custom-admin-domain-setup).
+For more information, see the [documentation](../features/cms/installation.html#multi-store-and-custom-admin-domain-setup).
 
 #### Editor UI Improvements
 

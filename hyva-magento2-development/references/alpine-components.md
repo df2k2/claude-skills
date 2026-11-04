@@ -104,7 +104,7 @@ function initSearch() {
 | `x-if="cond"` (in `<template>`) | Conditionally render the children |
 | `x-for="item in items"` (in `<template>`) | Loop |
 | `x-text="expr"` | Set `textContent` |
-| `x-html="expr"` | Set `innerHTML` (avoid for user content) |
+| `x-html="expr"` | Set `innerHTML` (avoid for user content). Removed from the Alpine CSP build (3.15+); use Hyvä's `x-html-safe` (1.5.3+) there |
 | `x-model="state.field"` | Two-way bind to an input |
 | `x-bind:attr="expr"` or `:attr="expr"` | Set an attribute |
 | `x-on:event="expr"` or `@event="expr"` | Listen to a DOM event |
@@ -243,14 +243,19 @@ window.dispatchEvent(new CustomEvent('foo', { detail: payload }));
 
 ## Plugins available in Hyvä
 
-The Hyvä Default Theme includes Alpine plugins:
-- `@alpinejs/intersect` — `x-intersect` (lazy-load, fire on scroll-into-view)
-- `@alpinejs/persist` — `$persist` (localStorage state)
-- `@alpinejs/focus` — `x-trap`, `$focus` (focus management for modals)
-- `@alpinejs/collapse` — `x-collapse` (animated height)
-- `@alpinejs/morph` — DOM morphing (used by some integrations)
+The Hyvä theme module ships these plugins out of the box:
+- `x-intersect` — Alpine's Intersect plugin: lazy-load, or fire when an element scrolls into view.
+- `x-ignore` — exclude a subtree from Alpine processing.
+- `x-defer` — Hyvä plugin: postpone component initialization, e.g. `x-defer="intersect"`, for faster initial load.
+- `x-snap-slider` — Hyvä plugin: CSS scroll-snap sliders with progressive JS (`.force-pager` modifier since snap-slider 2.2.3).
+- `x-htmldialog` — native `<dialog>` for modals and off-canvas. Since 1.5, Hyvä's own `hyva.modal` is built on it.
+- `x-html-safe` — Hyvä 1.5.3+: allowlist-sanitized `x-html`. Works on the standard and CSP builds.
 
-Add custom plugins via the theme's `requirejs`-free loading: register an additional script in your layout XML. Alpine plugins must be loaded **before** Alpine itself initializes — set them up on `alpine:init`.
+Not bundled:
+- `x-collapse` comes with Hyvä UI. On Hyvä 1.4+ it needs `interpolate-size: numeric-only` on the element; native `<details>` often replaces it.
+- Other official Alpine plugins (`persist`, `focus`, `morph`, …) you add yourself.
+
+Add a plugin the theme's `requirejs`-free way: an inline `<script>` in a phtml that registers it in an `alpine:init` listener, included via layout XML on the pages that need it. Plugins must be registered **before** Alpine initializes. See `sources/hyva-themes/working-with-alpinejs/alpine-plugins/custom.md`.
 
 ## Debugging
 

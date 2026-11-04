@@ -67,11 +67,13 @@ The template provides increment and decrement buttons that trigger Magewire acti
 Template with increment/decrement controls
 
 ```
-<input type="number" wire:model="count"/>
+<input type="number" wire:model.live="count"/>
 
 <button type="button" wire:click="increment">Increment</button>
 <button type="button" wire:click="decrement">Decrement</button>
 ```
+
+`wire:model.live` re-runs the evaluation while the customer types, on both release lines. On Magewire 3, a plain `wire:model` would only send the value with the next request. Magewire 1 ignores the `.live` modifier and syncs on every change, as it does for a plain `wire:model`.
 
 ### How the Evaluation API Processes Results
 
@@ -166,9 +168,54 @@ You can find all available capabilities in `Hyva\Checkout\Model\Magewire\Compone
 
 Each evaluation result type needs its own frontend processor. A processor is a callback that runs automatically during page rendering or when the Magewire component is updated.
 
-The following example shows the Event processor implementation. It demonstrates how to handle dispatch behavior and bind results to the Validation API.
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
 
-Before 1.1.12 use `hyvaCheckout.evaluation.processors['event'] = () => {}`
+On Checkout 3.x, processors work differently in three ways:
+
+- **The `component` argument is a Magewire 3 component.** The results come from `component.effects.evaluation`, not from `component.serverMemo.evaluation`. Custom JavaScript that reads `component.serverMemo` or `component.data` only works through the v1bc module.
+- **A processor may return a teardown function**, which Hyvä Checkout runs before it processes the component's next result and when the component is removed. A teardown that removes a validation passes the step it was registered on to `hyvaCheckout.validation.remove(name, group, step)`.
+- **`hyvaCheckout.evaluation.registerCleanup(result, callback)`** registers a cleanup that runs on the Magewire `commit` of the result's own component. It replaces the Checkout 1.x pattern of a `message.received` hook per result.
+
+[Processor Teardown and registerCleanup](../frontend-api/V1/evaluation.html#processor-teardown-and-registercleanup) explains both in detail.
+
+The following example shows a simplified version of the core Event processor. It handles the dispatch behavior, binds the result to the Validation API, and returns a teardown that removes the validation again:
+
+Event processor - Frontend implementation
+
+```
+hyvaCheckout.evaluation.registerProcessor('event', (component, el, result) => {
+    const dispatch = () => {
+        window.dispatchEvent(new CustomEvent(result.arguments.event, {detail: result.arguments.detail || {}}))
+
+        return result.result || false;
+    }
+
+    if (result.dispatch) {
+        dispatch();
+        return;
+    }
+
+    // Remove a failed validation once the component's next update succeeds.
+    hyvaCheckout.evaluation.registerCleanup(result, ({ succeed }) => {
+        succeed(() => {
+            if (result.result === false) {
+                hyvaCheckout.validation.remove(result.hash);
+            }
+        });
+    });
+
+    // Bind to the Validation API so it triggers on primary button click.
+    hyvaCheckout.validation.register(result.hash, () => dispatch(), el, result.group);
+
+    // The step the validation is registered on: a teardown can run after a step change.
+    const step = hyvaCheckout.navigation.getCurrent()?.name;
+
+    // Teardown: drop the validation when this result is superseded or the component is removed.
+    return () => hyvaCheckout.validation.remove(result.hash, result.group, step);
+})
+```
+
+The following example shows the Event processor implementation. It demonstrates how to handle dispatch behavior and bind results to the Validation API.
 
 Event processor - Frontend implementation
 
@@ -185,12 +232,14 @@ hyvaCheckout.evaluation.registerProcessor('event', (component, el, result) => {
         result.hash,
         () => window.dispatchEvent(new CustomEvent(result.arguments.event, {detail: result.arguments.detail})),
         el,
-        result.id
+        result.group
     )
 
     return result.result;
 })
 ```
+
+On Checkout 1.x, the processor reads results from `component.serverMemo.evaluation`. To clean up what a processor set up, register a Magewire `message.received` hook inside the processor.
 
 The callback result argument
 
@@ -201,6 +250,7 @@ The `result` argument has a fixed set of variables evaluated by the Hyvä Checko
 - **result** `bool`: Positive or negative type result.
 - **type** `string`: Result type name.
 - **id** `string`: The Magewire component ID.
+- **group** `string`: The result type and component ID, used to group validations.
 - **hash** `string`: SHA1 hash of the result array values.
 
-For more details, check `\Hyva\Checkout\Model\Magewire\Component\Hydrator\Evaluation`.
+For more details, check `compileEvaluationResult()` in `\Hyva\Checkout\Model\Magewire\Features\SupportHyvaCheckoutEvaluation\SupportHyvaCheckoutEvaluation` (Checkout 3.x) or `\Hyva\Checkout\Model\Magewire\Hydrator\Evaluation` (Checkout 1.x).

@@ -17,11 +17,15 @@ public function updatedMyProp(string $value): string
 {
     // Run your logic here, for example
     // persist $this->myProp to the database or session.
-    return $value;
+
+    // To change the stored value, assign it and return it.
+    $this->myProp = trim($value);
+
+    return $this->myProp;
 }
 ```
 
-The return value of the callback becomes the final value assigned to the property.
+Magewire 1 stores the return value of the callback as the property's final value. Magewire 3 ignores the return value and keeps what the callback assigned, so assigning and returning the value works on both release lines. See [Lifecycle Hooks](https://docs.magewirephp.nl/pages/essentials/lifecycle-hooks.html) in the Magewire 3 docs.
 
 Only triggered by Magewire updates
 
@@ -29,7 +33,13 @@ The `updatedMyProp()` callback is only called when the property is updated throu
 
 ## Generic `updated()` Callback for All Magewire Properties
 
-Magewire also provides a generic `updated($value, $prop)` lifecycle method that fires for every property update on the component, regardless of which property changed. The property-specific callback (like `updatedMyProp()`) is more common, but the generic version is useful when you want centralized handling for all property changes.
+Magewire also provides a generic `updated()` lifecycle method that fires for every property update on the component, regardless of which property changed. The property-specific callback (like `updatedMyProp()`) is more common, but the generic version is useful when you want centralized handling for all property changes.
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+The signature is `updated(string $prop, $value)`: the property name comes first. Components in v1 mode get the Magewire 1 argument order.
+
+The signature is `updated($value, $prop)`: the new value comes first.
 
 Both of these callbacks are Magewire lifecycle hook methods. You can find the full list of available hooks, including `updating()` variants that fire *before* the value is applied, in the [lifecycle hook methods documentation](lifecycle-hook-methods.html).
 

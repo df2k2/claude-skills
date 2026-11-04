@@ -14,7 +14,7 @@ If you only need fixed fields or minimal modifications, a regular phtml template
 
 Address Forms Built with the Form API
 
-All address forms in Hyva Checkout are built using the Form API abstraction, so developers can fully customize the forms without needing access to the core. In the future, components like the order comment and coupon code forms will be migrated to the Form API as well.
+All address forms in Hyva Checkout are built using the Form API abstraction, so developers can fully customize the forms without needing access to the core. The guest details form and the coupon code form (`CouponCodeForm`) are Form API forms as well, on both Checkout 1.3.15 and Checkout 3.x.
 
 ## Shipping Address Form - A Practical Example
 
@@ -247,6 +247,10 @@ class WithLastnameModifier implements \Hyva\Checkout\Model\Form\EntityFormModifi
     }
 }
 ```
+
+Hook names on Checkout 3.x
+
+The `form:init` hook in this example works the same on both release lines. For Magewire-driven forms, Checkout 3.x adds a `form:*:magewire` hook for every Magewire lifecycle step (for example `form:construct:magewire`, `form:loaded:magewire` and `form:updated:data:<field>:magewire`) and renames the trigger hooks from `form:execute:*:magewire` to `form:trigger:*:magewire`. See [Form Modification Hooks](form-modification-hooks.html#magewire-component-hooks).
 
 Modifiers Are Not Form Constructors
 

@@ -88,7 +88,7 @@ Previous to this release all components had a wrapper div in both preview and st
 
 If you had any customisations relying on these wrapper divs, for example CSS or JavaScript targeting these divs, or using them for child layout, you may need to make some updates to your customisations.
 
-Or you can restore the previous behaviour by enabling legacy liveview-content wrapper divs in Store Configuration > Hyvä CMS > Advanced.
+Or you can restore the previous behaviour by enabling legacy liveview-content wrapper divs in Store Configuration > Hyvä Commerce > Hyvä CMS > Advanced.
 
 ### Component Panel Forms
 

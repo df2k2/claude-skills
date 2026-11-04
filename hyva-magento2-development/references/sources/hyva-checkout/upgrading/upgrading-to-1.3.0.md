@@ -16,7 +16,7 @@ If your theme includes custom/shared components that are also used within the ch
 
 For more details, refer to the [CSP Checkout without CSP Theme guide](../devdocs/csp/csp-checkout-with-non-csp-theme.html).
 
-Please refer to the [changelog](changelog.html#130-2025-03-13) for details.
+Please refer to the [changelog](changelog-1.x.html#130-2025-03-13) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -106,4 +106,4 @@ composer update --with-dependencies hyva-themes/magento2-hyva-checkout:1.3.0
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

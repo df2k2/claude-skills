@@ -30,7 +30,7 @@ For proper display of validation messages, it's recommended to also include a co
 <div id="validation-messages-<?= $escaper->escapeHtmlAttr("{$uid}_{$fieldName}") ?>"></div>
 ```
 
-See the documentation for more information on how to create a [custom field type template](../features/cms/creating-custom-component-fields-types.html#creating-the-custom-field-type-template).
+See the documentation for more information on how to create a [custom field type template](./../features/cms/creating-custom-component-fields-types.html#creating-the-custom-field-type-template).
 
 ## Changelogs
 
@@ -38,4 +38,4 @@ The changelog is available [here](changelog.html#030-2025-05-06).
 
 ## Known Issues
 
-See bugfixes in the [0.4.0 release](upgrading-to-0.4.0.html).
+See bugfixes in the [0.4.0 release](./upgrading-to-0.4.0.html).

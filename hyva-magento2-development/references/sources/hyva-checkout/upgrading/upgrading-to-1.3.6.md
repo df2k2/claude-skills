@@ -4,7 +4,7 @@
 
 The key highlight is the new Frontend JavaScript Payment API, which provides a more robust and flexible way to build JS-driven payment methods, greatly improving the developer experience.
 
-Please refer to the [changelog](changelog.html#136-2025-11-04) for details.
+Please refer to the [changelog](changelog-1.x.html#136-2025-11-04) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -41,4 +41,4 @@ composer update --with-dependencies hyva-themes/magento2-hyva-checkout:1.3.6
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

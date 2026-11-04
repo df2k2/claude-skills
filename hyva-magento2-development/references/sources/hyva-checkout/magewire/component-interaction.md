@@ -19,11 +19,22 @@ If you're familiar with Alpine.js, you might recognize the similarity to `x-on:c
 
 Here are the most common Magewire bindings you'll use:
 
-- `wire:click="foo"` - Listens for a `click` event and calls the `foo` method on the Magewire component.
-- `wire:foo="bar"` - Listens for a browser event called `foo` and calls the `bar` method on the Magewire component. You can listen for any browser DOM event, not just those fired by Magewire.
-- `wire:model="foo"` - Assuming `$foo` is a public property on the component class, every time an input element with this directive is updated, the Magewire property value is synchronized.
-- `wire:model.lazy="foo"` - Lazily syncs the input with its corresponding Magewire component property at rest.
-- `wire:init="foo"` - Calls the `foo` method on the Magewire component immediately after it renders on the page.
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+- `wire:click="foo"`: listens for a `click` event and calls the `foo` method on the Magewire component.
+- `wire:foo="bar"`: listens for a browser event called `foo` and calls the `bar` method on the Magewire component. You can listen for any browser DOM event, not just those fired by Magewire.
+- `wire:model="foo"`: assuming `$foo` is a public property on the component class, the input value is sent along with the component's next request (an action, a form submit or a refresh). Magewire 3 no longer syncs a plain `wire:model` on every change.
+- `wire:model.live="foo"`: syncs the property every time the input element is updated, like a plain `wire:model` did in Magewire 1.
+- `wire:model.blur="foo"`: syncs the property when the input loses focus. Magewire 3 keeps `.lazy` only as an alias of `.change`.
+- `wire:init="foo"`: calls the `foo` method on the Magewire component immediately after it renders on the page.
+
+See [wire:model](https://docs.magewirephp.nl/pages/html-directives/wire-model.html) in the Magewire 3 docs for all modifiers, and the [Livewire 3 documentation](https://livewire.laravel.com/docs/3.x/wire-model) for the other directives. Components in v1 mode keep the Magewire 1 behavior, because the v1bc module rewrites their `wire:model` directives, except the fields of Hyvä Checkout's own guest details and address forms, which stay deferred.
+
+- `wire:click="foo"`: listens for a `click` event and calls the `foo` method on the Magewire component.
+- `wire:foo="bar"`: listens for a browser event called `foo` and calls the `bar` method on the Magewire component. You can listen for any browser DOM event, not just those fired by Magewire.
+- `wire:model="foo"`: assuming `$foo` is a public property on the component class, every time an input element with this directive is updated, the Magewire property value is synchronized.
+- `wire:model.lazy="foo"`: lazily syncs the input with its corresponding Magewire component property at rest.
+- `wire:init="foo"`: calls the `foo` method on the Magewire component immediately after it renders on the page.
 
 A [full list of all Livewire template directives](https://laravel-livewire.com/docs/2.x/reference#template-directives) is available in the Livewire documentation.
 
@@ -69,6 +80,17 @@ The `$refresh()` magic action requests and renders a fresh version of the Magewi
 
 ### Broadcasting Events with $emit()
 
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+On Magewire 3, the `$dispatch()` magic action broadcasts an event to all Magewire components that listen to it. The listener method receives the payload keys as named arguments (`$foo` and `$bar` in this example). Check out [Subscribing to emit messages](emit-messages.html) for more details.
+
+```
+<!-- Dispatches 'eventName' to all listening Magewire components with data -->
+<button wire:click="$dispatch('eventName', { foo: 123, bar: true })">Click me</button>
+```
+
+For components in v1 mode, the v1bc module still maps `$emit()` onto a dispatch.
+
 The `$emit()` magic action broadcasts a message to all Magewire components that have subscribed to it. Check out [Subscribing to emit messages](emit-messages.html) for more details.
 
 ```
@@ -77,6 +99,15 @@ The `$emit()` magic action broadcasts a message to all Magewire components that 
 ```
 
 ### Sending Events to a Specific Component with $emitTo()
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+On Magewire 3, the `$dispatchTo()` magic action sends an event to a specific Magewire component by its layout block name. See [Subscribing to emit messages](emit-messages.html) for more on how events work.
+
+```
+<!-- Dispatches 'eventName' only to the 'layout.block.name' Magewire component -->
+<button wire:click="$dispatchTo('layout.block.name', 'eventName', { foo: 123, bar: true })">Click me</button>
+```
 
 The `$emitTo()` magic action sends a message to a specific Magewire component by its layout block name. See [Subscribing to emit messages](emit-messages.html) for more on how `$emit` and `$emitTo` work.
 
@@ -121,6 +152,12 @@ $this->isSubscribed = true;
 // Outside a component method, using a component reference
 $magewireComponent->isSubscribed = false;
 ```
+
+Checkout 3.x (Magewire 3)Checkout 1.x (Magewire 1)
+
+Magewire 3 components do NOT provide magic setter, getter or has methods.
+
+Use direct property access instead: `$this->foo = 123`. Only components in v1 mode get the magic `getFoo()` and `hasFoo()` methods, through the v1bc module.
 
 Magewire components do NOT provide magic setter methods (only magic getters and has methods).
 

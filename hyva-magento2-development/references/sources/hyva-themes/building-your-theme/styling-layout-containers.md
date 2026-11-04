@@ -105,4 +105,4 @@ For Hyvä projects using version 1.0.x or 1.1.x, Tailwind does not scan layout X
 Related Topics
 
 - [Tailwind CSS Purging Settings](../working-with-tailwindcss/tailwind-purging-settings.html) covers how to configure which files Tailwind scans for class names.
-- [Using Tailwind Classes in CMS Content](../cms/using-tailwind-classes-in-cms-content.html) addresses a similar challenge of using Tailwind in non-template contexts.
+- [Using Tailwind Classes in CMS Content](../cms/tailwind-jit/index.html) addresses a similar challenge of using Tailwind in non-template contexts.

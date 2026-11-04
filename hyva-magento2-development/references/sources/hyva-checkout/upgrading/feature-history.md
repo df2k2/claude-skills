@@ -6,7 +6,64 @@ This page lists every notable feature added to Hyvä Checkout, organized by vers
 
 Looking for a particular feature without upgrading too far ahead? Just scan the list below - each version tag shows exactly what it brought to the table.
 
+## Hyvä Checkout 3.0.x Releases
+
+### Version 3.0.0
+
+- **Magewire 3 stable release** - First stable release of Hyvä Checkout on Magewire v3, following `3.0.0-beta1`.
+- **Magewire startup handle for module pages** - Modules that render Magewire components on their own pages, such as a payment status page, add the `hyva_checkout_magewire_startup` layout handle to start Magewire there.
+- **Magewire kept off non-checkout pages** - Magewire's scripts, styles, notifier and loading indicator are removed from pages where Magewire isn't started, saving about 40 KB of HTML and inline JavaScript per page.
+
+### Version 3.0.0-beta1
+
+- **Magewire 3 beta release** - First 3.0.0 beta release of Hyvä Checkout on Magewire v3, following the `1.4.0-beta` releases.
+- **Magewire v1 backward compatibility module** - Checkouts that use components or integrations written for Magewire v1 keep them working through the `hyva-themes/magento2-hyva-checkout-v1bc` module, which Composer installs as a dependency of the checkout.
+- **Google reCAPTCHA for guest sign in, coupon code and place order** - Supports reCAPTCHA v2 checkbox, v2 invisible and v3, using the existing Magento reCAPTCHA storefront settings.
+- **Postcode format validation setting** - Optionally validate the postcode against the format Magento defines for the selected country. Disabled by default.
+- **Checkout addresses saved on order placement** - Addresses entered during checkout are added to the address book when the order is placed, if **Save in address book** is checked.
+- **Billing address first** - Ask for the billing address before the shipping address through a DI preference on `SameAddressOrder`.
+- **Positional step layout handles** - `hyva_checkout_stepfirst` and `hyva_checkout_steplast` target whichever step is first or last.
+- **Hyvä default theme styling** - Checkout styling updated to match the Hyvä default theme on Tailwind v4, with Lucide icons.
+
+## Hyvä Checkout 1.4.x Releases
+
+### Version 1.4.0-beta3
+
+- **EAV attribute support in checkout address forms** - Render and validate additional customer and customer address EAV attributes (Text Field, Text Area, Date, Dropdown, Yes/No, Multiple Select, Multiline) in the billing and shipping address forms. File and Image inputs are not supported.
+- **Admin address field configuration changes** - The address field list is driven by the EAV attributes associated with the checkout registration form; the Enabled and Required values are derived from the attribute definition rather than set per field.
+- **Address configuration data migration and restore command** - Data patches migrate legacy field flags and remove customer attributes from the address forms, with a `bin/magento hyva:checkout-attributes:restore` command to roll the migration back.
+- **Reusable Progress Overlay for Blocking Checkout Actions** - Adds a non-closable, full-screen progress overlay (spinner and title) that blocks all user interaction while a blocking action completes, typically right before a redirect, such as signing a customer in and returning them to the checkout.
+- **Magewire 3.4** - Upgrades the Magewire dependency to `^3.4`.
+
+### Version 1.4.0-beta2
+
+- **Payment Method Availability Bypass** - Fixes a High-severity vulnerability where the client-side payment method availability checks could be bypassed.
+
+### Version 1.4.0-beta1
+
+- **Magewire 3 for Hyvä Checkout** - This is the first beta release of Magewire v3 for Hyvä Checkout, introducing significant architectural improvements and laying the foundation for future releases.
+
 ## Hyvä Checkout 1.3.x Releases
+
+### Version 1.3.15
+
+- **EAV attribute support in checkout address forms** - The EAV address attribute support from `1.3.1000-beta1` is now part of the stable 1.3.x line.
+- **Google reCAPTCHA for guest sign in, coupon code and place order** - Supports reCAPTCHA v2 checkbox, v2 invisible and v3, using the existing Magento reCAPTCHA storefront settings.
+- **Postcode format validation setting** - Optionally validate the postcode against the format Magento defines for the selected country. Disabled by default.
+- **Checkout addresses saved on order placement** - Addresses entered during checkout are added to the address book when the order is placed, if **Save in address book** is checked.
+- **Billing address first** - Ask for the billing address before the shipping address through a DI preference on `SameAddressOrder`.
+- **Positional step layout handles** - `hyva_checkout_stepfirst` and `hyva_checkout_steplast` target whichever step is first or last.
+- **Hyvä default theme styling** - Checkout styling updated to match the Hyvä default theme on Tailwind v4, with Lucide icons.
+
+### Version 1.3.1000-beta1
+
+- **EAV attribute support in checkout address forms** - Render and validate additional customer and customer address EAV attributes (Text Field, Text Area, Date, Dropdown, Yes/No, Multiple Select, Multiline) in the billing and shipping address forms. File and Image inputs are not supported.
+- **Admin address field configuration changes** - The address field list is driven by the EAV attributes associated with the checkout registration form; the Enabled and Required values are derived from the attribute definition rather than set per field.
+- **Address configuration data migration and restore command** - Data patches migrate legacy field flags and remove customer attributes from the address forms, with a `bin/magento hyva:checkout-attributes:restore` command to roll the migration back.
+
+### Version 1.3.13
+
+- **Add the cart item message to the order summary**
 
 ### Version 1.3.9
 

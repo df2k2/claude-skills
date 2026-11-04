@@ -97,6 +97,7 @@ This section contains detailed documentation for implementing CSP in Hyvä theme
 - **[Property Mutation](alpine-csp-property-mutation.html)**: Changing component state without inline expressions
 - **[x-model Alternatives](alpine-csp-x-model.html)**: CSP-compatible replacements for `x-model` directive
 - **[x-for Patterns](alpine-csp-x-for.html)**: Using iteration in Alpine CSP
+- **[x-html-safe](alpine-csp-html-safe.html)**: Why CSP has removed `x-html`, and the drop-in replacement
 - **[createBooleanObject Helper](alpine-csp-hyva-createbooleanobject.html)**: Utility for creating toggle-able boolean state objects
 
 ### Advanced Topics

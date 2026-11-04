@@ -1,12 +1,12 @@
 <!-- source: https://docs.hyva.io/hyva-commerce/features/media-optimization/features/developer-api.html -->
 
-# Media Optimisation Developer API
+# Media Optimization Developer API
+
+The Media Optimization Developer API lets you output optimized, responsive `<picture>` elements from your own blocks and templates. Use the view model below for all custom implementations to ensure compatibility whether or not Hyvä Commerce and the Media Optimization module are installed.
 
 ## Requesting Picture Output
 
-The below view model class and method in the `Hyva_Theme` module should be used for all custom implementations to ensure compatibility, regardless of whether Hyvä Commerce and the Media Optimisation module are installed, or not.
-
-`\Hyva\Theme\ViewModel\Media::getResponsivePictureHtml()`
+Use `\Hyva\Theme\ViewModel\Media::getResponsivePictureHtml()` from the `Hyva_Theme` module:
 
 ```
 /**
@@ -34,11 +34,11 @@ public function getResponsivePictureHtml(
 }
 ```
 
-This method calls the `getPictureHtml()` method declared in the `Hyva\Theme\Model\Media\MediaHtmlProviderInterface` interface.
+This method calls `getPictureHtml()` declared in the `Hyva\Theme\Model\Media\MediaHtmlProviderInterface` interface.
 
 ## Basic Usage Example
 
-Here's a minimal example for displaying a product image in your template:
+A minimal example for displaying a product image in your template:
 
 ```
 <?php
@@ -72,7 +72,7 @@ $desktopImage = [
     'width' => 1920,
     'height' => 600,
     'media' => '(min-width: 768px)',
-    'fallback' => true  // Use this image as a fallback in case the <picture> tag is not supporte by the browser
+    'fallback' => true  // Use this image as a fallback if the <picture> tag is not supported by the browser
 ];
 
 $mobileImage = [
@@ -95,22 +95,10 @@ echo $mediaViewModel->getResponsivePictureHtml(
 );
 ```
 
-## Interface
+## Interfaces and Implementations
 
-`\Hyva\Theme\Model\Media\MediaHtmlProviderInterface`
+`\Hyva\Theme\Model\Media\MediaHtmlProviderInterface` declares the `getPictureHtml()` method used by the view model.
 
-Declares the `getPictureHtml()` method used within the view model implementation.
+The default implementation in the `Hyva_Theme` module, `\Hyva\Theme\ViewModel\Media::getPictureHtml()`, outputs a `<picture>` tag from the provided image `src` and data, but does not resize or convert imagery.
 
-## Base Provider Class Implementation
-
-The default implementation in the `Hyva_Theme` module outputs a `<picture>` tag from the provided image `src` and additional data, but does not resize or convert imagery.
-
-`\Hyva\Theme\ViewModel\Media::getPictureHtml()`
-
-## Media Optimisation Implementation
-
-When the Media Optimisation module is installed, the base provider class is replaced with the below class, which adds resizing and conversion support, as well as different image sizes per viewport.
-
-`\Hyva\MediaOptimization\Model\Media\MediaHtmlProvider::getPictureHtml()`
-
-The module respects your Media Optimisation configuration settings. If optimisation is disabled, it gracefully falls back to standard image tags.
+When the Media Optimization module is installed, the base provider is replaced with `\Hyva\MediaOptimization\Model\Media\MediaHtmlProvider::getPictureHtml()`, which adds resizing and conversion, and different image sizes per viewport. It respects your Media Optimization configuration; if optimization is disabled, it gracefully falls back to standard image tags.

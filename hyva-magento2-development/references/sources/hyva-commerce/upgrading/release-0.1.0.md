@@ -21,8 +21,8 @@ This initial release includes:
 
 ## Changelogs
 
-The changelog is available [here](changelog.html#010-2025-04-11).
+The changelog is available [here](./changelog.html#010-2025-04-11).
 
 ## Known Issues
 
-See bugfixes in the [0.2.0 release](upgrading-to-0.2.0.html).
+See bugfixes in the [0.2.0 release](./upgrading-to-0.2.0.html).

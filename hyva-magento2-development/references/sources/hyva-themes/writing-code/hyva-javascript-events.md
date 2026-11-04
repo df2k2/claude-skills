@@ -53,7 +53,7 @@ if (browserStorage) {
 }
 ```
 
-More information can be found on the page [Working with sectionData](working-with-sectiondata.html).
+More information can be found on the page [Working with sectionData](./working-with-sectiondata.html).
 
 ## toggle-mobile-menu
 
@@ -211,7 +211,7 @@ On a product detail page of a product with the ID 68 this will update the displa
 
 Note: if no tier prices are set for a product, the `tierPrices` key still has to be set to an empty array on the event payload as shown in the example above.
 
-More information on product price logic can be found on the [PDP price logic](pdp-pricing-logic.html) page.
+More information on product price logic can be found on the [PDP price logic](./pdp-pricing-logic.html) page.
 
 ## update-qty-= (int)$product-getId() ?>
 

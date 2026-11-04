@@ -7,18 +7,18 @@
 First, log into the Magento admin UI and navigate to `Content -> Pages -> e.g. Home page`.
 
 1. Open the content section activate the Editor by clicking on the "Show/Hide" button.
-   ![](img/widget_1.jpg)
+   ![](./img/widget_1.jpg)
 2. Click on Insert Widget icon.
 3. Pick a widget type from the dropdown e.g. Hyva content widget.
-   ![](img/widget_2.jpg)
+   ![](./img/widget_2.jpg)
 4. A widget popup will display with a list of options.
-   ![](img/widget_3.jpg)
+   ![](./img/widget_3.jpg)
 5. When finished editing, press "Insert Widget" in the top right corner and save the page.
-   ![](img/widget_4.jpg)
+   ![](./img/widget_4.jpg)
 6. In production mode, the Bllock HTML and Full Page Cache needs to be "Refreshd" in order for changes to be applied on the store front.
-   ![](img/widget_5.jpg)
+   ![](./img/widget_5.jpg)
 7. We can now safely navigate to the store front and check out the widget.
-   ![](img/widget_6.jpg)
+   ![](./img/widget_6.jpg)
 
 ## Development
 

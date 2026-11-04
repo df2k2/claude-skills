@@ -42,9 +42,9 @@ The Hyvä Checkout initialization only runs once per [checkout session](../gloss
 
 The generic method auto-selection logic is handled by the `Hyva\Checkout\Observer\Frontend\HyvaCheckoutHyvaCheckoutInitAfter` observer. This observer runs during checkout initialization and selects the first available shipping and payment methods.
 
-The dynamic single-method auto-selection for payment methods lives in the `Hyva\Checkout\Magewire\Checkout\Payment\MethodList` component's `boot()` method. This separate piece of logic auto-selects a payment method when it's the only one available, which is especially useful for the [Zero Subtotal Checkout](zero-subtotal-checkout.html) feature. If a similar use case comes up for shipping methods, this dynamic auto-selection may be expanded to cover those as well.
+The dynamic single-method auto-selection for payment methods lives in the `Hyva\Checkout\Magewire\Checkout\Payment\MethodList` component's `boot()` method. This separate piece of logic auto-selects a payment method when it's the only one available, which is especially useful for the [Zero Subtotal Checkout](./zero-subtotal-checkout.html) feature. If a similar use case comes up for shipping methods, this dynamic auto-selection may be expanded to cover those as well.
 
 ## Related Topics
 
-- **[Zero Subtotal Checkout](zero-subtotal-checkout.html)** - Works hand-in-hand with payment method auto-select when only one payment option is available
+- **[Zero Subtotal Checkout](./zero-subtotal-checkout.html)** - Works hand-in-hand with payment method auto-select when only one payment option is available
 - **[Checkout Glossary](../glossary.html)** - Definitions of key terms like checkout session

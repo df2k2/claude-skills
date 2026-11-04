@@ -10,7 +10,7 @@ This page covers the standard manual deployment workflow suitable for traditiona
 
 Generate the production stylesheet on a development, staging, or CI/CD build environment rather than on the production server. Installing Node.js and build tools on production servers introduces unnecessary security risk.
 
-For automated CI/CD pipelines, use `npm ci` instead of `npm install` to ensure reproducible builds. The `npm ci` command installs the exact package versions specified in `package-lock.json`, while `npm install` may upgrade to newer compatible versions.
+For automated CI/CD pipelines, use `npm ci` instead of `npm install` to ensure reproducible builds. The `npm ci` command installs the exact package versions specified in `package-lock.json`, while `npm install` may upgrade to newer compatible versions. Additionally, include the `--ignore-scripts` flag (e.g. `npm ci --ignore-scripts`) to prevent packages from executing lifecycle scripts during installation, protecting against supply chain attacks.
 
 ## Step 1: Generate the Production Stylesheet
 
@@ -53,7 +53,7 @@ bin/magento setup:static-content:deploy -j 2 -f --area=frontend --no-parent --no
 
 Experimental: On-the-fly minification
 
-The `hyva-themes/magento2-minification` module minifies HTML, JS, and CSS on the fly with better results than the native Magento minification, rather than during static content deployment. It is currently experimental but can be tested already. For more information, see the module readme.
+The `hyva-themes/magento2-minification` module minifies HTML, JS, and CSS on the fly with better results than the native Magento minification, rather than during static content deployment. It is currently experimental but can be tested already. For more information, see the [module readme](../performance/hyva-minification-readme.html).
 
 ## Step 3: Transfer Assets to Production
 

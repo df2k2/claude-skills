@@ -6,7 +6,7 @@ This release introduces PHP `8.4` + Magento `2.4.8` support, redirect-only payme
 
 Alongside several other important fixes improvements.
 
-Please refer to the [changelog](changelog.html#131-2025-05-08) for details.
+Please refer to the [changelog](changelog-1.x.html#131-2025-05-08) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -76,4 +76,4 @@ This information is relevant only if you are upgrading directly from version `1.
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

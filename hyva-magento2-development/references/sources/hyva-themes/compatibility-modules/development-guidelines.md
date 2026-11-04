@@ -8,7 +8,7 @@ This guide is for creating **new** Compatibility Modules from scratch.
 
 For making existing modules Hyvä-compatible
 
-For a detailed explanation on how to make an existing module Hyvä-compatible without creating a new compatibility module, please see the [Making Existing Modules Hyvä-Compatible](getting-started.html#making-existing-modules-hyva-compatible) section in our Getting Started documentation.
+For a detailed explanation on how to make an existing module Hyvä-compatible without creating a new compatibility module, please see the [Making Existing Modules Hyvä-Compatible](./getting-started.html#making-existing-modules-hyva-compatible) section in our Getting Started documentation.
 
 ## Where to Begin Coding
 
@@ -23,7 +23,7 @@ The process of creating a compatibility module is slightly different every time,
 5. Locate the template containing the feature that is causing the error in the original module.
 6. Copy the template into the compatibility module to the same location in `view/frontend/templates`.
 7. Open the copy in the IDE.
-8. Inline any JavaScript code and convert it to vanilla JavaScript and Alpine.js. Then style the component using Tailwind CSS. This whole process is described in more detail in the "[From Luma to Hyvä](from-luma-to-hyva/migrating-js-and-templates.html#from-data-mage-init-and-require-to-inline-scripts)" section.
+8. Inline any JavaScript code and convert it to vanilla JavaScript and Alpine.js. Then style the component using Tailwind CSS. This whole process is described in more detail in the "[From Luma to Hyvä](./from-luma-to-hyva/migrating-js-and-templates.html#from-data-mage-init-and-require-to-inline-scripts)" section.
 9. Once the template renders without any errors and the feature works, take a moment to clean up the code, and then move on to the next template.
 
 Tip

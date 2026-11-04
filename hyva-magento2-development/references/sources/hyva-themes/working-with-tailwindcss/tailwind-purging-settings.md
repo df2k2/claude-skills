@@ -55,7 +55,7 @@ These helpers, used in your `tailwind.config.js` and `postcss.config.js`, read t
 
 This means you don't need to manually add paths for Hyvä compatibility modules.
 
-[For more information see the @hyva-themes/hyva-modules docs](using-hyva-modules/index.html)
+[For more information see the @hyva-themes/hyva-modules docs](./using-hyva-modules/index.html)
 
 ## Manual Configuration
 

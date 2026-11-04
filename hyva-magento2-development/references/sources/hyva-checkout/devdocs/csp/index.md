@@ -34,7 +34,7 @@ Hyvä Checkout shares templates with the Hyvä Theme for common page elements li
 
 To make shared templates CSP-compatible for Hyvä Checkout:
 
-- **Register inline scripts** -- Update shared templates to use CSP-safe patterns. Register each inline script with `<?php $hyvaCsp->registerInlineScript() ?>` immediately after the opening `<script>` tag.
+- **Register inline scripts** -- Update shared templates to use CSP-safe patterns. Register each inline script with `<?php $hyvaCsp->registerInlineScript() ?>` immediately after the closing `</script>` tag.
 - **Scan your theme with the migration tool** -- If you are unsure which templates need changes, run the [Hyvä Theme CSP Migration Tool](../../../hyva-themes/writing-code/csp/migration-tool.html) to scan your theme for CSP-incompatible patterns.
 - **Reference the Hyvä Default Theme** -- Hyvä Default Theme version 1.3.12 and newer ships with CSP-compatible versions of shared components. Use the Hyvä Default Theme templates as a reference when updating custom components for CSP compatibility.
 

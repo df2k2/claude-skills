@@ -94,8 +94,10 @@ We extend our gratitude to the following security researchers and contributors w
 ### External Researchers
 
 - **Jacques Kirchner** - Sensitive data exposure in URL detection
+- **Jelle Janssens** - Cross-site scripting in the MSRP templates
 - **Mihai Ardeleanu** - Sensitive data exposure in URL detection
 - **Pieter Zandbergen** - Session fixation vulnerability identification
+- **Teun Lassche** - Payment method availability bypass vulnerability
 - **Wout Kramer** - Frontend UI issue identification
 
 *Protecting Hyvä since 2020*

@@ -16,6 +16,20 @@ Please be sure to check the version specific upgrade notes.
 
 To update the Hyvä Enterprise metapackages for Hyvä Theme and Hyvä Checkout, see the relevant instructions below.
 
+### Full Product Suite Metapackages
+
+For non-B2B users:
+
+```
+composer update --with-dependencies hyva-themes/enterprise
+```
+
+For B2B users:
+
+```
+composer update --with-dependencies hyva-themes/enterprise-b2b
+```
+
 ### Hyvä Theme
 
 #### Adobe Commerce

@@ -70,8 +70,8 @@ Your `module.css` file should contain:
 /* Example: view/frontend/tailwind/module.css */
 
 /* 1. Add module templates to the content scan */
-@source ../templates/**/*.phtml;
-@source ../layout/**/*.xml;
+@source "../templates";
+@source "../layout";
 
 /* 2. Import module-specific CSS files */
 @import "./components/widget.css";

@@ -2,90 +2,120 @@
 
 # Installing Hyvä CMS
 
-## Prerequisites
+This guide covers installing Hyvä CMS with Composer, both with a license key and via the Hyvä Commerce GitLab repositories for agency and technology partners.
 
-See [Hyvä Commerce Prerequisites](../../getting-started/index.html#hyva-commerce-prerequisites).
+## Installing Hyvä CMS with Composer
 
-## Installation
+For prerequisites, see [Hyvä Commerce Installation Page](../../getting-started/index.html#hyva-commerce-prerequisites).
 
 Installation via Hyvä Commerce Metapackage Recommended
 
-The below steps are for installing Hyvä CMS only. While this is supported to provide greater flexibility and control over installed features, in most cases, we recommend installing all Hyvä Commerce features using our [metapackage](../../getting-started/index.html).
+These steps install Hyvä CMS on its own. While this is supported to provide greater flexibility and control over installed features, in most cases, we recommend installing all Hyvä Commerce features using our [metapackage](../../getting-started/index.html).
 
-### With a License Key
-
-1. Require the `hyva-themes/commerce-module-cms` package
+1. Require the `hyva-themes/commerce-module-cms` package:
 
    ```
    composer require hyva-themes/commerce-module-cms
    ```
-2. Run `bin/magento setup:upgrade`
-3. Run tailwind to generate storefront styles, replacing `vendor/hyva-themes/magento2-default-theme/web/tailwind/` with the path to your theme's `web/tailwind` folder:
+2. Run a setup upgrade:
+
+   ```
+   bin/magento setup:upgrade
+   ```
+3. Run Tailwind to generate storefront styles, replacing `vendor/hyva-themes/magento2-default-theme/web/tailwind/` with the path to your theme's `web/tailwind` folder:
 
    ```
    bin/magento hyva:config:generate
-   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci
+   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci --ignore-scripts
    npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ run build
    ```
 
 ### For Agency and Technology Partners
 
-If you have access to the Hyvä Commerce GitLab repositories as Gold/Platinum Agency Partner, or a Technology Partner, you can install Hyvä Commerce in development environments using SSH key authentication.
+If you have access to the Hyvä Commerce GitLab repositories as a Gold/Platinum Agency Partner or a Technology Partner, you can install Hyvä Commerce in development environments using SSH key authentication.
 
-You can configure the git repositories in your root composer.json and use the repositories directly as git repo's beneath your vendor directory. You can check out tags and branches, make commits and push contributions.
+You can configure the Git repositories in your root `composer.json` and use them directly as Git repos beneath your vendor directory. This lets you check out tags and branches, make commits, and push contributions.
 
-This installation method is not suited for deployments, because GitLab requires SSH key authorization.
+Development Environments Only
 
-1. Ensure your public SSH key is added to your account on gitlab.hyva.io.
-2. Set minimum-stability to `dev` in the Magento composer.json
+This installation method is not suited for deployments, because GitLab requires SSH key authorization and project changes can break production deployments.
+
+Installation Steps
+
+1. Make sure your public SSH key is added to your account on `gitlab.hyva.io`.
+2. Set minimum-stability to `dev` in the Magento `composer.json`:
 
    ```
    composer config minimum-stability dev
    ```
-3. Add the Hyvä CMS and base Hyvä Commerce module repositories to the Magento `composer.json`
+3. Add the Hyvä CMS and base Hyvä Commerce module repositories to the Magento `composer.json`:
 
    ```
    composer config repositories.hyva-themes/commerce-module-commerce git git@gitlab.hyva.io:hyva-commerce/module-commerce.git
    composer config repositories.hyva-themes/commerce-module-cms git git@gitlab.hyva.io:hyva-commerce/module-cms.git
+   composer config repositories.hyva-themes/commerce-module-cms-tailwind-jit-bridge git git@gitlab.hyva.io:hyva-commerce/commerce-module-cms-tailwind-jit-bridge.git
+   composer config repositories.hyva-themes/commerce-module-cms-google-maps git git@gitlab.hyva.io:hyva-commerce/module-cms-google-maps.git
    ```
-4. Require the `hyva-themes/commerce-module-cms` packages using the `dev-main` branch version:
+4. Require the `hyva-themes/commerce-module-cms` package using the `dev-main` branch:
 
    ```
    composer require --prefer-source 'hyva-themes/commerce-module-cms:dev-main'
    ```
-5. Run `bin/magento setup:upgrade`
-6. Run tailwind to generate storefront styles, replacing `vendor/hyva-themes/magento2-default-theme/web/tailwind/` with the path to your theme's `web/tailwind` folder:
+5. Run a setup upgrade:
+
+   ```
+   bin/magento setup:upgrade
+   ```
+6. Run Tailwind to generate storefront styles, replacing `vendor/hyva-themes/magento2-default-theme/web/tailwind/` with the path to your theme's `web/tailwind` folder:
 
    ```
    bin/magento hyva:config:generate
-   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci
+   npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ ci --ignore-scripts
    npm --prefix vendor/hyva-themes/magento2-default-theme/web/tailwind/ run build
    ```
 
-## Additional Setup
+## Upgrading
+
+For an existing CMS installation, follow [Upgrading to Hyvä Commerce 1.4.0](../../upgrading/upgrading-to-1.4.0.html#hyva-cms). That release includes CMS `1.3.0`; the guide covers the migration from CMS `1.2.x`, extension compatibility and the admin styles deployment step.
+
+The [Media Gallery](features/media-gallery.html) is included as a dependency of CMS `1.3.0`. [AI integrations](../ai-worker/installation.html) remain optional packages. Installing CMS alone does not deploy an AI worker or configure provider credentials.
+
+## Additional Hyvä CMS Setup
 
 ### Enable 'New' Media Gallery
 
 Hyvä CMS only supports the 'New' Media Gallery, for handling image selection and editing (using the [Image Editor](../image-editor/index.html)). Enabling the 'New' Media Gallery can be [configured in the admin panel](https://experienceleague.adobe.com/en/docs/commerce-admin/content-design/wysiwyg/gallery/media-gallery#enable-the-new-media-gallery).
 
-### Multi-Store & Domain / Custom Admin Domain Setup
+### Confirm Magento Cron
 
-Since version `1.0.2` the required CSP frame policies required for multi-domain setups are automatically applied in the Hyvä CMS Liveview Editor context.
+Hyvä CMS scheduling depends on Magento cron. Make sure cron is configured and running before relying on scheduled publication.
+
+Default scheduling jobs check for due releases every 5 minutes and clean old completed scheduling history weekly. See [Content Scheduling](features/content-scheduling.html).
+
+### Review Content Type Configuration
+
+CMS pages, CMS blocks, product attributes, and category attributes are enabled by default in the core Hyvä CMS modules. Review the admin configuration if a content type should be disabled for a project.
+
+Relevant configuration areas are all found in the Magento admin under `Stores → Settings → Configuration → Hyvä Commerce`:
+
+- `Hyvä CMS → Magento CMS`
+- `Hyvä CMS → Attributes`
+- `Hyvä CMS → Templates`
+- `Hyvä CMS → Scheduling`
+
+### Multi-Store and Custom Admin Domain Setup
+
+Since version `1.0.2` the required CSP frame policies for multi-domain setups are automatically applied in the Hyvä CMS Liveview Editor context.
 
 This feature is enabled by default and requires no additional configuration.
 
-**Configuration Path:**
-`hyva_cms/general/auto_csp_frame_policies`
-
-> Stores > Configuration > Hyvä Themes > CMS > General > Enable Multi Domain CSP Frame Policies
+**Configuration Path:** `hyva_cms/general/auto_csp_frame_policies`, found in the admin under `Stores → Settings → Configuration → Hyvä Commerce → Hyvä CMS → General → Enable Multi Domain CSP Frame Policies`.
 
 Manual CSP Configuration (Legacy)
 
 If you're using an older Hyvä CMS version, need to disable automatic CSP frame policies, or require custom configuration, you can configure [Magento CSP](https://developer.adobe.com/commerce/php/development/security/content-security-policies) manually:
 
-1. Disable automatic policies in the admin configuration:
-   `hyva_cms/general/auto_csp_frame_policies`
-   > Stores > Configuration > Hyvä Themes > CMS > General > Enable Multi Domain CSP Frame Policies
+1. Disable automatic policies in the admin configuration: `hyva_cms/general/auto_csp_frame_policies`, found under `Stores → Settings → Configuration → Hyvä Commerce → Hyvä CMS → General → Enable Multi Domain CSP Frame Policies`.
 2. Add CSP Whitelist Rules in a `csp_whitelist.xml` file:
 
    ```
@@ -106,7 +136,7 @@ If you're using an older Hyvä CMS version, need to disable automatic CSP frame 
        </policies>
    </csp_whitelist>
    ```
-3. Enable CSP strict Mode by adding the following to `config.xml` (or to app/etc/env.php):
+3. Enable CSP strict Mode by adding the following to `config.xml`:
 
    ```
    <?xml version="1.0"?>
@@ -123,58 +153,62 @@ If you're using an older Hyvä CMS version, need to disable automatic CSP frame 
    </config>
    ```
 
-   Note: frame-ancestors overrides X-Frame-Options only in strict mode (Content-Security-Policy). In report-only mode, X-Frame-Options still applies (see [spec](https://w3c.github.io/webappsec-csp/#frame-ancestors-and-frame-options)).
+or the following to `app/etc/env.php`:
+
+```
+'system' => [
+    'default' => [
+        'csp' => [
+            'mode' => [
+                'storefront' => [
+                    'report_only' => '0'
+                ]
+            ]
+        ]
+    ]
+]
+```
+
+Note: frame-ancestors overrides X-Frame-Options only in strict mode (Content-Security-Policy). In report-only mode, X-Frame-Options still applies (see [spec](https://w3c.github.io/webappsec-csp/#frame-ancestors-and-frame-options)).
 
 Why do we need CSP frame policies?
 
 For the Hyvä CMS Liveview Editor to be able to display the preview in a cross domain iframe, it requires the correct Content Security Policy (CSP) frame policies to be applied in the editor context.
 
-CSP and Magento
-
 For more information about CSP and Magento, see [CSP and Magento](../../../hyva-themes/writing-code/csp/index.html).
 
-### Handling the Hyva\_CMS Cache
+### Adobe Commerce Cloud WAF Exclusion
 
-The `hyva_cms` cache is automatically enabled in production environments and disabled in developer mode.
-This cache stores component configurations for improved performance.
+On Adobe Commerce Cloud, the Fastly Web Application Firewall (WAF) can block Hyvä CMS Liveview Editor preview requests. Ask Adobe Commerce support to exclude the `/liveview-editor/` path prefix from the WAF rules before editors start working on the site.
 
-Depending on your deployment strategy, you may need to include a step to clear the cache on each deployment:
+The Liveview Editor renders its preview by posting the page content as JSON to storefront endpoints under `/liveview-editor/`, for example `/liveview-editor/ajax/content`. This is deliberate: the preview is rendered with the storefront theme, which only a storefront request can do. Saving content goes through the admin path and is not affected.
+
+The WAF inspects that JSON body. Content that resembles an injection attempt, such as a `{{widget ...}}` directive inside a text component, triggers a rule and the request receives a `403` response. In the Liveview Editor the preview stops updating, and the browser console shows a `403` for `/liveview-editor/ajax/content`.
+
+To fix it, open a ticket with Adobe Commerce support and ask for a WAF path exclusion covering the whole `/liveview-editor/` prefix. Include the blocked request ID from the `403` page. The exclusion needs the full prefix rather than the single URL, because `/liveview-editor/ajax/single` and `/liveview-editor/preview/compile` post the same content. Once the exclusion is in place, no change to Hyvä CMS is needed. See [Adobe's WAF FAQ](https://experienceleague.adobe.com/en/docs/commerce-knowledge-base/kb/faq/web-application-firewall-waf-powered-by-fastly-the-faq) for the ticket details Adobe asks for.
+
+Custom VCL snippets cannot bypass the WAF
+
+Adobe and Fastly manage the WAF rules on Adobe Commerce Cloud, so a custom VCL snippet cannot exclude a path from them. The exclusion has to be added by Adobe support.
+
+### Handling the Hyvä CMS Cache
+
+The `hyva_cms` cache stores component declarations from `components.json` files for improved performance. It is automatically enabled in production environments and disabled in developer mode.
+
+Depending on your deployment strategy, you may need to clear this cache on each deployment:
 
 ```
 bin/magento cache:clean hyva_cms
 ```
 
-### Component Cache Management
+### Tailwind CSS Compilation
 
-The component system includes caching for:
-- Component declarations from `components.json` files
+Hyvä CMS generates Tailwind CSS for the classes used in CMS content, so components produce styles without a full theme rebuild. Compilation runs either **in-browser** (the default) or **server-side** through a Node-based Tailwind compiler. **For new projects, server-side compilation is recommended**, since it produces the smallest inline CSS payload.
 
-To clear component-specific cache:
+See [Tailwind CSS Compilation](tailwind-compilation.html) for the full details: choosing the strategy, the in-browser compiler version, server-side setup, when styles are compiled, style priority (theme styles always win), and backward compatibility.
 
-```
-bin/magento cache:clean hyva_cms
-```
+## Related Topics
 
-### Performance Optimization
-
-#### JIT CSS Compilation
-
-Hyvä CMS uses the `magento2-cms-tailwind-jit` module for compilation.
-
-- Tailwind CSS styles are generated on save of Hyvä CMS content (can be changed to on edit in the editor preferences).
-- Custom Tailwind configurations are supported per theme.
-- Tailwind JIT compilation can be disabled/enabled globally in Magento store configuration or per Hyvä CMS entity in the editor settings.
-- **Note:** Custom classes (e.g. the `.container` class) require extra configuration to produce the same styles as the frontend theme.
-
-For detailed configuration options, see [CMS Tailwind JIT Module Documentation](../../../hyva-themes/cms/cms-tailwind-jit-module.html).
-
-Best Practice: Avoid injecting CSS classes in CMS content
-
-Keep it simple for merchants.
-
-When building CMS components, avoid over-relying on Tailwind classes during content creation. Unlike traditional Page Builder approaches, merchants should never need to add CSS classes to add or edit content.
-
-Build components with specific fields and variant templates so merchants can choose how to display content through simple options, not by adding custom CSS classes or code to fields.
-We recommend applying Tailwind classes in the .phtml component templates instead of the CMS content.
-
-**This helps provide a more consistent design system and better user experience for merchants.**
+- **[Accessing Hyvä CMS](accessing-hyva-cms-editor.html)** - Open the Liveview Editor from CMS pages, blocks, and product and category forms
+- **[Tailwind CSS Compilation](tailwind-compilation.html)** - Choose between in-browser and server-side compilation for CMS content styles
+- **[Content Scheduling](features/content-scheduling.html)** - The cron-based scheduling jobs that publish content releases

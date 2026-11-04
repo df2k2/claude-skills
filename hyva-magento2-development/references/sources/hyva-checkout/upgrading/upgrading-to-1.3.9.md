@@ -4,7 +4,7 @@
 
 This release introduces pre-populated name fields for logged-in customers and improved multi-tab checkout stability with stale data and empty cart detection, along with a number of important bugfixes.
 
-Please refer to the [changelog](changelog.html#139-2026-02-20) for details.
+Please refer to the [changelog](changelog-1.x.html#139-2026-02-20) for details.
 
 Please check the [upgrade process overview](index.html#hyva-checkout-upgrade-process) for Hyvä-Checkout first.
 
@@ -32,4 +32,4 @@ and triggered through the evaluation results factory, making this hardcoded temp
 
 ## Changelogs
 
-Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog.html).
+Changelogs are available from the `CHANGELOG.md` in the codebase, or [here in the docs](changelog-1.x.html).

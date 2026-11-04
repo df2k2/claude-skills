@@ -10,6 +10,14 @@ With Magewire, you declare validation rules once in the PHP component, and they 
 
 Under the hood, Magewire uses the [rakit/validation](https://github.com/rakit/validation) library to apply validation rules to properties. This section gives you everything you need to get started with Magewire form validation.
 
+This page documents the Magewire 1 `Component\Form` API
+
+On Checkout 3.x, Magewire 3 still ships `\Magewirephp\Magewire\Component\Form` with the same `$rules`, `$messages` and `validate()` API. It validates with `magewirephp/validation`, a fork of rakit/validation that keeps the `Rakit\Validation` namespace, so your rules work unchanged. Magewire 3 does not register Livewire 3's `#[Validate]` attribute or form objects, so `Component\Form` is the form base class on both release lines.
+
+The `updated($value, $prop)` example below uses the Magewire 1 hook signature. On Magewire 3, the generic hook is `updated($prop, $value)` and its return value is ignored. See [Lifecycle Hook Methods](lifecycle-hook-methods.html).
+
+Hyvä Checkout's own forms are built with the [Hyvä Checkout Form API](../devdocs/form-api/index.html) instead of a plain `Component\Form`. The Form API's `Hyva\Checkout\Magewire\Component\AbstractForm` base class extends `Component\Form` and builds the validation rules from the form fields. On Checkout 3.x, the address forms, guest details and coupon code all extend it. Use the Form API when you build a checkout form that others should be able to extend.
+
 ## Magewire Form Component Base Class
 
 Magewire form components extend `\Magewirephp\Magewire\Component\Form` instead of the regular `\Magewirephp\Magewire\Component`.

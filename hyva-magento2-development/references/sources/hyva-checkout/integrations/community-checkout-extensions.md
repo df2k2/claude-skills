@@ -9,13 +9,17 @@ Community extensions can be published in two ways:
 1. Through the [Friends of Hyva](https://github.com/friends-of-hyva) GitHub organization, where the Hyva team can create a repository on request and grant access. After creating an initial tag, the Hyva team will also handle Packagist registration.
 2. Through a personal or company GitHub or GitLab account, where the developer or agency is responsible for maintenance and distribution.
 
+Checkout 3.x compatibility
+
+Unless stated otherwise, the integrations listed here that are built on Magewire target Hyvä Checkout 1.x (Magewire 1). On Checkout 3.x checkout pages they run through the [Magewire 1 backward compatibility module (v1bc)](../faq/what-is-v1bc.html). Check with the vendor whether an integration supports Checkout 3.x.
+
 Missing an extension?
 
 If you have built a Hyva Checkout extension yourself, or you know of one that belongs in this list, please create a [merge request](https://gitlab.hyva.io/hyva-themes/hyva-docs/-/merge_requests) for it (GitLab access required).
 
 Payment and shipping integrations
 
-The list below covers non-payment, non-shipping community extensions only. Payment and shipping integrations each have their own dedicated overview pages.
+The list below covers non-payment, non-shipping community extensions, plus earlier community modules that a Hyvä-maintained integration has since replaced. Payment and shipping integrations each have their own dedicated overview pages.
 
 ## Community Checkout Extension Directory
 
@@ -42,6 +46,10 @@ The list below covers non-payment, non-shipping community extensions only. Payme
 
 - [Chamber of Commerce Address Field](https://github.com/yireo/Yireo_HyvaCheckoutCoc)
 - [Postcode Validator](https://github.com/yireo/Yireo_HyvaCheckoutPostcodeValidator)
+
+### Zero1
+
+- [Click and Collect](https://gitlab.hyva.io/hyva-checkout/checkout-integrations/magento2-hyva-checkout-shipping-type-click-and-collect) (GitLab access required)
 
 Disclaimer
 

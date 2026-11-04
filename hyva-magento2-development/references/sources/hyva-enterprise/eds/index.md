@@ -17,7 +17,7 @@ A proof of concept tech demo can be found at [eds-demo.hyva.io](https://eds-demo
 
 The following high-level diagram illustrates the setup.
 
-[![hyva_edge_diagram.webp](img/hyva_edge_diagram.webp)](img/hyva_edge_diagram.webp)
+[![hyva_edge_diagram.webp](img%2Fhyva_edge_diagram.webp)](img%2Fhyva_edge_diagram.webp)
 
 ## How can it be implemented?
 

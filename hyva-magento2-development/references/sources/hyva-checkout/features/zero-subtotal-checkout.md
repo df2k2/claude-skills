@@ -4,6 +4,10 @@
 
 Hyvä Checkout supports zero subtotal checkout, letting customers complete orders that require no payment - for example, when a 100% discount coupon or store credit covers the full order total. You can control which payment methods appear during zero subtotal checkout through the Magento admin.
 
+Using Hyvä Commerce Store Credit?
+
+[Store Credit](../../hyva-commerce/features/store-credit/index.html) relies on zero subtotal checkout: when a customer's balance covers an order in full, it hides every payment method except Zero Subtotal Checkout. That method has to stay enabled or a fully covered order cannot be placed.
+
 ## Admin Configuration for Zero Subtotal Checkout
 
 Hyvä Checkout provides two configuration options for zero subtotal orders. You'll find them in the Magento admin under `Stores -> Settings -> Configuration -> Hyvä Themes -> Checkout`.

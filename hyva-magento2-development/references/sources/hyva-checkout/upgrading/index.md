@@ -13,7 +13,7 @@ Before upgrading, always check the version-specific upgrade notes in this docume
 Follow these steps to upgrade Hyvä Checkout to a new version:
 
 1. **Review the version-specific upgrade notes** in this documentation. Any backward incompatible changes will be listed there.
-2. **Check the changelog** for the new Hyvä Checkout version to understand what changed.
+2. **Check the changelog** for the new Hyvä Checkout version to understand what changed: the [Checkout 3.x Changelog](changelog.html) or the [Checkout 1.x Changelog](changelog-1.x.html).
 3. **Upgrade the `hyva-themes/magento2-hyva-checkout` module** using composer (see the commands below).
 4. **Apply required changes** from the upgrade notes to any files you customized in your theme.
 
@@ -41,3 +41,7 @@ To update Hyvä Checkout to a specific version, use the following command, repla
 ```
 composer update --with-dependencies hyva-themes/magento2-hyva-checkout:x.y.z
 ```
+
+Moving from Checkout 1.x to 3.x
+
+`composer update` keeps a Checkout 1.x store on 1.x, because the version constraint in `composer.json` doesn't allow 3.x. To move to Checkout 3.x, replace the constraint with `composer require`, as described in [Upgrading to 3.0.0](upgrading-to-3.0.0.html).

@@ -7,7 +7,7 @@
 - Content/WYSIWYG editor - A WYSIWYG editor which allows visual editing content like H1, font sizes etc. It also allows using [TailwindUI components](https://tailwindui.com/) or free components like [tailwindcomponents.com](https://tailwindcomponents.com/). Hide the editor when pasting HTML, and show the editor to use WYSIWYG interface.
 - Container - The container class width can be customized by overriding it in your themes `tailwind.config.js`. For more details how to configure tailwind please check [the Tailwind CSS documentation](https://tailwindcss.com/docs/configuration).
 
-![](img/content_content.jpeg)
+![](./img/content_content.jpeg)
 
 ## Animations
 
@@ -19,7 +19,7 @@ Note
 Animations only work with Hyvä 1.1.10.
 Earlier releases of Hyvä do not include the x-intersect plugin.
 
-![](img/content_animations.jpeg)
+![](./img/content_animations.jpeg)
 
 ## Spacing
 
@@ -28,10 +28,10 @@ Earlier releases of Hyvä do not include the x-intersect plugin.
 - Hyvä content margin - Outside spacing on the top, left, bottom and right. More details can be found in the [Tailwind CSS Margin documentation](https://tailwindcss.com/docs/margin).
   Example: `mt-8 mb-8 mr-4 ml-4`.
 
-![](img/content_spacing.jpeg)
+![](./img/content_spacing.jpeg)
 
 ## Text font color
 
 Color picker to choose the text color. It only works when using the WYSIWYG interface instead of pasting raw HTML. The available colors can be changed in the HTML by using [Tailwind CSS color classes](https://tailwindcss.com/docs/customizing-colors).
 
-![](img/content_color.jpeg)
+![](./img/content_color.jpeg)

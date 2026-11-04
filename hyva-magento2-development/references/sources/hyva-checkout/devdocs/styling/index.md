@@ -80,5 +80,5 @@ Once the default styles are excluded, you can write your own Tailwind-based chec
 Upgrading @hyva-themes/hyva-modules
 
 To update the library to a newer version, change into your theme's `web/tailwind` directory.
-To upgrade to 1.0.7 specifically, run `npm upgrade @hyva-themes/hyva-modules@1.0.7`.
-To upgrade to the latest version, run `npm upgrade @hyva-themes/hyva-modules`.
+To upgrade to 1.0.7 specifically, run `npm upgrade @hyva-themes/hyva-modules@1.0.7 --ignore-scripts`.
+To upgrade to the latest version, run `npm upgrade @hyva-themes/hyva-modules --ignore-scripts`.

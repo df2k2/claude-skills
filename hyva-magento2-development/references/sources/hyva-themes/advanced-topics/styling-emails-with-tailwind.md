@@ -86,7 +86,7 @@ module.exports = {
 Install the PostCSS command-line interface, which is required to run the email build script:
 
 ```
-npm install --save-dev postcss-cli
+npm install --save-dev postcss-cli --ignore-scripts
 ```
 
 ### Add the Email Build Script to package.json

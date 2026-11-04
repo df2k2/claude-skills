@@ -8,7 +8,7 @@ The API has improved significantly over version 2, and with Hyvä, we provide a 
 
 Tip
 
-To create a custom Alpine plugin for Hyvä, please refer to the [guide on adding custom plugins](custom.html).
+To create a custom Alpine plugin for Hyvä, please refer to the [guide on adding custom plugins](./custom.html).
 
 ## Plugins
 
@@ -21,7 +21,7 @@ providing an easy way to trigger actions when elements come into view.
 
 We provide this plugin by default in the Hyvä Theme Module starting from version 1.10.0.
 
-For more information, see the [`x-intersect` docs](x-intersect.html).
+For more information, see the [`x-intersect` docs](./x-intersect.html).
 
 ### `x-ignore`
 
@@ -30,7 +30,7 @@ Alpine's ignore directive allows you to exclude specific parts of your HTML from
 We provide Alpine v2 support in the Hyvä Theme Module starting from version 3.7.0 as a plugin.
 This directive is normally part of Alpine v3.0.0.
 
-For more information, see the [`x-ignore` docs](x-ignore.html).
+For more information, see the [`x-ignore` docs](./x-ignore.html).
 
 ### `x-defer`
 
@@ -38,7 +38,7 @@ The `x-defer` directive, a custom Hyvä Alpine plugin, allows you to postpone th
 
 This optimization technique can improve initial page load performance by deferring the execution of non-critical JavaScript code.
 
-For more information, see the [`x-defer` docs](x-defer.html).
+For more information, see the [`x-defer` docs](./x-defer.html).
 
 ### `x-snap-slider`
 
@@ -46,14 +46,24 @@ The `x-snap-slider` directive, a custom Hyvä Alpine plugin, allows you to build
 
 This enables you to create lightweight sliders powered by CSS, with JavaScript progressively enhancing the user experience.
 
-For more information, see the [`x-snap-slider` docs](x-snap-slider.html).
+For more information, see the [`x-snap-slider` docs](./x-snap-slider.html).
 
 ### `x-htmldialog`
 
 Alpine's HTML Dialog plugin, used with the `x-show` directive, enables the use of the native HTML dialog element.
 Allowing you to build Modals and Offcanvas elements with ease.
 
-For more information, see the [`x-htmldialog` docs](x-htmldialog.html) or see the [docs on fylgja.dev](https://fylgja.dev/library/extensions/alpinejs-dialog/).
+For more information, see the [`x-htmldialog` docs](./x-htmldialog.html) or see the [docs on fylgja.dev](https://fylgja.dev/library/extensions/alpinejs-dialog/).
+
+### `x-html-safe`
+
+Available since Hyvä 1.5.3
+
+The `x-html-safe` directive, a custom Hyvä Alpine plugin, renders HTML through a fixed tag and attribute allowlist instead of setting `innerHTML` directly.
+
+It's a drop-in replacement for Alpine's own `x-html`, which the [Alpine CSP build](../../writing-code/csp/alpine-csp.html) removes entirely.
+
+For more information, see the [`x-html-safe` docs](./x-html-safe.html).
 
 ### `x-collapse`
 

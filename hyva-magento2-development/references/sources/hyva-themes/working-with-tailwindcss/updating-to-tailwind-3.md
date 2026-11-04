@@ -17,11 +17,11 @@ Before updating, review the TailwindCSS changelog to understand the changes intr
 
 ## How to update
 
-1. **Install the update:** Run `npm install tailwindcss@1.3` in your theme's directory.
+1. **Install the update:** Run `npm install tailwindcss@1.3 --ignore-scripts` in your theme's directory.
    You can replace `@1.3` with a specific version for more control.
 2. **Upgrade PostCSS (Optional):** If you're not already using `postcss-preset-env`, follow these steps:
-   - **Uninstall Autoprefixer:** Run `npm uninstall autoprefixer`.
-   - **Install postcss-preset-env:** Run `npm install postcss-preset-env`.
+   - **Uninstall Autoprefixer:** Run `npm uninstall autoprefixer --ignore-scripts`.
+   - **Install postcss-preset-env:** Run `npm install postcss-preset-env --ignore-scripts`.
    - **Update `postcss.config.js`:**
      - Remove `require('autoprefixer'),`
      - Add `require('postcss-preset-env'),` after `require('tailwindcss'),`
@@ -36,13 +36,13 @@ Before updating, review the TailwindCSS changelog to understand the changes intr
      ]
      ```
 
-     For more information, refer to the [using browserlist docs](using-browserlist.html).
+     For more information, refer to the [using browserlist docs](./using-browserlist.html).
 3. **Update Optional Plugins (Optional):**
    You can update optional plugins like `@tailwindcss/forms` and `@tailwindcss/typography` similarly:
 
    ```
-   npm install @tailwindcss/forms@latest
-   npm install @tailwindcss/typography@latest
+   npm install @tailwindcss/forms@latest --ignore-scripts
+   npm install @tailwindcss/typography@latest --ignore-scripts
    ```
 
    **Important:** While these plugins are less likely to introduce new CSS properties, reviewing their changelogs before updating is still recommended.

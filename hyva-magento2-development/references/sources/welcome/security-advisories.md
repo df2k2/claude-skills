@@ -8,13 +8,14 @@ For detailed information about each vulnerability, including affected version ra
 
 Last Updated
 
-This documentation was last updated on **2026-02-20**. For the most recent security information, ensure you're viewing the latest version of this page.
+This documentation was last updated on **2026-10-27**. If you are a security officer, merchant, or agency auditing your Hyvä installations, bookmark this page and check this date: whenever it changes, there is new security information to review. It is the single entrypoint for the current security state of every Hyvä product.
 
 ## Critical and High-Severity Vulnerabilities
 
 | Product | Version | Date | Summary | Details |
 | --- | --- | --- | --- | --- |
 | Hyvä Checkout | 1.1.28 | 2025-01-23 | **CRITICAL** - Sensitive credentials exposed in browser URL on guest login | [Security Changelog](../hyva-checkout/upgrading/security-changelog.html#1128-2025-01-23) |
+| Hyvä Checkout | 1.3.12 | 2026-07-13 | **HIGH** - Payment Method Availability Bypass | [Security Changelog](../hyva-checkout/upgrading/security-changelog.html#1312-2026-07-13) |
 
 ## Per-Product Security Changelogs
 
@@ -27,7 +28,7 @@ This documentation was last updated on **2026-02-20**. For the most recent secur
 
 Stay informed about security updates and product releases through our notification channels:
 
-- **Slack** - Join our community Slack and follow the [#update-notifications channel](slack-channels.html#update-notifications) to receive announcements of all product releases, including security patches.
+- **Slack** - Join our community Slack and follow the [`#update-notifications` channel](support.html#hyva-theme-channels) to receive announcements of all product releases, including security patches.
 - **GitHub Security Advisories** - For our open source projects, vulnerabilities are published to the [PHP Security Advisories Database](https://github.com/FriendsOfPHP/security-advisories). GitHub Security Advisories will correctly report vulnerabilities, and Composer will actively block installing a vulnerable version.
 - **Technology Partner Communication** - Technology Partners are informed directly via existing communication channels, often in advance of public announcements. See the [list of technology partners](https://www.hyva.io/technology-partners).
 

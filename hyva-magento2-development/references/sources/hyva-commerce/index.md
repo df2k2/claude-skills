@@ -2,34 +2,107 @@
 
 # Hyvä Commerce
 
-[Hyvä Commerce](https://www.hyva.io/hyva-commerce.html) is our product suite focused on merchant friendly features for both the admin panel and storefront.
+[Hyvä Commerce](https://www.hyva.io/hyva-commerce.html) is our product suite focused on merchant friendly features for both the admin panel and storefront. It builds on top of Magento Open Source and includes [Hyvä Theme](https://www.hyva.io/hyva-theme-license.html) and [Hyvä Checkout](https://www.hyva.io/hyva-checkout.html).
 
-[Hyvä Commerce](https://www.hyva.io/hyva-commerce.html) builds on top of Magento Open Source and includes [Hyvä Theme](https://www.hyva.io/hyva-theme-license.html) and [Hyvä Checkout](https://www.hyva.io/hyva-checkout.html). Hyvä Commerce is also compatible with Adobe Commerce (alongside our [Hyvä Enterprise](https://www.hyva.io/hyva-enterprise.html) offering).
+Ready to install it? Continue to [Installing Hyvä Commerce](./getting-started/index.html).
 
-Please refer to the [Hyvä Commerce Roadmap](https://www.hyva.io/roadmap?product=hyva-commerce) to remain up-to-date with future plans and features.
+Adobe Commerce User?
 
-## Features and Release Process
+See [Hyvä Enterprise](../hyva-enterprise/index.html), which offers the same features but is built on top of Adobe Commerce.
 
-For more information on the features included with Hyvä Commerce, see the relevant sections:
+Hyvä Commerce is made up of several products. Explore each one below.
 
-- [Admin Dashboard](features/admin-dashboard/index.html)
-- [Admin Theme](features/admin-theme/index.html)
-- [Hyvä CMS](features/cms/index.html)
-- [Image Editor](features/image-editor/index.html)
-- [Media Optimisation](features/media-optimization/index.html)
+- **Admin Dashboard**
 
-Please see our [Release Process & Status](release-process-status.html) page for details on the release status of features, as well as our process for managing and versioning releases.
+  ---
 
-## Installation Guide
+  A customizable dashboard of widgets that puts sales, orders, and other key store metrics right in the Magento admin, so merchants don't need to dig through reports to see how the store is doing.
 
-Please follow our [Installation Guide](getting-started/index.html).
+  [Read more about Admin Dashboard](../hyva-commerce/features/admin-dashboard/index.html)
+- **Admin Theme**
 
-## Providing Feedback & Getting Help
+  ---
 
-For general help, guidance and assistance please reach out in the `#hyva-commerce` [community Slack](https://www.hyva.io/slack) channel. `#hyva-cms` also exists for [Hyvä CMS](features/cms/index.html) specific guidance.
+  A modern, refreshed look and feel for the Magento admin panel, making the day-to-day experience of managing a store nicer to work in.
 
-Technical support requests can be made through the [technical support form](https://www.hyva.io/request-hyva-support/request/index/) in Hyvä customer Portal.
+  [Read more about Admin Theme](../hyva-commerce/features/admin-theme/index.html)
+- **Advanced Admin Permissions**
 
-Bugs and feedback can be raised directly by Platinum/Gold/Technology partners in GitLab via the repositories 'Issues' section of the affected module.
+  ---
 
-Merge Requests for bugs you've found (or enhancements) are also welcome, but should be accompanied by a linked issue (you may also need to request the relevant access in order to create a merge request).
+  Several roles per admin user, plus a website or store view restriction that narrows what each admin can see and change, with an audit log and effective-permissions viewer to keep track.
+
+  [Read more about Advanced Admin Permissions](../hyva-commerce/features/advanced-admin-permissions/index.html)
+- **Category Merchandiser**
+
+  ---
+
+  A visual, drag-and-drop merchandiser for the category product grid, so merchants can reorder and search for products without inputting position values manually.
+
+  [Read more about Category Merchandiser](../hyva-commerce/features/category-merchandiser/index.html)
+- **Email & Newsletter Templates**
+
+  ---
+
+  Build transactional emails and newsletters visually with the Hyvä CMS Liveview Editor, instead of hand-editing Magento email HTML.
+
+  [Read more about Email & Newsletter Templates](../hyva-commerce/features/email-templates/index.html)
+- **Form Builder**
+
+  ---
+
+  Build web forms visually with the Hyvä CMS Liveview Editor, embed them in any page, block or Hyvä CMS content, and receive each submission by email.
+
+  [Read more about Form Builder](../hyva-commerce/features/form-builder/index.html)
+- **Hyvä CMS**
+
+  ---
+
+  A component-based content management system with a live visual editor, letting merchants build and update pages and blocks without needing a developer for every change.
+
+  [Read more about Hyvä CMS](../hyva-commerce/features/cms/index.html)
+- **Image Editor**
+
+  ---
+
+  A built-in image editing tool right in the Magento admin, so merchants can crop, resize, and adjust product images without leaving the Media Gallery.
+
+  [Read more about Image Editor](../hyva-commerce/features/image-editor/index.html)
+- **Linked Products**
+
+  ---
+
+  A new entity that gives you an ability to group different types of product by a shared attribute (like color, size).
+
+  [Read more about Linked Products](../hyva-commerce/features/linked-products/index.html)
+- **Media Optimization**
+
+  ---
+
+  Automatically optimizes and compresses images across the storefront, so pages load faster without merchants having to manually resize or re-export anything.
+
+  [Read more about Media Optimization](../hyva-commerce/features/media-optimization/index.html)
+- **Menu Builder**
+
+  ---
+
+  A flexible way to build and manage storefront navigation menus, without needing a developer to add, reorder, or restructure menu items.
+
+  [Read more about Menu Builder](../hyva-commerce/features/menu-builder/index.html)
+- **Store Credit**
+
+  ---
+
+  A spendable balance per customer, backed by a full audit trail, that they apply in the cart or checkout and that merchants top up or refund orders to.
+
+  [Read more about Store Credit](../hyva-commerce/features/store-credit/index.html)
+
+## Installing Hyvä Commerce
+
+Ready to get started? Follow [Installing Hyvä Commerce](./getting-started/index.html) to install it on your Magento store.
+
+## More Information
+
+- [Hyvä Commerce Roadmap](https://www.hyva.io/roadmap?product=hyva-commerce) - see all our planned features and what we're working on next
+- [Release Process & Status](./faqs/release-process-status.html) - learn about our release process and which features are generally available or in alpha/beta
+- [Providing Feedback & Getting Help](./faqs/getting-help.html) - community Slack, technical support, and how to report bugs or contribute

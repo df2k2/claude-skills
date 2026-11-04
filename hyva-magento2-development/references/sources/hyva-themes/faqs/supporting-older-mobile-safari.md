@@ -7,7 +7,7 @@ Archived
 This page is kept for reference for stores that cannot upgrade.
 It covers Hyvä versions older than 1.4 running Tailwind v3 or earlier, and the lower Safari versions those releases support.
 
-The officially supported minimum is Safari 16. See the [supported browsers overview](supported-browsers.html) for the full table.
+The officially supported minimum is Safari 16. See the [supported browsers overview](./supported-browsers.html) for the full table.
 
 Tailwind CSS v4 (Hyvä 1.4+) requires at least Safari 15.4. Supporting Safari older than 15.4 requires staying on a Tailwind v3 release of Hyvä.
 

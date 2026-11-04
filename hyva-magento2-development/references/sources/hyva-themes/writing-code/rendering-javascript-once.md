@@ -9,7 +9,7 @@ Hyvä generally tries to keep things that change at the same time in the same fi
 However, when the HTML is rendered multiple times, for example, items in a product list, this can lead to the duplication of JavaScript in the page source.
 In such situations, it can make sense to split the JavaScript into a separate template and render it only once.
 
-Since release 1.3.6 Hyvä allows rendering a JavaScript dependency in a block or template in the before-body-end container through the `Hyva\Theme\ViewModel\PageJsDependencyRegistry` view model.
+Since release 1.3.6 Hyvä allows rendering a JavaScript dependency in a block or template in the before.body.end container through the `Hyva\Theme\ViewModel\PageJsDependencyRegistry` view model.
 
 ## Rendering dependent JS via layout XML
 

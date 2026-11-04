@@ -12,7 +12,7 @@ https://docs.hyva.io/hyva-checkout/upgrading/index.html
 https://docs.hyva.io/hyva-commerce/features/admin-dashboard/devdocs/index.html
 https://docs.hyva.io/hyva-commerce/features/admin-dashboard/index.html
 https://docs.hyva.io/hyva-commerce/features/admin-dashboard/installation.html
-https://docs.hyva.io/hyva-commerce/features/admin-dashboard/user-guides/index.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/features/admin-dashboard/user-guides/index.html
 https://docs.hyva.io/hyva-commerce/features/admin-theme/configuration.html
 https://docs.hyva.io/hyva-commerce/features/admin-theme/index.html
 https://docs.hyva.io/hyva-commerce/features/admin-theme/installation.html
@@ -34,14 +34,14 @@ https://docs.hyva.io/hyva-commerce/features/media-optimization/configuration.htm
 https://docs.hyva.io/hyva-commerce/features/media-optimization/features/developer-api.html
 https://docs.hyva.io/hyva-commerce/features/media-optimization/index.html
 https://docs.hyva.io/hyva-commerce/features/media-optimization/installation.html
-https://docs.hyva.io/hyva-commerce/features/menu-builder/configuration.html
-https://docs.hyva.io/hyva-commerce/features/menu-builder/features/building-flexible-menus.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/features/menu-builder/configuration.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/features/menu-builder/features/building-flexible-menus.html
 https://docs.hyva.io/hyva-commerce/features/menu-builder/index.html
 https://docs.hyva.io/hyva-commerce/features/menu-builder/installation.html
 https://docs.hyva.io/hyva-commerce/getting-started/index.html
 https://docs.hyva.io/hyva-commerce/index.html
-https://docs.hyva.io/hyva-commerce/release-process-status.html
-https://docs.hyva.io/hyva-commerce/upgrading/changelog-beta.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/release-process-status.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/upgrading/changelog-beta.html
 https://docs.hyva.io/hyva-commerce/upgrading/changelog.html
 https://docs.hyva.io/hyva-commerce/upgrading/index.html
 https://docs.hyva.io/hyva-commerce/upgrading/release-0.1.0.html
@@ -59,7 +59,7 @@ https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-1.0.2.html
 https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-1.1.0.html
 https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-1.1.1.html
 https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-1.2.0.html
-https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-beta.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/hyva-commerce/upgrading/upgrading-to-beta.html
 https://docs.hyva.io/hyva-enterprise/devdocs/commerce/switcher-component.html
 https://docs.hyva.io/hyva-enterprise/eds/index.html
 https://docs.hyva.io/hyva-enterprise/getting-started/index.html
@@ -96,7 +96,7 @@ https://docs.hyva.io/hyva-widgets/what-are-hyva-widgets.html
 https://docs.hyva.io/hyva-widgets/widget-types/hyva-multi-field-widget.html
 https://docs.hyva.io/welcome/how-does-the-partner-program-work.html
 https://docs.hyva.io/welcome/security-advisories.html
-https://docs.hyva.io/welcome/slack-channels.html
+# redirect stub upstream as of 2026-11-04 (destination is in hyvalinks3.txt or already listed): https://docs.hyva.io/welcome/slack-channels.html
 https://docs.hyva.io/welcome/support.html
 https://docs.hyva.io/welcome/technical-vision.html
 https://docs.hyva.io/welcome/the-hyva-portal/index.html

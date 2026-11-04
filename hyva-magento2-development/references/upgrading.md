@@ -2,7 +2,7 @@
 
 ## When to read this
 
-You're moving a project from an older Hyvä release (1.2.x / 1.3.x) to 1.4.x, migrating Tailwind v3 → v4, Alpine v2 → v3, or just want to know how upgrades work in general.
+You're moving a project from an older Hyvä release (1.2.x / 1.3.x / 1.4.x) to 1.4.x or 1.5.x, migrating Tailwind v3 → v4, Alpine v2 → v3, or just want to know how upgrades work in general.
 
 ## The big version map
 
@@ -12,7 +12,10 @@ You're moving a project from an older Hyvä release (1.2.x / 1.3.x) to 1.4.x, mi
 | 1.1.x | v2 | v2 | Legacy |
 | 1.2.x | v3 | v3 | LTS-style support continues |
 | 1.3.x | v3 | v3 | Many shops still on this. Reset-theme parent removed at 1.3.18. |
-| 1.4.x | **v4** | v3 | Current. CSS-first config, Oxide engine, CSS components. PHP 8.1+. |
+| 1.4.x | **v4** (4.1 in the latest 1.4.x) | v3 | Still maintained alongside 1.5. 1.4.8 / 1.4.10 / 1.4.11 (2026-10-12) ship bug and security fixes, and each 1.5.x release carries the matching 1.4.x fixes. CSS-first config, Oxide engine, CSS components. PHP 8.1+. |
+| 1.5.x | **v4** (4.3) | v3 | **Current: 1.5.3 (2026-10-12).** First release was 1.5.1 (2026-07-01); there is no 1.5.0 default-theme release. Brings PHP-rendered swatches and gallery, and modals on the native `<dialog>` element. |
+
+Hyvä announces that from 2027 its products are built for PHP 8.2+. PHP 8.1, and with it Magento 2.4.4 / 2.4.5, stops being supported then.
 
 The theme-module (the runtime part with view models and `window.hyva`) maintains backwards compatibility, so it's almost always safe to upgrade just the theme-module independently from the default theme.
 
@@ -55,6 +58,65 @@ Or use:
 - [Hyvä Upgrade Helper Tools](https://github.com/hyva-themes/upgrade-helper-tools) — Composer dev-dependency
 - [Ampersand Magento2 Upgrade Patch Helper](https://github.com/AmpersandHQ/ampersand-magento2-upgrade-patch-helper)
 - [Elgentos Magento2 Upgrade GUI](https://github.com/elgentos/magento2-upgrade-gui)
+
+## Upgrading 1.4.x → 1.5.x
+
+Smaller than 1.3 → 1.4: Tailwind stays on v4 and Alpine on v3. But **1.5.1 has breaking changes** for child themes that override swatch templates or call `hyva.modal` from custom JavaScript.
+
+**Always update `hyva-themes/magento2-theme-module` together with the default theme.**
+- 1.5.1 needs the 1.5 theme module.
+- 1.5.3 needs theme module **≥ 1.5.3**, because of `x-html-safe` and the `Hyva\Theme\ViewModel\Product\Options` view model.
+
+Updating only the theme module stays safe, with two exceptions noted below (swatch changes and changed defaults in 1.5.3).
+
+### 1.5.1 — breaking changes
+
+**Configurable swatches are PHP-rendered.** The templates are rewritten from scratch; a line diff of your override shows nearly everything changed. Decide **before** `composer update`:
+- **Option 1 (recommended):** delete the swatch overrides from the child theme and use the new templates.
+- **Option 2:** copy the swatch templates you don't override yet from the *current* default theme into the child theme, which pins the old structure, then migrate each one to the new markup.
+
+Affected templates:
+- `Magento_Swatches`: `product/swatch-item.phtml`, `product/js/swatch-options.phtml`, `product/view/renderer.phtml`, `product/listing/renderer.phtml`, `product/tooltip.phtml`, `product/layered/renderer.phtml`
+- `Magento_ConfigurableProduct`: `product/view/type/options/configurable.phtml` and its `js/configurable-options.phtml`
+
+Other swatch changes:
+- Many JS methods are **removed** and throw if called, e.g. `getSwatchConfig`, `getSwatchBackgroundStyle`, `isTextSwatch`, `optionIsEnabled`, `preselectCartItems`. The full list is in the upgrade guide.
+- The tooltip's `activeTooltipItem` now has the shape `{ preview, label, type, width, height }`.
+- Clicking a selected swatch no longer deselects it; swatches now behave as a proper radio group.
+- Styling lives in the `.swatch-option` CSS component (`web/tailwind/components/swatches.css`), so visual tweaks are a stylesheet change, not a template override.
+
+**The modal system runs on the native `<dialog>` element** via the `x-htmldialog` Alpine plugin. The browser now handles focus trapping, Escape, and backdrop clicks.
+- Style the backdrop with Tailwind `backdrop:*` utilities on the `<dialog>`.
+- `withOverlayClasses()`, `withContainerClasses()`, and `excludeSelectorsFromFocusTrap()` are deprecated and log a warning.
+- New `withCloseby("any" | "closerequest" | "none")` controls close behavior.
+- Custom JS that drives `hyva.modal` directly must be updated; the recommended path is `x-htmldialog`. If you can't migrate yet, install `hyva-themes/magento2-legacy-modal-compatibility`.
+
+**Notable, non-breaking:**
+- The product gallery is PHP-rendered and hydrated by Alpine, which improves LCP. It is configured in `view.xml` (loop, caption, pager, navigation, thumbnail count), and extra elements go in the new `gallery.additional` container. Vertical thumbnails no longer need Hyvä UI.
+- Tailwind 4.1 → **4.3**. The templates use new v4.3 classes, so **update the child theme's Tailwind dependency to v4.3** or those classes are missing.
+- The default theme's `.npmrc` sets npm `min-release-age`, a supply-chain guard: 7 days in 1.5.1, 1 day from 1.5.2. Freshly published packages won't install until they are that old.
+
+### 1.5.2
+- `@hyva-themes/hyva-modules` **v1.4**. Run `npm install @hyva-themes/hyva-modules@latest` in the child theme. It adds:
+  - `tokens.src` can point at a **Google Stitch** Markdown export;
+  - `stripPrefix` / `rename` options for tokens;
+  - new `ink` / `ink-muted` tokens (old names still work);
+  - a default `theme.css` palette in `oklch`, with tints derived via `color-mix()`.
+- `snap-slider` 2.2.3, which adds the `x-snap-slider.force-pager` modifier.
+- A CSP-safety fix for the selected swatch. If you override `Magento_Swatches/templates/product/view/renderer.phtml`, apply the `data-attribute-id` change from the upgrade guide.
+
+### 1.5.3
+- **GraphQL is no longer required by the default theme.**
+  - The review form posts to `review/product/post`. The customer review list and the recently-viewed widget render server-side or from browser storage.
+  - The theme's `composer.json` no longer requires `magento2-graphql-view-model`, `magento2-graphql-tokens`, or five `magento/module-*-graph-ql` packages. A module that uses `GraphqlViewModel` or the customer section's `signin_token` must now require those Hyvä packages itself.
+  - The GraphQL modules stay installed, because `Hyva_Theme` still requires `magento/module-quote-graph-ql`. If nothing else uses `/graphql`, the route can be blocked.
+- **Font API.** `npx hyva-fonts` (in `@hyva-themes/hyva-modules` v1.5) downloads fonts configured in `hyva.config.json` (Fontsource, Google Fonts, or local files) to `generated/hyva-fonts.css`, with fallback metrics and a preload snippet. It's optional.
+- **`x-html-safe`** Alpine plugin: a sanitized `x-html` for CSP themes.
+- **Heroicons → Lucide** in all default-theme templates; the Heroicons view models still exist for your own templates. Renames include:
+  - `xCircle` → `circleX`, `checkCircle` → `circleCheck`, `exclamationCircle` → `circleAlert`
+  - `pencilAlt` → `pencil`, `refresh` → `refreshCw`
+- **Security:** an XSS fix in the MSRP templates, also shipped in 1.4.11. Overrides of `Magento_Msrp/templates/popup.phtml` / `product/price/msrp.phtml` don't get it. Re-base both on the new versions, and always update the two together.
+- **Changed defaults** (these apply even if you only update `Hyva_Theme`): the cart shows newest items first, and login-form autocomplete defaults to **Yes**.
 
 ## Upgrading 1.3.x → 1.4.x (the big one)
 
@@ -204,7 +266,7 @@ Check the browser console on each page — look for missing JS, broken Alpine ex
 
 ## When NOT to upgrade
 
-- **Tight production deadline.** A point-release upgrade is usually safe; a major upgrade (1.3.x → 1.4.x) is not a same-day operation.
+- **Tight production deadline.** A point-release upgrade is usually safe; a major upgrade (1.3.x → 1.4.x) is not a same-day operation, and 1.4.x → 1.5.x needs a review of swatch overrides and custom modal JS first. A store that isn't ready for 1.5 can stay on the maintained 1.4.x line.
 - **Custom checkout integrations not yet ready for the new version.** Test in staging first.
 - **Heavy template customizations.** Read the changelog carefully and budget time per customized file.
 
@@ -222,6 +284,10 @@ Hyvä commits to security releases on older branches when ecosystem changes (new
 - **PHP 7.4 still in CI** → 1.4.x requires 8.1+. Update the CI image.
 - **Node < 20** → Tailwind v4 build fails with cryptic errors. `node --version` and update.
 - **`bin/magento setup:upgrade` skipped** after a theme-module bump → new view models or schema not registered.
+- **1.5: swatch override still in the child theme** → PDP swatches break or JS errors appear for removed methods (`getSwatchConfig is not a function`, …). Remove the override or migrate it.
+- **1.5: child theme still on Tailwind 4.1** → classes the 1.5 templates use (new logical-property utilities) aren't generated. Bump Tailwind to 4.3.
+- **1.5: custom `hyva.modal` code** → overlay/container classes ignored, or focus behaves differently. Move to `x-htmldialog`, or install `hyva-themes/magento2-legacy-modal-compatibility`.
+- **1.5.3: default theme updated, theme module not** → `x-html-safe` and `Product\Options` view model missing. Update `magento2-theme-module` to ≥ 1.5.3.
 
 ## Original sources
 
@@ -231,6 +297,9 @@ Hyvä commits to security releases on older branches when ecosystem changes (new
 - `references/sources/hyva-themes/upgrading/changelog-theme-module.md` — theme-module changelog
 - `references/sources/hyva-themes/upgrading/security-changelog.md` — security-relevant updates
 - `references/sources/hyva-themes/upgrading/updating-tailwindcss.md` — Tailwind upgrade philosophy
-- `references/sources/hyva-themes/upgrading/upgrading-to-1-1-26.md` through `upgrading-to-1-4-0.md` — version-specific upgrade notes
+- `references/sources/hyva-themes/upgrading/upgrading-to-1-1-26.md` through `upgrading-to-1-4-11.md` — version-specific upgrade notes
+- `references/sources/hyva-themes/upgrading/upgrading-to-1-5-1.md` — the 1.4 → 1.5 guide (swatches, modal, gallery, Tailwind 4.3); then `upgrading-to-1-5-2.md`, `upgrading-to-1-5-3.md`
+- `references/sources/hyva-themes/view-utilities/modal-dialogs/legacy-modal-install.md` — legacy modal compatibility package
+- `references/sources/hyva-themes/working-with-tailwindcss/updating-to-tailwind-4.md` — v3→v4 migration doc
 - `references/sources/hyva-themes/working-with-tailwindcss/updating-to-tailwind-3.md` — earlier v2→v3 migration doc
-- `references/sources/hyva-checkout/upgrading/index.md` — Hyvä Checkout upgrade notes
+- `references/sources/hyva-checkout/upgrading/index.md` — Hyvä Checkout upgrade notes. For the Checkout 1.x → 3.x move, see `hyva-checkout.md` and `references/sources/hyva-checkout/upgrading/upgrading-to-3.0.0.md`.

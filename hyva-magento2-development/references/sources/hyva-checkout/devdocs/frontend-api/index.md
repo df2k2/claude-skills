@@ -1,8 +1,12 @@
 <!-- source: https://docs.hyva.io/hyva-checkout/devdocs/frontend-api/index.html -->
 
-# Hyva Checkout Frontend API Overview
+# Hyvä Checkout Frontend API Overview
 
-The **Hyva Checkout Frontend API** (`window.hyvaCheckout`) is a JavaScript namespace that provides client-side functionality for checkout interactions in Hyva Checkout. The Frontend API complements server-side [Magewire](../../magewire/index.html) components by handling tasks that require browser-level execution - validation orchestration, navigation control, session storage, and order placement coordination.
+The **Hyvä Checkout Frontend API** (`window.hyvaCheckout`) is a JavaScript namespace that provides client-side functionality for checkout interactions in Hyvä Checkout. The Frontend API complements server-side [Magewire](../../magewire/index.html) components by handling tasks that require browser-level execution - validation orchestration, navigation control, session storage, and order placement coordination.
+
+Note
+
+The "V1" in the JavaScript API Reference pages, and the `v1` in file and container names such as `page/js/api/v1.phtml` and `hyva.checkout.api-v1.after`, is the version of the JavaScript API, not of Hyvä Checkout. The same V1 API ships with both Checkout 1.x and Checkout 3.x, so these pages apply to both [release lines](../../getting-started/release-lines.html). The few methods that exist only on Checkout 3.x are marked on their pages.
 
 ## Frontend API Sub-namespaces
 
@@ -13,6 +17,7 @@ The `hyvaCheckout` object organizes its functionality into sub-namespaces. Each 
 | `hyvaCheckout.api` | Controls initialization timing and callback execution order | [API Initialization](V1/api.html) |
 | `hyvaCheckout.evaluation` | Processes backend evaluation results and registers frontend validators | [Frontend Evaluation](V1/evaluation.html) |
 | `hyvaCheckout.payment` | Registers and manages JavaScript-driven payment methods | [Payment Methods](V1/payment.html) |
+| `hyvaCheckout.order` | Places the order: `place()` runs the navigation tasks and validations, then the active payment method | [Placing the Order](V1/payment.html#placing-the-order-with-hyvacheckoutorderplace) |
 | `hyvaCheckout.storage` | Stores key-value pairs in browser session storage for Place Order Service | [Storage API](V1/storage.html) |
 | `hyvaCheckout.validation` | Manages the validation stack executed before navigation or order placement | [Form Validations](../form-api/form-validations.html) |
 | `hyvaCheckout.navigation` | Controls checkout step navigation and history management | - |
@@ -22,7 +27,7 @@ The `hyvaCheckout` object organizes its functionality into sub-namespaces. Each 
 
 For details on file structure, Layout XML organization, and extension patterns, see the [Architecture documentation](architecture.html).
 
-## When to Use the Hyva Checkout Frontend API
+## When to Use the Hyvä Checkout Frontend API
 
 The Frontend API serves as a toolkit for browser-level operations that Magewire components cannot handle alone on the server side. Use the Frontend API when you need to:
 
@@ -34,7 +39,7 @@ The Frontend API serves as a toolkit for browser-level operations that Magewire 
 
 ## How the Frontend API and Magewire Backend Work Together
 
-Hyva Checkout uses a "backend-first" architecture where Magewire components handle most logic server-side. The Frontend API provides targeted client-side support for operations that require browser execution. The [Evaluation API](../evaluation-api/index.html) is a great example of this pattern in action.
+Hyvä Checkout uses a "backend-first" architecture where Magewire components handle most logic server-side. The Frontend API provides targeted client-side support for operations that require browser execution. The [Evaluation API](../evaluation-api/index.html) is a great example of this pattern in action.
 
 ## Evaluation API Integration - Step-by-Step Example
 
@@ -117,7 +122,7 @@ Serialized evaluation result JSON payload
 
 The `hyvaCheckout.evaluation` sub-namespace processes incoming evaluation results. For validation-type results, the Frontend API looks for a registered validator callback matching the name specified in `createValidation()` and adds the validator to the validation stack.
 
-Register the validator callback using `hyvaCheckout.evaluation.registerValidator()` inside a `checkout:init:evaluation` event listener:
+Register the validator callback using `hyvaCheckout.evaluation.registerValidator()` inside a `checkout:init:evaluation` event listener. Because Hyvä Checkout enforces strict CSP on all checkout pages, the inline `<script>` block requires `$hyvaCsp->registerInlineScript()` immediately after the closing `</script>` tag. See [CSP Script Authorization](../csp/csp-script-validation.html) for details.
 
 Frontend Validator Registration
 
@@ -143,6 +148,7 @@ Frontend Validator Registration
         });
     });
 </script>
+<?php $hyvaCsp->registerInlineScript() ?>
 ```
 
 ### Step 4: Validators Execute on Navigation or Order Placement

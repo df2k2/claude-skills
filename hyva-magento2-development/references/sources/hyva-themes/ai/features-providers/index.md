@@ -1,113 +1,29 @@
 <!-- source: https://docs.hyva.io/hyva-themes/ai/features-providers/index.html -->
 
-# Hyvä AI Providers & Framework
+# Hyvä AI
 
-Hyvä's AI providers and framework offer a standardized way to implement AI-powered features in Hyvä projects.
+Hyvä AI is the open-source foundation for connecting Magento features to AI providers. The base module supplies shared contracts, configuration and request handling. Separate provider packages supply credentials, models and provider-specific options. Install only the providers you use.
 
-This consists of three key parts:
+## What Is Included?
 
-- A base framework for standardizing AI feature implementations
-- A set of AI providers that can be used out-of-the-box
-- Features that implement our framework (but are provider-agnostic)
+| Package | Responsibility |
+| --- | --- |
+| `hyva-themes/magento2-module-ai` | Feature and provider contracts, model and credential registries, execution routing, configuration UI and runtime safeguards. |
+| Individual provider packages | Anthropic, Google Gemini, OpenAI and DeepL connections, models, options and supported connection tests. |
+| `hyva-themes/magento2-ai-providers` | An optional bundle that installs all four provider packages. |
 
-## Features
+The base module and providers give developers a shared API for building AI features. They do not install the Commerce editing tools. For example, base AI plus Anthropic can be installed without the other providers, CMS or AI Worker.
 
-Our current features are:
+## Get Started
 
-- [AI-powered translations for Hyvä CMS](../../../hyva-commerce/features/cms/features/translations.html)
+1. [Install the base module and your chosen providers](installation.html).
+2. Open **Stores → Configuration → Hyvä AI → Settings**, save your provider credentials and [test the connection](configuration.html).
+3. Configure the installed feature that will use the provider, or build your own using the [Integration Guide](integration-guide.html).
 
-## Providers
+You need your own provider account. Provider API usage is billed separately.
 
-Our current providers are:
+## Advanced Features with Hyvä Commerce
 
-- OpenAI
-- Gemini
-- DeepL
+If you have a **Hyvä Commerce subscription**, continue to [AI Worker](../../../hyva-commerce/features/ai-worker/index.html) for advanced AI features and the Commerce integrations. That section covers [available features](../../../hyva-commerce/features/ai-worker/features.html), [package installation](../../../hyva-commerce/features/ai-worker/installation.html), configuration and running the worker.
 
-## Framework
-
-For more information on the framework and how to integrate your own providers, see the [integration guide](integration-guide.html).
-
-## Installation
-
-These installation instructions are for installing the AI providers and framework separate from our feature implementations only, i.e. these steps do not need to be followed to use AI-powered features in our product offerings (such as AI-powered translations for Hyvä CMS).
-
-### Install all providers (and base framework)
-
-#### Installing from Packagist.com
-
-Install the AI providers metapackage from Packagist.com using Composer:
-
-```
-composer require hyva-themes/magento2-ai-providers
-```
-
-Run:
-
-```
-bin/magento setup:upgrade
-```
-
-#### Installing for Development and Contributions
-
-GitLab access is available only to tech partners
-
-Direct access to the GitLab repository requires Hyvä tech partner status.
-
-Install the AI providers and base framework module from GitLab for development purposes:
-
-```
-# Add the GitLab repositories to Composer
-composer config repositories.hyva-themes/magento2-ai-providers git git@gitlab.hyva.io:hyva-themes/ai/metapackage-ai-providers.git
-composer config repositories.hyva-themes/magento2-module-ai git git@gitlab.hyva.io:hyva-themes/ai/module-ai.git
-composer config repositories.hyva-themes/magento2-module-ai-deep-l git git@gitlab.hyva.io:hyva-themes/ai/module-ai-deep-l.git
-composer config repositories.hyva-themes/magento2-module-ai-gemini git git@gitlab.hyva.io:hyva-themes/ai/module-ai-gemini.git
-composer config repositories.hyva-themes/magento2-module-ai-open-ai git git@gitlab.hyva.io:hyva-themes/ai/module-ai-open-ai.git
-
-# Install the modules with source files for development
-composer require hyva-themes/magento2-ai-providers:dev-main --prefer-source
-```
-
-Run:
-
-```
-bin/magento setup:upgrade
-```
-
-### Install base framework module only
-
-#### Installing from Packagist.com
-
-Install the AI module from Packagist.com using Composer:
-
-```
-composer require hyva-themes/magento2-module-ai
-```
-
-Run:
-
-```
-bin/magento setup:upgrade
-```
-
-#### Installing for Development and Contributions
-
-GitLab access is available only to tech partners
-
-Direct access to the GitLab repository requires Hyvä tech partner status.
-
-Install the base AI framework module from GitLab for development purposes:
-
-```
-# Add the GitLab repositories to Composer
-composer config repositories.hyva-themes/magento2-module-ai git git@gitlab.hyva.io:hyva-themes/ai/module-ai.git
-
-# Install the modules with source files for development
-composer require hyva-themes/magento2-module-ai:dev-main --prefer-source
-```
-
-Run:
-
-```
-bin/magento setup:upgrade
-```
+The open-source base module and providers remain the foundation used by those integrations.

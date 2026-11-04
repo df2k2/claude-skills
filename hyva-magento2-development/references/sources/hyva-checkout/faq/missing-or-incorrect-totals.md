@@ -14,11 +14,13 @@ Recollecting totals multiple times during the same request may cause issues. If 
 
 ## Magento 2.4.3-p3 Missing or Incorrect Shipping Totals
 
-This issue could only be reproduced in Magento `2.4.3-p3` and below.
+Legacy: Magento 2.4.3-p3 and below
+
+This issue could only be reproduced in Magento `2.4.3-p3` and below. Current Hyvä Checkout releases require Magento `2.4.5` or newer, so this section only matters for older installations. The patch below was written against an older Hyvä Checkout `MethodList.php` and may not apply to current releases.
 
 In Magento `2.4.3-p3`, there is a known bug where shipping totals do not update correctly in Hyvä Checkout. The root cause is an inconsistency in how Magento collects totals during segment retrieval.
 
-### Shipping Totals Bug Behavior in Magento 2.4.3-p3
+**Shipping totals bug behavior in Magento 2.4.3-p3**
 
 The shipping totals fail to update unless the following configuration value is set to `Off`:
 

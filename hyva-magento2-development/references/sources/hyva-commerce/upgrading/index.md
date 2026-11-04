@@ -12,7 +12,7 @@ This upgrade guide applies only to using the Hyvä Commerce Metapackage, and not
 ## The Upgrade Process
 
 1. Check version specific upgrade notes here in the docs for the Commerce version you wish to upgrade to. If there are any backward incompatible changes they will be listed there.
-2. Check the [changelog](changelog.html) for the new version.
+2. Check the [changelog](./changelog.html) for the new version.
 3. Upgrade the Hyvä Commerce metapackage (see below).
 4. Apply required changes from step 2. to files customized in your project where needed.
 

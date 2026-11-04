@@ -24,10 +24,10 @@ Remove BrowserSync from your theme's local dependencies and install it globally:
 
 ```
 # Remove from theme's package.json
-npm rm browser-sync
+npm rm browser-sync --ignore-scripts
 
 # Install globally (available system-wide)
-npm install -g browser-sync
+npm install -g browser-sync --ignore-scripts
 ```
 
 After global installation, the `browser-sync` command is available in any directory without per-theme installation.
@@ -63,7 +63,7 @@ For Tailwind v3 themes, also copy `postcss.config.js` (not present in Tailwind v
 Install all NPM dependencies at the Magento project root. This creates a single `node_modules` directory containing Tailwind CSS and all build tooling dependencies:
 
 ```
-npm install
+npm install --ignore-scripts
 ```
 
 After installation, the `node_modules` directory at the project root contains all build dependencies for all themes.
